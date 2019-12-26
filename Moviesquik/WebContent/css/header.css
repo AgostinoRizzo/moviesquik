@@ -1,0 +1,146 @@
+@charset "ISO-8859-1";
+
+/******************************************************
+	header style.
+******************************************************/
+
+.navbar
+{
+	/*min-height: 180px;*/
+	border-bottom: 1px solid hsla(0,0%,100%,.1) !important;
+	border-bottom-width: 1px !important;
+	border-bottom-style: solid !important;
+	border-bottom-color: hsla(0, 0%, 100%, 0.1) !important;
+}
+
+.icon-bar 
+{
+	width: 22px; 
+	height: 2px;
+	background-color: rgb(182,182,182);
+	display: block;
+	transition: all 0.2s;
+	margin-top: 4px
+}
+
+.navbar-toggler 
+{
+	border: none;
+	background: transparent !important;
+}
+
+.navbar-collapse
+{
+	margin-left: 10px;
+	margin-top: 12px;
+}
+
+.navbar > div > ul > li > a
+{
+	border-radius: 10px;
+	padding-left: 100px;
+	padding-right: 100px;	
+}
+
+.navbar > div > ul > li > a:hover
+{
+	background-color: #505050;
+}
+
+.navbar-nav
+{
+	margin-right: 20px;
+}
+
+.nav-item
+{
+	margin-right: 20px;
+}
+
+#header 
+{
+	padding: 10px 30px 0px 30px;
+	min-height: 82px;
+	position: fixed;
+	left: 0;
+	top: 0;
+	right: 0;
+	z-index: 997;
+	transition: all 0.5s;
+}
+
+#header a
+{
+	color: #afb4dc;
+}
+
+#header .navbar-toggler
+{
+	background-color: #fff;
+}
+
+#header #logo 
+{
+	float: left;
+}
+
+#header #logo h1 
+{
+	font-size: 36px;
+	margin: -4px 0 0 0;
+	padding: 0;
+	line-height: 1;
+	display: inline-block;
+	font-family: "Montserrat", sans-serif;
+	font-weight: 300;
+	letter-spacing: 3px;
+	text-transform: uppercase;
+}
+
+#header #logo h1 a,
+#header #logo h1 a:hover 
+{
+	color: #fff;
+}
+
+#header #logo img 
+{
+	padding: 0;
+	margin: 0;
+}
+
+#header.header-fixed 
+{
+	/*background: linear-gradient(45deg, #1de099, #1dc8cd);*/
+	/*background: linear-gradient(45deg, rgba(0, 0, 0, 1.0), rgba(0, 0, 0, 0.8));*/
+	background: #1e1e2f;
+	padding: 20px 0;
+	height: 100px;
+	transition: all 0.5s;
+}
+
+#header.header-fixed .navbar
+{
+	border-bottom-width: 0px !important;
+}
+
+@media(max-width: 1000px)
+{
+	#header
+	{
+		background: #1e1e2f;
+	}
+	.navbar
+	{
+		background: #1e1e2f;
+		border-bottom-width: 0px !important;
+	}
+}
+
+@media(min-width: 1001px)
+{
+	#header
+	{
+		transition: all 0.5s;
+	}
+}

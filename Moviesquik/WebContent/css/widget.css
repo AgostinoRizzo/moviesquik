@@ -1,0 +1,65 @@
+@charset "ISO-8859-1";
+
+/*******************************
+	primary button style
+*******************************/
+
+.btn-main {
+	background-image: linear-gradient(to left bottom, rgb(73, 143, 193), rgb(171, 89, 210)) !important;
+	color: #fff;
+	border: 1px solid transparent;
+	/*border-color: #fff;*/
+}
+.btn-main:focus,
+.btn-main.focus {
+	color: #fff;
+	background-color: transparent;
+	border-color: #122b40;
+}
+.btn-main:hover {
+	color: #fff;
+	background-image: none !important;
+	background-color: transparent;
+	border-color: #fff;
+}
+
+.btn-main:active,
+.btn-main.active,
+.open > .dropdown-toggle.btn-main {
+  color: #fff;
+  background-color: transparent;
+  border-color: #204d74;
+}
+.btn-main:active:hover,
+.btn-main.active:hover,
+.open > .dropdown-toggle.btn-main:hover,
+.btn-main:active:focus,
+.btn-main.active:focus,
+.open > .dropdown-toggle.btn-main:focus,
+.btn-main:active.focus,
+.btn-main.active.focus,
+.open > .dropdown-toggle.btn-main.focus {
+  color: #fff;
+  background-color: transparent;
+  border-color: #122b40;
+}
+.btn-main:active,
+.btn-main.active,
+.open > .dropdown-toggle.btn-main {
+  background-image: none;
+}
+.btn-main.disabled:hover,
+.btn-main[disabled]:hover,
+fieldset[disabled] .btn-main:hover,
+.btn-main.disabled:focus,
+.btn-main[disabled]:focus,
+fieldset[disabled] .btn-main:focus,
+.btn-main.disabled.focus,
+.btn-main[disabled].focus,
+fieldset[disabled] .btn-main.focus {
+  background-color: transparent;
+  border-color: #122b40;
+}
+.btn-main .badge {
+  color: #337ab7;
+}
