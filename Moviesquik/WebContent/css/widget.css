@@ -7,7 +7,9 @@
 .btn-main {
 	background-image: linear-gradient(to left bottom, rgb(73, 143, 193), rgb(171, 89, 210)) !important;
 	color: #fff;
-	border: 1px solid transparent;
+	/* border: 1px solid transparent; */
+	border: 1px solid;
+	border-color: #fff;
 	/*border-color: #fff;*/
 }
 .btn-main:focus,
@@ -21,6 +23,13 @@
 	background-image: none !important;
 	background-color: transparent;
 	border-color: #fff;
+}
+
+.btn-main-light:hover {
+	color: #204d74 !important;
+	background-image: none !important;
+	background-color: transparent;
+	border-color: #204d74 !important;
 }
 
 .btn-main:active,
@@ -62,4 +71,23 @@ fieldset[disabled] .btn-main.focus {
 }
 .btn-main .badge {
   color: #337ab7;
+}
+
+
+/*******************************
+	danger button style
+*******************************/
+.btn-danger, .btn-outline-danger
+{
+	color: #fff !important;
+}
+
+
+/*******************************
+	basic style
+*******************************/
+.btn > h1,h2,h3,h4,h5,h6
+{
+	margin: 0px;
+	padding: 0px;
 }

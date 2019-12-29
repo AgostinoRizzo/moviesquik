@@ -1,0 +1,139 @@
+@charset "ISO-8859-1";
+
+/******************************************************
+	signup form style.
+******************************************************/
+
+body
+{
+	/* background-color: #f6f7f2; */
+	/* background-color: #1e1e2f; */
+	background-color: #3F3F4F;
+	/* background: linear-gradient(rgba(30, 30, 47, 1.0), rgba(30, 30, 47, 0.8)) no-repeat; */
+	/* background-color: #041624; */
+}
+
+.signup-wrapper, .info-wrapper
+{
+	right: 0px;
+	/* min-height: 560px; */
+	margin: 0px auto;
+	width: 700px;
+	top: 50px;
+	position: relative;
+	border-radius: 10px;
+	/* background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.4)), url("../res/drawable/intro_background.jpg") no-repeat; */
+	/* background-color: #fff; */
+	background-color: #f6f7f2;
+	color: #000;
+	padding: 30px;
+}
+
+#plans-wrapper
+{
+	width: 900px !important;
+}
+
+#form-header
+{
+	padding-bottom: 50px;
+}
+
+#form-header.form-header-payment
+{
+	padding-bottom: 10px !important;
+}
+
+.form-row
+{
+	padding-bottom: 30px;
+}
+
+.form-row-light
+{
+	padding-bottom: 10px;
+}
+
+.form-check
+{
+	width: 100% !important;
+	height: 100% !important;
+}
+
+.form-radio-box
+{
+	padding-right: 10px;
+	padding-left: 30px;
+	padding-top: 40px;
+	/* padding-bottom: 30px; */
+}
+
+.btn-main
+{
+	width: 100% !important;
+}
+
+
+.btn-form-row
+{
+	/* padding-top: 30px; */
+}
+
+.form-check
+{
+	margin: 0px !important;
+	padding: 0px !important;
+}
+
+.form-check > label
+{
+	margin-left: 10px;
+	margin-bottom: 0px;
+}
+
+.form-group
+{
+	margin: 0px !important;
+}
+
+#header
+{
+	position: relative !important;
+	/* background-color: transparent !important; */
+}
+
+.payment-methods-img
+{
+	padding-bottom: 30px;
+}
+
+.modal
+{
+	display: block;
+}
+
+@media(max-width: 1000px)
+{
+	.signup-wrapper
+	{
+		width: 100% !important;
+	}
+	
+	#plans-wrapper
+	{
+		width: 100% !important;
+	}
+}
+
+@media(min-width: 1001px)
+{
+	.signup-wrapper
+	{
+		width: 700px !important;
+	}
+	
+	#plans-wrapper
+	{
+		width: 900px !important;
+	}
+}
