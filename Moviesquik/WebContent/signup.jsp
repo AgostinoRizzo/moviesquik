@@ -35,7 +35,7 @@
 		  Header section
 	======================= -->
 	
-	<header id="header" class="header-always-fixed foreground-box">
+	<header id="header" class="header-always-fixed foreground-box singup-header">
 			
 		<nav class="navbar navbar-light">
 			<a class="navbar-brand" href="./"><img alt="" src="res/drawable/logo.png" height="50px"></a>
@@ -48,7 +48,7 @@
 			
 	</header>
 	
-	<section>
+	<section id="intro">
 		<div class="signup-wrapper" id=<c:if test="${user != null and plan == null}">"plans-wrapper"</c:if> >
 			
 			<c:if test="${user == null}">

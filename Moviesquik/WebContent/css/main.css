@@ -9,7 +9,7 @@ body
 	background: #fff;
 	/* color: #afb4dc; */
 	color: #fff;
-	font-family: "SF Pro Text","SF Pro Icons","Helvetica Neue","Helvetica","Arial",sans-serif;
+	/* font-family: "SF Pro Text","SF Pro Icons","Helvetica Neue","Helvetica","Arial",sans-serif; */
 	overflow-x: hidden;
 }
 
@@ -46,6 +46,3 @@ h6
 {
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
 }
-
-
-

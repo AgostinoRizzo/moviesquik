@@ -29,7 +29,7 @@ public class DBManager
 	
 	private DBManager()
 	{
-		users.add(new User("Admin", "Admin", "admin@email.com", "", "", "admin"));
+		users.add(new User("Admin", "Admin", "admin@email.com", "", "", "adminadmin"));
 		creditCards.add(new CreditCard("Admin", "1234123412341234", "2019-12", "123"));
 	}
 	
@@ -67,5 +67,13 @@ public class DBManager
 		// TODO: add checks.
 		users.add(user);
 		return true;
+	}
+
+	public User login( final String email, final String password )
+	{
+		for( final User usr : users )
+			if ( usr.getEmail().equals(email) && usr.getPassword().equals(password) )
+				return usr;
+		return null;
 	}
 }

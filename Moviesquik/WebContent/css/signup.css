@@ -13,12 +13,11 @@ body
 	/* background-color: #041624; */
 }
 
-.signup-wrapper, .info-wrapper
+.signup-wrapper, .login-wrapper
 {
 	right: 0px;
 	/* min-height: 560px; */
 	margin: 0px auto;
-	width: 700px;
 	top: 50px;
 	position: relative;
 	border-radius: 10px;
@@ -29,6 +28,22 @@ body
 	padding: 30px;
 }
 
+.login-wrapper
+{
+	top: 130px !important;
+	padding: 40px 50px 50px 50px !important;
+}
+
+.signup-wrapper, .info-wrapper
+{
+	width: 700px;
+}
+
+.login-wrapper
+{
+	width: 450px;
+}
+
 #plans-wrapper
 {
 	width: 900px !important;
@@ -37,6 +52,11 @@ body
 #form-header
 {
 	padding-bottom: 50px;
+}
+
+.login-wrapper > #form-header
+{
+	padding-bottom: 30px !important;
 }
 
 #form-header.form-header-payment
@@ -79,6 +99,11 @@ body
 	/* padding-top: 30px; */
 }
 
+.login-wrapper .btn-form-row
+{
+	padding: 0px 0px 10px 0px !important;
+}
+
 .form-check
 {
 	margin: 0px !important;
@@ -96,7 +121,7 @@ body
 	margin: 0px !important;
 }
 
-#header
+.singup-header
 {
 	position: relative !important;
 	/* background-color: transparent !important; */
@@ -114,7 +139,7 @@ body
 
 @media(max-width: 1000px)
 {
-	.signup-wrapper
+	.signup-wrapper, .login-wrapper, .info-wrapper
 	{
 		width: 100% !important;
 	}
@@ -127,9 +152,14 @@ body
 
 @media(min-width: 1001px)
 {
-	.signup-wrapper
+	.signup-wrapper, .info-wrapper
 	{
 		width: 700px !important;
+	}
+	
+	.login-wrapper
+	{
+		width: 450px !important;
 	}
 	
 	#plans-wrapper

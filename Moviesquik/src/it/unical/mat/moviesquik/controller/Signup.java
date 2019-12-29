@@ -32,7 +32,7 @@ public class Signup extends HttpServlet
 		if ( cancel != null && cancel.equals("true") )
 		{
 			req.getSession().invalidate();
-			req.getRequestDispatcher("index.html").forward(req, resp);
+			req.getRequestDispatcher("").forward(req, resp);
 			return;
 		}
 		
