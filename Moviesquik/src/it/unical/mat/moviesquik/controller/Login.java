@@ -26,7 +26,13 @@ public class Login extends HttpServlet
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException
 	{
-		if ( req.getSession().getAttribute("user") == null )
+		final String isLogout = req.getParameter("logout");
+		if ( isLogout != null && isLogout.equals("true") )
+		{
+			req.getSession().invalidate();
+			req.getRequestDispatcher("").forward(req, resp);
+		}
+		else if ( req.getSession().getAttribute("user") == null )
 			req.getRequestDispatcher("login.jsp").forward(req, resp);
 		else
 			req.getRequestDispatcher("").forward(req, resp);

@@ -49,9 +49,9 @@
 	</header>
 	
 	<section id="intro">
-		<div class="signup-wrapper" id=<c:if test="${user != null and plan == null}">"plans-wrapper"</c:if> >
+		<div class="signup-wrapper" id=<c:if test="${new_user != null and plan == null}">"plans-wrapper"</c:if> >
 			
-			<c:if test="${user == null}">
+			<c:if test="${new_user == null}">
 			
 				<div id="form-header">
 					<div class="note">STEP 1 OF 3</div>
@@ -181,7 +181,7 @@
 				</form>
 			
 			</c:if>
-			<c:if test="${user != null and plan == null}">
+			<c:if test="${new_user != null and plan == null}">
 				
 				<div id="form-header">
 					<div class="note">STEP 2 OF 3</div>
@@ -241,7 +241,7 @@
 				
 			</c:if>
 			
-			<c:if test="${user != null and plan != null}">
+			<c:if test="${new_user != null and plan != null}">
 				
 				<c:if test="${invalid_credit_card != null}">
 										

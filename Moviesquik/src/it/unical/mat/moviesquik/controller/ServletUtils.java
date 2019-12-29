@@ -10,6 +10,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import it.unical.mat.moviesquik.model.Exception;
 
@@ -33,5 +34,13 @@ public class ServletUtils
 		final Enumeration<String> attrs = req.getSession().getAttributeNames();
 		while ( attrs.hasMoreElements() )
 			System.out.println(attrs.nextElement());
+	}
+	
+	public static void removeAllSessionAttributes( final HttpServletRequest req )
+	{
+		final Enumeration<String> attrs = req.getSession().getAttributeNames();
+		final HttpSession session = req.getSession();
+		while ( attrs.hasMoreElements() )
+			session.removeAttribute(attrs.nextElement());
 	}
 }

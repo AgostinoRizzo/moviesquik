@@ -23,7 +23,7 @@ public class Home extends HttpServlet
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) 
 			throws ServletException, IOException
 	{
-		final RequestDispatcher rd = req.getRequestDispatcher("index.html");
+		final RequestDispatcher rd = req.getRequestDispatcher("index.jsp");
 		rd.forward(req, resp);
 	}
 }

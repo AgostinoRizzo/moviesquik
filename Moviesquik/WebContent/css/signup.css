@@ -13,7 +13,7 @@ body
 	/* background-color: #041624; */
 }
 
-.signup-wrapper, .login-wrapper
+.signup-wrapper, .login-wrapper, .info-wrapper
 {
 	right: 0px;
 	/* min-height: 560px; */
@@ -28,7 +28,7 @@ body
 	padding: 30px;
 }
 
-.login-wrapper
+.login-wrapper, .info-wrapper
 {
 	top: 130px !important;
 	padding: 40px 50px 50px 50px !important;

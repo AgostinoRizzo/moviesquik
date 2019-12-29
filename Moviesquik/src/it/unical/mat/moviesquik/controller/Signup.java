@@ -36,7 +36,7 @@ public class Signup extends HttpServlet
 			return;
 		}
 		
-		final User user = (User) req.getSession().getAttribute("user");
+		final User user = (User) req.getSession().getAttribute("new_user");
 		final String choosenPlan = getChoosenPlan(req);
 		
 		if ( user == null)
@@ -55,7 +55,7 @@ public class Signup extends HttpServlet
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) 
 			throws ServletException, IOException
 	{
-		final User user = (User) req.getSession().getAttribute("user");
+		final User user = (User) req.getSession().getAttribute("new_user");
 		
 		if ( user == null )
 		{
@@ -72,7 +72,7 @@ public class Signup extends HttpServlet
 			else
 			{
 				req.getSession().removeAttribute("existing_user");
-				req.getSession().setAttribute("user", new_user);
+				req.getSession().setAttribute("new_user", new_user);
 			}
 		}
 		else
@@ -94,12 +94,22 @@ public class Signup extends HttpServlet
 				{
 					user.setCreditCard(card);
 					
-					if ( db.registerUser(user) ) req.getSession().setAttribute("registration_done", user);
-					else req.getSession().setAttribute("error", new Exception("registration_error"));
-					
-					req.getRequestDispatcher("info.jsp").forward(req, resp);
-					req.getSession().invalidate();
-					return;
+					if ( db.registerUser(user) ) 
+					{
+						ServletUtils.removeAllSessionAttributes(req);
+						req.getSession().setAttribute("registration_done", user);
+						req.getSession().setAttribute("user", user);
+						
+						req.getRequestDispatcher("info.jsp").forward(req, resp);
+						return;
+					}
+					else
+					{
+						req.getSession().setAttribute("error", new Exception("registration_error"));
+						req.getRequestDispatcher("info.jsp").forward(req, resp);
+						req.getSession().invalidate();
+						return;
+					}
 				}
 			}
 			else
@@ -130,5 +140,7 @@ public class Signup extends HttpServlet
 		
 		final RequestDispatcher rd = req.getRequestDispatcher("info.jsp");
 		rd.forward(req, resp);
+		
+		req.getSession().invalidate();
 	}
 }

@@ -132,6 +132,27 @@
 	border-bottom-width: 0px !important;
 }
 
+
+/******************************************************
+	nav user avatar style.
+******************************************************/
+
+#nav-user-avatar-box
+{
+	padding: 0px !important;
+}
+
+#nav-user-avatar-dropdown-menu a
+{
+	color: #000;
+}
+
+#navbar-nav-user
+{
+	margin-right: 0px !important;
+}
+
+
 @media(max-width: 1000px)
 {
 	#header
