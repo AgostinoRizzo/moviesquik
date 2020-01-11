@@ -87,7 +87,7 @@
 						          <img src="res/drawable/user_avatar.jpg" width="40" height="40" class="rounded-circle">
 						        </a>
 						        <div id="nav-user-avatar-dropdown-menu" class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-						        	<a class="dropdown-item" href="#"><small>Signed in as</small><br><strong>${user.first_name} ${user.last_name}</strong></a>
+						        	<a class="dropdown-item" href="#"><small>Signed in as</small><br><strong>${user.firstName} ${user.lastName}</strong></a>
 						        	<div class="dropdown-divider"></div>
 						        	<a class="dropdown-item" href="#">Dashboard</a>
 						        	<a class="dropdown-item" href="#">Edit Profile</a>

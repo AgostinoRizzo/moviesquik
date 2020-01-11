@@ -59,7 +59,7 @@
 				  <div class="lead">
 					  	<h6>
 					  		<c:if test="${registration_done != null}">
-					  			<strong>Registration done.</strong> Welcome ${registration_done.first_name}, now you can start enjoy watching Movies, TV Shows and more.
+					  			<strong>Registration done.</strong> Welcome ${registration_done.firstName}, now you can start enjoy watching Movies, TV Shows and more.
 					  		</c:if>
 					  		
 					  		<c:if test="${error != null}">

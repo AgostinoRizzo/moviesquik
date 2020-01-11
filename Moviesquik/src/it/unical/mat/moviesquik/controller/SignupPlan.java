@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import it.unical.mat.moviesquik.model.User;
+//import it.unical.mat.moviesquik.model.User;
 
 /**
  * @author Agostino
@@ -35,7 +35,7 @@ public class SignupPlan extends HttpServlet
 		
 		req.getRequestDispatcher("signup.jsp").forward(req, resp);
 	}
-	
+	/*
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException
@@ -70,4 +70,5 @@ public class SignupPlan extends HttpServlet
 				return plan;
 		return null;
 	}
+	*/
 }

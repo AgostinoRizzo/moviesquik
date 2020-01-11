@@ -7,7 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.unical.mat.moviesquik.model.CreditCard;
+import it.unical.mat.moviesquik.model.Family;
 import it.unical.mat.moviesquik.model.User;
+import it.unical.mat.moviesquik.persistence.dao.DaoFactory;
+import it.unical.mat.moviesquik.persistence.dao.jdbc.DaoFactoryJDBC;
 
 /**
  * @author Agostino
@@ -16,6 +19,21 @@ import it.unical.mat.moviesquik.model.User;
 public class DBManager
 {
 	private static DBManager instance = null;
+	
+	private static DataSource dataSource;
+	private static DaoFactory daoFactory;
+	
+	static
+	{
+		try
+		{
+			Class.forName("org.postgresql.Driver");
+			dataSource = new DataSource("jdbc:postgresql://localhost:5432/moviesquik", "postgres", "postgres");
+			daoFactory = new DaoFactoryJDBC(dataSource);
+		}
+		catch (ClassNotFoundException e)
+		{ e.printStackTrace(); }
+	}
 	
 	private List<User> users = new ArrayList<User>();
 	private List<CreditCard> creditCards = new ArrayList<>();
@@ -31,6 +49,11 @@ public class DBManager
 	{
 		users.add(new User("Admin", "Admin", "admin@email.com", "", "", "adminadmin"));
 		creditCards.add(new CreditCard("Admin", "1234123412341234", "2019-12", "123"));
+	}
+	
+	public DaoFactory getDaoFactory()
+	{
+		return daoFactory;
 	}
 	
 	public boolean exists( final User user )
@@ -51,9 +74,9 @@ public class DBManager
 	
 	public boolean userCreditCard( final CreditCard card )
 	{
-		for( final User u: users )
+		/*for( final User u: users )
 			if ( u.getCreditCard().equals(card) )
-				return true;
+				return true;*/
 		return false;
 	}
 	
@@ -62,10 +85,10 @@ public class DBManager
 		return false;
 	}
 	
-	public boolean registerUser( final User user )
+	public boolean registerUser( final Family family )
 	{
 		// TODO: add checks.
-		users.add(user);
+		users.add(family.getMembers().get(0));
 		return true;
 	}
 

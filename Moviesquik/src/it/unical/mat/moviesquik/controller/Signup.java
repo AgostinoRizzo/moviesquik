@@ -4,6 +4,8 @@
 package it.unical.mat.moviesquik.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,8 +13,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import it.unical.mat.moviesquik.model.Billing;
 import it.unical.mat.moviesquik.model.CreditCard;
 import it.unical.mat.moviesquik.model.Exception;
+import it.unical.mat.moviesquik.model.Family;
 import it.unical.mat.moviesquik.model.User;
 import it.unical.mat.moviesquik.persistence.DBManager;
 
@@ -43,7 +47,11 @@ public class Signup extends HttpServlet
 			req.getSession().invalidate();
 		else if ( user != null && choosenPlan != null )
 		{
-			user.setPlan(choosenPlan);
+			final Billing currentBilling = new Billing();
+			
+			currentBilling.setPlan(choosenPlan);
+			user.getFamily().setCurrentBilling(currentBilling);
+			
 			req.getSession().setAttribute("plan", choosenPlan);
 		}
 		
@@ -66,6 +74,15 @@ public class Signup extends HttpServlet
 					  req.getParameter("birthday"),
 					  req.getParameter("gender"),
 					  req.getParameter("password") );
+			
+			final List<User> members = new ArrayList<User>();
+			final Family new_family = new Family();
+			
+			members.add(new_user);
+			new_family.setName(Family.DEFAULT_NAME);
+			new_family.setMembers(members);
+			
+			new_user.setFamily(new_family);
 			
 			if ( DBManager.getInstance().exists(new_user) )
 				req.getSession().setAttribute("existing_user", new_user);
@@ -92,9 +109,14 @@ public class Signup extends HttpServlet
 					req.getSession().setAttribute("invalid_credit_card", card);
 				else
 				{
-					user.setCreditCard(card);
+					final Family family = user.getFamily();
+					final Billing currentBilling = family.getCurrentBilling();
 					
-					if ( db.registerUser(user) ) 
+					family.setCreditCard(card);
+					currentBilling.setTrial(true);
+					currentBilling.setStartDate("");
+					
+					if ( db.registerUser(family) ) 
 					{
 						ServletUtils.removeAllSessionAttributes(req);
 						req.getSession().setAttribute("registration_done", user);

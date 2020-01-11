@@ -9,14 +9,14 @@ package it.unical.mat.moviesquik.model;
  */
 public class User
 {
+	private Long id;
 	private String first_name;
 	private String last_name;
 	private String email;
 	private String birthday;
 	private String gender;
 	private String password;
-	private String plan;
-	private CreditCard creditCard;
+	private Family family;
 	
 	public User()
 	{}
@@ -36,22 +36,32 @@ public class User
 		this.password = password;
 	}
 
-	public String getFirst_name()
+	public Long getId()
+	{
+		return id;
+	}
+	
+	public void setId(Long id)
+	{
+		this.id = id;
+	}
+	
+	public String getFirstName()
 	{
 		return first_name;
 	}
 
-	public void setFirst_name(String first_name)
+	public void setFirstName(String first_name)
 	{
 		this.first_name = first_name;
 	}
 
-	public String getLast_name()
+	public String getLastName()
 	{
 		return last_name;
 	}
 
-	public void setLast_name(String last_name)
+	public void setLastName(String last_name)
 	{
 		this.last_name = last_name;
 	}
@@ -96,24 +106,14 @@ public class User
 		this.password = password;
 	}
 
-	public String getPlan()
+	public Family getFamily()
 	{
-		return plan;
+		return family;
 	}
-
-	public void setPlan(String plan)
+	
+	public void setFamily(Family family)
 	{
-		this.plan = plan;
-	}
-
-	public CreditCard getCreditCard()
-	{
-		return creditCard;
-	}
-
-	public void setCreditCard(CreditCard creditCard)
-	{
-		this.creditCard = creditCard;
+		this.family = family;
 	}
 	
 }
