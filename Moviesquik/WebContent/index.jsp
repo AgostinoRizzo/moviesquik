@@ -22,6 +22,7 @@
 	<script src="lib/jquery/jquery-migrate.min.js"></script>
 	<script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<script src="js/anim.js"></script>
+	<script src="js/header.js"></script>
 	
 </head>
 <body>
@@ -40,7 +41,7 @@
 				<span class="icon-bar bottom-bar"></span>
 			</button>
 			
-			<a class="navbar-brand" href="./"><img alt="" src="res/drawable/logo.png" height="50px"></a>
+			<a class="navbar-brand" href="./"><img alt="" src="res/drawable/logo3.png"></a>
 			
 			<div class="collapse navbar-collapse justify-content-end" id="navbarToggler">
 			
@@ -112,17 +113,28 @@
     <section id="intro">
 
 		<div class="intro-text">
-			<h1 class="main-text">Movies, TV shows and more.</h1>
-			<p>Watch what you want. Wherever you want.</p>
+			<h1 class="main-text"><strong>Movies, TV shows and more.</strong></h1>
+			<p>Watch what you want. Wherever you want. With anyone you want.</p>
 			
 			<div>
 				<form class="form-inline" id="join_form">
 					<a id="join_btn" href="registration" class="btn btn-outline-primary scrollto">JOIN FREE FOR A MONTH</a>
 	      		</form>
 	      	</div>
+	      	
+	      	<footer class="intro-movie-description fixed-bottom">
+				<div>
+					<img id="rate-star-img" alt="" src="res/drawable/rate_star.png">
+					<img id="rate-star-img" alt="" src="res/drawable/rate_star.png">
+					<img id="rate-star-img" alt="" src="res/drawable/rate_star.png">
+					<img id="rate-star-img" alt="" src="res/drawable/rate_star.png">
+					<img id="rate-star-img" alt="" src="res/drawable/rate_star_empty.png">
+					&nbsp; 4.3 &nbsp; &nbsp; Animation &nbsp; | &nbsp; Adventure
+				</div>
+			</footer>
 		</div>
-
-		<div class="content-screens" id="slide">
+		
+		<!-- <div class="content-screens" id="slide">
 
 			<div class="content-screen-1 content-screen wow fadeInUp" data-wow-delay="0.4s" data-wow-duration="0.6s" id="cont1">
         		<img src="res/drawable/product_wallpaper.png" alt="" height="200px">
@@ -136,7 +148,7 @@
         		<img src="res/drawable/product_wallpaper.png" alt="" height="200px">
       		</div>
 
-    	</div>
+    	</div> -->
 
 	</section>
 

@@ -37,13 +37,13 @@
 	<header id="header">
 			
 		<nav class="navbar navbar-light">
-			<a class="navbar-brand" href="./"><img alt="" src="res/drawable/logo.png" height="50px"></a>
+			<a class="navbar-brand" href="./"><img alt="" src="res/drawable/logo3.png"></a>
 		</nav>
 			
 	</header>
 
-	<section id="intro">
-		<div class="login-wrapper">
+	<section>
+		<div class="login-wrapper foreground-box">
 			
 			<div id="form-header">
 				<h1>Sign In</h1>
@@ -104,7 +104,7 @@
 				
 				<div class="form-row btn-form-row">
 					<div class="col">
-						<button class="btn btn-main btn-main-light" type="submit"><h5>Sign In</h5></button>
+						<button class="btn btn-main" type="submit"><h5>Sign In</h5></button>
 					</div>
 				</div>
 				<div class="form-check form-check-inline">

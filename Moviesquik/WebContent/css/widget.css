@@ -82,6 +82,15 @@ fieldset[disabled] .btn-main.focus {
 	color: #fff !important;
 }
 
+/*******************************
+	input style
+*******************************/
+input, select
+{
+	background-color: #1D1A23 !important;
+	color: #fff !important;
+}
+
 
 /*******************************
 	basic style

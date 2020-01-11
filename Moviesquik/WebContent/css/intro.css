@@ -10,14 +10,14 @@
 	height: 100vh;
 	/*background: linear-gradient(45deg, rgba(29, 224, 153, 0.8), rgba(29, 200, 205, 0.8)), url("../img/intro-bg.jpg") center top no-repeat;*/
 	/*background: linear-gradient(45deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.1)), url("../img/call-to-action-bg.jpg") center top no-repeat;*/
-	background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.4)), url("../res/drawable/intro_background.jpg") no-repeat;
+	background: linear-gradient(to right, rgba(0, 0, 0, 1.0) 0%, rgba(0, 0, 0, 0.7) 46%, rgba(0, 0, 0, 0.0) 77%), url("../res/drawable/movie2_background.png") no-repeat;
 	/*-webkit-filter: blue(20px);*/
 	/*background: linear-gradient(45deg, rgba(0, 0, 0, 1.0), rgba(21, 12, 25, 0.8)), url("../img/intro-bg.jpg") center top no-repeat;*/
 	background-size: cover;
 	position: relative;
 }
 
-#intro .intro-text 
+#intro .intro-text
 {
 	position: absolute;
 	left: 0;
@@ -25,7 +25,7 @@
 	/*top: 130px;*/
 	top: 0;
 	width: 100%;
-	height: 80%;
+	height: 100%;
 	/*-webkit-backdrop-filter: blur(10px);*/
 
 	right: 0;
@@ -48,6 +48,17 @@
 	-webkit-flex-direction: column;
 	-ms-flex-direction: column;
 	flex-direction: column;
+}
+
+.intro-movie-description
+{
+	margin-bottom: 30px;
+}
+
+.intro-movie-description #rate-star-img
+{
+	width: 12px;
+	height: 12px;
 }
 
 /* #intro h2 
@@ -182,3 +193,36 @@
 {
 	margin: 10px;
 }
+
+/********** TODO check new style **********/
+/*.intro-text
+{
+	height: 100% !important;
+	align-items: flex-start !important;
+	padding-left: 50px !important;
+}
+
+.intro-text h1
+{
+	font-size: 3.4rem !important;
+}
+
+.intro-text p
+{
+	padding-left: 0px !important;
+}
+
+.intro-text div a
+{
+	margin-left: 0px !important;
+}*/
+.intro-text
+{
+	height: 100% !important;
+}
+
+.intro-text h1
+{
+	font-size: 3.4rem !important;
+}
+

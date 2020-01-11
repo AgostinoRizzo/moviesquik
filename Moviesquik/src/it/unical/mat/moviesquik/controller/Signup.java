@@ -125,12 +125,15 @@ public class Signup extends HttpServlet
 		if ( choosenPlan != null )
 			return choosenPlan;
 		
+		/*
 		final String[] plans = {"basic", "standard", "premium"};
 		
 		for( final String plan : plans )
 			if ( req.getParameter(plan) != null )
 				return plan;
-		return null;
+		*/
+		
+		return req.getParameter("plan");
 	}
 	
 	private void manageSessionError( HttpServletRequest req, HttpServletResponse resp ) 

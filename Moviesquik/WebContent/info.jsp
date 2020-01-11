@@ -34,7 +34,7 @@
 	<header id="header" class="header-always-fixed foreground-box">
 			
 		<nav class="navbar navbar-light">
-			<a class="navbar-brand" href="./"><img alt="" src="res/drawable/logo.png" height="50px"></a>
+			<a class="navbar-brand" href="./"><img alt="" src="res/drawable/logo.png"></a>
 			<div class="navbar-content">
 				<!-- <form class="form-inline">
 					<a class="btn btn-outline-danger" type="button" href="signup?cancel=true">Cancel</a>
@@ -76,8 +76,10 @@
 				    <c:if test="${error != null}">Having trouble? <a href="">Contact us</a></c:if>
 				  </div>
 				  
+				  <br>
+				  
 				  <div class="lead">
-				    <a class="btn btn-main btn-main-light" href="." role="button">
+				    <a class="btn btn-main" href="." role="button">
 				    		<c:if test="${registration_done != null}"><h4>Start experience</h4></c:if>
 				    		<c:if test="${error != null}"><h4>Continue to Homepage</h4></c:if>
 				    </a>

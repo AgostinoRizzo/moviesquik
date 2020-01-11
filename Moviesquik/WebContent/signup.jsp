@@ -22,8 +22,7 @@
 	<script src="lib/jquery/jquery.min.js"></script>
 	<script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
 	
-	<!-- <link href="bootstrap-3.3.7-dist\css\bootstrap.min.css" rel="stylesheet">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.4.5/js/bootstrapvalidator.min.js"></script> -->
+	<script src="js/header.js"></script>
 	<script src="js/bootstrap-validate.js"></script>
 	<script src="js/validation.js"></script>
 	<script src="js/popup.js"></script>
@@ -35,10 +34,10 @@
 		  Header section
 	======================= -->
 	
-	<header id="header" class="header-always-fixed foreground-box singup-header">
+	<header id="header" class="foreground-box">
 			
 		<nav class="navbar navbar-light">
-			<a class="navbar-brand" href="./"><img alt="" src="res/drawable/logo.png" height="50px"></a>
+			<a class="navbar-brand" href="./"><img alt="" src="res/drawable/logo3.png"></a>
 			<div class="navbar-content">
 				<form class="form-inline">
 					<a class="btn btn-outline-danger" type="button" href="registration?cancel=true">Cancel</a>
@@ -48,8 +47,8 @@
 			
 	</header>
 	
-	<section id="intro">
-		<div class="signup-wrapper" id=<c:if test="${new_user != null and plan == null}">"plans-wrapper"</c:if> >
+	<div id="intro" class="intro-section">
+		<div class="signup-wrapper foreground-box" id=<c:if test="${new_user != null and plan == null}">"plans-wrapper"</c:if> >
 			
 			<c:if test="${new_user == null}">
 			
@@ -133,10 +132,10 @@
 								</div>
 							</div> -->
 							<label for="email">Gender</label>
-							<select class="custom-select" title="ignore" name="gender">
+							<select class="custom-select" name="gender">
 								<option value="female">Female</option>
 								<option value="male">Male</option>
-								<option value="ignore">Ignore</option>
+								<option value="ignore" selected>Ignore</option>
 							</select>
 						</div>
 					</div>
@@ -173,7 +172,7 @@
 					
 					<div class="form-row btn-form-row">
 						<div class="col">
-							<button class="btn btn-main btn-main-light" type="submit"><h4>Continue</h4></button>
+							<button class="btn btn-main" type="submit"><h4>Continue</h4></button>
 						</div>
 					</div>
 					
@@ -190,6 +189,7 @@
 				</div>
 				
 				<form method="GET" action="registration">
+				
 				<div class="card-deck mb-3 text-center">
 			        <div class="card mb-4 box-shadow">
 			          <div class="card-header">
@@ -203,9 +203,10 @@
 			              <li>Email support</li>
 			              <li>Help center access</li>
 			            </ul>
-			            <button class="btn btn-main btn-main-light" type="submit" name="basic"><h4>Choose basic</h4></button>
+			            <button class="btn btn-main btn-main-light" type="submit" name="plan" value="basic"><h5>Choose basic</h5></button>
 			          </div>
 			        </div>
+			        
 			        <div class="card mb-4 box-shadow">
 			          <div class="card-header">
 			            <h4 class="my-0 font-weight-normal">Standard</h4>
@@ -218,9 +219,10 @@
 			              <li>Priority email support</li>
 			              <li>Help center access</li>
 			            </ul>
-			            <button class="btn btn-main btn-main-light" type="submit" name="standard"><h4>Choose standard</h4></button>
+			            <button class="btn btn-main btn-main-light" type="submit" name="plan" value="standard"><h5>Choose standard</h5></button>
 			          </div>
 			        </div>
+			        
 			        <div class="card mb-4 box-shadow">
 			          <div class="card-header">
 			            <h4 class="my-0 font-weight-normal">Premium</h4>
@@ -233,7 +235,7 @@
 			              <li>Phone and email support</li>
 			              <li>Help center access</li>
 			            </ul>
-			            <button class="btn btn-main btn-main-light" type="submit" name="premium"><h4>Choose premium</h4></button>
+			            <button class="btn btn-main btn-main-light" type="submit" name="plan" value="premium"><h5>Choose premium</h5></button>
 			          </div>
 			        </div>
 				</div>
@@ -275,7 +277,7 @@
 					<div class="payment-methods-img">
 						<img alt="" src="res/drawable/payment_methods.png" height="70px">
 					</div>
-					<div class="d-block my-3">
+					<!-- <div class="d-block my-3">
 		              <div class="custom-control custom-radio">
 		                <input name="paymentMethod" class="custom-control-input" id="credit" required type="radio" checked>
 		                <label class="custom-control-label" for="credit">Credit card</label>
@@ -288,7 +290,7 @@
 		                <input name="paymentMethod" class="custom-control-input" id="paypal" required type="radio">
 		                <label class="custom-control-label" for="paypal">Paypal</label>
 		              </div>
-		            </div>
+		            </div> -->
 		            
 		            <div class="form-row">
 		              <div class="col">
@@ -310,14 +312,14 @@
 		            </div>
 		            
 		            <div class="form-row">
-		              <div class="col-md-5 mb-3">
+		              <div class="col mb-3">
 		                <label for="cc-expiration">Expiration</label>
 		                <div class="input-group">
 								<span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
 		                		<input class="form-control" id="cc-expiration-month" name="cc-expiration-month" required type="month" value="2019-12" placeholder="Month">
 		                </div>
 		              </div>
-		              <div class="col-md-3 mb-3">
+		              <div class="col mb-3">
 		                <label for="cc-expiration">CVV</label>
 		                <div class="input-group">
 								<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
@@ -327,9 +329,13 @@
 		            </div>
 		            
 		            <hr class="mb-4">
+		            
+		            <div class="info-text-box">
 		            By ticking the tickbox below, you agree to our <a href="">Terms of Use</a> and <a href="">Privacy Statement</a>. You may cancel at any time during your free trial and will
 		            not be charged. Moviesquik will automatically continue your membership at the end of your free trial and change the membership fee to your payment method on a monthly basis
 		            until you cancel.<br>
+		            </div>
+		            
 		            <div class="form-row">
 						<div class="col">
 							<div class="form-check form-check-inline">
@@ -338,15 +344,16 @@
 							</div>
 						</div>
 					</div>
-		            <hr class="mb-4">
 		            
-		            <button class="btn btn-main btn-main-light" type="submit"><h4>START MEMBERSHIP</h4></button>
+		            <!-- <hr class="mb-4"> -->
+		            
+		            <button class="btn btn-main" type="submit"><h4>START MEMBERSHIP</h4></button>
 				</form>
 				
 			</c:if>
 			
 		</div>
-	</section>
+	</div>
 	
 </body>
 </html>
