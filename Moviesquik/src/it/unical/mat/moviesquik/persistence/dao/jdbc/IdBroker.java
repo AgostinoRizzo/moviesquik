@@ -12,7 +12,7 @@ import java.sql.SQLException;
  */
 public class IdBroker
 {
-	private static final String NEXT_ID_QUERY = "select nextval('SequenceID') as id";
+	private static final String NEXT_ID_QUERY = "select nextval('primary_key_sequence') as id";
 	
 	public static Long getNextId( StatementPrompterJDBC statementPrompter ) throws SQLException
 	{

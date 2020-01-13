@@ -19,6 +19,7 @@ import it.unical.mat.moviesquik.model.Exception;
 import it.unical.mat.moviesquik.model.Family;
 import it.unical.mat.moviesquik.model.User;
 import it.unical.mat.moviesquik.persistence.DBManager;
+import it.unical.mat.moviesquik.util.DateUtil;
 
 /**
  * @author Agostino
@@ -50,12 +51,13 @@ public class Signup extends HttpServlet
 			final Billing currentBilling = new Billing();
 			
 			currentBilling.setPlan(choosenPlan);
+			currentBilling.setFamily(user.getFamily());
 			user.getFamily().setCurrentBilling(currentBilling);
 			
 			req.getSession().setAttribute("plan", choosenPlan);
 		}
 		
-		ServletUtils.printSessionAttributes(req);
+		//ServletUtils.printSessionAttributes(req);
 		req.getRequestDispatcher("signup.jsp").forward(req, resp);
 	}
 	
@@ -66,12 +68,12 @@ public class Signup extends HttpServlet
 		final User user = (User) req.getSession().getAttribute("new_user");
 		
 		if ( user == null )
-		{
+		{			
 			final User new_user = new User
 					( req.getParameter("first_name"),
 					  req.getParameter("last_name"),
 					  req.getParameter("email"),
-					  req.getParameter("birthday"),
+					  DateUtil.parse(req.getParameter("birthday")),
 					  req.getParameter("gender"),
 					  req.getParameter("password") );
 			
@@ -84,7 +86,7 @@ public class Signup extends HttpServlet
 			
 			new_user.setFamily(new_family);
 			
-			if ( DBManager.getInstance().exists(new_user) )
+			if ( DBManager.getInstance().canRegister(new_user) )
 				req.getSession().setAttribute("existing_user", new_user);
 			else
 			{
@@ -100,12 +102,12 @@ public class Signup extends HttpServlet
 				final CreditCard card = new CreditCard
 						( req.getParameter("cc-name"),
 						  req.getParameter("cc-number"),
-						  req.getParameter("cc-expiration-month"),
+						  DateUtil.parseMonthFormat(req.getParameter("cc-expiration-month")),
 						  req.getParameter("cc-cvv") );
 				
-				// TODO: check credit card data and add account.
 				final DBManager db = DBManager.getInstance();
-				if ( !db.exists(card) || db.used(card) )
+				
+				if ( !db.existsMatch(card) )
 					req.getSession().setAttribute("invalid_credit_card", card);
 				else
 				{
@@ -114,9 +116,9 @@ public class Signup extends HttpServlet
 					
 					family.setCreditCard(card);
 					currentBilling.setTrial(true);
-					currentBilling.setStartDate("");
+					currentBilling.setStartDate(DateUtil.getCurrent());
 					
-					if ( db.registerUser(family) ) 
+					if ( db.register(family) ) 
 					{
 						ServletUtils.removeAllSessionAttributes(req);
 						req.getSession().setAttribute("registration_done", user);

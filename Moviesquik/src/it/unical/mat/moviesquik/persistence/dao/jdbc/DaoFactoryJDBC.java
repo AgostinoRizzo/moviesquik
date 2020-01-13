@@ -4,8 +4,10 @@
 package it.unical.mat.moviesquik.persistence.dao.jdbc;
 
 import it.unical.mat.moviesquik.persistence.DataSource;
+import it.unical.mat.moviesquik.persistence.dao.CreditCardDao;
 import it.unical.mat.moviesquik.persistence.dao.DaoFactory;
 import it.unical.mat.moviesquik.persistence.dao.FamilyDao;
+import it.unical.mat.moviesquik.persistence.dao.RegistrationTransaction;
 import it.unical.mat.moviesquik.persistence.dao.UserDao;
 
 /**
@@ -31,6 +33,18 @@ public class DaoFactoryJDBC implements DaoFactory
 	public FamilyDao getFamilyDao()
 	{
 		return new FamilyDaoJDBC(statementPrompter);
+	}
+	
+	@Override
+	public CreditCardDao getCreditCardDao()
+	{
+		return new CreditCardDaoJDBC(statementPrompter);
+	}
+	
+	@Override
+	public RegistrationTransaction getRegistrationTransaction()
+	{
+		return new RegistrationTransactionJDBC(statementPrompter);
 	}
 
 }

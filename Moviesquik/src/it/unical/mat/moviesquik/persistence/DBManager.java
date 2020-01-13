@@ -3,9 +3,6 @@
  */
 package it.unical.mat.moviesquik.persistence;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import it.unical.mat.moviesquik.model.CreditCard;
 import it.unical.mat.moviesquik.model.Family;
 import it.unical.mat.moviesquik.model.User;
@@ -35,8 +32,6 @@ public class DBManager
 		{ e.printStackTrace(); }
 	}
 	
-	private List<User> users = new ArrayList<User>();
-	private List<CreditCard> creditCards = new ArrayList<>();
 	
 	public static DBManager getInstance()
 	{
@@ -47,8 +42,7 @@ public class DBManager
 	
 	private DBManager()
 	{
-		users.add(new User("Admin", "Admin", "admin@email.com", "", "", "adminadmin"));
-		creditCards.add(new CreditCard("Admin", "1234123412341234", "2019-12", "123"));
+		
 	}
 	
 	public DaoFactory getDaoFactory()
@@ -56,47 +50,23 @@ public class DBManager
 		return daoFactory;
 	}
 	
-	public boolean exists( final User user )
+	public boolean canRegister( final User user )
 	{
-		for( final User u: users )
-			if ( user.getEmail().equals(u.getEmail()) )
-				return true;
-		return false;
+		return getDaoFactory().getUserDao().findByEmail( user.getEmail() ) != null;
 	}
 	
-	public boolean exists( final CreditCard card )
+	public boolean existsMatch( final CreditCard card )
 	{
-		for( final CreditCard c: creditCards )
-			if ( card.getNumber().equals(c.getNumber()) )
-				return true;
-		return false;
+		return getDaoFactory().getCreditCardDao().existsMatch(card);
 	}
 	
-	public boolean userCreditCard( final CreditCard card )
+	public boolean register( final Family family )
 	{
-		/*for( final User u: users )
-			if ( u.getCreditCard().equals(card) )
-				return true;*/
-		return false;
-	}
-	
-	public boolean used( final CreditCard card )
-	{
-		return false;
-	}
-	
-	public boolean registerUser( final Family family )
-	{
-		// TODO: add checks.
-		users.add(family.getMembers().get(0));
-		return true;
+		return getDaoFactory().getRegistrationTransaction().execute(family);
 	}
 
 	public User login( final String email, final String password )
 	{
-		for( final User usr : users )
-			if ( usr.getEmail().equals(email) && usr.getPassword().equals(password) )
-				return usr;
-		return null;
+		return getDaoFactory().getUserDao().findByLogin(email, password);
 	}
 }

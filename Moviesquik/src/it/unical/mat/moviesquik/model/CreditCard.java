@@ -3,21 +3,24 @@
  */
 package it.unical.mat.moviesquik.model;
 
+import java.util.Date;
+
 /**
  * @author Agostino
  *
  */
 public class CreditCard
 {
+	private Long id;
 	private String name;
 	private String number;
-	private String expiration;
+	private Date expiration;
 	private String cvv;
 	
 	public CreditCard()
 	{}
 
-	public CreditCard(String name, String number, String expiration, String cvv)
+	public CreditCard(String name, String number, Date expiration, String cvv)
 	{
 		this.name = name;
 		this.number = number;
@@ -33,6 +36,16 @@ public class CreditCard
 		return false;
 	}
 
+	public Long getId()
+	{
+		return id;
+	}
+	
+	public void setId(Long id)
+	{
+		this.id = id;
+	}
+	
 	public String getName()
 	{
 		return name;
@@ -53,12 +66,12 @@ public class CreditCard
 		this.number = number;
 	}
 
-	public String getExpiration()
+	public Date getExpiration()
 	{
 		return expiration;
 	}
 
-	public void setExpiration(String expiration)
+	public void setExpiration(Date expiration)
 	{
 		this.expiration = expiration;
 	}

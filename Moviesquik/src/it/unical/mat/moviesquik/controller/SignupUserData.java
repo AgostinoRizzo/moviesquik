@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import it.unical.mat.moviesquik.model.User;
 import it.unical.mat.moviesquik.persistence.DBManager;
+import it.unical.mat.moviesquik.util.DateUtil;
 
 /**
  * @author Agostino
@@ -45,11 +46,11 @@ public class SignupUserData extends HttpServlet
 			  ( req.getParameter("first_name"),
 				req.getParameter("last_name"),
 				req.getParameter("email"),
-				req.getParameter("birthday"),
+				DateUtil.parse(req.getParameter("birthday")),
 				req.getParameter("gender"),
 				req.getParameter("password") );
 		
-		if ( DBManager.getInstance().exists(new_user) )
+		if ( DBManager.getInstance().canRegister(new_user) )
 		{
 			req.getSession().setAttribute("existing_user", new_user);
 			req.getRequestDispatcher("signup.jsp").forward(req, resp);

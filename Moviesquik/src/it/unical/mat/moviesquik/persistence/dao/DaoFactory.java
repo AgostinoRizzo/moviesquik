@@ -11,4 +11,7 @@ public interface DaoFactory
 {
 	public UserDao getUserDao();
 	public FamilyDao getFamilyDao();
+	public CreditCardDao getCreditCardDao();
+	
+	public RegistrationTransaction getRegistrationTransaction();
 }

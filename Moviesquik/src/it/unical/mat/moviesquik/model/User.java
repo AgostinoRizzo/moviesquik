@@ -3,6 +3,8 @@
  */
 package it.unical.mat.moviesquik.model;
 
+import java.util.Date;
+
 /**
  * @author Agostino
  *
@@ -13,7 +15,7 @@ public class User
 	private String first_name;
 	private String last_name;
 	private String email;
-	private String birthday;
+	private Date birthday;
 	private String gender;
 	private String password;
 	private Family family;
@@ -24,7 +26,7 @@ public class User
 	public User(final String first_name, 
 				final String last_name, 
 				final String email, 
-				final String birthday, 
+				final Date birthday, 
 				final String gender, 
 				final String password)
 	{
@@ -76,12 +78,12 @@ public class User
 		this.email = email;
 	}
 
-	public String getBirthday()
+	public Date getBirthday()
 	{
 		return birthday;
 	}
 
-	public void setBirthday(String birthday)
+	public void setBirthday(Date birthday)
 	{
 		this.birthday = birthday;
 	}

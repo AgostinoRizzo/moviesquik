@@ -26,6 +26,16 @@ public class StatementPrompterJDBC
 		return dataSource.getConnection().prepareStatement(sql);
 	}
 	
+	public void startTransaction() throws SQLException
+	{
+		dataSource.getConnection().setAutoCommit(false);
+	}
+	
+	public void commit() throws SQLException
+	{
+		dataSource.getConnection().commit();
+	}
+	
 	public void onFinalize()
 	{
 		try
@@ -34,5 +44,10 @@ public class StatementPrompterJDBC
 		} 
 		catch (SQLException e)
 		{ e.printStackTrace(); }
+	}
+	
+	public DataSource getDataSource()
+	{
+		return dataSource;
 	}
 }

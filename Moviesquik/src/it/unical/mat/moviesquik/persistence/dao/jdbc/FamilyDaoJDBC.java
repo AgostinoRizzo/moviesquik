@@ -11,6 +11,7 @@ import java.util.List;
 
 import it.unical.mat.moviesquik.model.Family;
 import it.unical.mat.moviesquik.persistence.DBManager;
+import it.unical.mat.moviesquik.persistence.dao.DaoFactory;
 import it.unical.mat.moviesquik.persistence.dao.FamilyDao;
 
 /**
@@ -19,22 +20,13 @@ import it.unical.mat.moviesquik.persistence.dao.FamilyDao;
  */
 public class FamilyDaoJDBC implements FamilyDao
 {
-	private static final String INSERT_STATEMENT = 
-			"insert into Family(FamilyID, Name) values (?,?)";
+	protected static final String INSERT_STATEMENT          = "insert into family(family_id, name, credit_card_id) values (?,?,?)";
+	protected static final String FIND_BY_PRIMARY_KEY_QUERY = "select * from family where family_id = ?";
+	protected static final String FIND_ALL_QUERY            = "select * from family";
+	protected static final String UPDATE_STATEMENT          = "update family SET name = ? credit_card_id = ? WHERE family_id = ?";
+	protected static final String DELETE_STATEMENT          = "delete from family where family_id = ?";
 	
-	private static final String FIND_BY_PRIMARY_KEY_QUERY = 
-			"select * from Family where FamilyID = ?";
-	
-	private static final String FIND_ALL_QUERY = 
-			"select * from Family";
-	
-	private static final String UPDATE_STATEMENT = 
-			"update Family SET Name = ? WHERE FamilyID = ?";
-	
-	private static final String DELETE_STATEMENT = 
-			"delete from Family where FamilyID = ?";
-	
-	private final StatementPrompterJDBC statementPrompter;
+	protected final StatementPrompterJDBC statementPrompter;
 	
 	public FamilyDaoJDBC( final StatementPrompterJDBC statementPrompter )
 	{
@@ -49,20 +41,18 @@ public class FamilyDaoJDBC implements FamilyDao
 			family.setId(IdBroker.getNextId(statementPrompter));
 			final PreparedStatement statement = statementPrompter.prepareStatement(INSERT_STATEMENT);
 			
-			statement.setLong  (1, family.getId());
-			statement.setString(2, family.getName());
+			setDataToInsertStatement(family, statement);
 			
 			statement.executeUpdate();
+			
 			return true;
 		}
 		
 		catch (SQLException e)
-		{ e.printStackTrace(); }
+		{ e.printStackTrace(); return false; }
 		
 		finally 
 		{ statementPrompter.onFinalize(); }
-		
-		return false;
 	}
 
 	@Override
@@ -79,15 +69,15 @@ public class FamilyDaoJDBC implements FamilyDao
 			
 			if ( result.next() )
 				family = createUserFromResult(result);
+			
+			return family;
 		}
 		
 		catch (SQLException e)
-		{ e.printStackTrace(); }
+		{ e.printStackTrace(); return null; }
 		
 		finally 
 		{ statementPrompter.onFinalize(); }
-		
-		return family;
 	}
 
 	@Override
@@ -102,15 +92,15 @@ public class FamilyDaoJDBC implements FamilyDao
 			
 			while ( result.next() )
 				families.add( createUserFromResult(result) );
+			
+			return families;
 		}
 		
 		catch (SQLException e)
-		{ e.printStackTrace(); }
+		{ e.printStackTrace(); return families; }
 		
 		finally 
 		{ statementPrompter.onFinalize(); }
-		
-		return families;
 	}
 
 	@Override
@@ -120,8 +110,9 @@ public class FamilyDaoJDBC implements FamilyDao
 		{
 			final PreparedStatement statement = statementPrompter.prepareStatement(UPDATE_STATEMENT);
 			
-			statement.setString(1, family.getName());			
-			statement.setLong  (2, family.getId());
+			statement.setString(1, family.getName());
+			statement.setString(2, family.getCreditCard().getNumber());
+			statement.setLong  (3, family.getId());
 			
 			statement.executeUpdate();
 			
@@ -129,12 +120,10 @@ public class FamilyDaoJDBC implements FamilyDao
 		}
 		
 		catch (SQLException e)
-		{ e.printStackTrace(); }
+		{ e.printStackTrace(); return false; }
 		
 		finally 
 		{ statementPrompter.onFinalize(); }
-		
-		return false;
 	}
 
 	@Override
@@ -149,22 +138,29 @@ public class FamilyDaoJDBC implements FamilyDao
 		}
 		
 		catch (SQLException e)
-		{ e.printStackTrace(); }
+		{ e.printStackTrace(); return false; }
 		
 		finally 
 		{ statementPrompter.onFinalize(); }
-		
-		return false;
+	}
+	
+	protected static void setDataToInsertStatement( final Family family, final PreparedStatement statement ) throws SQLException
+	{
+		statement.setLong  (1, family.getId());
+		statement.setString(2, family.getName());
+		statement.setLong(3, family.getCreditCard().getId());
 	}
 	
 	private Family createUserFromResult( final ResultSet result ) throws SQLException
 	{
 		final Family family = new Family();
 		
-		family.setId(result.getLong("FamilyID"));
-		family.setName(result.getString("Name"));
+		family.setId(result.getLong("family_id"));
+		family.setName(result.getString("name"));
 		
-		family.setMembers(DBManager.getInstance().getDaoFactory().getUserDao().findByFamily(family));
+		final DaoFactory factory = DBManager.getInstance().getDaoFactory();
+		family.setMembers(factory.getUserDao().findByFamily(family));
+		family.setCreditCard(factory.getCreditCardDao().findByPrimaryKey(result.getLong("credit_card_id")));
 		
 		return family;
 	}

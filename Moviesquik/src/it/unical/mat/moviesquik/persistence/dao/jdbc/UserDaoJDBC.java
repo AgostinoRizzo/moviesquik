@@ -13,6 +13,7 @@ import it.unical.mat.moviesquik.model.Family;
 import it.unical.mat.moviesquik.model.User;
 import it.unical.mat.moviesquik.persistence.DBManager;
 import it.unical.mat.moviesquik.persistence.dao.UserDao;
+import it.unical.mat.moviesquik.util.DateUtil;
 
 /**
  * @author Agostino
@@ -20,23 +21,14 @@ import it.unical.mat.moviesquik.persistence.dao.UserDao;
  */
 public class UserDaoJDBC implements UserDao
 {
-	private static final String INSERT_STATEMENT = 
-			"insert into User(UserID, FirstName, LastName, Email, Birthday, Gender, Password, FamilyID) values (?,?,?,?,?,?,?,?)";
-	
-	private static final String FIND_BY_PRIMARY_KEY_QUERY = 
-			"select * from User where UserID = ?";
-	
-	private static final String FIND_ALL_QUERY = 
-			"select * from User";
-	
-	private static final String UPDATE_STATEMENT = 
-			"update User SET FirstName = ?, LastName = ?, Email = ?, Birthday = ?, Gender = ?, Password = ?, FamilyID = ? WHERE UserID = ?";
-	
-	private static final String DELETE_STATEMENT = 
-			"delete from User where UserID = ?";
-	
-	private static final String FIND_BY_FAMILY_QUERY = 
-			"select * from User where FamilyID = ?";
+	protected static final String INSERT_STATEMENT          = "insert into \"user\"(user_id, first_name, last_name, email, birthday, gender, password, family_id) values (?,?,?,?,?,?,?,?)";
+	protected static final String FIND_BY_PRIMARY_KEY_QUERY = "select * from \"user\" where user_id = ?";
+	protected static final String FIND_ALL_QUERY            = "select * from \"user\"";
+	protected static final String UPDATE_STATEMENT          = "update \"user\" SET first_name = ?, last_name = ?, email = ?, birthday = ?, gender = ?, password = ?, family_id = ? WHERE user_id = ?";
+	protected static final String DELETE_STATEMENT          = "delete from \"user\" where user_id = ?";
+	protected static final String FIND_BY_FAMILY_QUERY      = "select * from \"user\" where family_id = ?";
+	protected static final String FIND_BY_EMAIL_QUERY       = "select * from \"user\" where email = ?";
+	protected static final String FIND_BY_LOGIN_QUERY       = "select * from \"user\" where email = ? and password = ?";
 
 	private final StatementPrompterJDBC statementPrompter;
 	
@@ -53,26 +45,17 @@ public class UserDaoJDBC implements UserDao
 			usr.setId(IdBroker.getNextId(statementPrompter));
 			final PreparedStatement statement = statementPrompter.prepareStatement(INSERT_STATEMENT);
 			
-			statement.setLong  (1, usr.getId());
-			statement.setString(2, usr.getFirstName());
-			statement.setString(3, usr.getLastName());
-			statement.setString(4, usr.getEmail());
-			statement.setString(5, usr.getBirthday());
-			statement.setString(6, usr.getGender());
-			statement.setString(7, usr.getPassword());
-			statement.setLong  (8, usr.getFamily().getId());
+			setDataToInsertStatement(usr, statement);
 			
 			statement.executeUpdate();
 			return true;
 		}
 		
 		catch (SQLException e)
-		{ e.printStackTrace(); }
+		{ e.printStackTrace(); return false; }
 		
 		finally 
 		{ statementPrompter.onFinalize(); }
-		
-		return false;
 	}
 
 	@Override
@@ -89,15 +72,14 @@ public class UserDaoJDBC implements UserDao
 			
 			if ( result.next() )
 				usr = createUserFromResult(result, null);
+			return usr;
 		}
 		
 		catch (SQLException e)
-		{ e.printStackTrace(); }
+		{ e.printStackTrace(); return null; }
 		
 		finally 
 		{ statementPrompter.onFinalize(); }
-		
-		return usr;
 	}
 
 	@Override
@@ -112,15 +94,14 @@ public class UserDaoJDBC implements UserDao
 			
 			while ( result.next() )
 				users.add( createUserFromResult(result, null) );
+			return users;
 		}
 		
 		catch (SQLException e)
-		{ e.printStackTrace(); }
+		{ e.printStackTrace(); return null; }
 		
 		finally 
 		{ statementPrompter.onFinalize(); }
-		
-		return users;
 	}
 
 	@Override
@@ -133,7 +114,7 @@ public class UserDaoJDBC implements UserDao
 			statement.setString(1, usr.getFirstName());
 			statement.setString(2, usr.getLastName());
 			statement.setString(3, usr.getEmail());
-			statement.setString(4, usr.getBirthday());
+			statement.setDate(4, DateUtil.toJDBC(usr.getBirthday()));
 			statement.setString(5, usr.getGender());
 			statement.setString(6, usr.getPassword());
 			statement.setLong  (7, usr.getFamily().getId());
@@ -146,12 +127,10 @@ public class UserDaoJDBC implements UserDao
 		}
 		
 		catch (SQLException e)
-		{ e.printStackTrace(); }
+		{ e.printStackTrace(); return false; }
 		
 		finally 
 		{ statementPrompter.onFinalize(); }
-		
-		return false;
 	}
 
 	@Override
@@ -166,12 +145,10 @@ public class UserDaoJDBC implements UserDao
 		}
 		
 		catch (SQLException e)
-		{ e.printStackTrace(); }
+		{ e.printStackTrace(); return false; }
 		
 		finally 
 		{ statementPrompter.onFinalize(); }
-		
-		return false;
 	}
 	
 	@Override
@@ -188,31 +165,87 @@ public class UserDaoJDBC implements UserDao
 			
 			while ( result.next() )
 				users.add( createUserFromResult(result, family) );
+			return users;
 		}
 		
 		catch (SQLException e)
-		{ e.printStackTrace(); }
+		{ e.printStackTrace(); return users; }
 		
 		finally 
 		{ statementPrompter.onFinalize(); }
+	}
+	
+	@Override
+	public User findByEmail(String email)
+	{
+		try
+		{
+			final PreparedStatement statement = statementPrompter.prepareStatement(FIND_BY_EMAIL_QUERY);
+			statement.setString(1, email);
+			
+			ResultSet result = statement.executeQuery();
+			
+			if ( result.next() )
+				return createUserFromResult(result, null);
+			return null;
+		}
 		
-		return users;
+		catch (SQLException e)
+		{ e.printStackTrace(); return null; }
+		
+		finally 
+		{ statementPrompter.onFinalize(); }
+	}
+	
+	@Override
+	public User findByLogin(String email, String password)
+	{
+		try
+		{
+			final PreparedStatement statement = statementPrompter.prepareStatement(FIND_BY_LOGIN_QUERY);
+			statement.setString(1, email);
+			statement.setString(2, password);
+			
+			ResultSet result = statement.executeQuery();
+			
+			if ( result.next() )
+				return createUserFromResult(result, null);
+			return null;
+		}
+		
+		catch (SQLException e)
+		{ e.printStackTrace(); return null;}
+		
+		finally 
+		{ statementPrompter.onFinalize(); }
+	}
+	
+	protected static void setDataToInsertStatement( final User usr, final PreparedStatement statement ) throws SQLException
+	{
+		statement.setLong  (1, usr.getId());
+		statement.setString(2, usr.getFirstName());
+		statement.setString(3, usr.getLastName());
+		statement.setString(4, usr.getEmail());
+		statement.setDate(5, DateUtil.toJDBC(usr.getBirthday()));
+		statement.setString(6, usr.getGender());
+		statement.setString(7, usr.getPassword());
+		statement.setLong  (8, usr.getFamily().getId());
 	}
 	
 	private User createUserFromResult( final ResultSet result, final Family family ) throws SQLException
 	{
 		final User usr = new User();
 		
-		usr.setId(result.getLong("UserID"));
-		usr.setFirstName(result.getString("FirstName"));
-		usr.setLastName(result.getString("LastName"));
-		usr.setEmail(result.getString("Email"));
-		usr.setBirthday(result.getString("Birthday"));
-		usr.setGender(result.getString("Gender"));
-		usr.setPassword(result.getString("Password"));
+		usr.setId(result.getLong("user_id"));
+		usr.setFirstName(result.getString("first_name"));
+		usr.setLastName(result.getString("last_name"));
+		usr.setEmail(result.getString("email"));
+		usr.setBirthday(DateUtil.toJava(result.getDate("birthday")));
+		usr.setGender(result.getString("gender"));
+		usr.setPassword(result.getString("password"));
 		
 		usr.setFamily( (family == null ) ? DBManager.getInstance().getDaoFactory().getFamilyDao()
-				.findByPrimaryKey(result.getLong("FamilyID")) : family );
+				.findByPrimaryKey(result.getLong("family_id")) : family );
 		
 		return usr;
 	}

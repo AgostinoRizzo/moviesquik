@@ -24,6 +24,7 @@ $(document).ready(function()
 	{
 	    bootstrapValidate('#email', 'email:Please enter a valid email address.');
 	    bootstrapValidate('#email', 'required:Email address required.');
+	    bootstrapValidate('#first_name', 'max:320:Please enter no more than 320 characters.');
 	}
     
 	if ( $("#birthday").length )

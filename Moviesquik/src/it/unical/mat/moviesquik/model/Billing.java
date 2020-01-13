@@ -3,6 +3,8 @@
  */
 package it.unical.mat.moviesquik.model;
 
+import java.util.Date;
+
 /**
  * @author Agostino
  *
@@ -10,9 +12,10 @@ package it.unical.mat.moviesquik.model;
 public class Billing
 {
 	private Long id;
-	private String startDate;
+	private Date startDate;
 	private String plan;
 	private boolean isTrial;
+	private Family family;
 	
 	public Long getId()
 	{
@@ -22,11 +25,11 @@ public class Billing
 	{
 		this.id = id;
 	}
-	public String getStartDate()
+	public Date getStartDate()
 	{
 		return startDate;
 	}
-	public void setStartDate(String startDate)
+	public void setStartDate(Date startDate)
 	{
 		this.startDate = startDate;
 	}
@@ -45,6 +48,15 @@ public class Billing
 	public void setTrial(boolean isTrial)
 	{
 		this.isTrial = isTrial;
+	}
+	
+	public Family getFamily()
+	{
+		return family;
+	}
+	public void setFamily(Family family)
+	{
+		this.family = family;
 	}
 	
 }
