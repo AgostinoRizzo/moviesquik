@@ -32,6 +32,8 @@ public class DBManager
 		{ e.printStackTrace(); }
 	}
 	
+	private DBFiller filler = new DBFiller();
+	
 	
 	public static DBManager getInstance()
 	{
@@ -48,6 +50,11 @@ public class DBManager
 	public DaoFactory getDaoFactory()
 	{
 		return daoFactory;
+	}
+	
+	public DBFiller getFiller()
+	{
+		return filler;
 	}
 	
 	public boolean canRegister( final User user )

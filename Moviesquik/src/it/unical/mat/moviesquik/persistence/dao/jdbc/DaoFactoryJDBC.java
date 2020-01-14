@@ -7,6 +7,7 @@ import it.unical.mat.moviesquik.persistence.DataSource;
 import it.unical.mat.moviesquik.persistence.dao.CreditCardDao;
 import it.unical.mat.moviesquik.persistence.dao.DaoFactory;
 import it.unical.mat.moviesquik.persistence.dao.FamilyDao;
+import it.unical.mat.moviesquik.persistence.dao.MediaContentDao;
 import it.unical.mat.moviesquik.persistence.dao.RegistrationTransaction;
 import it.unical.mat.moviesquik.persistence.dao.UserDao;
 
@@ -45,6 +46,12 @@ public class DaoFactoryJDBC implements DaoFactory
 	public RegistrationTransaction getRegistrationTransaction()
 	{
 		return new RegistrationTransactionJDBC(statementPrompter);
+	}
+	
+	@Override
+	public MediaContentDao getMediaContentDao()
+	{
+		return new MediaContentDaoJDBC(statementPrompter);
 	}
 
 }
