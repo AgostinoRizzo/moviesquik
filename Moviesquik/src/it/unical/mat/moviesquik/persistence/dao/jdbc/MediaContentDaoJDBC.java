@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.unical.mat.moviesquik.model.MediaContent;
+import it.unical.mat.moviesquik.model.User;
 import it.unical.mat.moviesquik.persistence.dao.MediaContentDao;
 import it.unical.mat.moviesquik.util.DateUtil;
 
@@ -24,7 +25,7 @@ public class MediaContentDaoJDBC implements MediaContentDao
 			"values (?,?,?,?,?,?,?,?,?,?,?,?)";
 	protected static final String FIND_BY_PRIMARY_KEY_QUERY = "select * from media_content where media_content_id = ?";
 	protected static final String FIND_BY_TITLE_YEAR_QUERY = "select * from media_content where title = ? and year = ?";
-	protected static final String FIND_MOST_RATED_QUERY = "select * from media_content";
+	protected static final String FIND_MOST_RATED_QUERY = "select * from media_content limit ?";
 	
 	
 	private final StatementPrompterJDBC statementPrompter;
@@ -81,13 +82,23 @@ public class MediaContentDaoJDBC implements MediaContentDao
 	}
 	
 	@Override
-	public List<MediaContent> findMostRated()
+	public MediaContent getMediaContentOfTheDay()
+	{
+		final List<MediaContent> contents = findByTitleYear("The Lion King", (short) 2019);
+		if ( contents.isEmpty() )
+			return null;
+		return contents.get(0);
+	}
+	
+	@Override
+	public List<MediaContent> findMostRated( final int maxfindCount )
 	{
 		final List<MediaContent> mediaContents = new ArrayList<MediaContent>();
 		
 		try
 		{
 			final PreparedStatement statement = statementPrompter.prepareStatement(FIND_MOST_RATED_QUERY);
+			statement.setInt(1, maxfindCount);
 			
 			ResultSet result = statement.executeQuery();
 			
@@ -101,6 +112,24 @@ public class MediaContentDaoJDBC implements MediaContentDao
 		
 		finally 
 		{ statementPrompter.onFinalize(); }
+	}
+	
+	@Override
+	public List<MediaContent> findMostPopular( final int maxfindCount )
+	{
+		return findMostRated(maxfindCount);
+	}
+	
+	@Override
+	public List<MediaContent> findMostFavorites( final int maxfindCount )
+	{
+		return findMostRated(maxfindCount);
+	}
+	
+	@Override
+	public List<MediaContent> findSuggested(int maxfindCount, User user)
+	{
+		return findMostRated(maxfindCount);
 	}
 	
 	protected static void setDataToInsertStatement( final MediaContent mediaContent, final PreparedStatement statement ) throws SQLException

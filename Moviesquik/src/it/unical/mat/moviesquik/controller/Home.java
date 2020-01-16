@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import it.unical.mat.moviesquik.model.MediaContent;
+import it.unical.mat.moviesquik.persistence.DBManager;
+
 /**
  * @author Agostino
  *
@@ -23,6 +26,11 @@ public class Home extends HttpServlet
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) 
 			throws ServletException, IOException
 	{
+		final MediaContent mediaContentOfTheDay =
+				DBManager.getInstance().getDaoFactory().getMediaContentDao().getMediaContentOfTheDay();
+		if ( mediaContentOfTheDay != null )
+			req.setAttribute("media_content_of_the_day", mediaContentOfTheDay);
+		
 		final RequestDispatcher rd = req.getRequestDispatcher("index.jsp");
 		rd.forward(req, resp);
 	}

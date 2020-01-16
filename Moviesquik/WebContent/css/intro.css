@@ -7,15 +7,20 @@
 #intro 
 {
 	width: 100%;
-	height: 100vh;
+	/* height: 100vh; */
+	height: 700px;
 	/*background: linear-gradient(45deg, rgba(29, 224, 153, 0.8), rgba(29, 200, 205, 0.8)), url("../img/intro-bg.jpg") center top no-repeat;*/
 	/*background: linear-gradient(45deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.1)), url("../img/call-to-action-bg.jpg") center top no-repeat;*/
+	
 	background: linear-gradient(to right, rgba(0, 0, 0, 1.0) 0%, rgba(0, 0, 0, 0.7) 46%, rgba(0, 0, 0, 0.0) 77%), url("../res/drawable/movie2_background.png") no-repeat;
+	/*mask-image: linear-gradient(to bottom, transparent 25%, black 75%); */
+	
 	/*-webkit-filter: blue(20px);*/
 	/*background: linear-gradient(45deg, rgba(0, 0, 0, 1.0), rgba(21, 12, 25, 0.8)), url("../img/intro-bg.jpg") center top no-repeat;*/
 	background-size: cover;
 	position: relative;
 }
+
 
 #intro .intro-text
 {
@@ -53,12 +58,36 @@
 .intro-movie-description
 {
 	margin-bottom: 30px;
+	position: absolute;
+	bottom: 0px;
 }
 
 .intro-movie-description #rate-star-img
 {
 	width: 12px;
 	height: 12px;
+}
+
+.intro-watch
+{
+	-webkit-box-pack: left !important;
+	-webkit-justify-content: left !important;
+	-ms-flex-pack: left !important;
+	justify-content: left !important;
+	text-align: left !important;
+	-webkit-box-align: left !important;
+	-webkit-align-items: left !important;
+	align-items: left !important;
+	text-align: left !important;
+	position: absolute;
+	left: 0px;
+	margin-left: 10%;
+	max-width: 800px;
+}
+
+.intro-watch p
+{
+	padding-left: 0px !important;
 }
 
 /* #intro h2 
@@ -192,6 +221,11 @@
 #join_btn
 {
 	margin: 10px;
+}
+
+#btn-group-info
+{
+	margin-left: 30px;
 }
 
 /********** TODO check new style **********/

@@ -16,6 +16,10 @@
 	<link href="css/header.css" rel="stylesheet">
 	<link href="css/intro.css" rel="stylesheet">
 	<link href="css/widget.css" rel="stylesheet">
+	<link href="css/plans.css" rel="stylesheet">
+	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	
 	
 	<!-- JavaScript files -->
 	<script src="lib/jquery/jquery.min.js"></script>
@@ -31,79 +35,7 @@
 		  Header section
 	======================= -->
 	
-	<header id="header">
-			
-		<nav class="navbar navbar-expand-lg navbar-light">
-			
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="icon-bar top-bar"></span>
-				<span class="icon-bar middle-bar"></span>
-				<span class="icon-bar bottom-bar"></span>
-			</button>
-			
-			<a class="navbar-brand" href="./"><img alt="" src="res/drawable/logo3.png"></a>
-			
-			<div class="collapse navbar-collapse justify-content-end" id="navbarToggler">
-			
-				<c:if test="${user == null}">
-				
-					<ul class="navbar-nav">
-						<li class="nav-item active">
-							<a class="nav-link" href="#">About <span class="sr-only">(current)</span></a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="#">Prices</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link disabled" href="registration">Sign Up</a>
-						</li>
-					</ul>
-					<form class="form-inline my-2 my-lg-0">
-						<button class="btn btn-main" type="button" onclick="window.location.href='login'">Sign In</button>
-					</form>
-				
-				</c:if>
-				
-				<c:if test="${user != null}">
-					
-					<ul class="navbar-nav">
-				
-							<li class="nav-item active">
-								<a class="nav-link" href="#">About <span class="sr-only">(current)</span></a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="#">Prices</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link disabled" href="registration">Sign Up</a>
-							</li>
-							
-					</ul>
-					
-					<ul id="navbar-nav-user" class="navbar-nav">
-							
-							<li class="nav-item dropdown">
-						        <a id="nav-user-avatar-box" class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						          <img src="res/drawable/user_avatar.jpg" width="40" height="40" class="rounded-circle">
-						        </a>
-						        <div id="nav-user-avatar-dropdown-menu" class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-						        	<a class="dropdown-item" href="#"><small>Signed in as</small><br><strong>${user.firstName} ${user.lastName}</strong></a>
-						        	<div class="dropdown-divider"></div>
-						        	<a class="dropdown-item" href="#">Dashboard</a>
-						        	<a class="dropdown-item" href="#">Edit Profile</a>
-						        	<div class="dropdown-divider"></div>
-						        	<a class="dropdown-item" href="login?logout=true">Sign Out</a>
-						        </div>
-						    </li>
-						      
-					</ul>
-					
-				</c:if>
-				
-			</div>
-		</nav>
-			
-	</header>
+	<jsp:include page="header.jsp"></jsp:include>
 	
 	
 	<!--==========================
@@ -111,27 +43,56 @@
     ============================-->
     
     <section id="intro">
-
+    
 		<div class="intro-text">
-			<h1 class="main-text"><strong>Movies, TV shows and more.</strong></h1>
-			<p>Watch what you want. Wherever you want. With anyone you want.</p>
+		
+			<c:if test="${user == null}">
 			
-			<div>
-				<form class="form-inline" id="join_form">
-					<a id="join_btn" href="registration" class="btn btn-outline-primary scrollto">JOIN FREE FOR A MONTH</a>
-	      		</form>
-	      	</div>
-	      	
-	      	<footer class="intro-movie-description fixed-bottom">
+				<h1 class="main-text"><strong>Movies, TV shows and more.</strong></h1>
+				<p>Watch what you want. Wherever you want. With anyone you want.</p>
+				
 				<div>
-					<img id="rate-star-img" alt="" src="res/drawable/rate_star.png">
-					<img id="rate-star-img" alt="" src="res/drawable/rate_star.png">
-					<img id="rate-star-img" alt="" src="res/drawable/rate_star.png">
-					<img id="rate-star-img" alt="" src="res/drawable/rate_star.png">
-					<img id="rate-star-img" alt="" src="res/drawable/rate_star_empty.png">
-					&nbsp; 4.3 &nbsp; &nbsp; Animation &nbsp; | &nbsp; Adventure
+					<form class="form-inline" id="join_form">
+						<a id="join_btn" href="registration" class="btn btn-outline-primary scrollto">JOIN FREE FOR A MONTH</a>
+		      		</form>
+		      	</div>
+			
+			</c:if>
+			
+			<c:if test="${media_content_of_the_day != null}">
+			
+				<c:if test="${user != null}">
+					
+					<div class="intro-watch">
+						<h1 class="main-text"><strong>${media_content_of_the_day.title}</strong></h1>
+						<p>${media_content_of_the_day.production}.</p>
+						<p>${media_content_of_the_day.plot}.</p>
+						
+						<div>
+							<form class="form-inline">
+								<div class="btn-group">
+									<a href="registration" class="btn btn-outline-success"><i class="fa fa-play"></i> WATCH</a>
+									<a href="#" class="btn btn-outline-warning"><i class="fa fa-plus"></i> Add</a>
+								</div>
+								<div id="btn-group-info" class="btn-group">
+									<a href="registration" class="btn btn-outline-secondary"><i class="fa fa-info"></i> More Info</a>
+								</div>
+				      		</form>
+				      	</div>
+			      	</div>
+			    
+				</c:if>
+			
+				<div class="intro-movie-description">
+						<div>
+							<c:if test="${user == null}"><p>${media_content_of_the_day.title}</p></c:if>
+							<jsp:include page="content-ratings.html"></jsp:include>
+							&nbsp; &nbsp; ${media_content_of_the_day.genre}
+						</div>
 				</div>
-			</footer>
+			
+			</c:if>
+			
 		</div>
 		
 		<!-- <div class="content-screens" id="slide">
@@ -151,6 +112,21 @@
     	</div> -->
 
 	</section>
-
+	
+	<jsp:include page="contents.jsp"></jsp:include>
+	
+	<div class="pricing-section">
+		<div class="pricing-header">
+			<div class="note">TRY IT FREE FOR A MONTH</div>
+			<h2>Choose a plan that's right for you.</h2>
+			<h5 class="note">Downgrade or upgrade at any time.</h5>
+		</div>
+		<div class="pricing-body">
+			<jsp:include page="pricing.jsp"></jsp:include>
+		</div>
+	</div>
+	
+	<jsp:include page="footer.html"></jsp:include>
+	
 </body>
 </html>

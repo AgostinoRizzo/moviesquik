@@ -32,7 +32,7 @@
 .navbar-collapse, .navbar-content
 {
 	margin-left: 10px;
-	margin-top: 12px;
+	/* margin-top: 12px; */
 }
 
 .navbar > div > ul > li > a
@@ -52,9 +52,14 @@
 	margin-right: 20px;
 }
 
-.nav-item
+.nav-item:not(.dropdown)
 {
 	margin-right: 50px;
+}
+
+.navbar input
+{
+	background-color: transparent !important;
 }
 
 #header 
@@ -134,6 +139,11 @@
 #header.header-fixed .navbar, #header.header-always-fixed .navbar
 {
 	border-bottom-width: 0px !important;
+}
+
+.header-search-form
+{
+	margin-right: 30px;
 }
 
 

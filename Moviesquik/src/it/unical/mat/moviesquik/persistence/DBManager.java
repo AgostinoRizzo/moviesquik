@@ -76,4 +76,5 @@ public class DBManager
 	{
 		return getDaoFactory().getUserDao().findByLogin(email, password);
 	}
+	
 }

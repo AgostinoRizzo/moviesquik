@@ -76,3 +76,23 @@
 #pricing .featured .get-started-btn {
   background: linear-gradient(45deg, #1de099, #1dc8cd);
 }
+
+.pricing-section
+{
+	margin-right: 20%;
+	margin-left: 20%;
+	margin-top: 30px;
+}
+
+.pricing-header
+{
+	color: #fff;
+	margin-top: 50px;
+	margin-bottom: 30px;
+	text-align: center;
+}
+
+.pricing-body
+{
+	color: #000;
+}
