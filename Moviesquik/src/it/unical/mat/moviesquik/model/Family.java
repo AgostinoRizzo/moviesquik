@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class Family
 {
-	public static final String DEFAULT_NAME = "Family";
+	public static final String DEFAULT_NAME = "MyFamily";
 	
 	private Long id;
 	private String name;

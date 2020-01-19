@@ -21,5 +21,6 @@ public class Initializer implements ServletContextListener
 	{
 		DBManager.getInstance().getFiller()
 			.fillMediaContents(sce.getServletContext().getRealPath(File.separator));
+		DBManager.getFileSystemDataSource().setSrcPath(sce.getServletContext().getRealPath(""));
 	}
 }

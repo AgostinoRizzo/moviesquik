@@ -59,7 +59,7 @@
 						<div class="input-group">
 							
 							<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-							<input type="text" id="email" name="email" class="form-control" placeholder="email@example.com" required>
+							<input type="text" id="email" name="email" class="form-control" placeholder="email@example.com" value="admin.admin@email.com" required>
 							
 						</div>
 					</div>
@@ -70,7 +70,7 @@
 						<label for="password">Password</label>
 						<div class="input-group">
 							<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-							<input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+							<input type="password" id="password" name="password" class="form-control" placeholder="Password" value="adminadmin" required>
 							
 							<c:if test="${error != null && error.type == 'invalid_login'}">
 										

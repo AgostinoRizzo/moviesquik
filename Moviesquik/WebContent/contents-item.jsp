@@ -4,7 +4,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<div class="col-12 col-sm-6 col-md-4 col-xl-2 media-col-item">
+<!-- <div class="col-12 col-sm-6 col-md-4 col-xl-2 media-col-item"> -->
      <div class="card media-content-card view-overlay">
 		  
 		  <img class="card-img-top" src="">
@@ -25,4 +25,4 @@
 		  </div>
 		  
 	</div>
-</div>
+<!-- </div> -->

@@ -42,4 +42,9 @@ public class JSONUtil
 	{
 		return new Gson().toJson(lst);
 	}
+	
+	public static String toJson( final Object obj )
+	{
+		return new Gson().toJson(obj, obj.getClass());
+	}
 }

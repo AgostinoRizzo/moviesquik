@@ -4,6 +4,9 @@
 package it.unical.mat.moviesquik.model;
 
 import java.util.Date;
+import java.util.List;
+
+import it.unical.mat.moviesquik.persistence.DBManager;
 
 /**
  * @author Agostino
@@ -19,6 +22,10 @@ public class User
 	private String gender;
 	private String password;
 	private Family family;
+	private List<User> friends;
+	private Integer followersCount;
+	private List<String> favoritesGenres;
+	private String profileImagePath;
 	
 	public User()
 	{}
@@ -118,4 +125,44 @@ public class User
 		this.family = family;
 	}
 	
+	public List<User> getFriends()
+	{
+		friends = DBManager.getInstance().getDaoFactory().getUserDao().findFriends(this, 10);
+		return friends;
+	}
+	
+	public void setFriends(List<User> friends)
+	{
+		this.friends = friends;
+	}
+	
+	public Integer getFollowersCount()
+	{
+		return followersCount;
+	}
+	
+	public void setFollowersCount(Integer followersCount)
+	{
+		this.followersCount = followersCount;
+	}
+	
+	public List<String> getFavoritesGenres()
+	{
+		return favoritesGenres;
+	}
+	
+	public void setFavoritesGenres(List<String> favoritesGenres)
+	{
+		this.favoritesGenres = favoritesGenres;
+	}
+	
+	public String getProfileImagePath()
+	{
+		return profileImagePath;
+	}
+	
+	public void setProfileImagePath(String profileImagePath)
+	{
+		this.profileImagePath = profileImagePath;
+	}	
 }

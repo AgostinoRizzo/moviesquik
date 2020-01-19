@@ -21,4 +21,5 @@ public interface MediaContentDao
 	public List<MediaContent> findMostPopular( final int maxfindCount );
 	public List<MediaContent> findMostFavorites( final int maxfindCount );
 	public List<MediaContent> findSuggested( final int maxfindCount, final User user );
+	public List<MediaContent> findRecentlyWatched( final int maxfindCount, final User user );
 }

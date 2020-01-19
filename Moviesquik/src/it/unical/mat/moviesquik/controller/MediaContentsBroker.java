@@ -50,12 +50,14 @@ public class MediaContentsBroker extends HttpServlet
 			mediaContents = 
 			DBManager.getInstance().getDaoFactory().getMediaContentDao().findMostFavorites(MAX_FIND_COUNT);
 		
-		else if ( policy.equals("suggested") )
+		else if ( policy.equals("suggested") || policy.equals("recently") )
 		{
 			final User user = (User) req.getSession().getAttribute("user");
 			if ( user != null )
 				mediaContents = 
-				DBManager.getInstance().getDaoFactory().getMediaContentDao().findSuggested(MAX_FIND_COUNT, user);
+				(policy.equals("suggested"))
+				? DBManager.getInstance().getDaoFactory().getMediaContentDao().findSuggested(MAX_FIND_COUNT, user)
+				: DBManager.getInstance().getDaoFactory().getMediaContentDao().findRecentlyWatched(MAX_FIND_COUNT, user);
 			else
 				mediaContents = new ArrayList<MediaContent>();
 		}

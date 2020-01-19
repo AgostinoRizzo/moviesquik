@@ -20,6 +20,8 @@ public class DBManager
 	private static DataSource dataSource;
 	private static DaoFactory daoFactory;
 	
+	private static FileSystemDataSoruce fsDataSource;
+	
 	static
 	{
 		try
@@ -27,6 +29,7 @@ public class DBManager
 			Class.forName("org.postgresql.Driver");
 			dataSource = new DataSource("jdbc:postgresql://localhost:5432/moviesquik", "postgres", "postgres");
 			daoFactory = new DaoFactoryJDBC(dataSource);
+			fsDataSource = new FileSystemDataSoruce();
 		}
 		catch (ClassNotFoundException e)
 		{ e.printStackTrace(); }
@@ -55,6 +58,16 @@ public class DBManager
 	public DBFiller getFiller()
 	{
 		return filler;
+	}
+	
+	public static DataSource getDataSource()
+	{
+		return dataSource;
+	}
+	
+	public static FileSystemDataSoruce getFileSystemDataSource()
+	{
+		return fsDataSource;
 	}
 	
 	public boolean canRegister( final User user )

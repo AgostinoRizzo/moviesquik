@@ -132,6 +132,12 @@ public class MediaContentDaoJDBC implements MediaContentDao
 		return findMostRated(maxfindCount);
 	}
 	
+	@Override
+	public List<MediaContent> findRecentlyWatched(int maxfindCount, User user)
+	{
+		return findMostRated(maxfindCount);
+	}
+	
 	protected static void setDataToInsertStatement( final MediaContent mediaContent, final PreparedStatement statement ) throws SQLException
 	{
 		statement.setLong  (1 , mediaContent.getId());

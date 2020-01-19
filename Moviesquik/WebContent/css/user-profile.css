@@ -1,0 +1,116 @@
+@charset "ISO-8859-1";
+
+.user-profile-content
+{
+	margin-top: 200px;
+}
+
+.user-name-box
+{
+	text-align: left;
+	margin: 0px;
+}
+
+.user-profile-content .card
+{
+	color: #000;
+}
+
+.user-profile-content .card .row
+{
+	margin: 0px;
+}
+
+
+.user-profile-content .media-content-card
+{
+	color: #fff !important;
+}
+
+.user-profile-content .media-col-item
+{
+	padding-left: 0px !important;
+}
+
+.user-profile-content .media-contents-list-header
+{
+	margin-right: 0px !important;
+	margin-left: 0px !important;
+}
+
+.user-profile-content .media-contents-list-items
+{
+	margin-right: 0px !important;
+	margin-left: 0px !important;
+}
+
+.user-profile-content .nav
+{
+	margin-top: 30px;
+}
+
+.user-profile-content .nav .nav-link:not(.active)
+{
+	color: #afb4dc !important;
+}
+
+.user-profile-content .tab-pane
+{
+	margin-top: 50px;
+}
+
+.user-profile-content .members-row
+{
+	margin-top: 30px;
+}
+
+.user-profile-content .media
+{
+	margin-right: 50px;
+	margin-bottom: 30px;
+}
+
+.user-profile-content .media img
+{
+	margin-right: 30px;
+}
+
+.user-profile-content .media .is-master-text
+{
+	color: green;
+}
+
+.user-profile-content .nav-item
+{
+	margin-right: 10px;
+}
+
+.user-profile-content .edit-form
+{
+	width: 100%;
+}
+
+.showcase-header-title
+{
+	font-weight: bold !important;
+}
+
+.user-col-item
+{
+	text-align: center;
+	padding: 0px;
+	margin: 0px;
+}
+
+.card-list-avatar-img
+{
+	width: 60px !important;
+	height: 60px !important;
+}
+
+.input-img-preview
+{
+	margin-bottom: 20px;
+	margin-right: 30px;
+	max-width: 100%;
+}

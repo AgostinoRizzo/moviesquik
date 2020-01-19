@@ -35,6 +35,26 @@
 	<url-pattern>/login</url-pattern>
 </servlet-mapping>
 
+<!-- User Profile Servlet -->
+<servlet>
+	<servlet-name>user_profile</servlet-name>
+	<servlet-class>it.unical.mat.moviesquik.controller.accounting.UserProfile</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>user_profile</servlet-name>
+	<url-pattern>/user</url-pattern>
+</servlet-mapping>
+
+<!-- User Profile Upload Servlet -->
+<servlet>
+	<servlet-name>user_profile_upload</servlet-name>
+	<servlet-class>it.unical.mat.moviesquik.controller.accounting.UserProfileUpload</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>user_profile_upload</servlet-name>
+	<url-pattern>/user_upload</url-pattern>
+</servlet-mapping>
+
 <!-- MediaContentsBroker Servlet -->
 <servlet>
 	<servlet-name>media_contents_broker</servlet-name>
@@ -43,6 +63,16 @@
 <servlet-mapping>
 	<servlet-name>media_contents_broker</servlet-name>
 	<url-pattern>/listcontents</url-pattern>
+</servlet-mapping>
+
+<!-- FamilyMembersBroker Servlet -->
+<servlet>
+	<servlet-name>family_broker</servlet-name>
+	<servlet-class>it.unical.mat.moviesquik.controller.accounting.FamilyBroker</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>family_broker</servlet-name>
+	<url-pattern>/getfamily</url-pattern>
 </servlet-mapping>
 
 </web-app>

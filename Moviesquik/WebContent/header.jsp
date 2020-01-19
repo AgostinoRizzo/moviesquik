@@ -45,7 +45,7 @@
 				<ul class="navbar-nav">
 						
 						<li class="nav-item">
-							<a class="nav-link" href="#">Home</a>
+							<a class="nav-link" href="./">Home</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="#">Movies</a>
@@ -83,10 +83,16 @@
 						
 						<li class="nav-item dropdown">
 					        <a id="nav-user-avatar-box" class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					          <img src="res/drawable/user_avatar.jpg" width="40" height="40" class="rounded-circle">
+					          
+					          	<c:set var = "user_profile_img_src" scope = "request" value = "res/drawable/user_avatar.jpg"/>
+								<c:if test="${user.profileImagePath != null && user.profileImagePath.length() > 0}">
+									<c:set var = "user_profile_img_src" scope = "request" value = "res/user/${user.profileImagePath}"/>
+								</c:if>
+					          	<img src="${user_profile_img_src}" class="avatar-img rounded-circle">
+					          	
 					        </a>
-					        <div id="nav-user-avatar-dropdown-menu" class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-					        	<a class="dropdown-item" href="#"><small>Signed in as</small><br><strong>${user.firstName} ${user.lastName}</strong></a>
+					        <div id="nav-user-avatar-dropdown-menu" class="dropdown-menu dropdown-menu-right bg-dark text-white" aria-labelledby="navbarDropdownMenuLink">
+					        	<a class="dropdown-item" href="user"><small>Signed in as</small><br><strong>${user.firstName} ${user.lastName}</strong></a>
 					        	<div class="dropdown-divider"></div>
 					        	<a class="dropdown-item" href="#">Dashboard</a>
 					        	<a class="dropdown-item" href="#">Edit Profile</a>

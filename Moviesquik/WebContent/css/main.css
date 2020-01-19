@@ -72,3 +72,9 @@ footer
 	padding-bottom: 3rem;
 	background-color: #1e1e2f;
 }
+
+.avatar-img
+{
+	width: 40px !important;
+	height: 40px !important;
+}

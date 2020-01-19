@@ -158,12 +158,17 @@
 
 #nav-user-avatar-dropdown-menu a
 {
-	color: #000;
+	color: #fff;
 }
 
 #navbar-nav-user
 {
 	margin-right: 0px !important;
+}
+
+.dropdown-menu .dropdown-item:focus, .dropdown-item:hover
+{
+	color: #000 !important;
 }
 
 

@@ -24,7 +24,7 @@ public class UserDaoJDBC implements UserDao
 	protected static final String INSERT_STATEMENT          = "insert into \"user\"(user_id, first_name, last_name, email, birthday, gender, password, family_id) values (?,?,?,?,?,?,?,?)";
 	protected static final String FIND_BY_PRIMARY_KEY_QUERY = "select * from \"user\" where user_id = ?";
 	protected static final String FIND_ALL_QUERY            = "select * from \"user\"";
-	protected static final String UPDATE_STATEMENT          = "update \"user\" SET first_name = ?, last_name = ?, email = ?, birthday = ?, gender = ?, password = ?, family_id = ? WHERE user_id = ?";
+	protected static final String UPDATE_STATEMENT          = "update \"user\" SET first_name = ?, last_name = ?, email = ?, birthday = ?, gender = ?, password = ?, profile_img = ?, family_id = ? WHERE user_id = ?";
 	protected static final String DELETE_STATEMENT          = "delete from \"user\" where user_id = ?";
 	protected static final String FIND_BY_FAMILY_QUERY      = "select * from \"user\" where family_id = ?";
 	protected static final String FIND_BY_EMAIL_QUERY       = "select * from \"user\" where email = ?";
@@ -117,9 +117,10 @@ public class UserDaoJDBC implements UserDao
 			statement.setDate(4, DateUtil.toJDBC(usr.getBirthday()));
 			statement.setString(5, usr.getGender());
 			statement.setString(6, usr.getPassword());
-			statement.setLong  (7, usr.getFamily().getId());
+			statement.setString(7, usr.getProfileImagePath());
+			statement.setLong  (8, usr.getFamily().getId());
 			
-			statement.setLong  (8, usr.getId());
+			statement.setLong  (9, usr.getId());
 			
 			statement.executeUpdate();
 			
@@ -220,6 +221,25 @@ public class UserDaoJDBC implements UserDao
 		{ statementPrompter.onFinalize(); }
 	}
 	
+	@Override
+	public List<User> findFriends(User user, int maxCount)
+	{
+		final User f1 = new User();
+		final User f2 = new User();
+		final User f3 = new User();
+		
+		f1.setFirstName("F1"); f1.setLastName("G1"); f1.setEmail("f1@email.com");
+		f2.setFirstName("F2"); f2.setLastName("G2"); f2.setEmail("f1@email.com");
+		f3.setFirstName("F3"); f3.setLastName("G3"); f3.setEmail("f1@email.com");
+		
+		final List<User> friends = new ArrayList<User>();
+		friends.add(f1);
+		friends.add(f2);
+		friends.add(f3);
+		
+		return friends;
+	}
+	
 	protected static void setDataToInsertStatement( final User usr, final PreparedStatement statement ) throws SQLException
 	{
 		statement.setLong  (1, usr.getId());
@@ -247,7 +267,31 @@ public class UserDaoJDBC implements UserDao
 		usr.setFamily( (family == null ) ? DBManager.getInstance().getDaoFactory().getFamilyDao()
 				.findByPrimaryKey(result.getLong("family_id")) : family );
 		
+		usr.setFollowersCount(getFollowersCount(usr));
+		usr.setFavoritesGenres(getFavoritesGenres(usr));
+		
+		usr.setProfileImagePath(result.getString("profile_img"));
+		
 		return usr;
+	}
+	
+	private Integer getFollowersCount( final User user )
+	{
+		return 12;
+	}
+	
+	private List<String> getFavoritesGenres( final User user )
+	{
+		final String g1 = "Action";
+		final String g2 = "Cartoon";
+		final String g3 = "Science";
+		
+		final List<String> genres = new ArrayList<String>();
+		genres.add(g1);
+		genres.add(g2);
+		genres.add(g3);
+		
+		return genres;
 	}
 
 }

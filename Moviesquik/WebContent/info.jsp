@@ -53,6 +53,7 @@
 					<h1 class="display">
 						<c:if test="${error.type == 'registration_error'}">Registration Error!</c:if>
 						<c:if test="${error.type == 'session_error'}">Session Error!</c:if>
+						<c:if test="${error.type == 'parameter_error'}">Parameter Error!</c:if>
 					</h1>
 				</c:if>
 				  
