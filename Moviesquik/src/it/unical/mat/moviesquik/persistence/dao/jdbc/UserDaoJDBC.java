@@ -29,6 +29,14 @@ public class UserDaoJDBC implements UserDao
 	protected static final String FIND_BY_FAMILY_QUERY      = "select * from \"user\" where family_id = ?";
 	protected static final String FIND_BY_EMAIL_QUERY       = "select * from \"user\" where email = ?";
 	protected static final String FIND_BY_LOGIN_QUERY       = "select * from \"user\" where email = ? and password = ?";
+	protected static final String FIND_FRIENDS_QUERY        =   "select * \r\n" + 
+																"from following INNER JOIN \"user\" ON (followed_id = user_id)\r\n" + 
+																"where follower_id = ? and EXISTS \r\n" + 
+																"	(\r\n" + 
+																"		select * from following AS back_following\r\n" + 
+																"		where back_following.follower_id = following.followed_id and back_following.followed_id = ?\r\n" + 
+																"	)";
+	protected static final String FOLLOWERS_COUNT_QUERY     = "select COUNT(*) from following where (followed_id = ?)";
 
 	private final StatementPrompterJDBC statementPrompter;
 	
@@ -224,6 +232,7 @@ public class UserDaoJDBC implements UserDao
 	@Override
 	public List<User> findFriends(User user, int maxCount)
 	{
+		/*
 		final User f1 = new User();
 		final User f2 = new User();
 		final User f3 = new User();
@@ -238,6 +247,28 @@ public class UserDaoJDBC implements UserDao
 		friends.add(f3);
 		
 		return friends;
+		*/
+		
+		final List<User> friends = new ArrayList<User>();
+		
+		try
+		{
+			final PreparedStatement statement = statementPrompter.prepareStatement(FIND_FRIENDS_QUERY);
+			statement.setLong  (1, user.getId());
+			statement.setLong  (2, user.getId());
+			
+			ResultSet result = statement.executeQuery();
+			
+			while ( result.next() )
+				friends.add( createUserFromResult(result, null) );
+			return friends;
+		}
+		
+		catch (SQLException e)
+		{ e.printStackTrace(); return friends; }
+		
+		finally 
+		{ statementPrompter.onFinalize(); }
 	}
 	
 	protected static void setDataToInsertStatement( final User usr, final PreparedStatement statement ) throws SQLException
@@ -277,7 +308,23 @@ public class UserDaoJDBC implements UserDao
 	
 	private Integer getFollowersCount( final User user )
 	{
-		return 12;
+		try
+		{
+			final PreparedStatement statement = statementPrompter.prepareStatement(FOLLOWERS_COUNT_QUERY);
+			statement.setLong(1, user.getId());
+			
+			ResultSet result = statement.executeQuery();
+			
+			if ( result.next() )
+				return result.getInt("count");
+			return 0;
+		}
+		
+		catch (SQLException e)
+		{ e.printStackTrace(); return 0; }
+		
+		finally 
+		{ statementPrompter.onFinalize(); }
 	}
 	
 	private List<String> getFavoritesGenres( final User user )

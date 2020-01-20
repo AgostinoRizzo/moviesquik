@@ -2,11 +2,13 @@
  * 
  */
 
+var SCROLL_TOP_MARGIN = 10;
+
 jQuery(document).ready(function($) {
 
   // Header fixed and Back to top button
   $(window).scroll(function() {
-    if ($(this).scrollTop() > 100) {
+    if ($(this).scrollTop() > SCROLL_TOP_MARGIN) {
       $('.back-to-top').fadeIn('slow');
       $('#header').addClass('header-fixed');
     } else {
@@ -15,7 +17,7 @@ jQuery(document).ready(function($) {
     }
   });
 
-  if ($(this).scrollTop() > 100) {
+  if ($(this).scrollTop() > SCROLL_TOP_MARGIN) {
     $('.back-to-top').fadeIn('slow');
     $('#header').addClass('header-fixed');
   }

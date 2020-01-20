@@ -65,7 +65,6 @@ public class MediaContentsBroker extends HttpServlet
 		else
 			mediaContents = new ArrayList<MediaContent>();
 		
-		mediaContents.addAll(mediaContents);
 		Collections.shuffle(mediaContents);
 		
 		filterByCount(mediaContents, req);

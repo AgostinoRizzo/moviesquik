@@ -21,11 +21,12 @@ import it.unical.mat.moviesquik.util.DateUtil;
 public class MediaContentDaoJDBC implements MediaContentDao
 {
 	protected static final String INSERT_STATEMENT = 
-			"insert into media_content(media_content_id, title, type, year, release_date, runtime, genre, plot, poster, production, director, actors) " +
-			"values (?,?,?,?,?,?,?,?,?,?,?,?)";
+			"insert into media_content(media_content_id, title, type, year, release_date, runtime, genre, plot, poster, production, director, actors, rating) " +
+			"values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+	protected static final String UPDATE_RATING_STATEMENT = "update media_content SET rating = ? WHERE media_content_id = ?";
 	protected static final String FIND_BY_PRIMARY_KEY_QUERY = "select * from media_content where media_content_id = ?";
 	protected static final String FIND_BY_TITLE_YEAR_QUERY = "select * from media_content where title = ? and year = ?";
-	protected static final String FIND_MOST_RATED_QUERY = "select * from media_content limit ?";
+	protected static final String FIND_MOST_RATED_QUERY = "select * from media_content order by rating desc limit ?";
 	
 	
 	private final StatementPrompterJDBC statementPrompter;
@@ -46,6 +47,28 @@ public class MediaContentDaoJDBC implements MediaContentDao
 			setDataToInsertStatement(mediaContent, statement);
 			
 			statement.executeUpdate();
+			return true;
+		}
+		
+		catch (SQLException e)
+		{ e.printStackTrace(); return false; }
+		
+		finally 
+		{ statementPrompter.onFinalize(); }
+	}
+	
+	@Override
+	public boolean updateRatings(MediaContent mediaContent)
+	{
+		try
+		{
+			final PreparedStatement statement = statementPrompter.prepareStatement(UPDATE_RATING_STATEMENT);
+			
+			statement.setFloat(1, mediaContent.getRating());
+			statement.setLong (2, mediaContent.getId());
+			
+			statement.executeUpdate();
+			
 			return true;
 		}
 		
@@ -152,6 +175,7 @@ public class MediaContentDaoJDBC implements MediaContentDao
 		statement.setString(10, mediaContent.getProduction());
 		statement.setString(11, mediaContent.getDirector());
 		statement.setString(12, mediaContent.getActors());
+		statement.setFloat (13, mediaContent.getRating());
 	}
 	
 	private MediaContent createFromResult( final ResultSet result ) throws SQLException
@@ -170,7 +194,9 @@ public class MediaContentDaoJDBC implements MediaContentDao
 		mediaContent.setProduction(result.getString("production"));
 		mediaContent.setDirector(result.getString("director"));
 		mediaContent.setActors(result.getString("actors"));
-		
+		mediaContent.setRating(result.getFloat("rating"));
+		mediaContent.setViews(result.getLong("views"));
+		mediaContent.setLikes(result.getLong("likes"));
 		
 		return mediaContent;
 	}

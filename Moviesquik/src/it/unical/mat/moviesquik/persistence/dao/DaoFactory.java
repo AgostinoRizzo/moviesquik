@@ -13,6 +13,8 @@ public interface DaoFactory
 	public FamilyDao getFamilyDao();
 	public CreditCardDao getCreditCardDao();
 	public MediaContentDao getMediaContentDao();
+	public FriendshipDao getFriendshipDao();
+	public FollowingDao getFollowingDao();
 	
 	public RegistrationTransaction getRegistrationTransaction();
 }

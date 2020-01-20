@@ -46,6 +46,6 @@ $(document).ready( function()
 	{
 		/* users requests */
 		
-		request_users("#family-box", "getfamily", fill_family_users);
+		//request_users("#family-box", "getfamily", fill_family_users);
 	}
 );

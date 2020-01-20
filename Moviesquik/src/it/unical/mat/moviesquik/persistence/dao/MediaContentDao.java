@@ -15,6 +15,7 @@ import it.unical.mat.moviesquik.model.User;
 public interface MediaContentDao
 {
 	public boolean save( final MediaContent mediaContent );
+	public boolean updateRatings( final MediaContent mediaContent );
 	public List<MediaContent> findByTitleYear( final String title, final short year );
 	public MediaContent getMediaContentOfTheDay();
 	public List<MediaContent> findMostRated( final int maxfindCount );

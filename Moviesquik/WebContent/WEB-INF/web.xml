@@ -55,6 +55,26 @@
 	<url-pattern>/user_upload</url-pattern>
 </servlet-mapping>
 
+<!-- FriendshipManager Servlet -->
+<servlet>
+	<servlet-name>friendship_manager</servlet-name>
+	<servlet-class>it.unical.mat.moviesquik.controller.accounting.FriendshipManager</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>friendship_manager</servlet-name>
+	<url-pattern>/friendship</url-pattern>
+</servlet-mapping>
+
+<!-- FollowingManager Servlet -->
+<servlet>
+	<servlet-name>following_manager</servlet-name>
+	<servlet-class>it.unical.mat.moviesquik.controller.accounting.FollowingManager</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>following_manager</servlet-name>
+	<url-pattern>/following</url-pattern>
+</servlet-mapping>
+
 <!-- MediaContentsBroker Servlet -->
 <servlet>
 	<servlet-name>media_contents_broker</servlet-name>

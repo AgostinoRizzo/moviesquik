@@ -23,6 +23,10 @@ public class MediaContent
 	private String production;
 	private String director;
 	private String actors;
+	private float rating;
+	private Long views;
+	private Long likes;
+	private float imdbRating;
 	
 	public Long getId()
 	{
@@ -121,4 +125,39 @@ public class MediaContent
 		this.actors = actors;
 	}
 	
+	public float getRating()
+	{
+		return rating;
+	}
+	public void setRating(float rating)
+	{
+		this.rating = rating;
+	}
+	
+	public Long getViews()
+	{
+		return views;
+	}
+	public void setViews(Long views)
+	{
+		this.views = views;
+	}
+	
+	public Long getLikes()
+	{
+		return likes;
+	}
+	public void setLikes(Long likes)
+	{
+		this.likes = likes;
+	}
+	
+	public float getImdbRating()
+	{
+		return imdbRating;
+	}
+	public void setImdbRating(float imdbRating)
+	{
+		this.imdbRating = imdbRating;
+	}
 }

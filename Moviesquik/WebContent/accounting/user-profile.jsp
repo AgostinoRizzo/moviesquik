@@ -34,6 +34,7 @@
 	<script src="js/media-contents-filler.js"></script>
 	<script src="js/users-filler.js"></script>
 	<script src="js/image-upload.js"></script>
+	<script src="js/friendship.js"></script>
 	
 </head>
 <body>
@@ -89,9 +90,65 @@
 						</div>
 				        <br>
 				        <c:if test="${user_to_display.id != user.id}">
-					        <form action="GET">
-					        	<button type="submit" name="follow" class="btn btn-main col-4">Follow</button>
-					        	<button class="btn btn-light col-4">Message</button>
+					        <form action="">
+					        	
+					        	<input id="friendship-other-user-id" type="hidden" value="${user_to_display.id}">
+					        	
+					        	<c:if test="${following == null}">
+					        		<a class="btn btn-main col-4" href="following?action=follow&user_id=${user_to_display.id}">Follow</a>
+					        	</c:if>
+					        	
+					        	<c:if test="${following != null}">
+					        		
+					        		<c:if test="${!is_friend}">
+					        			<a class="btn btn-warning col-4 dropdown-toggle" data-toggle="dropdown">Following</a>
+					        			<div class="dropdown-menu"><a class="dropdown-item" href="#">Remove</a></div>
+					        		</c:if>
+					        		<c:if test="${is_friend}">
+					        			<a class="btn btn-success col-4 dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-check"></i> Friend</a>
+					        			<div class="dropdown-menu"><a class="dropdown-item" href="#">Remove</a></div>
+					        		</c:if>
+									
+					        	</c:if>
+					        	
+					        	
+					        	<%-- <c:if test="${friendship == null}">
+					        	
+					        		<a id="add-friend-btn" class="btn btn-main col-4" href="friendship?action=send&user_id=${user_to_display.id}">Add Friend</a>
+					        		
+					        	</c:if>
+					        	<c:if test="${friendship != null}">
+					        		
+					        		<c:if test="${friendship.applicantUser == null}">
+					        			<button id="friends-btn" name="action" value="${user_to_display.id}" class="btn btn-success col-4 dropdown-toggle" data-toggle="dropdown">
+						        			<i class="fa fa-fw fa-check"></i> Friends
+						        		</button>
+						        		<div class="dropdown-menu">
+										    <a class="dropdown-item" href="#">Remove</a>
+										</div>
+					        		</c:if>
+					        		
+					        		<c:if test="${friendship.applicantUser != null && friendship.firstUser.id == user.id}">
+						        		<button id="request-sent-btn" name="action" value="${user_to_display.id}" class="btn btn-warning col-4 dropdown-toggle" data-toggle="dropdown">
+						        			<i class="fa fa-fw fa-send"></i> Request Sent
+						        		</button>
+						        		<div class="dropdown-menu">
+										    <a class="dropdown-item" href="#">Remove</a>
+										</div>
+									</c:if>
+									
+									<c:if test="${friendship.applicantUser != null  && friendship.applicantUser.id != user.id}">
+										<div class="btn-group">
+											<a id="accept-request-btn" type="button" class="btn btn-warning" href="friendship?action=accept&user_id=${user_to_display.id}"><i class="fa fa-fw fa-send"></i> Accept Request</a>
+											<button type="button" class="btn btn-warning dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"></button>
+							        		<div class="dropdown-menu">
+											    <a class="dropdown-item" href="#">Remove</a>
+											</div>
+										</div>
+									</c:if>
+					        		
+					        	</c:if> --%>
+					        	
 					        </form>
 				        </c:if>
 			        
@@ -103,14 +160,16 @@
 	        
 	        <!-- Nav pills -->
 			<ul class="nav nav-tabs">
-				  <c:if test="${user_to_display.id == user.id || has_recently_watched != null}">
+				  <c:if test="${following != null || user_to_display.id == user.id || has_recently_watched != null}">
 					  <li class="nav-item active">
 					    <a class="nav-link" data-toggle="tab" href="#showcase"><span class="fa fa-video-camera"></span> Watch</a>
 					  </li>
 				  </c:if>
-				  <li class="nav-item <c:if test="${user_to_display.id != user.id && has_recently_watched == null}">active</c:if>" >
-				    <a class="nav-link" data-toggle="tab" href="#posts"><span class="fa fa-comment"></span> Posts</a>
-				  </li>
+				  <c:if test="${following != null || user_to_display.id == user.id}">
+					  <li class="nav-item <c:if test="${user_to_display.id != user.id && has_recently_watched == null}">active</c:if>" >
+					    <a class="nav-link" data-toggle="tab" href="#posts"><span class="fa fa-comment"></span> Posts</a>
+					  </li>
+				  </c:if>
 				  <li class="nav-item">
 				    <a class="nav-link" data-toggle="tab" href="#info"><span class="fa fa-info"></span> Info</a>
 				  </li>
@@ -118,7 +177,7 @@
 				    <a class="nav-link" data-toggle="tab" href="#family"><span class="fa fa-home"></span> Family (${user_to_display.family.members.size()})</a>
 				  </li>
 				  <li class="nav-item">
-				    <a class="nav-link" data-toggle="tab" href="#followers"><span class="fa fa-group"></span> Followers (${user_to_display.followersCount})</a>
+				    <a class="nav-link" data-toggle="tab" href="#friends"><span class="fa fa-group"></span> Friends (${user_to_display.friends.size()})</a>
 				  </li>
 				  
 				  <c:if test="${user_to_display.id == user.id}">
@@ -137,7 +196,7 @@
 						<div class="media-contents-list">
 					
 							<div class="media-contents-list-header">
-									<div class="media-contents-icon-title"><h3 class="media-contents-list-header-title"><!-- <span class="fa fa-lightbulb-o checked"></span>  -->Suggested for you</h3></div>
+									<div class="media-contents-icon-title"><h5 class="media-contents-list-header-title"><!-- <span class="fa fa-lightbulb-o checked"></span>  -->Suggested for you</h5></div>
 									<div class="view-all-contents">
 										<button id="suggested-view-all-btn" class="btn btn-link view-all-btn invisible">View All</button>
 									</div>
@@ -248,10 +307,16 @@
 			        <h5 class="">${user_to_display.family.name}</h5>
 			        
 	          		<div class="row members-row">
+	          			
 		            	<c:forEach items="${user_to_display.family.members}" var="member">
 		            	
 		            		<div class="media">
-								  <img src="res/drawable/user_avatar.jpg" class="avatar-img card-list-avatar-img rounded-circle">
+		            			  <c:if test="${member.profileImagePath != null && member.profileImagePath.length() > 0}">
+								  		<a href="user?id=${member.id}"><img src="res/user/${member.profileImagePath}" class="avatar-img card-list-avatar-img rounded-circle"></a>
+								  </c:if>
+								  <c:if test="${member.profileImagePath == null || member.profileImagePath.length() == 0}">
+								  		<a href="user?id=${member.id}"><img src="res/drawable/user_avatar.jpg" class="avatar-img card-list-avatar-img rounded-circle"></a>
+								  </c:if>
 								  
 								  <div class="media-body">
 								    <h4>${member.firstName} ${member.lastName} <small class="is-master-text"><i>master</i></small></h4>
@@ -264,13 +329,19 @@
 					
 			  </div>
 			  
-			  <div class="tab-pane container fade" id="followers">
+			  <div class="tab-pane container fade" id="friends">
 			        
 	          		<div class="row members-row">
 		            	<c:forEach items="${user_to_display.friends}" var="friend">
 		            	
 		            		<div class="media">
-								  <img src="res/drawable/user_avatar.jpg" class="avatar-img card-list-avatar-img rounded-circle">
+		            			
+								  <c:if test="${friend.profileImagePath != null && friend.profileImagePath.length() > 0}">
+								  		<a href="user?id=${friend.id}"><img src="res/user/${friend.profileImagePath}" class="avatar-img card-list-avatar-img rounded-circle"></a>
+								  </c:if>
+								  <c:if test="${friend.profileImagePath == null || friend.profileImagePath.length() == 0}">
+								  		<a href="user?id=${friend.id}"><img src="res/drawable/user_avatar.jpg" class="avatar-img card-list-avatar-img rounded-circle"></a>
+								  </c:if>
 								  
 								  <div class="media-body">
 								    <h4>${friend.firstName} ${friend.lastName}</h4>
@@ -297,8 +368,8 @@
 	      <div class="col-md-4">
 	
 	        <!-- Search Widget -->
-	        <div class="card bg-dark text-white my-4">
-	          <h5 class="card-header">Search</h5>
+	        <!-- <div class="card bg-dark text-white my-4">
+	          <p class="card-header">Search</p>
 	          <div class="card-body">
 	            <div class="input-group">
 	              <input class="form-control" type="text" placeholder="Search for...">
@@ -307,11 +378,11 @@
 	              </span>
 	            </div>
 	          </div>
-	        </div>
+	        </div> -->
 	
 	        <!-- Genres Widget -->
 	        <div class="card bg-dark text-white my-4">
-	          <h5 class="card-header"><span class="fa fa-film"></span> Favorites Genres (${user_to_display.favoritesGenres.size()})</h5>
+	          <p class="card-header"><span class="fa fa-film"></span> Favorites Genres (${user_to_display.favoritesGenres.size()})</p>
 	          <div class="card-body">
 	            <div class="row">
 	            
@@ -327,24 +398,45 @@
 			
 			<!-- Family card -->
 	        <div class="card bg-dark text-white my-4">
-	          <h5 class="card-header"></h5>
+	          <p class="card-header"><span class="fa fa-home"></span> ${user_to_display.family.name}</p>
 	          <div class="card-body">
 	          		<div id="family-box" class="row">
-		            	
+		            	<c:forEach items="${user_to_display.family.members}" var="member">
+		            		
+		            		<div class="col-4 user-col-item">
+		            			<a href="user?id=${member.id}" data-toggle="tooltip" data-placement="top" title="${member.firstName} ${member.lastName}">
+		            					<c:if test="${member.profileImagePath != null && member.profileImagePath.length() > 0}">
+										  		<img src="res/user/${member.profileImagePath}" class="avatar-img card-list-avatar-img rounded-circle">
+										</c:if>
+										<c:if test="${member.profileImagePath == null || member.profileImagePath.length() == 0}">
+										  		<img src="res/drawable/user_avatar.jpg" class="avatar-img card-list-avatar-img rounded-circle">
+										</c:if>
+								</a>
+								<p>${member.firstName} ${member.lastName}</p>
+							</div>
+							
+						</c:forEach>
 					</div>
 	          </div>
 	        </div>
 	        
 	        <!-- Friends card -->
 	        <div class="card bg-dark text-white my-4">
-	          <h5 class="card-header"><span class="fa fa-group"></span> Followers (${user_to_display.followersCount})</h5>
+	          <p class="card-header"><span class="fa fa-group"></span> Friends (${user_to_display.friends.size()})</p>
 	          <div class="card-body">
 	          		<div id="friends-box" class="row">
 	          			
 	          			<c:forEach items="${user_to_display.friends}" var="friend">
 			            	<div class="col-3 user-col-item">
-									<a href="#" data-toggle="tooltip" data-placement="top" title="${friend.firstName} ${friend.lastName}">
-										<img src="res/drawable/user_avatar.jpg" class="avatar-img card-list-avatar-img rounded-circle">
+									<a href="user?id=${friend.id}" data-toggle="tooltip" data-placement="top" title="${friend.firstName} ${friend.lastName}">
+									
+										<c:if test="${friend.profileImagePath != null && friend.profileImagePath.length() > 0}">
+										  		<img src="res/user/${friend.profileImagePath}" class="avatar-img card-list-avatar-img rounded-circle">
+										</c:if>
+										<c:if test="${friend.profileImagePath == null || friend.profileImagePath.length() == 0}">
+										  		<img src="res/drawable/user_avatar.jpg" class="avatar-img card-list-avatar-img rounded-circle">
+										</c:if>
+										
 									</a>
 									<p>${friend.firstName} ${friend.lastName}</p>
 							</div>
@@ -360,6 +452,8 @@
 	    <!-- /.row -->
 
   </div>
+  
+  <jsp:include page="../footer.html"></jsp:include>
 	
 </body>
 </html>

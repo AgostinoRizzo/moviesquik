@@ -24,7 +24,7 @@ public class FamilyDaoJDBC implements FamilyDao
 	protected static final String INSERT_STATEMENT          = "insert into family(family_id, name, credit_card_id) values (?,?,?)";
 	protected static final String FIND_BY_PRIMARY_KEY_QUERY = "select * from family where family_id = ?";
 	protected static final String FIND_ALL_QUERY            = "select * from family";
-	protected static final String UPDATE_STATEMENT          = "update family SET name = ? credit_card_id = ? WHERE family_id = ?";
+	protected static final String UPDATE_STATEMENT          = "update family SET name = ?, credit_card_id = ? WHERE family_id = ?";
 	protected static final String DELETE_STATEMENT          = "delete from family where family_id = ?";
 	protected static final String FIND_BY_MEMBER_STATEMENT  = "SELECT family.family_id, family.name, family.credit_card_id " + 
 															  "FROM family INNER JOIN \"user\" ON family.family_id = \"user\".family_id " + 

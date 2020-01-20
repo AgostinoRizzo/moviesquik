@@ -78,3 +78,8 @@ footer
 	width: 40px !important;
 	height: 40px !important;
 }
+
+.card-body
+{
+	/* background-color: #000; */
+}

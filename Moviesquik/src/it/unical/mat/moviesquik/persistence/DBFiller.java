@@ -4,6 +4,7 @@
 package it.unical.mat.moviesquik.persistence;
 
 import java.io.File;
+import java.util.List;
 
 import it.unical.mat.moviesquik.model.MediaContent;
 import it.unical.mat.moviesquik.persistence.dao.MediaContentDao;
@@ -25,9 +26,17 @@ public class DBFiller
 		for ( final MediaContent mc : mcs )
 		{
 			final MediaContentDao mcdao = DBManager.getInstance().getDaoFactory().getMediaContentDao();
+			final List<MediaContent> found = mcdao.findByTitleYear(mc.getTitle(), mc.getYear());
 			
-			if ( mcdao.findByTitleYear(mc.getTitle(), mc.getYear()).isEmpty() )
+			if ( found.isEmpty() )
 				mcdao.save(mc);
+			else
+			{
+				mc.setId(found.get(0).getId());
+				mc.setRating(mc.getImdbRating());
+				mcdao.updateRatings(mc);
+			}
+			
 		}
 	}
 }
