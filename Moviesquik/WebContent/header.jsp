@@ -70,12 +70,17 @@
 						
 						<li class="nav-item dropdown">
 					        <a id="nav-user-avatar-box" class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					          <span class="fa fa-bell checked"></span>
+					          	<span class="fa fa-bell checked"></span>
+					          	
+					          	
 					        </a>
-					        <div id="nav-user-avatar-dropdown-menu" class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-					        	
+					        <div id="nav-user-notifications-dropdown-menu" class="dropdown-menu dropdown-menu-right bg-dark text-white notifications-dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+					        	<jsp:include page="notifications/notifications-list.jsp"></jsp:include>
 					        </div>
 					    </li>
+					    <c:if test="${user.unreadNotifications != null}">
+					          	<small><span class="badge badge-pill badge-danger">${user.unreadNotifications.size()}</span></small>
+					    </c:if>
 					      
 				</ul>
 				

@@ -147,6 +147,7 @@
 }
 
 
+
 /******************************************************
 	nav user avatar style.
 ******************************************************/
@@ -169,6 +170,51 @@
 .dropdown-menu .dropdown-item:focus, .dropdown-item:hover
 {
 	color: #000 !important;
+}
+
+
+/******************************************************
+	nav user notifications style.
+******************************************************/
+
+.notifications-dropdown-menu
+{
+	width: 500px;
+	color: #fff;
+}
+
+.notifications-dropdown-menu a
+{
+	color: #0056b3 !important;
+}
+
+#nav-user-notifications-dropdown-menu .dropdown-item
+{
+	color: #fff;
+}
+
+.notification-avatar-img
+{
+	width: 60px !important;
+	height: 60px !important;
+	margin-top: 5px;
+}
+
+.badge
+{
+	position: relative;
+	top: -12px !important;
+	left: -25px !important;
+}
+
+.show-all-notification-container
+{
+	text-align: center;
+}
+
+.mark-unread-notification-container
+{
+	text-align: center;
 }
 
 

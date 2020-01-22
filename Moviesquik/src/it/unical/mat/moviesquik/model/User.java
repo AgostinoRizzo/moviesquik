@@ -26,6 +26,7 @@ public class User
 	private Integer followersCount;
 	private List<String> favoritesGenres;
 	private String profileImagePath;
+	private List<Notification> unreadNotifications;
 	
 	public User()
 	{}
@@ -164,5 +165,17 @@ public class User
 	public void setProfileImagePath(String profileImagePath)
 	{
 		this.profileImagePath = profileImagePath;
-	}	
+	}
+	
+	public List<Notification> getUnreadNotifications()
+	{
+		setUnreadNotifications(DBManager.getInstance().getDaoFactory().getNotificationDao()
+				.findUnreadByUser(this, Notification.NOTIFICATIONS_LIMIT));
+		return unreadNotifications;
+	}
+	
+	public void setUnreadNotifications(List<Notification> unreadNotifications)
+	{
+		this.unreadNotifications = unreadNotifications;
+	}
 }

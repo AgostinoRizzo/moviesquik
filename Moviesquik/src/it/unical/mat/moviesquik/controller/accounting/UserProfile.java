@@ -76,7 +76,7 @@ public class UserProfile extends HttpServlet
 			
 			if ( friendship != null )
 				req.setAttribute("friendship", friendship);
-			
+			System.out.println("2");
 			
 			final Following following = daoFactory.getFollowingDao().findByMembers(currentUser, userToDisplay);
 			final Following back_following = daoFactory.getFollowingDao().findByMembers(userToDisplay, currentUser);
@@ -86,6 +86,7 @@ public class UserProfile extends HttpServlet
 				req.setAttribute("following", following);
 				if ( back_following != null )
 					req.setAttribute("is_friend", true);
+				System.out.println("3");
 			}
 		}
 	}
