@@ -10,6 +10,7 @@ import it.unical.mat.moviesquik.persistence.dao.FamilyDao;
 import it.unical.mat.moviesquik.persistence.dao.FollowingDao;
 import it.unical.mat.moviesquik.persistence.dao.FriendshipDao;
 import it.unical.mat.moviesquik.persistence.dao.MediaContentDao;
+import it.unical.mat.moviesquik.persistence.dao.NotificationDao;
 import it.unical.mat.moviesquik.persistence.dao.RegistrationTransaction;
 import it.unical.mat.moviesquik.persistence.dao.UserDao;
 
@@ -19,53 +20,64 @@ import it.unical.mat.moviesquik.persistence.dao.UserDao;
  */
 public class DaoFactoryJDBC implements DaoFactory
 {
-	private final StatementPrompterJDBC statementPrompter;
+	private final DataSource dataSource;
 	
 	public DaoFactoryJDBC( final DataSource dataSource )
 	{
-		statementPrompter = new StatementPrompterJDBC(dataSource);
+		this.dataSource = dataSource;
 	}
 	
 	@Override
 	public UserDao getUserDao()
 	{
-		return new UserDaoJDBC(statementPrompter);
+		return new UserDaoJDBC(getNewStatementPrompter());
 	}
 
 	@Override
 	public FamilyDao getFamilyDao()
 	{
-		return new FamilyDaoJDBC(statementPrompter);
+		return new FamilyDaoJDBC(getNewStatementPrompter());
 	}
 	
 	@Override
 	public CreditCardDao getCreditCardDao()
 	{
-		return new CreditCardDaoJDBC(statementPrompter);
+		return new CreditCardDaoJDBC(getNewStatementPrompter());
 	}
 	
 	@Override
 	public RegistrationTransaction getRegistrationTransaction()
 	{
-		return new RegistrationTransactionJDBC(statementPrompter);
+		return new RegistrationTransactionJDBC(getNewStatementPrompter());
 	}
 	
 	@Override
 	public MediaContentDao getMediaContentDao()
 	{
-		return new MediaContentDaoJDBC(statementPrompter);
+		return new MediaContentDaoJDBC(getNewStatementPrompter());
 	}
 	
 	@Override
 	public FriendshipDao getFriendshipDao()
 	{
-		return new FriendshipDaoJDBC(statementPrompter);
+		return new FriendshipDaoJDBC(getNewStatementPrompter());
 	}
 	
 	@Override
 	public FollowingDao getFollowingDao()
 	{
-		return new FollowindDaoJDBC(statementPrompter);
+		return new FollowindDaoJDBC(getNewStatementPrompter());
+	}
+	
+	@Override
+	public NotificationDao getNotificationDao()
+	{
+		return new NotificationDaoJDBC(getNewStatementPrompter());
+	}
+	
+	private StatementPrompterJDBC getNewStatementPrompter()
+	{
+		return new StatementPrompterJDBC(dataSource);
 	}
 
 }

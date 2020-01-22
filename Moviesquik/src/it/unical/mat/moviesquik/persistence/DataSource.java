@@ -24,7 +24,7 @@ public class DataSource
 		this.password = password;
 	}
 	
-	public Connection getConnection() throws SQLException
+	public Connection getNewConnection() throws SQLException
 	{
 		return DriverManager.getConnection(uri, username, password);
 	}

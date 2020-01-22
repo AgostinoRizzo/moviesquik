@@ -3,6 +3,7 @@
  */
 package it.unical.mat.moviesquik.persistence.dao.jdbc;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
@@ -15,6 +16,7 @@ import it.unical.mat.moviesquik.persistence.DataSource;
 public class StatementPrompterJDBC
 {
 	private final DataSource dataSource;
+	private Connection connection = null;
 	
 	public StatementPrompterJDBC( final DataSource dataSource )
 	{
@@ -23,31 +25,40 @@ public class StatementPrompterJDBC
 	
 	public PreparedStatement prepareStatement( final String sql ) throws SQLException
 	{
-		return dataSource.getConnection().prepareStatement(sql);
+		onFinalize();
+		connection = dataSource.getNewConnection();
+		return connection.prepareStatement(sql);
 	}
 	
 	public void startTransaction() throws SQLException
 	{
-		dataSource.getConnection().setAutoCommit(false);
+		onFinalize();
+		connection = dataSource.getNewConnection();
+		connection.setAutoCommit(false);
 	}
 	
 	public void commit() throws SQLException
 	{
-		dataSource.getConnection().commit();
+		connection.commit();
 	}
 	
 	public void onFinalize()
 	{
 		try
 		{
-			dataSource.getConnection().close();
+			if ( connection != null )
+				connection.close();
 		} 
 		catch (SQLException e)
 		{ e.printStackTrace(); }
+		
+		finally 
+		{ connection = null; }
 	}
 	
 	public DataSource getDataSource()
 	{
 		return dataSource;
 	}
+	
 }

@@ -12,6 +12,7 @@ import java.util.List;
 import it.unical.mat.moviesquik.model.Family;
 import it.unical.mat.moviesquik.model.User;
 import it.unical.mat.moviesquik.persistence.DBManager;
+import it.unical.mat.moviesquik.persistence.dao.DaoFactory;
 import it.unical.mat.moviesquik.persistence.dao.UserDao;
 import it.unical.mat.moviesquik.util.DateUtil;
 
@@ -285,6 +286,7 @@ public class UserDaoJDBC implements UserDao
 	
 	private User createUserFromResult( final ResultSet result, final Family family ) throws SQLException
 	{
+		final DaoFactory daoFactory = DBManager.getInstance().getDaoFactory();
 		final User usr = new User();
 		
 		usr.setId(result.getLong("user_id"));
@@ -295,7 +297,7 @@ public class UserDaoJDBC implements UserDao
 		usr.setGender(result.getString("gender"));
 		usr.setPassword(result.getString("password"));
 		
-		usr.setFamily( (family == null ) ? DBManager.getInstance().getDaoFactory().getFamilyDao()
+		usr.setFamily( (family == null ) ? daoFactory.getFamilyDao()
 				.findByPrimaryKey(result.getLong("family_id")) : family );
 		
 		usr.setFollowersCount(getFollowersCount(usr));

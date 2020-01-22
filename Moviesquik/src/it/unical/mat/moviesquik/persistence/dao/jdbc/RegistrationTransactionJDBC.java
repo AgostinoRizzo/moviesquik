@@ -36,7 +36,7 @@ public class RegistrationTransactionJDBC implements RegistrationTransaction
 		Connection connection = null;
 		try
 		{
-			connection = statementPrompter.getDataSource().getConnection();
+			connection = statementPrompter.getDataSource().getNewConnection();
 			connection.setAutoCommit(false);
 			
 			final PreparedStatement familyInsertStatement = connection.prepareStatement(FamilyDaoJDBC.INSERT_STATEMENT);
