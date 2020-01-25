@@ -55,7 +55,7 @@
 	<div class="container user-profile-content-header row">
 	
 		<!-- Profile Image res/drawable/user_avatar.jpg -->
-		<div id="user-profile-img-header" class="col-4">
+		<div id="user-profile-img-header" class="col-5">
 				
 				<c:set var = "user_profile_img_src" scope = "request" value = "res/drawable/user_avatar.jpg"/>
 				<c:if test="${user_to_display.profileImagePath != null && user_to_display.profileImagePath.length() > 0}">
@@ -67,7 +67,7 @@
 		<br>
 		
         <!-- Name -->
-        <div class="col-8">
+        <div class="col-7">
         
 	        <h2 class="user-name-box">${user_to_display.firstName} ${user_to_display.lastName}</h2>
 	        

@@ -8,6 +8,7 @@ import it.unical.mat.moviesquik.model.Family;
 import it.unical.mat.moviesquik.model.User;
 import it.unical.mat.moviesquik.persistence.dao.DaoFactory;
 import it.unical.mat.moviesquik.persistence.dao.jdbc.DaoFactoryJDBC;
+import it.unical.mat.moviesquik.persistence.searching.DBSearchEngine;
 
 /**
  * @author Agostino
@@ -21,6 +22,7 @@ public class DBManager
 	private static DaoFactory daoFactory;
 	
 	private static FileSystemDataSoruce fsDataSource;
+	private static DBSearchEngine searchEngine;
 	
 	static
 	{
@@ -30,6 +32,7 @@ public class DBManager
 			dataSource = new DataSource("jdbc:postgresql://localhost:5432/moviesquik", "postgres", "postgres");
 			daoFactory = new DaoFactoryJDBC(dataSource);
 			fsDataSource = new FileSystemDataSoruce();
+			searchEngine = new DBSearchEngine();
 		}
 		catch (ClassNotFoundException e)
 		{ e.printStackTrace(); }
@@ -68,6 +71,11 @@ public class DBManager
 	public static FileSystemDataSoruce getFileSystemDataSource()
 	{
 		return fsDataSource;
+	}
+	
+	public static DBSearchEngine getSearchEngine()
+	{
+		return searchEngine;
 	}
 	
 	public boolean canRegister( final User user )

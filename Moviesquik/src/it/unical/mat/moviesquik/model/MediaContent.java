@@ -160,4 +160,20 @@ public class MediaContent
 	{
 		this.imdbRating = imdbRating;
 	}
+	
+	@Override
+	public int hashCode()
+	{
+		return Long.hashCode(getId());
+	}
+	
+	@Override
+	public boolean equals(Object obj)
+	{
+		if ( this == obj )
+			return true;
+		if ( obj instanceof MediaContent )
+			return this.getId().equals(((MediaContent) obj).getId());
+		return false;
+	}
 }

@@ -62,8 +62,9 @@
 						
 				</ul>
 				
-				<form class="form-inline my-2 my-lg-0 header-search-form">
-					<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+				<form method="GET" action="search" class="form-inline my-2 my-lg-0 header-search-form">
+					<!-- <span class="input-group-addon fa fa-search"></span> -->
+					<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="query">
 				</form>
 				    
 				<ul class="navbar-nav">

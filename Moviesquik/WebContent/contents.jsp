@@ -25,7 +25,7 @@
 		<!-- <hr class="mb-4"> -->
 		
 		<!-- Top content -->
-	    <div id="suggested-media-contents-items" class="media-contents-list-items row" role="listbox">
+	    <div class="media-contents-list-items row" role="listbox">
 	        <jsp:include page="contents-items.jsp"></jsp:include>
 	    </div>
 		

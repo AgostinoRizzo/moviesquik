@@ -75,6 +75,20 @@
 	<url-pattern>/following</url-pattern>
 </servlet-mapping>
 
+
+<!-- Searching Servlets -->
+
+<!-- Search Servlet -->
+<servlet>
+	<servlet-name>search</servlet-name>
+	<servlet-class>it.unical.mat.moviesquik.controller.searching.Search</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>search</servlet-name>
+	<url-pattern>/search</url-pattern>
+</servlet-mapping>
+
+
 <!-- MediaContentsBroker Servlet -->
 <servlet>
 	<servlet-name>media_contents_broker</servlet-name>

@@ -12,6 +12,7 @@ import java.util.List;
 import it.unical.mat.moviesquik.model.MediaContent;
 import it.unical.mat.moviesquik.model.User;
 import it.unical.mat.moviesquik.persistence.dao.MediaContentDao;
+import it.unical.mat.moviesquik.persistence.searching.SortingPolicy;
 import it.unical.mat.moviesquik.util.DateUtil;
 
 /**
@@ -25,6 +26,8 @@ public class MediaContentDaoJDBC implements MediaContentDao
 			"values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	protected static final String UPDATE_RATING_STATEMENT = "update media_content SET rating = ? WHERE media_content_id = ?";
 	protected static final String FIND_BY_PRIMARY_KEY_QUERY = "select * from media_content where media_content_id = ?";
+	protected static final String FIND_BY_TITLE_QUERY = "select * from media_content where lower(title) = lower(?)";
+	protected static final String FIND_BY_TITLE_WEAK_QUERY = "select * from media_content where lower(title) like lower(concat('%', ?, '%'))";
 	protected static final String FIND_BY_TITLE_YEAR_QUERY = "select * from media_content where title = ? and year = ?";
 	protected static final String FIND_MOST_RATED_QUERY = "select * from media_content order by rating desc limit ?";
 	
@@ -74,6 +77,34 @@ public class MediaContentDaoJDBC implements MediaContentDao
 		
 		catch (SQLException e)
 		{ e.printStackTrace(); return false; }
+		
+		finally 
+		{ statementPrompter.onFinalize(); }
+	}
+	
+	@Override
+	public List<MediaContent> findByTitle(String title, boolean weakSearch, SortingPolicy sortingPolicy, int limit)
+	{
+		final List<MediaContent> mediaContents = new ArrayList<MediaContent>();
+		
+		String query = weakSearch ? FIND_BY_TITLE_WEAK_QUERY : FIND_BY_TITLE_QUERY;
+		query = addQuerySortingPolicy(query, sortingPolicy);
+		query = DaoUtilJDBC.addQueryLimit(query, limit);
+		
+		try
+		{
+			final PreparedStatement statement = statementPrompter.prepareStatement(query);
+			statement.setString(1, title);
+			
+			ResultSet result = statement.executeQuery();
+			
+			while ( result.next() )
+				mediaContents.add( createFromResult(result) );
+			return mediaContents;
+		}
+		
+		catch (SQLException e)
+		{ e.printStackTrace(); return mediaContents; }
 		
 		finally 
 		{ statementPrompter.onFinalize(); }
@@ -199,6 +230,21 @@ public class MediaContentDaoJDBC implements MediaContentDao
 		mediaContent.setLikes(result.getLong("likes"));
 		
 		return mediaContent;
+	}
+	
+	private static String addQuerySortingPolicy( final String query, final SortingPolicy policy )
+	{
+		String orderBy;
+		
+		switch ( policy )
+		{
+		case YEAR_RELEASED: orderBy = "year desc";  break;
+		case TITLE_ASC:     orderBy = "title asc";  break;
+		case TITLE_DESC:    orderBy = "title desc"; break;
+		default: return query;
+		}
+		
+		return query + " order by " + orderBy;
 	}
 
 }

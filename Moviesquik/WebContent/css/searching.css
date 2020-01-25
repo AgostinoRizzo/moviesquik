@@ -1,0 +1,51 @@
+@charset "ISO-8859-1";
+
+#search-results-content
+{
+	margin-top: 120px;
+}
+
+.media-contents-list-header
+{
+	margin-top: 120px;
+	margin-right: 0px;
+	margin-left: 0px;
+}
+
+.media-contents-list-header .col
+{
+	margin-right: 0px;
+	margin-left: 0px;
+	margin-top: 30px;
+	padding-right: 0px;
+	padding-left: 0px;
+}
+
+.media-contents-list-header-title
+{
+	display: inline;
+}
+
+.sorting-policy-section
+{
+	text-align: right;
+}
+
+#sorting-policy-select
+{
+	position: relative;
+	top: -7px;
+}
+
+.empty-result-wrapper
+{
+	right: 0px;
+	margin: 0px auto;
+	margin-top: 20%;
+	top: 50px;
+	position: relative;
+	border-radius: 10px;
+	color: #fff;
+	padding: 30px;
+	text-align: center;
+}
