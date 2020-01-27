@@ -42,7 +42,7 @@
 			
 			<c:if test="${user != null}">
 				
-				<ul class="navbar-nav">
+				<ul id="navbar-nav-links" class="navbar-nav">
 						
 						<li class="nav-item">
 							<a class="nav-link" href="./">Home</a>
@@ -64,14 +64,16 @@
 				
 				<form method="GET" action="search" class="form-inline my-2 my-lg-0 header-search-form">
 					<!-- <span class="input-group-addon fa fa-search"></span> -->
-					<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="query">
+					<span id="search-icon" class="input-group-addon fa fa-search clickable"></span>
+					<span id="searching-icon" class="input-group-addon fa fa-search d-none"></span>
+					<input id="search-textbox" class="form-control mr-sm-2 d-none" type="text" placeholder="Search on moviesquik" aria-label="Search" name="query" autocomplete="off">
 				</form>
 				    
-				<ul class="navbar-nav">
+				<ul class="navbar-nav notifications-navbar-nav">
 						
 						<li class="nav-item dropdown">
-					        <a id="nav-user-avatar-box" class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					          	<span class="fa fa-bell checked"></span>
+					        <a id="nav-user-avatar-box" class="nav-link" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					          	<span class="fa fa-envelope checked"></span>
 					          	
 					          	
 					        </a>
@@ -88,7 +90,7 @@
 				<ul id="navbar-nav-user" class="navbar-nav">
 						
 						<li class="nav-item dropdown">
-					        <a id="nav-user-avatar-box" class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					        <a id="nav-user-avatar-box" class="nav-link" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					          
 					          	<c:set var = "user_profile_img_src" scope = "request" value = "res/drawable/user_avatar.jpg"/>
 								<c:if test="${user.profileImagePath != null && user.profileImagePath.length() > 0}">

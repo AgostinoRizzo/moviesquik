@@ -12,6 +12,8 @@ function request_media_contents(url_str)
 			success: function(data)
 				{
 					$("#search-result").html(data);
+					$("#media-contents-search-result-title")
+						.html( $("#media-contents-search-update-result-title").html() );
 				}
 		}
 	);
@@ -24,7 +26,7 @@ $(document).ready( function()
 			var query = $(this).siblings("#search-query").val();
 			var policy = $(this).val();
 			
-			request_media_contents("search?query=" + query +  "&sorting_policy=" + policy + "&reqtype=update");
+			request_media_contents("search?query=" + query +  "&sorting_policy=" + policy + "&reqtype=mc_update");
 		});
 	}
 );

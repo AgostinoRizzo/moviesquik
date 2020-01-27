@@ -84,3 +84,8 @@ footer
 {
 	/* background-color: #000; */
 }
+
+.clickable
+{
+	cursor: pointer;
+}

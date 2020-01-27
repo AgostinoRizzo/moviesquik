@@ -17,6 +17,7 @@
 	<link href="css/widget.css" rel="stylesheet">
 	<link href="css/contents.css" rel="stylesheet">
 	<link href="css/searching.css" rel="stylesheet">
+	<link href="css/user-profile.css" rel="stylesheet">
 	
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	
@@ -25,6 +26,7 @@
 	<script src="lib/jquery/jquery.min.js"></script>
 	<script src="lib/jquery/jquery-migrate.min.js"></script>
 	<script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="lib/typeahead/bootstrap3-typeahead.js"></script>
 	<script src="js/anim.js"></script>
 	<script src="js/header.js"></script>
 	<script src="js/searching.js"></script>
@@ -43,7 +45,9 @@
 		  Search results
 	======================= -->
 	
-	<c:if test="${search_result.contents.isEmpty()}">
+	<div id="search-results-content">
+	
+	<c:if test="${search_result.contents.isEmpty() && search_result.users.isEmpty()}">
 		<div class="empty-result-wrapper">
 			<h5 class="note">
 				Your search for "${search_result.query}" did not have any matches.<br>
@@ -52,10 +56,71 @@
 		</div>
 	</c:if>
 	
+	<c:if test="${!search_result.users.isEmpty()}">
+		
+		<div id="users-list-header" class="media-contents-list-header row">
+				<div class="media-contents-search-result-title col col-12 col-lg-8">
+					<h5 class="media-contents-list-header-title note">Explore people related to: </h5>
+					&nbsp;
+					<!-- <span class="input-group-addon fa fa-film"></span> -->
+					
+					<c:set var="user_count" scope="request" value="1"/>
+					<c:forEach items="${search_result.users}" var="user">
+						
+						<h5 class="media-contents-list-header-title">
+							${user.firstName}&nbsp;${user.lastName}
+							<c:if test="${user_count < search_result.users.size()}">
+								&nbsp;|&nbsp;
+							</c:if>
+						</h5>
+						
+						<c:set var="user_count" scope="request" value="${user_count + 1}"/>
+						
+					</c:forEach>
+											
+				</div>
+		</div>
+		
+		<div class="media-contents-list">
+				
+			<!-- <hr class="mb-4"> -->
+			
+			<!-- Search result content -->
+			<div id="users-search-result" class="media-contents-list-items row members-row" role="listbox">
+			
+				<!-- Users Search result content -->
+
+				<c:forEach items="${search_result.users}" var="user">
+					<div class="media col-3">
+		            			
+						  <c:if test="${user.profileImagePath != null && user.profileImagePath.length() > 0}">
+						  		<a href="user?id=${user.id}"><img src="res/user/${user.profileImagePath}" class="avatar-img card-list-avatar-img rounded-circle"></a>
+						  </c:if>
+						  <c:if test="${user.profileImagePath == null || user.profileImagePath.length() == 0}">
+						  		<a href="user?id=${user.id}"><img src="res/drawable/user_avatar.jpg" class="avatar-img card-list-avatar-img rounded-circle"></a>
+						  </c:if>
+						  
+						  <div class="media-body">
+						    <h4>${user.firstName} ${user.lastName}</h4>
+						    <p><a href="#">${user.email}</a></p>
+						  </div>
+					</div>
+				</c:forEach>
+				
+			</div>
+		    			
+			<div class="more-collapse-box d-none">
+				<button id="suggested-view-more-btn" class="btn btn-link view-more-btn"><span class="fa fa-plus checked"></span> More</button>
+				<button id="suggested-view-collapse-btn" class="btn btn-link view-collapse-btn"><span class="fa fa-minus checked"></span> Collapse</button>
+			</div>
+		</div>
+		
+	</c:if>
+	
 	<c:if test="${!search_result.contents.isEmpty()}">
 	
-		<div class="media-contents-list-header row">
-				<div class="media-contents-search-result-title col col-12 col-lg-8">
+		<div id="media-contents-list-header" class="media-contents-list-header row">
+				<div id="media-contents-search-result-title" class="media-contents-search-result-title col col-12 col-lg-8">
 					<h5 class="media-contents-list-header-title note">Explore titles related to: </h5>
 					&nbsp;
 					<!-- <span class="input-group-addon fa fa-film"></span> -->
@@ -127,6 +192,7 @@
 		</div>
 		
 	</c:if>
+	</div>
 	
 </body>
 </html>

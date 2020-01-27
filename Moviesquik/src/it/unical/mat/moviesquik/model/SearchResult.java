@@ -3,6 +3,7 @@
  */
 package it.unical.mat.moviesquik.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,6 +14,13 @@ public class SearchResult
 {
 	private String query;
 	private List<MediaContent> contents;
+	private List<User> users;
+	
+	public SearchResult()
+	{
+		contents = new ArrayList<MediaContent>();
+		users = new ArrayList<User>();
+	}
 	
 	public String getQuery()
 	{
@@ -31,4 +39,14 @@ public class SearchResult
 	{
 		this.contents = contents;
 	}
+	
+	public List<User> getUsers()
+	{
+		return users;
+	}
+	public void setUsers(List<User> users)
+	{
+		this.users = users;
+	}
+	
 }

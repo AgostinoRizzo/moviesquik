@@ -11,6 +11,7 @@
 	border-bottom-width: 1px !important;
 	border-bottom-style: solid !important;
 	border-bottom-color: hsla(0, 0%, 100%, 0.1) !important;
+	padding: 0px;
 }
 
 .icon-bar 
@@ -49,6 +50,17 @@
 
 .navbar-nav
 {
+	/* margin-right: 20px; */
+}
+
+#navbar-nav-links
+{
+	/* width: 100%; */
+	/* text-align: center; */
+}
+
+.notifications-navbar-nav
+{
 	margin-right: 20px;
 }
 
@@ -76,7 +88,8 @@
 
 #header a
 {
-	color: #afb4dc;
+	/* color: #afb4dc; */
+	color: #fff;
 }
 
 #header .navbar-toggler
@@ -143,7 +156,8 @@
 
 .header-search-form
 {
-	margin-right: 30px;
+	/* margin-right: 120px; */
+	margin-right: 50px;
 }
 
 
@@ -204,7 +218,7 @@
 {
 	position: relative;
 	top: -12px !important;
-	left: -25px !important;
+	left: -5px !important;
 }
 
 .show-all-notification-container
@@ -215,6 +229,41 @@
 .mark-unread-notification-container
 {
 	text-align: center;
+}
+
+
+/******************************************************
+	search input text type ahead style.
+******************************************************/
+
+#search-textbox
+{
+	border-top-width: 0px !important;
+	border-right-width: 0px !important;
+	border-left-width: 0px !important;
+	border-radius: 0px;
+	border-color: #fff;
+	box-shadow: 0px 0px 0px 0px !important;
+}
+
+#searching-icon
+{
+	margin-right: 10px;
+}
+
+.typeahead
+{
+	color: #fff !important;
+}
+
+.typeahead a
+{
+	color: #fff !important;
+}
+
+.typeahead .active a
+{
+	color: #000 !important;
 }
 
 

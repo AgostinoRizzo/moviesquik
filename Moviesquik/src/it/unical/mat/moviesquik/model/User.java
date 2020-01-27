@@ -75,6 +75,11 @@ public class User
 	{
 		this.last_name = last_name;
 	}
+	
+	public String getFullName()
+	{
+		return first_name + " " + last_name;
+	}
 
 	public String getEmail()
 	{

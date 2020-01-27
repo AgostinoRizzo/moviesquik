@@ -38,6 +38,7 @@ public class UserDaoJDBC implements UserDao
 																"		where back_following.follower_id = following.followed_id and back_following.followed_id = ?\r\n" + 
 																"	)";
 	protected static final String FOLLOWERS_COUNT_QUERY     = "select COUNT(*) from following where (followed_id = ?)";
+	protected static final String FIND_BY_NAME_QUERY        = "select * from \"user\" where lower(first_name) like lower(concat('%', ?, '%')) or (lower(last_name) like lower(concat('%', ?, '%')) and char_length(?) > 0) limit ?";
 
 	private final StatementPrompterJDBC statementPrompter;
 	
@@ -267,6 +268,34 @@ public class UserDaoJDBC implements UserDao
 		
 		catch (SQLException e)
 		{ e.printStackTrace(); return friends; }
+		
+		finally 
+		{ statementPrompter.onFinalize(); }
+	}
+	
+	@Override
+	public List<User> findByName(String name, int limit)
+	{
+		final List<User> users = new ArrayList<User>();
+		final String[] fullname = name.split(" ", 2);
+		
+		try
+		{
+			final PreparedStatement statement = statementPrompter.prepareStatement(FIND_BY_NAME_QUERY);
+			statement.setString(1, (fullname.length > 0) ? fullname[0] : "");
+			statement.setString(2, (fullname.length > 1) ? fullname[1] : "");
+			statement.setString(3, (fullname.length > 1) ? fullname[1] : "");
+			statement.setInt(4, limit);
+			
+			ResultSet result = statement.executeQuery();
+			
+			while ( result.next() )
+				users.add( createUserFromResult(result, null) );
+			return users;
+		}
+		
+		catch (SQLException e)
+		{ e.printStackTrace(); return users; }
 		
 		finally 
 		{ statementPrompter.onFinalize(); }

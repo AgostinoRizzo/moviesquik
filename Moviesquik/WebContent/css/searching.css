@@ -5,9 +5,20 @@
 	margin-top: 120px;
 }
 
+#users-list-header
+{
+	/* margin-top: 120px; */
+}
+
+#media-contents-list-header:not(#users-list-header)
+{
+	/* margin-top: 120px; */
+}
+
 .media-contents-list-header
 {
-	margin-top: 120px;
+	/* margin-top: 120px; */
+	margin-top: 50px;
 	margin-right: 0px;
 	margin-left: 0px;
 }
@@ -37,6 +48,16 @@
 	top: -7px;
 }
 
+#users-search-result .media
+{
+	text-align: left !important;
+}
+
+#users-search-result .media img
+{
+	margin-right: 30px !important;
+}
+
 .empty-result-wrapper
 {
 	right: 0px;
@@ -48,4 +69,9 @@
 	color: #fff;
 	padding: 30px;
 	text-align: center;
+}
+
+.media-contents-list
+{
+	padding-top: 0px !important;
 }

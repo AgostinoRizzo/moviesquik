@@ -73,7 +73,7 @@
 
 .user-profile-content .media img
 {
-	margin-right: 30px;
+	margin-right: 30px !important;
 }
 
 .user-profile-content .media .is-master-text
