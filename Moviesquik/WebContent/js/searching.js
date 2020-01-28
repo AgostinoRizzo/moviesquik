@@ -19,6 +19,7 @@ function request_media_contents(url_str)
 	);
 };
 
+
 $(document).ready( function()
 	{
 		$("#sorting-policy-select").change(function() {
@@ -27,6 +28,6 @@ $(document).ready( function()
 			var policy = $(this).val();
 			
 			request_media_contents("search?query=" + query +  "&sorting_policy=" + policy + "&reqtype=mc_update");
-		});
+		});		
 	}
 );

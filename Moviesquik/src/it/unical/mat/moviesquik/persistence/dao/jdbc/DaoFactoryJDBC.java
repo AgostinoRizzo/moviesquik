@@ -10,6 +10,8 @@ import it.unical.mat.moviesquik.persistence.dao.FamilyDao;
 import it.unical.mat.moviesquik.persistence.dao.FollowingDao;
 import it.unical.mat.moviesquik.persistence.dao.FriendshipDao;
 import it.unical.mat.moviesquik.persistence.dao.MediaContentDao;
+import it.unical.mat.moviesquik.persistence.dao.MediaContentGenreDao;
+import it.unical.mat.moviesquik.persistence.dao.MediaContentSearchDao;
 import it.unical.mat.moviesquik.persistence.dao.NotificationDao;
 import it.unical.mat.moviesquik.persistence.dao.RegistrationTransaction;
 import it.unical.mat.moviesquik.persistence.dao.UserDao;
@@ -55,6 +57,18 @@ public class DaoFactoryJDBC implements DaoFactory
 	public MediaContentDao getMediaContentDao()
 	{
 		return new MediaContentDaoJDBC(getNewStatementPrompter());
+	}
+	
+	@Override
+	public MediaContentSearchDao getMediaContentSearchDao()
+	{
+		return new MediaContentSearchDaoJDBC(getNewStatementPrompter());
+	}
+	
+	@Override
+	public MediaContentGenreDao getMediaContentGenreDao()
+	{
+		return new MediaContentGenreDaoJDBC(getNewStatementPrompter());
 	}
 	
 	@Override

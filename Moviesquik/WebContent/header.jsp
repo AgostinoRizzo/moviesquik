@@ -48,10 +48,10 @@
 							<a class="nav-link" href="./">Home</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#">Movies</a>
+							<a class="nav-link" href="mcsearch?type=movie&view=group">Movies</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#">TV Shows</a>
+							<a class="nav-link" href="mcsearch?type=tv_show&view=group">TV Shows</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="#">Watch List</a>

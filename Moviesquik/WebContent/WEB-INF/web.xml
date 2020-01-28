@@ -98,6 +98,17 @@
 	<url-pattern>/textsearch</url-pattern>
 </servlet-mapping>
 
+<!-- Type Search Servlet -->
+<servlet>
+	<servlet-name>media_content_search</servlet-name>
+	<servlet-class>it.unical.mat.moviesquik.controller.searching.MediaContentsSearch</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>media_content_search</servlet-name>
+	<url-pattern>/mcsearch</url-pattern>
+</servlet-mapping>
+
+
 
 <!-- MediaContentsBroker Servlet -->
 <servlet>

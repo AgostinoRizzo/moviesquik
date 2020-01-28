@@ -150,7 +150,7 @@
 						
 						<div class="form-inline">
 							<input type="hidden" id="search-query" value="${search_result.query}">
-							<select id="sorting-policy-select" class="form-control" name="">
+							<select id="sorting-policy-select" class="form-control sorting-policy-select" name="">
 								
 								<option value="suggested">Suggestions for you</option>
 								<option value="year-released">Year Released</option>

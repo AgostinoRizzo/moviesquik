@@ -3,6 +3,8 @@
  */
 package it.unical.mat.moviesquik.persistence;
 
+import java.util.List;
+
 import it.unical.mat.moviesquik.model.CreditCard;
 import it.unical.mat.moviesquik.model.Family;
 import it.unical.mat.moviesquik.model.User;
@@ -39,6 +41,7 @@ public class DBManager
 	}
 	
 	private DBFiller filler = new DBFiller();
+	private List<String> mediaContentsGenres = null;
 	
 	
 	public static DBManager getInstance()
@@ -96,6 +99,13 @@ public class DBManager
 	public User login( final String email, final String password )
 	{
 		return getDaoFactory().getUserDao().findByLogin(email, password);
+	}
+	
+	public List<String> getMediaContentsGenres()
+	{
+		if ( mediaContentsGenres == null )
+			mediaContentsGenres = getDaoFactory().getMediaContentGenreDao().findAll();
+		return mediaContentsGenres;
 	}
 	
 }

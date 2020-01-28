@@ -15,8 +15,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import it.unical.mat.moviesquik.model.MediaContent;
+import it.unical.mat.moviesquik.model.MediaContentType;
 import it.unical.mat.moviesquik.model.User;
 import it.unical.mat.moviesquik.persistence.DBManager;
+import it.unical.mat.moviesquik.persistence.searching.SortingPolicy;
 import it.unical.mat.moviesquik.util.JSONUtil;
 
 /**
@@ -40,15 +42,18 @@ public class MediaContentsBroker extends HttpServlet
 		
 		if ( policy.equals("most_rated") )
 			mediaContents = 
-				DBManager.getInstance().getDaoFactory().getMediaContentDao().findMostRated(MAX_FIND_COUNT);
+				DBManager.getInstance().getDaoFactory().getMediaContentSearchDao()
+					.searchTopRated(MediaContentType.ALL, SortingPolicy.NONE, MAX_FIND_COUNT);
 		
 		else if ( policy.equals("most_popular") )
 			mediaContents = 
-			DBManager.getInstance().getDaoFactory().getMediaContentDao().findMostPopular(MAX_FIND_COUNT);
+			DBManager.getInstance().getDaoFactory().getMediaContentSearchDao()
+				.searchMostPopular(MediaContentType.ALL, SortingPolicy.NONE, MAX_FIND_COUNT);
 		
 		else if ( policy.equals("most_favorites") )
 			mediaContents = 
-			DBManager.getInstance().getDaoFactory().getMediaContentDao().findMostFavorites(MAX_FIND_COUNT);
+			DBManager.getInstance().getDaoFactory().getMediaContentSearchDao()
+				.searchMostFavorites(MediaContentType.ALL, SortingPolicy.NONE, MAX_FIND_COUNT);
 		
 		else if ( policy.equals("suggested") || policy.equals("recently") )
 		{
@@ -56,8 +61,10 @@ public class MediaContentsBroker extends HttpServlet
 			if ( user != null )
 				mediaContents = 
 				(policy.equals("suggested"))
-				? DBManager.getInstance().getDaoFactory().getMediaContentDao().findSuggested(MAX_FIND_COUNT, user)
-				: DBManager.getInstance().getDaoFactory().getMediaContentDao().findRecentlyWatched(MAX_FIND_COUNT, user);
+				? DBManager.getInstance().getDaoFactory().getMediaContentSearchDao()
+						.searchSuggested(MediaContentType.ALL, user, SortingPolicy.NONE, MAX_FIND_COUNT)
+				: DBManager.getInstance().getDaoFactory().getMediaContentSearchDao()
+						.searchRecentlyWatched(MediaContentType.ALL, user, SortingPolicy.NONE, MAX_FIND_COUNT);
 			else
 				mediaContents = new ArrayList<MediaContent>();
 		}
