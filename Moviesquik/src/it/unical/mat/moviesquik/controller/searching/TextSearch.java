@@ -34,7 +34,7 @@ public class TextSearch extends HttpServlet
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
 	{
 		final String searchQuery = req.getParameter("query");
-		System.out.println("GET query="+searchQuery);
+		
 		if ( searchQuery != null )
 			manageSearchByQuery(searchQuery, req, resp);
 		else

@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.unical.mat.moviesquik.controller.searching.MediaContentsSearchFilter;
 import it.unical.mat.moviesquik.model.MediaContent;
 import it.unical.mat.moviesquik.model.MediaContentType;
 import it.unical.mat.moviesquik.persistence.dao.MediaContentSearchDao;
@@ -23,7 +24,9 @@ public class MediaContentSearchDaoJDBC implements MediaContentSearchDao
 	protected static final String SEARCH_BY_TITLE_QUERY = "select * from media_content where lower(title) = lower(?)";
 	protected static final String SEARCH_BY_TITLE_WEAK_QUERY = "select * from media_content where lower(title) like lower(concat('%', ?, '%'))";
 	protected static final String SEARCH_BY_TYPE_QUERY = "select * from media_content where lower(type) like lower(concat('%', ?, '%'))";
-	protected static final String SEARCH_TOP_RATED_QUERY = "select * from media_content where lower(type) like lower(concat('%', ?, '%')) order by rating desc";
+	
+	protected static final String SEARCH_TOP_RATED_QUERY = "select * from media_content where lower(type) like lower(concat('%', ?, '%'))";
+	protected static final String SEARCH_TOP_RATED_ORDER_BY_QUERY = " order by rating desc";
 	
 	private final StatementPrompterJDBC statementPrompter;
 	
@@ -38,7 +41,7 @@ public class MediaContentSearchDaoJDBC implements MediaContentSearchDao
 		final List<MediaContent> mediaContents = new ArrayList<MediaContent>();
 		
 		String query = weakSearch ? SEARCH_BY_TITLE_WEAK_QUERY : SEARCH_BY_TITLE_QUERY;
-		query = addQuerySortingPolicy(query, sortingPolicy);
+		query = addQuerySortingPolicy(query, sortingPolicy, false);
 		query = DaoUtilJDBC.addQueryLimit(query, limit);
 		
 		try
@@ -61,12 +64,13 @@ public class MediaContentSearchDaoJDBC implements MediaContentSearchDao
 	}
 
 	@Override
-	public List<MediaContent> searchByType(MediaContentType type, SortingPolicy sortingPolicy, int limit)
+	public List<MediaContent> searchByType(MediaContentType type, SortingPolicy sortingPolicy, int limit, MediaContentsSearchFilter filter)
 	{
 		final List<MediaContent> mediaContents = new ArrayList<MediaContent>();
 		
 		String query = SEARCH_BY_TYPE_QUERY;
-		query = addQuerySortingPolicy(query, sortingPolicy);
+		query = addGenresFilter(query, filter, true);
+		query = addQuerySortingPolicy(query, sortingPolicy, false);
 		query = DaoUtilJDBC.addQueryLimit(query, limit);
 		
 		try
@@ -89,12 +93,14 @@ public class MediaContentSearchDaoJDBC implements MediaContentSearchDao
 	}
 	
 	@Override
-	public List<MediaContent> searchTopRated(MediaContentType type, SortingPolicy sortingPolicy, int limit)
+	public List<MediaContent> searchTopRated(MediaContentType type, SortingPolicy sortingPolicy, int limit, MediaContentsSearchFilter filter)
 	{
 		final List<MediaContent> mediaContents = new ArrayList<MediaContent>();
 		
 		String query = SEARCH_TOP_RATED_QUERY;
-		query = addQuerySortingPolicy(query, sortingPolicy);
+		query = addGenresFilter(query, filter, true);
+		query = query + SEARCH_TOP_RATED_ORDER_BY_QUERY;
+		query = addQuerySortingPolicy(query, sortingPolicy, true);
 		query = DaoUtilJDBC.addQueryLimit(query, limit);
 		
 		try
@@ -117,36 +123,36 @@ public class MediaContentSearchDaoJDBC implements MediaContentSearchDao
 	}
 	
 	@Override
-	public List<MediaContent> searchMostPopular(MediaContentType type, SortingPolicy sortingPolicy, int limit)
+	public List<MediaContent> searchMostPopular(MediaContentType type, SortingPolicy sortingPolicy, int limit, MediaContentsSearchFilter filter)
 	{
 		// TODO Auto-generated method stub
-		return searchTopRated(type, sortingPolicy, limit);
+		return searchTopRated(type, sortingPolicy, limit, filter);
 	}
 	
 	@Override
-	public List<MediaContent> searchMostFavorites(MediaContentType type, SortingPolicy sortingPolicy, int limit)
+	public List<MediaContent> searchMostFavorites(MediaContentType type, SortingPolicy sortingPolicy, int limit, MediaContentsSearchFilter filter)
 	{
 		// TODO Auto-generated method stub
-		return searchTopRated(type, sortingPolicy, limit);
+		return searchTopRated(type, sortingPolicy, limit, filter);
 	}
 	
 	@Override
 	public List<MediaContent> searchSuggested(MediaContentType type, it.unical.mat.moviesquik.model.User user,
-			SortingPolicy sortingPolicy, int limit)
+			SortingPolicy sortingPolicy, int limit, MediaContentsSearchFilter filter)
 	{
 		// TODO Auto-generated method stub
-		return searchTopRated(type, sortingPolicy, limit);
+		return searchTopRated(type, sortingPolicy, limit, filter);
 	}
 	
 	@Override
 	public List<MediaContent> searchRecentlyWatched(MediaContentType type,
-			it.unical.mat.moviesquik.model.User user, SortingPolicy sortingPolicy, int limit)
+			it.unical.mat.moviesquik.model.User user, SortingPolicy sortingPolicy, int limit, MediaContentsSearchFilter filter)
 	{
 		// TODO Auto-generated method stub
-		return searchTopRated(type, sortingPolicy, limit);
+		return searchTopRated(type, sortingPolicy, limit, filter);
 	}
 	
-	private static String addQuerySortingPolicy( final String query, final SortingPolicy policy )
+	private static String addQuerySortingPolicy( final String query, final SortingPolicy policy, final boolean append )
 	{
 		String orderBy;
 		
@@ -158,7 +164,27 @@ public class MediaContentSearchDaoJDBC implements MediaContentSearchDao
 		default: return query;
 		}
 		
-		return query + " order by " + orderBy;
+		return (append) ? query + ", " + orderBy : query + " order by " + orderBy;
+	}
+	
+	private static String addGenresFilter( final String query, final MediaContentsSearchFilter filter, final boolean append )
+	{
+		final StringBuilder whereConditions = new StringBuilder();
+		boolean first = true;
+		for ( final String genre : filter.getGenres() )
+		{
+			whereConditions.append( first ? "(" : " or " );
+			whereConditions.append("lower(genre) like lower('%" + genre + "%')");
+			first = false;
+		}
+		
+		if ( whereConditions.length() > 0 )
+		{
+			whereConditions.append(") ");
+			return (append) ? query + " and " + whereConditions.toString() 
+							: query + " where " + whereConditions.toString();
+		}
+		return query;
 	}
 
 }

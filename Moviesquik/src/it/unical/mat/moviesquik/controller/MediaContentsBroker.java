@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import it.unical.mat.moviesquik.controller.searching.MediaContentsSearchFilter;
 import it.unical.mat.moviesquik.model.MediaContent;
 import it.unical.mat.moviesquik.model.MediaContentType;
 import it.unical.mat.moviesquik.model.User;
@@ -43,17 +44,17 @@ public class MediaContentsBroker extends HttpServlet
 		if ( policy.equals("most_rated") )
 			mediaContents = 
 				DBManager.getInstance().getDaoFactory().getMediaContentSearchDao()
-					.searchTopRated(MediaContentType.ALL, SortingPolicy.NONE, MAX_FIND_COUNT);
+					.searchTopRated(MediaContentType.ALL, SortingPolicy.NONE, MAX_FIND_COUNT, MediaContentsSearchFilter.EMPTY);
 		
 		else if ( policy.equals("most_popular") )
 			mediaContents = 
 			DBManager.getInstance().getDaoFactory().getMediaContentSearchDao()
-				.searchMostPopular(MediaContentType.ALL, SortingPolicy.NONE, MAX_FIND_COUNT);
+				.searchMostPopular(MediaContentType.ALL, SortingPolicy.NONE, MAX_FIND_COUNT, MediaContentsSearchFilter.EMPTY);
 		
 		else if ( policy.equals("most_favorites") )
 			mediaContents = 
 			DBManager.getInstance().getDaoFactory().getMediaContentSearchDao()
-				.searchMostFavorites(MediaContentType.ALL, SortingPolicy.NONE, MAX_FIND_COUNT);
+				.searchMostFavorites(MediaContentType.ALL, SortingPolicy.NONE, MAX_FIND_COUNT, MediaContentsSearchFilter.EMPTY);
 		
 		else if ( policy.equals("suggested") || policy.equals("recently") )
 		{
@@ -62,9 +63,9 @@ public class MediaContentsBroker extends HttpServlet
 				mediaContents = 
 				(policy.equals("suggested"))
 				? DBManager.getInstance().getDaoFactory().getMediaContentSearchDao()
-						.searchSuggested(MediaContentType.ALL, user, SortingPolicy.NONE, MAX_FIND_COUNT)
+						.searchSuggested(MediaContentType.ALL, user, SortingPolicy.NONE, MAX_FIND_COUNT, MediaContentsSearchFilter.EMPTY)
 				: DBManager.getInstance().getDaoFactory().getMediaContentSearchDao()
-						.searchRecentlyWatched(MediaContentType.ALL, user, SortingPolicy.NONE, MAX_FIND_COUNT);
+						.searchRecentlyWatched(MediaContentType.ALL, user, SortingPolicy.NONE, MAX_FIND_COUNT, MediaContentsSearchFilter.EMPTY);
 			else
 				mediaContents = new ArrayList<MediaContent>();
 		}

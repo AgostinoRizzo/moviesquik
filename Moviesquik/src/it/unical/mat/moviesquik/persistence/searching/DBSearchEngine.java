@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import it.unical.mat.moviesquik.controller.searching.MediaContentsSearchFilter;
 import it.unical.mat.moviesquik.model.MediaContent;
 import it.unical.mat.moviesquik.model.MediaContentType;
 import it.unical.mat.moviesquik.model.MediaContentGroup;
@@ -66,34 +67,36 @@ public class DBSearchEngine
 	}
 	
 	public List<MediaContent> fullMediaContentSearch
-		( final MediaContentType type, final String genre, final SortingPolicy sortingPolicy, final User user )
+		( final MediaContentType type, final String genre, final SortingPolicy sortingPolicy, 
+				final User user, final MediaContentsSearchFilter filter )
 	{
 		final DaoFactory daoFactory = DBManager.getInstance().getDaoFactory();
-		return daoFactory.getMediaContentSearchDao().searchByType(type, sortingPolicy, FULL_MEDIA_CONTENTS_SEARCH_LIMIT);
+		return daoFactory.getMediaContentSearchDao().searchByType(type, sortingPolicy, FULL_MEDIA_CONTENTS_SEARCH_LIMIT, filter);
 	}
 
 	public Map<MediaContentGroup, List<MediaContent>> groupMediaContentSearch
-		( final MediaContentType type, final String genre, final SortingPolicy sortingPolicy, final User user  )
+		( final MediaContentType type, final String genre, final SortingPolicy sortingPolicy, 
+				final User user, final MediaContentsSearchFilter filter  )
 	{
 		final DaoFactory daoFactory = DBManager.getInstance().getDaoFactory();
 		final Map<MediaContentGroup, List<MediaContent>> groupMediaContents = new HashMap<MediaContentGroup, List<MediaContent>>();
 		
 		groupMediaContents.put(MediaContentGroup.TOP_RATED, daoFactory.getMediaContentSearchDao()
-					.searchTopRated(type, sortingPolicy, GROUP_MEDIA_CONTENTS_SEARCH_LIMIT));
+					.searchTopRated(type, sortingPolicy, GROUP_MEDIA_CONTENTS_SEARCH_LIMIT, filter));
 		
 		groupMediaContents.put(MediaContentGroup.MOST_POPULAR, daoFactory.getMediaContentSearchDao()
-				.searchMostPopular(type, sortingPolicy, GROUP_MEDIA_CONTENTS_SEARCH_LIMIT));
+				.searchMostPopular(type, sortingPolicy, GROUP_MEDIA_CONTENTS_SEARCH_LIMIT, filter));
 		
 		groupMediaContents.put(MediaContentGroup.MOST_FAVORITES, daoFactory.getMediaContentSearchDao()
-				.searchMostFavorites(type, sortingPolicy, GROUP_MEDIA_CONTENTS_SEARCH_LIMIT));
+				.searchMostFavorites(type, sortingPolicy, GROUP_MEDIA_CONTENTS_SEARCH_LIMIT, filter));
 		
 		if ( user != null )
 		{
 			groupMediaContents.put(MediaContentGroup.SUGGESTED, daoFactory.getMediaContentSearchDao()
-					.searchSuggested(type, user, sortingPolicy, GROUP_MEDIA_CONTENTS_SEARCH_LIMIT));
+					.searchSuggested(type, user, sortingPolicy, GROUP_MEDIA_CONTENTS_SEARCH_LIMIT, filter));
 			
 			groupMediaContents.put(MediaContentGroup.RECENTLY_WATCHED, daoFactory.getMediaContentSearchDao()
-					.searchRecentlyWatched(type, user, sortingPolicy, GROUP_MEDIA_CONTENTS_SEARCH_LIMIT));
+					.searchRecentlyWatched(type, user, sortingPolicy, GROUP_MEDIA_CONTENTS_SEARCH_LIMIT, filter));
 		}
 		
 		return groupMediaContents;

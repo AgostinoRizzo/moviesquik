@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
 import it.unical.mat.moviesquik.controller.ServletUtils;
 import it.unical.mat.moviesquik.model.MediaContent;
 import it.unical.mat.moviesquik.model.MediaContentGroup;
@@ -33,6 +36,21 @@ public class MediaContentsSearch extends HttpServlet
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
 	{
+		manageSearch(req, resp, MediaContentsSearchFilter.EMPTY);
+	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
+	{
+		final JsonObject jsonFilter = new Gson().fromJson(ServletUtils.readAllBody(req), JsonObject.class);
+		final MediaContentsSearchFilter filter  = new MediaContentsSearchFilter(jsonFilter);
+		
+		manageSearch(req, resp, filter);
+	}
+	
+	private void manageSearch(HttpServletRequest req, HttpServletResponse resp, final MediaContentsSearchFilter filter)
+			throws ServletException, IOException
+	{
 		final MediaContentType type = MediaContentType.parse( req.getParameter("type") );
 		final MediaContentsViewTemplate viewTemplate = MediaContentsViewTemplate.parse( req.getParameter("view") );
 		if ( type == null || viewTemplate == null )
@@ -44,18 +62,20 @@ public class MediaContentsSearch extends HttpServlet
 		final User user = (User) req.getSession().getAttribute("user");
 		
 		switch ( viewTemplate ) {
-		case FULL:  manageFullViewTemplate(req, resp, type, viewTemplate, user); break;
-		case GROUP: manageGroupViewTemplate(req, resp, type, viewTemplate, user); break;
+		case FULL:  manageFullViewTemplate(req, resp, type, viewTemplate, user, filter); break;
+		case GROUP: manageGroupViewTemplate(req, resp, type, viewTemplate, user, filter); break;
 		default: ServletUtils.manageParameterError(req, resp);
 		}
 	}
 	
 	private void manageFullViewTemplate( HttpServletRequest req, HttpServletResponse resp,
-											final MediaContentType type, final MediaContentsViewTemplate viewTemplate, final User user )
+											final MediaContentType type, final MediaContentsViewTemplate viewTemplate, final User user,
+											final MediaContentsSearchFilter filter )
 													throws ServletException, IOException
 	{
+		final SortingPolicy sortingPolicy = SortingPolicy.parse( req.getParameter("sorting_policy") );
 		final List<MediaContent> mediaContents = DBManager.getSearchEngine()
-				.fullMediaContentSearch(type, "", SortingPolicy.NONE, user);
+				.fullMediaContentSearch(type, "", sortingPolicy, user, filter);
 		final MediaContentSearchResult searchResult = new MediaContentSearchResult();
 		
 		searchResult.setType(type.toString());
@@ -68,11 +88,12 @@ public class MediaContentsSearch extends HttpServlet
 	}
 	
 	private void manageGroupViewTemplate( HttpServletRequest req, HttpServletResponse resp,
-											final MediaContentType type, final MediaContentsViewTemplate viewTemplate, final User user ) 
+											final MediaContentType type, final MediaContentsViewTemplate viewTemplate, final User user,
+											final MediaContentsSearchFilter filter ) 
 													throws ServletException, IOException
 	{
 		final Map<MediaContentGroup, List<MediaContent>> groupMediaContents = DBManager.getSearchEngine()
-				.groupMediaContentSearch(type, "", SortingPolicy.NONE, user);
+				.groupMediaContentSearch(type, "", SortingPolicy.YEAR_RELEASED, user, filter);
 
 		final MediaContentSearchResult searchResult = new MediaContentSearchResult();
 		

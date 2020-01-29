@@ -3,15 +3,38 @@
  */
 
 var selectedGenres = [];
+var currentSelectedGenre = "";
 
 function update() {
-	alert("AJAX");
+	if ( $("#full-view-btn").hasClass("active") )
+		request_media_contents("mcsearch?type=" + typeSearch + "&view=full&reqtype=mc_update", null);
+	else if ( $("#group-view-btn").hasClass("active") )
+		request_media_contents("mcsearch?type=" + typeSearch + "&view=group&reqtype=mc_update", null);
+}
+
+function getCurrentFilterObject() {
+	var filteredGenres = [currentSelectedGenre];
+	if ( selectedGenres.length > 0 )
+		filteredGenres = selectedGenres;
+	
+	var obj =
+		{
+			genres: filteredGenres,
+			duration: $("#duration-select").val(),
+			features: $("#features-select").val()
+		};
+	return obj;
 }
 
 function updateSingleGenreLabel() {
 	var genreVal = $("#genres-select").find(":selected").val();
 	if ( genreVal == "all" )
-		genreVal = "All Genres";
+		{
+			currentSelectedGenre = "";
+			genreVal = "All Genres";
+		}
+	else
+		currentSelectedGenre = genreVal;
 	$("#selected-genre-label").text( genreVal );
 }
 
@@ -19,15 +42,19 @@ function request_media_contents(url_str, newTypeSearch)
 {
 	$.ajax(
 		{
-			type: "GET",
+			type: "POST",
 			url: url_str,
+			contentType: "application/json",
 			dataType: "html",
+			data: JSON.stringify( getCurrentFilterObject() ),
 			success: function(data)
 				{
 					$("#type-search-content").html(data);
 					$("#media-contents-type-search-result-title")
 						.html( $("#media-contents-search-update-result-title").html() );
-					typeSearch = newTypeSearch;
+					
+					if ( newTypeSearch != null )
+						typeSearch = newTypeSearch;
 				}
 		}
 	);
@@ -37,9 +64,11 @@ function type_search_request_media_contents(url_str, newTypeSearch)
 {
 	$.ajax(
 		{
-			type: "GET",
+			type: "POST",
 			url: url_str,
+			contentType: "application/json",
 			dataType: "html",
+			data: JSON.stringify( getCurrentFilterObject() ),
 			success: function(data)
 				{
 					$("#type-search-content").html(data);
@@ -50,7 +79,8 @@ function type_search_request_media_contents(url_str, newTypeSearch)
 					$("#media-contents-type-search-result-title")
 						.html( $("#media-contents-search-update-result-title").html() );
 					
-					typeSearch = newTypeSearch;
+					if ( newTypeSearch != null )
+						typeSearch = newTypeSearch;
 				}
 		}
 	);
@@ -116,6 +146,7 @@ $(document).ready( function()
 			$("#clear-filter-btn").addClass("d-none");
 			selectedGenres = [];
 			$("#genres-select option").removeClass("note");
+			$("#genres-select").val("all");
 			updateSingleGenreLabel();
 			update();
 		});

@@ -3,7 +3,9 @@
  */
 package it.unical.mat.moviesquik.controller;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Enumeration;
 
 import javax.servlet.RequestDispatcher;
@@ -65,10 +67,26 @@ public class ServletUtils
 	{
 		final String contentDisp = part.getHeader("content-disposition");
 		final String[] items = contentDisp.split(";");
-		for ( final String s : items ) {System.out.println(s);
+		for ( final String s : items ) {
 			if ( s.trim().startsWith("filename") )
 				return s.substring(s.indexOf("=") + 2, s.length() - 1);
 		}
 		return "";		
+	}
+	
+	public static String readAllBody( final HttpServletRequest req ) throws IOException
+	{
+		final BufferedReader r = new BufferedReader( new InputStreamReader( req.getInputStream() ) );
+		final StringBuilder ans = new StringBuilder();
+		
+		String line;
+		try
+		{
+			while( (line = r.readLine()) != null )
+				ans.append( line );
+			return ans.toString();
+		} catch 
+		(IOException e)
+		{ return ""; }
 	}
 }
