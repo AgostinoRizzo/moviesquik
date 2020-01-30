@@ -12,6 +12,7 @@ import java.util.List;
 import it.unical.mat.moviesquik.controller.searching.MediaContentsSearchFilter;
 import it.unical.mat.moviesquik.model.MediaContent;
 import it.unical.mat.moviesquik.model.MediaContentType;
+import it.unical.mat.moviesquik.model.User;
 import it.unical.mat.moviesquik.persistence.dao.MediaContentSearchDao;
 import it.unical.mat.moviesquik.persistence.searching.SortingPolicy;
 
@@ -25,8 +26,10 @@ public class MediaContentSearchDaoJDBC implements MediaContentSearchDao
 	protected static final String SEARCH_BY_TITLE_WEAK_QUERY = "select * from media_content where lower(title) like lower(concat('%', ?, '%'))";
 	protected static final String SEARCH_BY_TYPE_QUERY = "select * from media_content where lower(type) like lower(concat('%', ?, '%'))";
 	
-	protected static final String SEARCH_TOP_RATED_QUERY = "select * from media_content where lower(type) like lower(concat('%', ?, '%'))";
+	protected static final String ANONYMUS_SEARCH_QUERY = "select * from media_content where lower(type) like lower(concat('%', ?, '%'))";
 	protected static final String SEARCH_TOP_RATED_ORDER_BY_QUERY = " order by rating desc";
+	protected static final String SEARCH_MOST_POPULAR_ORDER_BY_QUERY = " order by views desc";
+	protected static final String SEARCH_MOST_FAVORITES_ORDER_BY_QUERY = " order by likes desc";
 	
 	private final StatementPrompterJDBC statementPrompter;
 	
@@ -95,11 +98,45 @@ public class MediaContentSearchDaoJDBC implements MediaContentSearchDao
 	@Override
 	public List<MediaContent> searchTopRated(MediaContentType type, SortingPolicy sortingPolicy, int limit, MediaContentsSearchFilter filter)
 	{
+		return anonymusSearch(SEARCH_TOP_RATED_ORDER_BY_QUERY, type, sortingPolicy, limit, filter);
+	}
+	
+	@Override
+	public List<MediaContent> searchMostPopular(MediaContentType type, SortingPolicy sortingPolicy, int limit, MediaContentsSearchFilter filter)
+	{
+		return anonymusSearch(SEARCH_MOST_POPULAR_ORDER_BY_QUERY, type, sortingPolicy, limit, filter);
+	}
+	
+	@Override
+	public List<MediaContent> searchMostFavorites(MediaContentType type, SortingPolicy sortingPolicy, int limit, MediaContentsSearchFilter filter)
+	{
+		return anonymusSearch(SEARCH_MOST_FAVORITES_ORDER_BY_QUERY, type, sortingPolicy, limit, filter);
+	}
+	
+	@Override
+	public List<MediaContent> searchSuggested(MediaContentType type, User user,
+			SortingPolicy sortingPolicy, int limit, MediaContentsSearchFilter filter)
+	{
+		// TODO Auto-generated method stub
+		return searchTopRated(type, sortingPolicy, limit, filter);
+	}
+	
+	@Override
+	public List<MediaContent> searchRecentlyWatched(MediaContentType type, User user, 
+			SortingPolicy sortingPolicy, int limit, MediaContentsSearchFilter filter)
+	{
+		// TODO Auto-generated method stub
+		return searchTopRated(type, sortingPolicy, limit, filter);
+	}
+	
+	private List<MediaContent> anonymusSearch( final String orderByQuery, final MediaContentType type, final SortingPolicy sortingPolicy, 
+												final int limit, final MediaContentsSearchFilter filter)
+	{
 		final List<MediaContent> mediaContents = new ArrayList<MediaContent>();
 		
-		String query = SEARCH_TOP_RATED_QUERY;
+		String query = ANONYMUS_SEARCH_QUERY;
 		query = addGenresFilter(query, filter, true);
-		query = query + SEARCH_TOP_RATED_ORDER_BY_QUERY;
+		query = query + orderByQuery;
 		query = addQuerySortingPolicy(query, sortingPolicy, true);
 		query = DaoUtilJDBC.addQueryLimit(query, limit);
 		
@@ -120,36 +157,6 @@ public class MediaContentSearchDaoJDBC implements MediaContentSearchDao
 		
 		finally 
 		{ statementPrompter.onFinalize(); }
-	}
-	
-	@Override
-	public List<MediaContent> searchMostPopular(MediaContentType type, SortingPolicy sortingPolicy, int limit, MediaContentsSearchFilter filter)
-	{
-		// TODO Auto-generated method stub
-		return searchTopRated(type, sortingPolicy, limit, filter);
-	}
-	
-	@Override
-	public List<MediaContent> searchMostFavorites(MediaContentType type, SortingPolicy sortingPolicy, int limit, MediaContentsSearchFilter filter)
-	{
-		// TODO Auto-generated method stub
-		return searchTopRated(type, sortingPolicy, limit, filter);
-	}
-	
-	@Override
-	public List<MediaContent> searchSuggested(MediaContentType type, it.unical.mat.moviesquik.model.User user,
-			SortingPolicy sortingPolicy, int limit, MediaContentsSearchFilter filter)
-	{
-		// TODO Auto-generated method stub
-		return searchTopRated(type, sortingPolicy, limit, filter);
-	}
-	
-	@Override
-	public List<MediaContent> searchRecentlyWatched(MediaContentType type,
-			it.unical.mat.moviesquik.model.User user, SortingPolicy sortingPolicy, int limit, MediaContentsSearchFilter filter)
-	{
-		// TODO Auto-generated method stub
-		return searchTopRated(type, sortingPolicy, limit, filter);
 	}
 	
 	private static String addQuerySortingPolicy( final String query, final SortingPolicy policy, final boolean append )

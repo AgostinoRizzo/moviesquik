@@ -4,6 +4,10 @@
 
 function request_media_contents(url_str)
 {
+	$(".loader").removeClass("d-none");
+	$("#media-contents-search-result-title").children().hide();
+	$("#media-contents-list").children().hide();
+	
 	$.ajax(
 		{
 			type: "GET",
@@ -11,9 +15,12 @@ function request_media_contents(url_str)
 			dataType: "html",
 			success: function(data)
 				{
+					$(".loader").addClass("d-none");
 					$("#search-result").html(data);
 					$("#media-contents-search-result-title")
 						.html( $("#media-contents-search-update-result-title").html() );
+					$("#media-contents-search-result-title").children().show();
+					$("#media-contents-list").children().show();
 				}
 		}
 	);

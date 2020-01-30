@@ -177,61 +177,7 @@
 				
 		</div>
 		
-		<%-- <div id="filter-section" class="media-contents-list-header filter-section row">
-			
-			<div class="col col-12 col-lg-2">
-					<h5 class="media-contents-list-header-title"><span class="fa fa-sliders"></span> &nbsp;&nbsp;Filter </h5>
-			</div>
-			
-			<div class="col col-12 col-lg-2">
-				<h5 class="note"><span class="fa fa-sliders"></span> &nbsp;&nbsp;Genres </h5>
-			</div>
-			
-			<div class="col col-12 col-lg-2">
-				<h5 class="note"><span class="fa fa-sliders"></span> &nbsp;&nbsp;Duration </h5>
-			</div>
-			
-			<div class="col col-12 col-lg-2">
-				<h5 class="note"><span class="fa fa-sliders"></span> &nbsp;&nbsp;Features </h5>
-			</div>
-			
-			<div class="sorting-policy-section col col-12 col-lg-4">
-					
-				<div class="btn-group">
-					
-					<button type="button" id="group-view-btn" class="btn btn-outline-light btn-sm active"><span class="fa fa-align-left"></span></button>
-					<button type="button" id="full-view-btn" class="btn btn-outline-light btn-sm"><span class="fa fa-th"></span></button>
-					
-				</div>
-				
-			</div>
-				
-		</div>
-		
-		<div id="" class="row">
-		
-			<div class="col col-12 col-lg-2">
-			</div>
-			
-			<div class="col col-12 col-lg-2">
-				<c:forEach items="${genres}" var="genre">
-					<a href="${genre}">&nbsp;&nbsp;${genre}</a><br>
-				</c:forEach>
-			</div>
-			
-			<div class="col col-12 col-lg-2">
-				<a href="">&nbsp;&nbsp;</a>Any<br>
-				<a href="">&nbsp;&nbsp;</a>Short (&#60; 4 minutes)<br>
-				<a href="">&nbsp;&nbsp;</a>Long (&#62; 20 minutes)<br>
-			</div>
-			
-			<div class="col col-12 col-lg-2">
-				<a href="">&nbsp;&nbsp;</a>Any<br>
-				<a href="">&nbsp;&nbsp;</a>4K<br>
-				<a href="">&nbsp;&nbsp;</a>HD<br>
-			</div>
-			
-		</div> --%>
+		<div class="loader d-none"></div>
 		
 		<div id="media-contents-type-search-list-header" class="media-contents-list-header row d-none">
 				<div id="media-contents-type-search-result-title" class="media-contents-search-result-title col col-12 col-lg-8">

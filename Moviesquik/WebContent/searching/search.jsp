@@ -117,8 +117,10 @@
 		
 	</c:if>
 	
-	<c:if test="${!search_result.contents.isEmpty()}">
+	<div class="loader d-none"></div>
 	
+	<c:if test="${!search_result.contents.isEmpty()}">
+		
 		<div id="media-contents-list-header" class="media-contents-list-header row">
 				<div id="media-contents-search-result-title" class="media-contents-search-result-title col col-12 col-lg-8">
 					<h5 class="media-contents-list-header-title note">Explore titles related to: </h5>
@@ -176,7 +178,7 @@
 				</div>
 		</div>
 			
-		<div class="media-contents-list">
+		<div id="media-contents-list" class="media-contents-list">
 			
 			<!-- <hr class="mb-4"> -->
 			

@@ -38,8 +38,22 @@ function updateSingleGenreLabel() {
 	$("#selected-genre-label").text( genreVal );
 }
 
+function hideContentsOnUpdate() {
+	$(".loader").removeClass("d-none");
+	$("#media-contents-type-search-result-title").children().hide();
+	$("#type-search-content").children().hide();
+}
+
+function showContentsOnUpdate() {
+	$(".loader").addClass("d-none");
+	$("#media-contents-type-search-result-title").children().show();
+	$("#type-search-content").children().show();
+}
+
 function request_media_contents(url_str, newTypeSearch)
 {
+	hideContentsOnUpdate();
+	
 	$.ajax(
 		{
 			type: "POST",
@@ -55,6 +69,8 @@ function request_media_contents(url_str, newTypeSearch)
 					
 					if ( newTypeSearch != null )
 						typeSearch = newTypeSearch;
+					
+					showContentsOnUpdate();
 				}
 		}
 	);
@@ -62,6 +78,8 @@ function request_media_contents(url_str, newTypeSearch)
 
 function type_search_request_media_contents(url_str, newTypeSearch)
 {
+	hideContentsOnUpdate();
+	
 	$.ajax(
 		{
 			type: "POST",
@@ -81,6 +99,8 @@ function type_search_request_media_contents(url_str, newTypeSearch)
 					
 					if ( newTypeSearch != null )
 						typeSearch = newTypeSearch;
+					
+					showContentsOnUpdate();
 				}
 		}
 	);
