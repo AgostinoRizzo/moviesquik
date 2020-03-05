@@ -39,6 +39,7 @@ public class UserDaoJDBC implements UserDao
 																"	)";
 	protected static final String FOLLOWERS_COUNT_QUERY     = "select COUNT(*) from following where (followed_id = ?)";
 	protected static final String FIND_BY_NAME_QUERY        = "select * from \"user\" where lower(first_name) like lower(concat('%', ?, '%')) or (lower(last_name) like lower(concat('%', ?, '%')) and char_length(?) > 0) limit ?";
+	protected static final String FIND_FOLLOWED_IDS_QUERY   = "select followed_id from following where (follower_id = ?)";
 
 	private final StatementPrompterJDBC statementPrompter;
 	
@@ -121,16 +122,16 @@ public class UserDaoJDBC implements UserDao
 		{
 			final PreparedStatement statement = statementPrompter.prepareStatement(UPDATE_STATEMENT);
 			
-			statement.setString(1, usr.getFirstName());
-			statement.setString(2, usr.getLastName());
-			statement.setString(3, usr.getEmail());
-			statement.setDate(4, DateUtil.toJDBC(usr.getBirthday()));
-			statement.setString(5, usr.getGender());
-			statement.setString(6, usr.getPassword());
-			statement.setString(7, usr.getProfileImagePath());
-			statement.setLong  (8, usr.getFamily().getId());
+			statement.setString   (1, usr.getFirstName());
+			statement.setString   (2, usr.getLastName());
+			statement.setString   (3, usr.getEmail());
+			statement.setTimestamp(4, DateUtil.toJDBC(usr.getBirthday()));
+			statement.setString   (5, usr.getGender());
+			statement.setString   (6, usr.getPassword());
+			statement.setString   (7, usr.getProfileImagePath());
+			statement.setLong     (8, usr.getFamily().getId());
 			
-			statement.setLong  (9, usr.getId());
+			statement.setLong     (9, usr.getId());
 			
 			statement.executeUpdate();
 			
@@ -303,14 +304,14 @@ public class UserDaoJDBC implements UserDao
 	
 	protected static void setDataToInsertStatement( final User usr, final PreparedStatement statement ) throws SQLException
 	{
-		statement.setLong  (1, usr.getId());
-		statement.setString(2, usr.getFirstName());
-		statement.setString(3, usr.getLastName());
-		statement.setString(4, usr.getEmail());
-		statement.setDate(5, DateUtil.toJDBC(usr.getBirthday()));
-		statement.setString(6, usr.getGender());
-		statement.setString(7, usr.getPassword());
-		statement.setLong  (8, usr.getFamily().getId());
+		statement.setLong     (1, usr.getId());
+		statement.setString   (2, usr.getFirstName());
+		statement.setString   (3, usr.getLastName());
+		statement.setString   (4, usr.getEmail());
+		statement.setTimestamp(5, DateUtil.toJDBC(usr.getBirthday()));
+		statement.setString   (6, usr.getGender());
+		statement.setString   (7, usr.getPassword());
+		statement.setLong     (8, usr.getFamily().getId());
 	}
 	
 	private User createUserFromResult( final ResultSet result, final Family family ) throws SQLException
@@ -322,7 +323,7 @@ public class UserDaoJDBC implements UserDao
 		usr.setFirstName(result.getString("first_name"));
 		usr.setLastName(result.getString("last_name"));
 		usr.setEmail(result.getString("email"));
-		usr.setBirthday(DateUtil.toJava(result.getDate("birthday")));
+		usr.setBirthday(DateUtil.toJava(result.getTimestamp("birthday")));
 		usr.setGender(result.getString("gender"));
 		usr.setPassword(result.getString("password"));
 		

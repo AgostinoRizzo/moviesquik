@@ -18,6 +18,7 @@ public interface DaoFactory
 	public FriendshipDao getFriendshipDao();
 	public FollowingDao getFollowingDao();
 	public NotificationDao getNotificationDao();
+	public PostDao getPostDao();
 	
 	public RegistrationTransaction getRegistrationTransaction();
 }

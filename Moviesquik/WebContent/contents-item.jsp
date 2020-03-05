@@ -8,19 +8,30 @@
 	  
 	  <img class="card-img-top" src="${media_content.poster}">
 	  
-	  <div class="card-body">
+	  <c:if test="${empty small_view}">
+		  <div class="card-body">
+		  
+		    <jsp:include page="content-ratings.html"></jsp:include>
+		    
+		    <h5 class="card-title">${media_content.title}</h5>
+		    <p class="card-text note">${media_content.production}</p>
+		    
+		    <c:if test="${user != null}">
+			    <div class="btn-group">
+				    <a href="#" class="btn btn-outline-success btn-sm"><i class="fa fa-play"></i> Watch</a>
+				    <a href="#" class="btn btn-outline-warning btn-sm"><i class="fa fa-plus"></i> Add</a>
+			    </div>
+		    </c:if>
+		  </div>
+	  </c:if>
 	  
-	    <jsp:include page="content-ratings.html"></jsp:include>
-	    
-	    <h5 class="card-title">${media_content.title}</h5>
-	    <p class="card-text note">${media_content.production}</p>
-	    
-	    <c:if test="${user != null}">
-		    <div class="btn-group">
-			    <a href="#" class="btn btn-outline-success btn-sm"><i class="fa fa-play"></i> Watch</a>
-			    <a href="#" class="btn btn-outline-warning btn-sm"><i class="fa fa-plus"></i> Add</a>
-		    </div>
-	    </c:if>
-	  </div>
+	  <c:if test="${not empty small_view}">
+		  	<div class="card-body">
+			    
+			    <p class="card-title">${media_content.title}</p>
+			    <%-- <p class="card-text note">${media_content.production}</p> --%>
+			    
+			  </div>
+	  </c:if>
 	  
 </div>

@@ -1,0 +1,59 @@
+/**
+ * 
+ */
+package it.unical.mat.moviesquik.model;
+
+import java.util.Date;
+
+import it.unical.mat.moviesquik.util.DateUtil;
+
+/**
+ * @author Agostino
+ *
+ */
+public class Post
+{
+	public static final int POSTS_LIMIT = 5;
+	
+	private Long id;
+	private Date dateTime;
+	private String text;
+	private User owner;
+	
+	public Long getId()
+	{
+		return id;
+	}
+	public void setId(Long id)
+	{
+		this.id = id;
+	}
+	public Date getDateTime()
+	{
+		return dateTime;
+	}
+	public void setDateTime(Date dateTime)
+	{
+		this.dateTime = dateTime;
+	}
+	public String getHumanReadableDateTime()
+	{
+		return DateUtil.toHumanReadable(dateTime);
+	}
+	public String getText()
+	{
+		return text;
+	}
+	public void setText(String text)
+	{
+		this.text = text;
+	}
+	public User getOwner()
+	{
+		return owner;
+	}
+	public void setOwner(User owner)
+	{
+		this.owner = owner;
+	}
+}

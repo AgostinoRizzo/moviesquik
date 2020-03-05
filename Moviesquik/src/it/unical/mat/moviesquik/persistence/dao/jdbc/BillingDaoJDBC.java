@@ -21,7 +21,7 @@ public class BillingDaoJDBC implements BillingDao
 	protected static void setDataToInsertStatement( final Billing billing, final PreparedStatement statement ) throws SQLException
 	{
 		statement.setLong(1, billing.getId());
-		statement.setDate(2, DateUtil.toJDBC(billing.getStartDate()));
+		statement.setTimestamp(2, DateUtil.toJDBC(billing.getStartDate()));
 		statement.setString(3, billing.getPlan());
 		statement.setBoolean(4, billing.isTrial());
 		statement.setLong(5, billing.getFamily().getId());

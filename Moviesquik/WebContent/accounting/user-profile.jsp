@@ -16,6 +16,7 @@
 	<link href="css/header.css" rel="stylesheet">
 	<link href="css/widget.css" rel="stylesheet">
 	<link href="css/user-profile.css" rel="stylesheet">
+	<link href="css/posting.css" rel="stylesheet">
 	
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	
@@ -283,6 +284,14 @@
 				          </div>
 				        </div>
 					</c:if>
+					
+					
+					<!-- List all personal posts -->
+					<c:forEach items="${user_to_display.posts}" var="post">
+						<c:set var="post_to_display" scope="request" value="${post}"/>
+						<jsp:include page="../posting/post_box.jsp"></jsp:include>
+					</c:forEach>
+					
 					
 			        <!-- Single Comment -->
 			        <div class="media mb-4">

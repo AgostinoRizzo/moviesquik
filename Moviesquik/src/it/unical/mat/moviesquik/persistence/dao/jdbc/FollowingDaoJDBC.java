@@ -15,14 +15,14 @@ import it.unical.mat.moviesquik.persistence.dao.FollowingDao;
  * @author Agostino
  *
  */
-public class FollowindDaoJDBC implements FollowingDao
+public class FollowingDaoJDBC implements FollowingDao
 {
 	protected static final String INSERT_STATEMENT = "insert into following(follower_id, followed_id) values (?,?)";
 	protected static final String FIND_BY_MEMBERS_QUERY = "select * from following where follower_id = ? and followed_id = ?";
 		
 	private final StatementPrompterJDBC statementPrompter;
 	
-	public FollowindDaoJDBC( final StatementPrompterJDBC statementPrompter )
+	public FollowingDaoJDBC( final StatementPrompterJDBC statementPrompter )
 	{
 		this.statementPrompter = statementPrompter;
 	}

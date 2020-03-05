@@ -27,6 +27,8 @@ public class User
 	private List<String> favoritesGenres;
 	private String profileImagePath;
 	private List<Notification> unreadNotifications;
+	private List<Post> personalPosts;
+	private List<Post> allPosts;
 	
 	public User()
 	{}
@@ -182,5 +184,17 @@ public class User
 	public void setUnreadNotifications(List<Notification> unreadNotifications)
 	{
 		this.unreadNotifications = unreadNotifications;
+	}
+	
+	public List<Post> getPersonalPosts()
+	{
+		personalPosts = DBManager.getInstance().getDaoFactory().getPostDao().findByUser(this, Post.POSTS_LIMIT);
+		return personalPosts;
+	}
+	
+	public List<Post> getAllPosts()
+	{
+		allPosts = DBManager.getInstance().getDaoFactory().getPostDao().findByFollowedUsers(this, Post.POSTS_LIMIT);
+		return allPosts;
 	}
 }

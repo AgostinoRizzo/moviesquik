@@ -113,19 +113,19 @@ public class MediaContentDaoJDBC implements MediaContentDao
 	
 	protected static void setDataToInsertStatement( final MediaContent mediaContent, final PreparedStatement statement ) throws SQLException
 	{
-		statement.setLong  (1 , mediaContent.getId());
-		statement.setString(2 , mediaContent.getTitle());
-		statement.setString(3 , mediaContent.getType());
-		statement.setShort (4 , mediaContent.getYear());
-		statement.setDate  (5 , DateUtil.toJDBC(mediaContent.getReleased()));
-		statement.setString(6 , mediaContent.getRuntime());
-		statement.setString(7 , mediaContent.getGenre());
-		statement.setString(8 , mediaContent.getPlot());
-		statement.setString(9 , mediaContent.getPoster());
-		statement.setString(10, mediaContent.getProduction());
-		statement.setString(11, mediaContent.getDirector());
-		statement.setString(12, mediaContent.getActors());
-		statement.setFloat (13, mediaContent.getRating());
+		statement.setLong       (1 , mediaContent.getId());
+		statement.setString     (2 , mediaContent.getTitle());
+		statement.setString     (3 , mediaContent.getType());
+		statement.setShort      (4 , mediaContent.getYear());
+		statement.setTimestamp  (5 , DateUtil.toJDBC(mediaContent.getReleased()));
+		statement.setString     (6 , mediaContent.getRuntime());
+		statement.setString     (7 , mediaContent.getGenre());
+		statement.setString     (8 , mediaContent.getPlot());
+		statement.setString     (9 , mediaContent.getPoster());
+		statement.setString     (10, mediaContent.getProduction());
+		statement.setString     (11, mediaContent.getDirector());
+		statement.setString     (12, mediaContent.getActors());
+		statement.setFloat      (13, mediaContent.getRating());
 	}
 	
 	protected static MediaContent createFromResult( final ResultSet result ) throws SQLException
@@ -136,7 +136,7 @@ public class MediaContentDaoJDBC implements MediaContentDao
 		mediaContent.setTitle(result.getString("title"));
 		mediaContent.setType(result.getString("type"));
 		mediaContent.setYear(result.getShort("year"));
-		mediaContent.setReleased(DateUtil.toJava(result.getDate("release_date")));
+		mediaContent.setReleased(DateUtil.toJava(result.getTimestamp("release_date")));
 		mediaContent.setRuntime(result.getString("runtime"));
 		mediaContent.setGenre(result.getString("genre"));
 		mediaContent.setPlot(result.getString("plot"));

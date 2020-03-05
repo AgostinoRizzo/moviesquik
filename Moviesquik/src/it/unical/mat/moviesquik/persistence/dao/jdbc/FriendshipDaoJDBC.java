@@ -60,9 +60,9 @@ public class FriendshipDaoJDBC implements FriendshipDao
 		{
 			final PreparedStatement statement = statementPrompter.prepareStatement(UPDATE_STATEMENT);
 			
-			statement.setDate   (1 , DateUtil.toJDBC(friendship.getStartDate()));
-			statement.setLong   (2, friendship.getFirstUser().getId());
-			statement.setLong   (3, friendship.getSecondUser().getId());
+			statement.setTimestamp   (1 , DateUtil.toJDBC(friendship.getStartDate()));
+			statement.setLong        (2, friendship.getFirstUser().getId());
+			statement.setLong        (3, friendship.getSecondUser().getId());
 			
 			if ( friendship.getFirstForApplicant() == null )
 				statement.setNull(4, Types.BOOLEAN);
@@ -110,11 +110,11 @@ public class FriendshipDaoJDBC implements FriendshipDao
 	
 	protected static void setDataToInsertStatement( final Friendship friendship, final PreparedStatement statement ) throws SQLException
 	{
-		statement.setLong   (1 , friendship.getId());
-		statement.setDate   (2 , DateUtil.toJDBC(friendship.getStartDate()));
-		statement.setLong   (3 , friendship.getFirstUser().getId());
-		statement.setLong   (4 , friendship.getSecondUser().getId());
-		statement.setBoolean(5 , friendship.getFirstForApplicant());
+		statement.setLong        (1 , friendship.getId());
+		statement.setTimestamp   (2 , DateUtil.toJDBC(friendship.getStartDate()));
+		statement.setLong        (3 , friendship.getFirstUser().getId());
+		statement.setLong        (4 , friendship.getSecondUser().getId());
+		statement.setBoolean     (5 , friendship.getFirstForApplicant());
 	}
 	
 	private Friendship createFromResult( final ResultSet result ) throws SQLException
@@ -122,7 +122,7 @@ public class FriendshipDaoJDBC implements FriendshipDao
 		final Friendship friendship = new Friendship();
 		
 		friendship.setId(result.getLong("friendship_id"));
-		friendship.setStartDate(DateUtil.toJava(result.getDate("start_date")));
+		friendship.setStartDate(DateUtil.toJava(result.getTimestamp("start_date")));
 		
 		final Long firstUserId = result.getLong("a_user_id");
 		final Long secondUserId = result.getLong("b_user_id");

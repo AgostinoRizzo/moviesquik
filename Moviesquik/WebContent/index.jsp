@@ -17,6 +17,7 @@
 	<link href="css/intro.css" rel="stylesheet">
 	<link href="css/widget.css" rel="stylesheet">
 	<link href="css/plans.css" rel="stylesheet">
+	<link href="css/posting.css" rel="stylesheet">
 	
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	
@@ -28,6 +29,7 @@
 	<script src="lib/typeahead/bootstrap3-typeahead.js"></script>
 	<script src="js/anim.js"></script>
 	<script src="js/header.js"></script>
+	<script src="js/posting.js"></script>
 	
 </head>
 <body>
@@ -42,6 +44,11 @@
 	<!--==========================
     	  Intro Section
     ============================-->
+    
+    <!-- News Section -->
+    <c:if test="${user != null}">
+	    <jsp:include page="posting/news.jsp"></jsp:include>
+    </c:if>
     
     <section id="intro">
     

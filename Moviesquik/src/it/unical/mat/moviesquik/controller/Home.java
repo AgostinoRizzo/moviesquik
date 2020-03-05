@@ -30,6 +30,7 @@ public class Home extends HttpServlet
 				DBManager.getInstance().getDaoFactory().getMediaContentDao().getMediaContentOfTheDay();
 		if ( mediaContentOfTheDay != null )
 			req.setAttribute("media_content_of_the_day", mediaContentOfTheDay);
+		req.setAttribute("genres", DBManager.getInstance().getMediaContentsGenres());
 		
 		final RequestDispatcher rd = req.getRequestDispatcher("index.jsp");
 		rd.forward(req, resp);

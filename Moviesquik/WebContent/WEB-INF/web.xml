@@ -130,4 +130,15 @@
 	<url-pattern>/getfamily</url-pattern>
 </servlet-mapping>
 
+
+<!-- CreatePost Servlet -->
+<servlet>
+	<servlet-name>create_post</servlet-name>
+	<servlet-class>it.unical.mat.moviesquik.controller.posting.CreatePost</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>create_post</servlet-name>
+	<url-pattern>/createpost</url-pattern>
+</servlet-mapping>
+
 </web-app>
