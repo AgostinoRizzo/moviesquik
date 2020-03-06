@@ -8,6 +8,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * @author Agostino
@@ -64,7 +65,7 @@ public class DateUtil
 		if ( target_date.after(right_now) ||
 				target_date.get(Calendar.YEAR) != right_now.get(Calendar.YEAR) || 
 				target_date.get(Calendar.MONTH) != right_now.get(Calendar.MONTH) )
-			return target_date.toString();
+			return toString(when);
 		
 		final int days = right_now.get(Calendar.DATE) - target_date.get(Calendar.DATE);
 		
@@ -81,7 +82,13 @@ public class DateUtil
 		if ( days == 1 )
 			return "yesterday at " + getTimeString(target_date);
 		
-		return target_date.toString();
+		return toString(when);
+	}
+	
+	public static String toString( final Date when )
+	{
+		final SimpleDateFormat format = new SimpleDateFormat("dd MMMM yyyy", Locale.ENGLISH);
+		return format.format(when);
 	}
 	
 	private static String getPluralChar( final int n )

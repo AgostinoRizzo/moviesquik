@@ -287,7 +287,7 @@
 					
 					
 					<!-- List all personal posts -->
-					<c:forEach items="${user_to_display.posts}" var="post">
+					<c:forEach items="${user_to_display.personalPosts}" var="post">
 						<c:set var="post_to_display" scope="request" value="${post}"/>
 						<jsp:include page="../posting/post_box.jsp"></jsp:include>
 					</c:forEach>
