@@ -6,7 +6,7 @@
 <div class="container news-container">
 	<div class="row">
 		
-		<div class="col-2">
+		<div class="col-md-12 col-lg-2">
 			<nav class="navbar">
 
 				  <!-- Links -->
@@ -53,7 +53,7 @@
 			</nav>
 		</div>
 		
-		<div class="col-6">
+		<div class="col-md-12 col-lg-6 posts-col">
 		
 			<!-- New post box -->
 			<jsp:include page="./new_post_box.jsp"></jsp:include>
@@ -64,7 +64,7 @@
 			</div>
 		</div>
 		
-		<div class="col-4 news-media-contents-col">
+		<div class="col-md-12 col-lg-4 news-media-contents-col">
 			<c:set var="small_view" scope="request" value="true"/>
 			<jsp:include page="../contents.jsp"></jsp:include>
 			<c:remove var="small_view"/>

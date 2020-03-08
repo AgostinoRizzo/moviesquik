@@ -4,24 +4,22 @@
 package it.unical.mat.moviesquik.model;
 
 import java.util.Date;
-import java.util.List;
 
-import it.unical.mat.moviesquik.persistence.DBManager;
 import it.unical.mat.moviesquik.util.DateUtil;
 
 /**
  * @author Agostino
  *
  */
-public class Post
+public class Comment
 {
-	public static final int POSTS_LIMIT = 5;
+	public static final int COMMENTS_LIMIT = 5;
 	
 	private Long id;
 	private Date dateTime;
 	private String text;
 	private User owner;
-	private List<Comment> comments;
+	private Post referredPost;
 	
 	public Long getId()
 	{
@@ -59,13 +57,12 @@ public class Post
 	{
 		this.owner = owner;
 	}
-	public List<Comment> getComments()
+	public Post getReferredPost()
 	{
-		comments = DBManager.getInstance().getDaoFactory().getCommentDao().findByPost(this, Comment.COMMENTS_LIMIT);
-		return comments;
+		return referredPost;
 	}
-	public void setComments(List<Comment> comments)
+	public void setReferredPost(Post referredPost)
 	{
-		this.comments = comments;
+		this.referredPost = referredPost;
 	}
 }

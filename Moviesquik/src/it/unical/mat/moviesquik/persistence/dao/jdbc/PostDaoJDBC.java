@@ -23,6 +23,7 @@ import it.unical.mat.moviesquik.util.DateUtil;
 public class PostDaoJDBC extends AbstractDaoJDBC<Post> implements PostDao
 {
 	protected static final String INSERT_STATEMENT             = "insert into post(post_id, date_time, text, user_id) values (?,?,?,?)";
+	protected static final String FIND_BY_ID_QUERY             = "select * from post where post_id = ?";
 	protected static final String FIND_BY_USER_QUERY           = "select * from post where user_id = ? order by date_time desc limit ?";
 	protected static final String FIND_BY_FOLLOWED_USERS_QUERY = "select * from post where user_id = ? or user_id in (" + 
 																	UserDaoJDBC.FIND_FOLLOWED_IDS_QUERY + ") order by date_time desc limit ?";
@@ -30,6 +31,30 @@ public class PostDaoJDBC extends AbstractDaoJDBC<Post> implements PostDao
 	protected PostDaoJDBC(StatementPrompterJDBC statementPrompter)
 	{
 		super(statementPrompter);
+	}
+	
+	@Override
+	public Post findById(Long id)
+	{
+		try
+		{
+			final PreparedStatement statement = statementPrompter.prepareStatement(FIND_BY_ID_QUERY);
+			
+			statement.setLong(1, id);
+			
+			ResultSet result = statement.executeQuery();
+			
+			if ( result.next() )
+				return createFromResult(result);
+			
+			return null;
+		}
+		
+		catch (SQLException e)
+		{ e.printStackTrace(); return null; }
+		
+		finally 
+		{ statementPrompter.onFinalize(); }
 	}
 	
 	@Override

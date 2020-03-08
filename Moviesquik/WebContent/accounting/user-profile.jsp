@@ -37,6 +37,8 @@
 	<script src="js/users-filler.js"></script>
 	<script src="js/image-upload.js"></script>
 	<script src="js/friendship.js"></script>
+	<script src="js/posting.js"></script>
+	<script src="js/commenting.js"></script>
 	
 </head>
 <body>

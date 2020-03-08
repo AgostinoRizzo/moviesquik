@@ -15,6 +15,7 @@ import it.unical.mat.moviesquik.model.User;
 public interface PostDao
 {
 	public boolean save( final Post post );
+	public Post findById( final Long id );
 	public List<Post> findByUser( final User user, final int limit );
 	public List<Post> findByFollowedUsers( final User user, final int limit );
 }

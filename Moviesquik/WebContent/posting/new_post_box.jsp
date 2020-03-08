@@ -8,7 +8,7 @@
 	  <div class="media-body">
 	  		<div class="row">
 		  		<div class="col-1"><img src="${user_profile_img_src}" width="30px" class="avatar-img rounded-circle"></div>
-			    <div class="col">
+			    <div class="col-11">
 			    	<textarea class="form-control text-area-post" rows="2" id="new-post-text" placeholder="What's in your mind, ${user.firstName}?" name="post-text"></textarea>
 			    </div>
 		    </div>

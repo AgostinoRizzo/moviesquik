@@ -19,6 +19,7 @@ public interface DaoFactory
 	public FollowingDao getFollowingDao();
 	public NotificationDao getNotificationDao();
 	public PostDao getPostDao();
+	public CommentDao getCommentDao();
 	
 	public RegistrationTransaction getRegistrationTransaction();
 }

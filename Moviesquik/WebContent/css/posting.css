@@ -48,12 +48,22 @@
 	height: 20px;
 }
 
+.posts-col
+{
+	min-width: 530px;
+}
+
 .media
 {
 	background-color: #212121;
 	border-radius: 10px;
 	margin-right: 0px !important;
 	margin-bottom: 12px !important;
+}
+
+.media-body .header-text
+{
+	margin-left: 10px;
 }
 
 .media .note
@@ -125,6 +135,33 @@
 	display: none;
 }
 
+.show-comments-list-btn
+{
+	cursor: pointer;
+}
+
+.media-comment-box
+{
+	padding-bottom: 0px !important;
+	padding-top: 0px !important;
+	margin-top: 5px;
+	margin-bottom: 0px !important;
+}
+.media-comment-box .header-text
+{
+	background-color: #0F0F0F !important;
+	border-radius: 10px;
+	margin-left: 20px;
+	padding-top: 5px;
+	padding-left: 10px;
+	display: inline-block;
+}
+.media-comment-box .post-text
+{
+	margin: 0px !important;
+	padding-bottom: 5px !important;
+}
+
 
 /* News Container Style */
 
@@ -184,7 +221,7 @@
 /* Home NavItems Style */
 .home-navbar-nav
 {
-	margin-top: 20px;
+	margin-top: 10px;
 }
 .home-nav-item
 {
@@ -193,4 +230,44 @@
 .home-nav-item a
 {
 	color: #fff !important;
+}
+
+
+/* CommentForm Style */
+.new-comment-media
+{
+	/* padding: 0px !important;
+	margin-top: 30px; */
+	margin-bottom: 40px !important;
+	display: none;
+	padding-top: 0px !important;
+}
+.new-comment-media .dropdown-divider
+{
+	margin-left: 10px;
+}
+.new-comment-media .dropdown-toggle
+{
+	margin-left: 10px;
+}
+.new-post-action-row .publish-comment-row-item
+{
+	position: absolute;
+	right: 10px;
+	display: none;
+}
+
+
+/* Comments List Style */
+.comments-list
+{
+	padding-top: 5px;
+}
+
+
+/* Loader Style */
+.media .loader
+{
+	position: relative !important;
+	left: 47% !important;
 }

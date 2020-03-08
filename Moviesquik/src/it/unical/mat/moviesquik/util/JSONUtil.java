@@ -6,11 +6,13 @@ package it.unical.mat.moviesquik.util;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.List;
 
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
 
 /**
  * @author Agostino
@@ -46,5 +48,22 @@ public class JSONUtil
 	public static String toJson( final Object obj )
 	{
 		return new Gson().toJson(obj, obj.getClass());
+	}
+	
+	public static JsonObject readFromReader( final BufferedReader reader )
+	{
+		String line;
+		try
+		{
+			while ((line = reader.readLine()) != null)
+			{
+				System.out.println(line);
+			}
+		} catch (IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return new Gson().fromJson(reader, JsonObject.class);
 	}
 }

@@ -30,6 +30,7 @@
 	<script src="js/anim.js"></script>
 	<script src="js/header.js"></script>
 	<script src="js/posting.js"></script>
+	<script src="js/commenting.js"></script>
 	
 </head>
 <body>

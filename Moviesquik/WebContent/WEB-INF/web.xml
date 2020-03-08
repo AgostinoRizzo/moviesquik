@@ -141,4 +141,15 @@
 	<url-pattern>/createpost</url-pattern>
 </servlet-mapping>
 
+
+<!-- CreateComment Servlet -->
+<servlet>
+	<servlet-name>create_comment</servlet-name>
+	<servlet-class>it.unical.mat.moviesquik.controller.posting.CreateComment</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>create_comment</servlet-name>
+	<url-pattern>/createcomment</url-pattern>
+</servlet-mapping>
+
 </web-app>

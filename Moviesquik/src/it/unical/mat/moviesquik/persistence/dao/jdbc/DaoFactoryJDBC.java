@@ -4,6 +4,7 @@
 package it.unical.mat.moviesquik.persistence.dao.jdbc;
 
 import it.unical.mat.moviesquik.persistence.DataSource;
+import it.unical.mat.moviesquik.persistence.dao.CommentDao;
 import it.unical.mat.moviesquik.persistence.dao.CreditCardDao;
 import it.unical.mat.moviesquik.persistence.dao.DaoFactory;
 import it.unical.mat.moviesquik.persistence.dao.FamilyDao;
@@ -94,6 +95,12 @@ public class DaoFactoryJDBC implements DaoFactory
 	public PostDao getPostDao()
 	{
 		return new PostDaoJDBC(getNewStatementPrompter());
+	}
+	
+	@Override
+	public CommentDao getCommentDao()
+	{
+		return new CommentDaoJDBC(getNewStatementPrompter());
 	}
 	
 	private StatementPrompterJDBC getNewStatementPrompter()
