@@ -72,3 +72,22 @@
 		
 	</div>
 </div>
+
+<div id="post-feedback-popup" class="modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Post feedback</h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>The provided email address is already used.</p>
+                <p class="text-secondary"><small>Please enter a new email address.</small></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-main btn-main-light" data-dismiss="modal">Cancel</button>
+                <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+            </div>
+        </div>
+    </div>
+</div>

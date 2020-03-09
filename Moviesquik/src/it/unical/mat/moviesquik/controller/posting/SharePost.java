@@ -22,13 +22,12 @@ import it.unical.mat.moviesquik.util.DateUtil;
  * @author Agostino
  *
  */
-public class CreatePost extends HttpServlet
+public class SharePost extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
 	
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) 
-			throws ServletException, IOException
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
 	{
 		final User user = (User) req.getSession().getAttribute("user");
 		
@@ -38,17 +37,16 @@ public class CreatePost extends HttpServlet
 			return;
 		}
 		
-		final String postText = req.getParameter("post-text");
+		final Long source_post_id = Long.parseLong( req.getParameter("share-post-id") );
+		final DaoFactory daoFactory = DBManager.getInstance().getDaoFactory();
+		
+		final Post source_post = daoFactory.getPostDao().findById(source_post_id);
 		final Post newPost = new Post();
 		newPost.setDateTime( DateUtil.getCurrent() );
-		newPost.setText(postText);
+		newPost.setText(source_post.getText());
 		newPost.setOwner(user);
 		
-		final DaoFactory daoFactory = DBManager.getInstance().getDaoFactory();
 		daoFactory.getPostDao().save(newPost);
-		
-		//user.getPosts();
-		//PostsBroker.sendView(req, resp);
 		
 		final RequestDispatcher rd = req.getRequestDispatcher("/");
 		rd.forward(req, resp);

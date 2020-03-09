@@ -39,6 +39,7 @@
 	<script src="js/friendship.js"></script>
 	<script src="js/posting.js"></script>
 	<script src="js/commenting.js"></script>
+	<script src="js/send-feedback.js"></script>
 	
 </head>
 <body>

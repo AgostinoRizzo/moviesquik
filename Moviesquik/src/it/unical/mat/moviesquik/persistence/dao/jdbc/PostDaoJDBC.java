@@ -28,6 +28,14 @@ public class PostDaoJDBC extends AbstractDaoJDBC<Post> implements PostDao
 	protected static final String FIND_BY_FOLLOWED_USERS_QUERY = "select * from post where user_id = ? or user_id in (" + 
 																	UserDaoJDBC.FIND_FOLLOWED_IDS_QUERY + ") order by date_time desc limit ?";
 	
+	protected static final String FIND_LIKES_LOVES_COUNTERS_BY_ID_QUERY    = "select count(distinct f1.feedback_id) as n_likes, count(distinct f2.feedback_id) as n_loves \r\n" + 
+																			 "from post_feedback as f1 full outer join post_feedback as f2 on (f1.user_id = f2.user_id and f1.post_id = f2.post_id and f1.is_like != f2.is_like)\r\n" + 
+																			 "where (f1.post_id = ? or f2.post_id = ?) and ( (f1.is_like is NULL or f1.is_like) and (f2.is_like is NULL or not f2.is_like))";
+	protected static final String FIND_COMMENTS_COUNTERS_BY_ID_QUERY       = "select count(\"comment\".comment_id) as n_comments\r\n" + 
+																			 "from \"comment\"\r\n" + 
+																			 "where post_id = ?";
+	
+	
 	protected PostDaoJDBC(StatementPrompterJDBC statementPrompter)
 	{
 		super(statementPrompter);
@@ -154,6 +162,43 @@ public class PostDaoJDBC extends AbstractDaoJDBC<Post> implements PostDao
 		else
 			post.setOwner(daoFactory.getUserDao().findByPrimaryKey(subjectUserId));
 		
+		addPostCounters(post);
+		
 		return post;
+	}
+	
+	private void addPostCounters( final Post post )
+	{
+		final Long post_id = post.getId();
+		try
+		{
+			// likes and loves counters
+			PreparedStatement statement = statementPrompter.prepareStatement(FIND_LIKES_LOVES_COUNTERS_BY_ID_QUERY);
+			statement.setLong(1, post_id);
+			statement.setLong(2, post_id);
+			
+			ResultSet result = statement.executeQuery();
+			
+			if ( result.next() )
+			{
+				post.setNumLikes(result.getLong("n_likes"));
+				post.setNumLoves(result.getLong("n_loves"));
+			}
+			
+			// comments counters
+			statement = statementPrompter.prepareStatement(FIND_COMMENTS_COUNTERS_BY_ID_QUERY);
+			statement.setLong(1, post_id);
+			
+			result = statement.executeQuery();
+			
+			if ( result.next() )
+				post.setNumAllComments(result.getLong("n_comments"));
+		}
+		
+		catch (SQLException e)
+		{ e.printStackTrace(); }
+		
+		finally 
+		{ statementPrompter.onFinalize(); }
 	}
 }

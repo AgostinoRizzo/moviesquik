@@ -35,4 +35,10 @@ public class Home extends HttpServlet
 		final RequestDispatcher rd = req.getRequestDispatcher("index.jsp");
 		rd.forward(req, resp);
 	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
+	{
+		doGet(req, resp);
+	}
 }

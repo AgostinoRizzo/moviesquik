@@ -20,6 +20,7 @@ body
 a
 {
 	transition: 0.5s;
+	color: inherit;
 }
 
 a:hover,
@@ -114,6 +115,20 @@ footer
 .loader-sm
 {
 	margin-top: 0px !important;
+}
+
+.clickable
+{
+	cursor: pointer;
+}
+.clickable:hover
+{
+	transform: scale(1.2);
+}
+
+.modal
+{
+	color: #000;
 }
 
 @keyframes spin {

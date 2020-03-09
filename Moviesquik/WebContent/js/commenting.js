@@ -22,8 +22,12 @@ function submit_new_comment(post_id, comment_text, comment_form_tag)
 			dataType: "html",
 			success: function(data)
 				{
+					var media = comment_form_tag.prev(".media");
+					var num_all_comments = $($.parseHTML(data)).filter("#num-comments-hidden").val();
+					
 					loader.addClass("d-none");
-					comment_form_tag.prev(".media").find(".comments-list").html(data);
+					media.find(".comments-list").html(data);
+					media.find(".show-comments-list-btn").text(num_all_comments + ' comments');					
 				}
 		}
 	);

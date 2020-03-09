@@ -13,9 +13,9 @@
 				<c:if test="${post_to_display.owner.profileImagePath != null && post_to_display.owner.profileImagePath.length() > 0}">
 					<c:set var = "post_owner_profile_img_src" scope = "request" value = "res/user/${post_to_display.owner.profileImagePath}"/>
 				</c:if>
-		  		<div class="col-1"><img src="${post_owner_profile_img_src}" width="30px" class="avatar-img rounded-circle"></div>
+		  		<div class="col-1"><a href="user?id=${post_to_display.owner.id}"><img src="${post_owner_profile_img_src}" width="30px" class="avatar-img rounded-circle"></a></div>
 			    <div class="col header-text">
-			    	<h5>${post_to_display.owner.fullName}</h5>
+			    	<h5><a href="user?id=${post_to_display.owner.id}">${post_to_display.owner.fullName}</a></h5>
 			    	<small class="note" data-toggle="tooltip" data-placement="top" title="${post_to_display.dateTime}">Posted ${post_to_display.humanReadableDateTime}</small>
 			    </div>
 		    </div>
@@ -24,21 +24,24 @@
 		    
 		    <div class="row" id="count-row">
 		    	<div class="col">
-		    		<small class="fa-container"><a href="#"><i class="fa fa-thumbs-up rounded-circle"></i></a></small>
-		    		<small class="fa-container"><a href="#"><i class="fa fa-heart rounded-circle"></i></a></small>
-		    		<small class="note">&nbsp;&nbsp; 123 likes, 123 loves</small>
+		    		<small class="fa-container"><a class="add-like"><i class="fa fa-thumbs-up rounded-circle clickable"></i></a></small>
+		    		<small class="fa-container"><a class="add-love"><i class="fa fa-heart rounded-circle clickable"></i></a></small>
+		    		<small class="note" id="likes-loves-count">&nbsp;&nbsp; ${post_to_display.numLikes} likes, ${post_to_display.numLoves} loves</small>
 		    	</div>
 		    	<div class="col" id="n-comments-col">
-		    		<small class="note show-comments-list-btn">123 comments</small>
+		    		<small class="note show-comments-list-btn">${post_to_display.numAllComments} comments</small>
 		    	</div>
 		    </div>
 		    
 		    <div class="dropdown-divider"></div>
 		    
 		    <div class="row post-action-row">
-		    	<div class="col post-action"><p class="btn"><i class="fa fa-thumbs-up"></i>&nbsp;&nbsp;Like<p></div>
+		    	<div class="col post-action"><p class="btn add-like"><i class="fa fa-thumbs-up"></i>&nbsp;&nbsp;Like<p></div>
 		    	<div class="col post-action"><p class="btn comment-btn"><i class="fa fa-comment"></i>&nbsp;&nbsp;Comment<p></div>
-		    	<div class="col post-action"><p class="btn"><i class="fa fa-share"></i>&nbsp;&nbsp;Share<p></div>
+		    	<form class="col post-action" method="POST" action="sharepost">
+		    		<input type="hidden" name="share-post-id" value="${post_to_display.id}">
+		    		<p class="btn share-post-submit-btn"><i class="fa fa-share"></i>&nbsp;&nbsp;Share<p>
+		    	</form>
 		    </div>
 		    
 		    <div class="comments-list">

@@ -152,4 +152,26 @@
 	<url-pattern>/createcomment</url-pattern>
 </servlet-mapping>
 
+
+<!-- SendPostFeedback Servlet -->
+<servlet>
+	<servlet-name>send_post_feedback</servlet-name>
+	<servlet-class>it.unical.mat.moviesquik.controller.posting.SendPostFeedback</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>send_post_feedback</servlet-name>
+	<url-pattern>/sendfeedback</url-pattern>
+</servlet-mapping>
+
+
+<!-- SharePost Servlet -->
+<servlet>
+	<servlet-name>share_post</servlet-name>
+	<servlet-class>it.unical.mat.moviesquik.controller.posting.SharePost</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>share_post</servlet-name>
+	<url-pattern>/sharepost</url-pattern>
+</servlet-mapping>
+
 </web-app>

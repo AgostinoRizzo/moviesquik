@@ -15,6 +15,7 @@ import it.unical.mat.moviesquik.persistence.dao.MediaContentGenreDao;
 import it.unical.mat.moviesquik.persistence.dao.MediaContentSearchDao;
 import it.unical.mat.moviesquik.persistence.dao.NotificationDao;
 import it.unical.mat.moviesquik.persistence.dao.PostDao;
+import it.unical.mat.moviesquik.persistence.dao.PostFeedbackDao;
 import it.unical.mat.moviesquik.persistence.dao.RegistrationTransaction;
 import it.unical.mat.moviesquik.persistence.dao.UserDao;
 
@@ -101,6 +102,12 @@ public class DaoFactoryJDBC implements DaoFactory
 	public CommentDao getCommentDao()
 	{
 		return new CommentDaoJDBC(getNewStatementPrompter());
+	}
+	
+	@Override
+	public PostFeedbackDao getPostFeedbackDao()
+	{
+		return new PostFeedbackDaoJDBC(getNewStatementPrompter());
 	}
 	
 	private StatementPrompterJDBC getNewStatementPrompter()

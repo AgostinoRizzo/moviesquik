@@ -22,6 +22,9 @@ public class Post
 	private String text;
 	private User owner;
 	private List<Comment> comments;
+	private Long numAllComments;
+	private Long numLikes;
+	private Long numLoves;
 	
 	public Long getId()
 	{
@@ -67,5 +70,29 @@ public class Post
 	public void setComments(List<Comment> comments)
 	{
 		this.comments = comments;
+	}
+	public Long getNumAllComments()
+	{
+		return numAllComments;
+	}
+	public void setNumAllComments(Long numAllComments)
+	{
+		this.numAllComments = numAllComments;
+	}
+	public Long getNumLikes()
+	{
+		return numLikes;
+	}
+	public void setNumLikes(Long numLikes)
+	{
+		this.numLikes = numLikes;
+	}
+	public Long getNumLoves()
+	{
+		return numLoves;
+	}
+	public void setNumLoves(Long numLoves)
+	{
+		this.numLoves = numLoves;
 	}
 }

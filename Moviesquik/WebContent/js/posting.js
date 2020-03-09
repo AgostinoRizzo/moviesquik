@@ -2,6 +2,7 @@
  * 
  */
 
+
 $(document).ready( function()
 	{
 		$(".emoji-panel .emoji").click(function() 
@@ -43,6 +44,11 @@ $(document).ready( function()
 					$(this).closest(".media").next(".new-comment-media").hide();
 					$(this).html("<i class=\"fa fa-comment\"></i>&nbsp;&nbsp;Comment");
 				}
+		});
+		
+		$(".share-post-submit-btn").click(function() 
+		{
+			$(this).closest("form").submit();
 		});
 	}
 );
