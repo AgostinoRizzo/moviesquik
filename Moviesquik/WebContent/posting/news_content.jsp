@@ -3,7 +3,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 
-<c:if test="${user_to_display == null}">
+<c:if test="${user_to_display == null && posts == null}">
 	<c:set var="user_to_display" scope="request" value="${user}"/>
 	<c:set var="posts" scope="request" value="${user_to_display.allPosts}"/>
 </c:if>

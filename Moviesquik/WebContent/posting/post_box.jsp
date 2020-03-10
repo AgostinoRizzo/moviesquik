@@ -48,6 +48,13 @@
 		    	<jsp:include page="./comments_list.jsp"></jsp:include>
 		    </div>
 		    
+		    <c:if test="${post_to_display.comments.size() != post_to_display.numAllComments}">
+			    <div class="text-center" id="view-more-comments-tag">
+					<div class="loader loader-sm more-comments-loader d-none"></div>
+					<button class="btn btn-link view-all-btn" id="comments-view-more-btn">view all</button>
+				</div>
+			</c:if>
+		    
 	  </div>
 </div>
 

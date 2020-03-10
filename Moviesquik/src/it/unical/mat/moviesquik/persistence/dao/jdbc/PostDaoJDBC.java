@@ -12,6 +12,7 @@ import java.util.List;
 import it.unical.mat.moviesquik.model.Post;
 import it.unical.mat.moviesquik.model.User;
 import it.unical.mat.moviesquik.persistence.DBManager;
+import it.unical.mat.moviesquik.persistence.DataListPage;
 import it.unical.mat.moviesquik.persistence.dao.DaoFactory;
 import it.unical.mat.moviesquik.persistence.dao.PostDao;
 import it.unical.mat.moviesquik.util.DateUtil;
@@ -24,9 +25,9 @@ public class PostDaoJDBC extends AbstractDaoJDBC<Post> implements PostDao
 {
 	protected static final String INSERT_STATEMENT             = "insert into post(post_id, date_time, text, user_id) values (?,?,?,?)";
 	protected static final String FIND_BY_ID_QUERY             = "select * from post where post_id = ?";
-	protected static final String FIND_BY_USER_QUERY           = "select * from post where user_id = ? order by date_time desc limit ?";
+	protected static final String FIND_BY_USER_QUERY           = "select * from post where user_id = ? order by date_time desc limit ? offset ?";
 	protected static final String FIND_BY_FOLLOWED_USERS_QUERY = "select * from post where user_id = ? or user_id in (" + 
-																	UserDaoJDBC.FIND_FOLLOWED_IDS_QUERY + ") order by date_time desc limit ?";
+																	UserDaoJDBC.FIND_FOLLOWED_IDS_QUERY + ") order by date_time desc limit ? offset ?";
 	
 	protected static final String FIND_LIKES_LOVES_COUNTERS_BY_ID_QUERY    = "select count(distinct f1.feedback_id) as n_likes, count(distinct f2.feedback_id) as n_loves \r\n" + 
 																			 "from post_feedback as f1 full outer join post_feedback as f2 on (f1.user_id = f2.user_id and f1.post_id = f2.post_id and f1.is_like != f2.is_like)\r\n" + 
@@ -91,7 +92,7 @@ public class PostDaoJDBC extends AbstractDaoJDBC<Post> implements PostDao
 	}
 
 	@Override
-	public List<Post> findByUser(User user, int limit)
+	public List<Post> findByUser(User user, DataListPage page)
 	{
 		final List<Post> posts = new ArrayList<Post>();
 		
@@ -100,7 +101,8 @@ public class PostDaoJDBC extends AbstractDaoJDBC<Post> implements PostDao
 			final PreparedStatement statement = statementPrompter.prepareStatement(FIND_BY_USER_QUERY);
 			
 			statement.setLong(1, user.getId());
-			statement.setInt(2, limit);
+			statement.setInt(2, page.getLimit());
+			statement.setInt(3, page.getOffset());
 			
 			ResultSet result = statement.executeQuery();
 			
@@ -118,7 +120,7 @@ public class PostDaoJDBC extends AbstractDaoJDBC<Post> implements PostDao
 	}
 	
 	@Override
-	public List<Post> findByFollowedUsers(User user, int limit)
+	public List<Post> findByFollowedUsers(User user, DataListPage page)
 	{
 		final List<Post> posts = new ArrayList<Post>();
 		
@@ -128,7 +130,8 @@ public class PostDaoJDBC extends AbstractDaoJDBC<Post> implements PostDao
 			
 			statement.setLong(1, user.getId());
 			statement.setLong(2, user.getId());
-			statement.setInt(3, limit);
+			statement.setInt(3, page.getLimit());
+			statement.setInt(4, page.getOffset());
 			
 			ResultSet result = statement.executeQuery();
 			

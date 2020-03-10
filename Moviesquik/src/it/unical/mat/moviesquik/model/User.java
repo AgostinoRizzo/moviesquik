@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 import it.unical.mat.moviesquik.persistence.DBManager;
+import it.unical.mat.moviesquik.persistence.DataListPage;
 
 /**
  * @author Agostino
@@ -188,13 +189,13 @@ public class User
 	
 	public List<Post> getPersonalPosts()
 	{
-		personalPosts = DBManager.getInstance().getDaoFactory().getPostDao().findByUser(this, Post.POSTS_LIMIT);
+		personalPosts = DBManager.getInstance().getDaoFactory().getPostDao().findByUser(this, DataListPage.DEFAULT_POSTS_PAGE);
 		return personalPosts;
 	}
 	
 	public List<Post> getAllPosts()
 	{
-		allPosts = DBManager.getInstance().getDaoFactory().getPostDao().findByFollowedUsers(this, Post.POSTS_LIMIT);
+		allPosts = DBManager.getInstance().getDaoFactory().getPostDao().findByFollowedUsers(this, DataListPage.DEFAULT_POSTS_PAGE);
 		return allPosts;
 	}
 }

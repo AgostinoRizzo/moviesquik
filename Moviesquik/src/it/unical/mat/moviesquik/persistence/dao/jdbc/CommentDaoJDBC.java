@@ -12,6 +12,7 @@ import java.util.List;
 import it.unical.mat.moviesquik.model.Comment;
 import it.unical.mat.moviesquik.model.Post;
 import it.unical.mat.moviesquik.persistence.DBManager;
+import it.unical.mat.moviesquik.persistence.DataListPage;
 import it.unical.mat.moviesquik.persistence.dao.CommentDao;
 import it.unical.mat.moviesquik.persistence.dao.DaoFactory;
 import it.unical.mat.moviesquik.util.DateUtil;
@@ -23,7 +24,7 @@ import it.unical.mat.moviesquik.util.DateUtil;
 public class CommentDaoJDBC extends AbstractDaoJDBC<Comment> implements CommentDao
 {
 	protected static final String INSERT_STATEMENT             = "insert into comment(comment_id, date_time, text, user_id, post_id) values (?,?,?,?,?)";
-	protected static final String FIND_BY_POST_QUERY           = "select * from comment where post_id = ? order by date_time desc limit ?";
+	protected static final String FIND_BY_POST_QUERY           = "select * from comment where post_id = ? order by date_time desc limit ? offset ?";
 	
 	protected CommentDaoJDBC(StatementPrompterJDBC statementPrompter)
 	{
@@ -57,7 +58,7 @@ public class CommentDaoJDBC extends AbstractDaoJDBC<Comment> implements CommentD
 	}
 
 	@Override
-	public List<Comment> findByPost(Post post, int limit)
+	public List<Comment> findByPost(Post post, DataListPage page)
 	{
 		final List<Comment> comments = new ArrayList<Comment>();
 		
@@ -66,7 +67,8 @@ public class CommentDaoJDBC extends AbstractDaoJDBC<Comment> implements CommentD
 			final PreparedStatement statement = statementPrompter.prepareStatement(FIND_BY_POST_QUERY);
 			
 			statement.setLong(1, post.getId());
-			statement.setInt(2, limit);
+			statement.setInt(2, page.getLimit());
+			statement.setInt(3, page.getOffset());
 			
 			ResultSet result = statement.executeQuery();
 			

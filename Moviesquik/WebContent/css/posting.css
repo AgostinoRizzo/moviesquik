@@ -271,3 +271,7 @@
 	position: relative !important;
 	left: 47% !important;
 }
+.media .more-comments-loader
+{
+	margin-top: 10px !important;
+}

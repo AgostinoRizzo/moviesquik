@@ -12,9 +12,7 @@ import it.unical.mat.moviesquik.util.DateUtil;
  *
  */
 public class Comment
-{
-	public static final int COMMENTS_LIMIT = 5;
-	
+{	
 	private Long id;
 	private Date dateTime;
 	private String text;

@@ -5,14 +5,14 @@
 
 $(document).ready( function()
 	{
-		$(".emoji-panel .emoji").click(function() 
+		$(document).on("click", ".emoji-panel .emoji", function() 
 		{
 			var emoji_code = $(this).text();
 			$(this).closest(".media-body").find(".text-area-post").append(emoji_code);
 		});
 		
 		
-		$("#new-post-text").keyup(function() 
+		$(document).on("keyup", "#new-post-text", function() 
 		{
 			var content = $.trim($(this).val());
 			if ( content.length > 0 )
@@ -21,7 +21,7 @@ $(document).ready( function()
 				$("#publish-row-item").hide();
 		});
 		
-		$(".new-comment-text").keyup(function() 
+		$(document).on("keyup", ".new-comment-text", function() 
 		{
 			var content = $.trim($(this).val());
 			if ( content.length > 0 )
@@ -30,7 +30,7 @@ $(document).ready( function()
 				$(this).closest(".media").find(".publish-comment-row-item").hide();
 		});
 		
-		$(".comment-btn").click(function() 
+		$(document).on("click", ".comment-btn", function() 
 		{
 			var text = $(this).text().trim();
 			
@@ -46,7 +46,7 @@ $(document).ready( function()
 				}
 		});
 		
-		$(".share-post-submit-btn").click(function() 
+		$(document).on("click", ".share-post-submit-btn", function() 
 		{
 			$(this).closest("form").submit();
 		});

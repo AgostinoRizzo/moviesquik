@@ -38,8 +38,8 @@ function sendPostFeedback(element, is_like) {
 }
 
 $(document).ready( function()
-	{		
-		$(".add-like").click(function() { sendPostFeedback($(this), true); });
-		$(".add-love").click(function() { sendPostFeedback($(this), false); });
+	{	
+		$(document).on("click", ".add-like", function() { sendPostFeedback($(this), true); });
+		$(document).on("click", ".add-love", function() { sendPostFeedback($(this), false); });
 	}
 );

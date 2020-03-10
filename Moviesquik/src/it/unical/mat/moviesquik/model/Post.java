@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 import it.unical.mat.moviesquik.persistence.DBManager;
+import it.unical.mat.moviesquik.persistence.DataListPage;
 import it.unical.mat.moviesquik.util.DateUtil;
 
 /**
@@ -15,8 +16,6 @@ import it.unical.mat.moviesquik.util.DateUtil;
  */
 public class Post
 {
-	public static final int POSTS_LIMIT = 5;
-	
 	private Long id;
 	private Date dateTime;
 	private String text;
@@ -64,7 +63,8 @@ public class Post
 	}
 	public List<Comment> getComments()
 	{
-		comments = DBManager.getInstance().getDaoFactory().getCommentDao().findByPost(this, Comment.COMMENTS_LIMIT);
+		if ( comments == null || comments.isEmpty() )
+			comments = DBManager.getInstance().getDaoFactory().getCommentDao().findByPost(this, DataListPage.DEFAULT_COMMENTS_PAGE);
 		return comments;
 	}
 	public void setComments(List<Comment> comments)

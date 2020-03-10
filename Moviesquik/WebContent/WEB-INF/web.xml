@@ -174,4 +174,26 @@
 	<url-pattern>/sharepost</url-pattern>
 </servlet-mapping>
 
+
+<!-- PostsBroker Servlet -->
+<servlet>
+	<servlet-name>get_posts</servlet-name>
+	<servlet-class>it.unical.mat.moviesquik.controller.posting.PostsBroker</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>get_posts</servlet-name>
+	<url-pattern>/getposts</url-pattern>
+</servlet-mapping>
+
+
+<!-- CommentsBroker Servlet -->
+<servlet>
+	<servlet-name>get_comments</servlet-name>
+	<servlet-class>it.unical.mat.moviesquik.controller.posting.CommentsBroker</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>get_comments</servlet-name>
+	<url-pattern>/getcomments</url-pattern>
+</servlet-mapping>
+
 </web-app>

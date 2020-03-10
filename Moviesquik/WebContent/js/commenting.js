@@ -73,7 +73,7 @@ function encodeToHtmlDecimal(str) {
 
 $(document).ready( function()
 	{
-		$(".new-comment-submit-btn").click(function() 
+		$(document).on("click", ".new-comment-submit-btn", function() 
 		{
 			var post_id = $(this).closest(".new-comment-media").prev(".media-post-box").find("#post-id").val();
 			var comment_text = $(this).closest(".media").find(".new-comment-text").text().trim();

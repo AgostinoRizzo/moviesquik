@@ -62,6 +62,11 @@
 			<div id="news-list">
 				<jsp:include page="./news_content.jsp"></jsp:include>
 			</div>
+			
+			<div class="text-center" id="view-more-posts-tag">
+				<div class="loader loader-sm d-none"></div>
+				<button class="btn btn-link view-all-btn" id="posts-view-more-btn">view more</button>
+			</div>
 		</div>
 		
 		<div class="col-md-12 col-lg-4 news-media-contents-col">
