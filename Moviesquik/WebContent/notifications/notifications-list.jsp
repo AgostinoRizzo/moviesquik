@@ -4,35 +4,45 @@
 <!DOCTYPE html>
 <html>
 
-<c:if test="${user.unreadNotifications != null && !user.unreadNotifications.isEmpty()}">
+<c:if test="${user.notifications != null && !user.notifications.isEmpty()}">
 	
-	<c:forEach items="${user.unreadNotifications}" var="notification">
+	<c:set var = "new_notifications_counter" scope = "request" value = "0"/>
+	
+	<c:forEach items="${user.notifications}" var="notification">
 		
-		<div class="notification-box dropdown-item">
+		<div class="notification-box">
 	           <div class="row">
-		             <div class="col-lg-2 col-sm-2 col-2 text-center">
-		             		
-		             		<c:if test="${notification.subjectUser != null}">
-		             			<c:set var = "user_profile_img_src" scope = "request" value = "res/drawable/user_avatar.jpg"/>
-								<c:if test="${notification.subjectUser.profileImagePath != null && notification.subjectUser.profileImagePath.length() > 0}">
-									<c:set var = "user_profile_img_src" scope = "request" value = "res/user/${notification.subjectUser.profileImagePath}"/>
-								</c:if>
-		               			<img src="${user_profile_img_src}" class="notification-avatar-img rounded-circle">
-		               		</c:if>
-		               		
-		             </div>    
-		             <div class="col-lg-10 col-sm-10 col-10">
+	           
+	           		 <c:if test="${notification.subjectUser != null}">
+			             <div class="col-lg-1 col-sm-1 col-1 text-center">
+			      			
+			             			<c:set var = "user_profile_img_src" scope = "request" value = "res/drawable/user_avatar.jpg"/>
+									<c:if test="${notification.subjectUser.profileImagePath != null && notification.subjectUser.profileImagePath.length() > 0}">
+										<c:set var = "user_profile_img_src" scope = "request" value = "res/user/${notification.subjectUser.profileImagePath}"/>
+									</c:if>
+			               			<img src="${user_profile_img_src}" class="notification-avatar-img rounded-circle">
+			               		
+			             </div>    
+		             </c:if>
+		             
+		             <div class="col-lg-10 col-sm-10 col-10 notification-body">
 		             	   
 		             	   <div class="row">
-			               		<div class="col-10"><strong class="">${notification.title}</strong></div>
-			               		<div class="col-2"><a href="#">more</a></div>
+			               		<div class="col">
+			               			<strong class="">${notification.title}</strong>
+			               			<c:if test="${user.unreadNotifications != null && new_notifications_counter < user.unreadNotifications.size()}">
+			               				&nbsp;&nbsp;<small class="new-notification-marker">New</small>
+			               				<c:set var = "new_notifications_counter" value = "${new_notifications_counter + 1}"/>
+			               			</c:if>
+			               		</div>
+			               		<!-- <div class="col-2"><a href="#">more</a></div> -->
 			               </div>
 			               
-			               <div>
+			               <p>
 			               		${notification.description}
-			               </div>
+			               </p>
 			               
-			               <small class="">${notification.dateTime}</small>
+			               <small class="note" title="${notification.dateTime}">${notification.humanReadableDateTime}</small>
 			               
 			       	 </div>
 			       	 
@@ -53,5 +63,5 @@
 </c:if>
 
 <div class="container show-all-notification-container">
-	<a>show all</a>
+	<button class="btn btn-link">show all</button>
 </div>

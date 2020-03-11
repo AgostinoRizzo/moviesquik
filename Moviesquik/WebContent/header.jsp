@@ -72,17 +72,21 @@
 				<ul class="navbar-nav notifications-navbar-nav">
 						
 						<li class="nav-item dropdown">
-					        <a id="nav-user-avatar-box" class="nav-link" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					          	<span class="fa fa-envelope checked"></span>
+					        <a id="nav-user-avatar-box" class="nav-link" href="#" id="notifications-menu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					          	<span class="fa fa-envelope checked" id="notifications-menu-btn"></span>
 					          	
 					          	
 					        </a>
-					        <div id="nav-user-notifications-dropdown-menu" class="dropdown-menu dropdown-menu-right bg-dark text-white notifications-dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+					        <div id="nav-user-notifications-dropdown-menu" class="dropdown-menu dropdown-menu-right bg-dark text-white notifications-dropdown-menu" aria-labelledby="notifications-menu">
 					        	<jsp:include page="notifications/notifications-list.jsp"></jsp:include>
 					        </div>
 					    </li>
-					    <c:if test="${user.unreadNotifications != null}">
-					          	<small><span class="badge badge-pill badge-danger">${user.unreadNotifications.size()}</span></small>
+					    
+					    <c:if test="${user.unreadNotifications != null && user.unreadNotifications.size() > 0}">
+					    	<small><span class="badge badge-pill badge-danger">${user.unreadNotifications.size()}</span></small>
+					    </c:if>
+					    <c:if test="${user.unreadNotifications == null || user.unreadNotifications.size() == 0}">
+					    	<small><span class="badge badge-pill badge-danger invisible"></span></small>
 					    </c:if>
 					      
 				</ul>

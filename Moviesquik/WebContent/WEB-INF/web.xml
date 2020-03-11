@@ -196,4 +196,15 @@
 	<url-pattern>/getcomments</url-pattern>
 </servlet-mapping>
 
+
+<!-- NotificationsBroker Servlet -->
+<servlet>
+	<servlet-name>notification</servlet-name>
+	<servlet-class>it.unical.mat.moviesquik.controller.accounting.NotificationsBroker</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>notification</servlet-name>
+	<url-pattern>/notification</url-pattern>
+</servlet-mapping>
+
 </web-app>

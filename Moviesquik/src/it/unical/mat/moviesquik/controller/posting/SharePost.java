@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import it.unical.mat.moviesquik.controller.ServletUtils;
+import it.unical.mat.moviesquik.model.Notification;
+import it.unical.mat.moviesquik.model.NotificationFactory;
 import it.unical.mat.moviesquik.model.Post;
 import it.unical.mat.moviesquik.model.User;
 import it.unical.mat.moviesquik.persistence.DBManager;
@@ -47,6 +49,13 @@ public class SharePost extends HttpServlet
 		newPost.setOwner(user);
 		
 		daoFactory.getPostDao().save(newPost);
+		
+		final User receiver = source_post.getOwner();
+		if ( receiver.getId() != user.getId() )
+		{
+			final Notification notification = NotificationFactory.getInstance().createPostShareNotification(user);
+			daoFactory.getNotificationDao().save(notification, receiver);
+		}
 		
 		final RequestDispatcher rd = req.getRequestDispatcher("/");
 		rd.forward(req, resp);

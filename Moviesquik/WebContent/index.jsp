@@ -33,6 +33,7 @@
 	<script src="js/commenting.js"></script>
 	<script src="js/send-feedback.js"></script>
 	<script src="js/more-news.js"></script>
+	<script src="js/notifications.js"></script>
 	
 </head>
 <body>

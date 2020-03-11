@@ -81,6 +81,11 @@ footer
 	background-color: #1e1e2f;
 }
 
+.dropdown-menu
+{
+	font-size: 14px !important;
+}
+
 .avatar-img
 {
 	width: 40px !important;
@@ -129,6 +134,12 @@ footer
 .modal
 {
 	color: #000;
+}
+
+.invisible
+{
+	display: inline-block !important;
+	visibility: hidden !important;
 }
 
 @keyframes spin {

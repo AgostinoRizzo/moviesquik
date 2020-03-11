@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.JsonObject;
 
 import it.unical.mat.moviesquik.controller.ServletUtils;
+import it.unical.mat.moviesquik.model.Notification;
+import it.unical.mat.moviesquik.model.NotificationFactory;
 import it.unical.mat.moviesquik.model.Post;
 import it.unical.mat.moviesquik.model.PostFeedback;
 import it.unical.mat.moviesquik.model.User;
@@ -40,10 +42,11 @@ public class SendPostFeedback extends HttpServlet
 			return;
 		}
 		
+		final DaoFactory daoFactory = DBManager.getInstance().getDaoFactory();
+		
 		final Long post_id = Long.parseLong( req.getParameter("postid") );
 		final boolean is_like = req.getParameter("islike").equals("true");
-		final Post referred_post = new Post();
-		referred_post.setId(post_id);
+		final Post referred_post = daoFactory.getPostDao().findById(post_id);
 		
 		final PostFeedback feedback = new PostFeedback();
 		feedback.setLike(is_like);
@@ -56,7 +59,6 @@ public class SendPostFeedback extends HttpServlet
 		final PrintWriter out = resp.getWriter();
 		final JsonObject json_response = new JsonObject();
 		
-		final DaoFactory daoFactory = DBManager.getInstance().getDaoFactory();
 		json_response.addProperty("added", daoFactory.getPostFeedbackDao().save(feedback));
 		
 		if ( json_response.get("added").getAsBoolean() )
@@ -65,6 +67,16 @@ public class SendPostFeedback extends HttpServlet
 			json_response.addProperty("nlikes", post.getNumLikes());
 			json_response.addProperty("nloves", post.getNumLoves());
 			json_response.addProperty("ncomments", post.getNumAllComments());
+			
+			final User receiver = referred_post.getOwner();
+			if ( receiver.getId() != user.getId() )
+			{
+				final Notification notification = feedback.isLike() 
+												  ? NotificationFactory.getInstance().createPostLikeFeedbackNotification(user)
+												  : NotificationFactory.getInstance().createPostLoveFeedbackNotification(user);
+				daoFactory.getNotificationDao().save(notification, receiver);
+			}
+			
 		}
 		
 		out.print(json_response.toString());

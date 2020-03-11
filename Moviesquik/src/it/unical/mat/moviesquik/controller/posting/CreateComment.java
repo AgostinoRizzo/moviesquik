@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import it.unical.mat.moviesquik.controller.ServletUtils;
 import it.unical.mat.moviesquik.model.Comment;
+import it.unical.mat.moviesquik.model.Notification;
+import it.unical.mat.moviesquik.model.NotificationFactory;
 import it.unical.mat.moviesquik.model.Post;
 import it.unical.mat.moviesquik.model.User;
 import it.unical.mat.moviesquik.persistence.DBManager;
@@ -42,8 +44,8 @@ private static final long serialVersionUID = 1L;
 		final Long post_id = Long.parseLong( req.getParameter("postid") );
 		final String commentText = req.getParameter("text");
 		
-		final Post referredPost = new Post();
-		referredPost.setId(post_id);
+		final DaoFactory daoFactory = DBManager.getInstance().getDaoFactory();
+		final Post referredPost = daoFactory.getPostDao().findById(post_id);
 		
 		final Comment newComment = new Comment();
 		newComment.setDateTime( DateUtil.getCurrent() );
@@ -51,8 +53,14 @@ private static final long serialVersionUID = 1L;
 		newComment.setOwner(user);
 		newComment.setReferredPost(referredPost);
 		
-		final DaoFactory daoFactory = DBManager.getInstance().getDaoFactory();
 		daoFactory.getCommentDao().save(newComment);
+		
+		final User receiver = referredPost.getOwner();
+		if ( receiver.getId() != user.getId() )
+		{
+			final Notification notification = NotificationFactory.getInstance().createPostCommentNotification(user);
+			daoFactory.getNotificationDao().save(notification, receiver);
+		}
 		
 		req.setAttribute("post_to_display", daoFactory.getPostDao().findById(post_id));
 		

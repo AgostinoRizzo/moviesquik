@@ -12,6 +12,7 @@ import java.util.List;
 import it.unical.mat.moviesquik.model.Notification;
 import it.unical.mat.moviesquik.model.User;
 import it.unical.mat.moviesquik.persistence.DBManager;
+import it.unical.mat.moviesquik.persistence.DataListPage;
 import it.unical.mat.moviesquik.persistence.dao.DaoFactory;
 import it.unical.mat.moviesquik.persistence.dao.NotificationDao;
 import it.unical.mat.moviesquik.util.DateUtil;
@@ -23,8 +24,9 @@ import it.unical.mat.moviesquik.util.DateUtil;
 public class NotificationDaoJDBC implements NotificationDao
 {
 	protected static final String INSERT_STATEMENT          = "insert into notification(notification_id, date_time, title, description, is_read, user_id, subject_user_id) values (?,?,?,?,?,?,?)";
-	protected static final String FIND_BY_USER_QUERY        = "select * from notification where user_id = ? order by date_time desc limit ?";
-	protected static final String FIND_UNREAD_BY_USER_QUERY = "select * from notification where user_id = ? and is_read is false order by date_time desc limit ?";
+	protected static final String FIND_BY_USER_QUERY        = "select * from notification where user_id = ? order by date_time desc limit ? offset ?";
+	protected static final String FIND_UNREAD_BY_USER_QUERY = "select * from notification where user_id = ? and is_read is false order by date_time desc limit ? offset ?";
+	protected static final String READ_ALL_STATEMENT        = "UPDATE notification SET is_read = true WHERE user_id = ? AND NOT is_read";
 	
 	private final StatementPrompterJDBC statementPrompter;
 	
@@ -62,7 +64,7 @@ public class NotificationDaoJDBC implements NotificationDao
 	}
 	
 	@Override
-	public List<Notification> findByUser(User user, int limit)
+	public List<Notification> findByUser(User user, DataListPage page)
 	{
 		final List<Notification> notifications = new ArrayList<Notification>();
 		
@@ -71,7 +73,8 @@ public class NotificationDaoJDBC implements NotificationDao
 			final PreparedStatement statement = statementPrompter.prepareStatement(FIND_BY_USER_QUERY);
 			
 			statement.setLong(1, user.getId());
-			statement.setInt(2, limit);
+			statement.setInt(2, page.getLimit());
+			statement.setInt(3, page.getOffset());
 			
 			ResultSet result = statement.executeQuery();
 			
@@ -89,7 +92,7 @@ public class NotificationDaoJDBC implements NotificationDao
 	}
 	
 	@Override
-	public List<Notification> findUnreadByUser(User user, int limit)
+	public List<Notification> findUnreadByUser(User user, DataListPage page)
 	{
 		final List<Notification> notifications = new ArrayList<Notification>();
 		
@@ -98,7 +101,8 @@ public class NotificationDaoJDBC implements NotificationDao
 			final PreparedStatement statement = statementPrompter.prepareStatement(FIND_UNREAD_BY_USER_QUERY);
 			
 			statement.setLong(1, user.getId());
-			statement.setInt(2, limit);
+			statement.setInt(2, page.getLimit());
+			statement.setInt(3, page.getOffset());
 			
 			ResultSet result = statement.executeQuery();
 			
@@ -110,6 +114,25 @@ public class NotificationDaoJDBC implements NotificationDao
 		
 		catch (SQLException e)
 		{ e.printStackTrace(); return notifications; }
+		
+		finally 
+		{ statementPrompter.onFinalize(); }
+	}
+	
+	@Override
+	public boolean readAll(User user)
+	{
+		try
+		{
+			final PreparedStatement statement = statementPrompter.prepareStatement(READ_ALL_STATEMENT);
+			statement.setLong(1, user.getId());
+			statement.executeUpdate();
+			
+			return true;
+		}
+		
+		catch (SQLException e)
+		{ e.printStackTrace(); return false; }
 		
 		finally 
 		{ statementPrompter.onFinalize(); }

@@ -5,14 +5,14 @@ package it.unical.mat.moviesquik.model;
 
 import java.util.Date;
 
+import it.unical.mat.moviesquik.util.DateUtil;
+
 /**
  * @author Agostino
  *
  */
 public class Notification
-{
-	public static final int NOTIFICATIONS_LIMIT = 10;
-	
+{	
 	private Long id;
 	private Date dateTime;
 	private String title;
@@ -35,6 +35,10 @@ public class Notification
 	public void setDateTime(Date dateTime)
 	{
 		this.dateTime = dateTime;
+	}
+	public String getHumanReadableDateTime()
+	{
+		return DateUtil.toHumanReadable(dateTime);
 	}
 	public String getTitle()
 	{

@@ -6,7 +6,7 @@ function submit_new_comment(post_id, comment_text, comment_form_tag)
 {
 	var ajax_url = "createcomment";
 	
-	var loader = comment_form_tag.prev(".media-post-box").find(".loader");
+	var loader = comment_form_tag.prev(".media-post-box").find(".comments-list").find(".loader");
 	loader.removeClass("d-none");
 	
 	comment_form_tag.find("#new-comment-text").val('');

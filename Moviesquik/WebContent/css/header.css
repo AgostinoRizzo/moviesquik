@@ -195,11 +195,14 @@
 {
 	width: 500px;
 	color: #fff;
+	border-radius: 20px;
+	background-color: #212121 !important;
+	padding-top: 10px;
 }
 
 .notifications-dropdown-menu a
 {
-	color: #0056b3 !important;
+	/* color: #0056b3 !important; */
 }
 
 #nav-user-notifications-dropdown-menu .dropdown-item
@@ -207,11 +210,29 @@
 	color: #fff;
 }
 
+.notifications-dropdown-menu .new-notification-marker
+{
+	background-color: #218838;
+	border-color: #1e7e34;
+	padding: 3px;
+	border-radius: 3px;
+}
+
 .notification-avatar-img
 {
-	width: 60px !important;
-	height: 60px !important;
+	width: 40px !important;
+	height: 40px !important;
 	margin-top: 5px;
+}
+
+.notification-body
+{
+	margin-left: 10px;
+}
+
+.notification-body p
+{
+	margin-bottom: 0px;
 }
 
 .badge
@@ -229,6 +250,17 @@
 .mark-unread-notification-container
 {
 	text-align: center;
+}
+
+.notification-box
+{
+	margin-right: 20px;
+	margin-left: 20px;
+}
+
+.dropdown-divider
+{
+	border-top-color: #383838;
 }
 
 

@@ -7,6 +7,7 @@ import java.util.List;
 
 import it.unical.mat.moviesquik.model.Notification;
 import it.unical.mat.moviesquik.model.User;
+import it.unical.mat.moviesquik.persistence.DataListPage;
 
 /**
  * @author Agostino
@@ -15,6 +16,7 @@ import it.unical.mat.moviesquik.model.User;
 public interface NotificationDao
 {
 	public boolean save( final Notification notification, final User user );
-	public List<Notification> findByUser( final User user, final int limit );
-	public List<Notification> findUnreadByUser( final User user, final int limit );
+	public List<Notification> findByUser( final User user, final DataListPage page );
+	public List<Notification> findUnreadByUser( final User user, final DataListPage page );
+	public boolean readAll( final User user );
 }
