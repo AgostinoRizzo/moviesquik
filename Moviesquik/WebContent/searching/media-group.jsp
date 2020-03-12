@@ -4,18 +4,20 @@
 <!DOCTYPE html>
 <html>
 
-<div id="" class="media-contents-group-list-header row">
-		<div id="media-contents-search-result-title" class="media-contents-search-result-title col col-12 col-lg-8">
-			
-			<div class="btn-group">
-			
-				<h5 class="media-contents-list-header-title">${media_content_list_title}</h5>
-			
+<c:if test="${empty home_news_view}">
+	<div id="" class="media-contents-group-list-header row">
+			<div id="media-contents-search-result-title" class="media-contents-search-result-title col col-12 col-lg-8">
+				
+				<div class="btn-group">
+				
+					<h5 class="media-contents-list-header-title">${media_content_list_title}</h5>
+				
+				</div>
+										
 			</div>
-									
-		</div>
-		
-</div>
+			
+	</div>
+</c:if>
 
 <div class="media-contents-list">
 			

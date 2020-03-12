@@ -63,7 +63,7 @@ public class MediaContentsSearch extends HttpServlet
 		
 		switch ( viewTemplate ) {
 		case FULL:  manageFullViewTemplate(req, resp, type, viewTemplate, user, filter); break;
-		case GROUP: manageGroupViewTemplate(req, resp, type, viewTemplate, user, filter); break;
+		case GROUP: manageGroupViewTemplate(req, resp, type, viewTemplate, user, filter, true); break;
 		default: ServletUtils.manageParameterError(req, resp);
 		}
 	}
@@ -87,9 +87,9 @@ public class MediaContentsSearch extends HttpServlet
 		sendView(req, resp);
 	}
 	
-	private void manageGroupViewTemplate( HttpServletRequest req, HttpServletResponse resp,
+	public static void manageGroupViewTemplate( HttpServletRequest req, HttpServletResponse resp,
 											final MediaContentType type, final MediaContentsViewTemplate viewTemplate, final User user,
-											final MediaContentsSearchFilter filter ) 
+											final MediaContentsSearchFilter filter, final boolean sendview ) 
 													throws ServletException, IOException
 	{
 		final Map<MediaContentGroup, List<MediaContent>> groupMediaContents = DBManager.getSearchEngine()
@@ -107,10 +107,12 @@ public class MediaContentsSearch extends HttpServlet
 		
 		req.setAttribute("search_result", searchResult);
 		req.setAttribute("genres", DBManager.getInstance().getMediaContentsGenres());
-		sendView(req, resp);
+		
+		if ( sendview )
+			sendView(req, resp);
 	}
 	
-	private void sendView(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
+	private static void sendView(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
 	{
 		final SearchRequestType reqtype = SearchRequestType.parse( req.getParameter("reqtype") );
 		final String jspPage = ( reqtype == SearchRequestType.MEDIA_CONTENTS_UPDATE )

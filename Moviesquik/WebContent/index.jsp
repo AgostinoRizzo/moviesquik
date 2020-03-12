@@ -18,6 +18,7 @@
 	<link href="css/widget.css" rel="stylesheet">
 	<link href="css/plans.css" rel="stylesheet">
 	<link href="css/posting.css" rel="stylesheet">
+	<link href="css/searching.css" rel="stylesheet">
 	
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	
@@ -49,11 +50,15 @@
     	  Intro Section
     ============================-->
     
+    <!-- News Contents -->
+    <jsp:include page="contents-news.jsp"></jsp:include>
+    
     <!-- News Section -->
     <c:if test="${user != null}">
 	    <jsp:include page="posting/news.jsp"></jsp:include>
     </c:if>
     
+    <c:if test="${user == null}">
     <section id="intro">
     
 		<div class="intro-text">
@@ -71,7 +76,8 @@
 			
 			</c:if>
 			
-			<c:if test="${media_content_of_the_day != null}">
+			<!-- MediaContent of the day -->
+			<%-- <c:if test="${media_content_of_the_day != null}">
 			
 				<c:if test="${user != null}">
 					
@@ -103,7 +109,8 @@
 						</div>
 				</div>
 			
-			</c:if>
+			</c:if> --%>
+			<!-- /MediaContent of the day -->
 			
 		</div>
 		
@@ -124,6 +131,7 @@
     	</div> -->
 
 	</section>
+	</c:if>
 	
 	<jsp:include page="contents.jsp"></jsp:include>
 	
