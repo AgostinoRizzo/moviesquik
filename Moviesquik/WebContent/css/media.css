@@ -1,0 +1,17 @@
+@charset "ISO-8859-1";
+
+#media-content-page-container
+{
+	margin-top: 120px;
+}
+
+.media-content-title
+{
+	/* margin-top: 20px; */
+	font-weight: bold;
+}
+
+.checked-star
+{
+	color: orange;
+}

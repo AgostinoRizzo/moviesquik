@@ -9,7 +9,7 @@
 
 <header id="header">
 		
-	<nav class="navbar navbar-expand-lg navbar-light">
+	<nav class="navbar navbar-expand lgnavbar-light">
 		
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="icon-bar top-bar"></span>
@@ -61,7 +61,12 @@
 						</li>
 						
 				</ul>
-				
+			</c:if>
+		</div>
+		
+		<c:if test="${user != null}">
+			<div class="collapse navbar-collapse justify-content-end" id="navbarToggler">
+			
 				<form method="GET" action="search" class="form-inline my-2 my-lg-0 header-search-form">
 					<!-- <span class="input-group-addon fa fa-search"></span> -->
 					<span id="search-icon" class="input-group-addon fa fa-search clickable"></span>
@@ -115,9 +120,19 @@
 					      
 				</ul>
 				
-			</c:if>
 			
-		</div>
+			</div>
+		</c:if>
+		
 	</nav>
 		
 </header>
+
+<!-- <div class="chapternav">
+	<div class="container row">
+		
+		<div class="col-auto">
+		</div>
+		
+	</div>
+</div> -->

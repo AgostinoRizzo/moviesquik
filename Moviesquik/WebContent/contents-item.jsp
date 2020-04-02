@@ -6,9 +6,11 @@
 
 <div class="card media-content-card view-overlay">
 	  
-	  <img class="card-img-top" src="${media_content.poster}">
+	  <input type="hidden" id="media-id" value="${media_content.id}">
 	  
-	  <c:if test="${empty small_view && empty home_news_view}">
+	  <img class="card-img-top can-point" src="${media_content.poster}">
+	  
+	  <c:if test="${empty small_view && empty home_news_view && empty not_view_media_body}">
 		  <div class="card-body">
 		  
 		    <jsp:include page="content-ratings.html"></jsp:include>
@@ -25,7 +27,7 @@
 		  </div>
 	  </c:if>
 	  
-	  <c:if test="${not empty small_view}">
+	  <c:if test="${not empty small_view || not empty not_view_media_body}">
 		  	<div class="card-body">
 			    
 			    <p class="card-title">${media_content.title}</p>

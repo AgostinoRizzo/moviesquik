@@ -11,7 +11,7 @@
 <script src="js/media-contents-filler.js"></script>
 
 
-<c:if test="${user != null}">
+<c:if test="${user != null && empty no_view_suggested}">
 
 	<div class="media-contents-list">
 
