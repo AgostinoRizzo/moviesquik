@@ -4,15 +4,33 @@
 <!DOCTYPE html>
 
 
-<div class="home-wrapper">
+<!-- <div class="chapternav">
+	<div class="col-1"></div>
+	<div class="col-1"></div>
+	<div class="col-1"></div>
+	<div class="col-1"></div>
+	<div class="col-1"><h3><span class="fa fa-film"></span></h3>For You</div>
+	<div class="col-1"><h3><span class="fa fa-film"></span></h3>Trending Now</div>
+	<div class="col-1"><h3><span class="fa fa-film"></span></h3>Most Popular</div>
+	<div class="col-1"><h3><span class="fa fa-film"></span></h3>Most Favorites</div>
+	<div class="col-1"></div>
+	<div class="col-1"></div>
+	<div class="col-1"></div>
+	<div class="col-1"></div>
+	<div class="col-1"></div>
+</div> -->
+
+<div class="home-wrapper container">
 	
-	<jsp:include page="sidenav.jsp"></jsp:include>
-	
-	<div class="home-container-wrapper">
-	
-		<div class="container home-container">
+	<div class="home-container-wrapper row">
+		
+		<div class="col-auto sidenav-col">
+			<jsp:include page="sidenav.jsp"></jsp:include>
+		</div>
+		
+		<div class="home-container col-auto home-col">
 			
-			<div class="row">
+			<%-- <div class="row">
 				<c:if test="${user != null}">
 					
 					<c:set var="not_view_media_body" scope="request" value="true"/>
@@ -56,32 +74,26 @@
 					<div></div>
 					
 				</c:if>
-			</div>
+			</div> --%>
 			
 			<div class="row">
 			
-				
-				
-				<br><br>
 				<%-- <div class="col-auto users-col home-container-col">
 					<jsp:include page="users.jsp"></jsp:include>
 				</div>  --%>
 				
 				<div class="col-auto posts-col home-container-col">
-					<br>
-					<h4 class="media-contents-list-header-title"><!-- <span class="fa fa-lightbulb-o checked"></span>  -->&nbsp;News</h4>
+					<h4 class="media-contents-list-header-title"><!-- <span class="fa fa-lightbulb-o checked"></span>  -->&nbsp;&nbsp;News</h4>
 					<br><br>
 					<jsp:include page="../posting/news.jsp"></jsp:include>
 				</div>
 				
 				<div class="col-auto news-media-contents-col home-container-col">
-					<br>
-					<br>
 					<c:set var="small_view" scope="request" value="true"/>
-					<c:set var="no_view_suggested" scope="request" value="true"/>
+					<%-- <c:set var="no_view_suggested" scope="request" value="true"/> ### uncomment to hide suggested contents ### --%>
 					<jsp:include page="../contents.jsp"></jsp:include>
 					<c:remove var="small_view"/>
-					<c:remove var="no_view_suggested"/>
+					<%-- <c:remove var="no_view_suggested"/> ### uncomment to hide suggested contents ### --%>
 				</div>
 				
 				<%-- 

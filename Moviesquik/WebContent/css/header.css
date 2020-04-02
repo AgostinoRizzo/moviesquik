@@ -133,7 +133,9 @@
 	/*background: linear-gradient(45deg, rgba(0, 0, 0, 1.0), rgba(0, 0, 0, 0.8));*/
 	
 	/* background: #1e1e2f !important; */
-	background-color: rgba(29, 29, 31, 1.0/* 0.72 */) !important;
+	/* background-color: rgba(29, 29, 31, 1.00.72) !important; */
+	-webkit-backdrop-filter: saturate(180%) blur(20px);
+	backdrop-filter: saturate(180%) blur(20px);
 	
 	/* padding: 20px 0; */
 	/* height: 100px; */
@@ -327,17 +329,3 @@
 	}
 }
 
-
-.chapternav
-{
-	position: fixed;
-	top: 41px;
-	z-index: 1000;
-	width: 100%;
-	height: 100px;
-	
-	/* background-color: rgba(29, 29, 31, 0.72); */
-	background: linear-gradient(to right, #CC5AC7, #837FE9);
-	
-	box-shadow: 10px 0px 20px #000;
-}

@@ -3,7 +3,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 
-<div class="media p-3 media-post-box">
+<div class="media p-3 media-post-box main-media-post-box">
 
 	  <input type="hidden" id="post-id" value="${post_to_display.id}">
 	  

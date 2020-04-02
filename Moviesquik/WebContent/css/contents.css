@@ -63,13 +63,20 @@
 	background-color: transparent;
 	color: #fff;
 	text-align: left;
-	font-size: xx-small;
+	/* font-size: xx-small; */
 	transition: transform .2s;
+	height: 100%;
 }
 
 .media-content-card:hover
 {
 	transform: scale(1.1);
+}
+
+.card-img-top
+{
+	border-radius: 20px;
+	/* height: 80%; */
 }
 
 /*
@@ -98,6 +105,9 @@
 
 .media-content-card .card-title
 {
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
 }
 
 .media-content-card .btn

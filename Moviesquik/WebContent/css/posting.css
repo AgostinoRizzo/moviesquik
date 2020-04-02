@@ -50,7 +50,7 @@
 
 .posts-col
 {
-	min-width: 530px;
+	/* min-width: 530px; */
 }
 
 .media
@@ -163,15 +163,6 @@
 }
 
 
-/* News Container Style */
-
-.news-container
-{
-	/* margin-top: 120px; */
-	margin-top: 10px;
-}
-
-
 /* Emoji Panel */
 
 .emoji-panel
@@ -216,21 +207,6 @@
 .news-media-contents-col .media-contents-list
 {
 	padding-top: 3px !important;
-}
-
-
-/* Home NavItems Style */
-.home-navbar-nav
-{
-	margin-top: 10px;
-}
-.home-nav-item
-{
-	align-items: center !important;
-}
-.home-nav-item a
-{
-	color: #fff !important;
 }
 
 

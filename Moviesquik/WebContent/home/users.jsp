@@ -7,12 +7,12 @@
 <div class="row user-list-row">
 		            			
 	  <c:if test="${user.profileImagePath != null && user.profileImagePath.length() > 0}">
-	  		<a href="user?id=${user.id}" class="col-auto"><img src="res/user/${user.profileImagePath}" class="avatar-img card-list-avatar-img rounded-circle">
+	  		<a href="user?id=${user.id}" class="col-auto sidenav-item-col"><img src="res/user/${user.profileImagePath}" class="avatar-img card-list-avatar-img rounded-circle">
 	  			<i class="fa fa-check-circle fa-xs line-status online-status"></i>
 	  		</a>
 	  </c:if>
 	  <c:if test="${user.profileImagePath == null || user.profileImagePath.length() == 0}">
-	  		<a href="user?id=${user.id}" class="col-auto"><img src="res/drawable/user_avatar.jpg" class="avatar-img card-list-avatar-img rounded-circle">
+	  		<a href="user?id=${user.id}" class="col-auto sidenav-item-col"><img src="res/drawable/user_avatar.jpg" class="avatar-img card-list-avatar-img rounded-circle">
 	  			<i class="fa fa-check-circle fa-xs line-status online-status"></i>
 	  		</a>
 	  </c:if>		  
@@ -32,12 +32,12 @@
 	<div class="row user-list-row">
 		            			
 		  <c:if test="${friend.profileImagePath != null && friend.profileImagePath.length() > 0}">
-		  		<a href="user?id=${friend.id}" class="col-auto"><img src="res/user/${friend.profileImagePath}" class="avatar-img card-list-avatar-img rounded-circle">
+		  		<a href="user?id=${friend.id}" class="col-auto sidenav-item-col"><img src="res/user/${friend.profileImagePath}" class="avatar-img card-list-avatar-img rounded-circle">
 		  			<i class="fa fa-check-circle fa-xs line-status online-status"></i>
 		  		</a>
 		  </c:if>
 		  <c:if test="${friend.profileImagePath == null || friend.profileImagePath.length() == 0}">
-		  		<a href="user?id=${friend.id}" class="col-auto"><img src="res/drawable/user_avatar.jpg" class="avatar-img card-list-avatar-img rounded-circle">
+		  		<a href="user?id=${friend.id}" class="col-auto sidenav-item-col"><img src="res/drawable/user_avatar.jpg" class="avatar-img card-list-avatar-img rounded-circle">
 		  			<i class="fa fa-check-circle fa-xs line-status online-status"></i>
 		  		</a>
 		  </c:if>		  
