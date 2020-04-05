@@ -21,6 +21,7 @@
 	<link href="css/searching.css" rel="stylesheet">
 	<link href="css/media.css" rel="stylesheet">
 	<link href="css/home.css" rel="stylesheet">
+	<link href="css/contents.css" rel="stylesheet">
 	
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	
@@ -38,6 +39,8 @@
 	<script src="js/more-news.js"></script>
 	<script src="js/notifications.js"></script>
 	<script src="js/media/show_media_content.js"></script>
+	<script src="js/contents.js"></script>
+	<script src="js/media-contents-filler.js"></script>
 	
 </head>
 <body>

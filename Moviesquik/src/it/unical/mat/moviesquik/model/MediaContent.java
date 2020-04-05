@@ -5,6 +5,8 @@ package it.unical.mat.moviesquik.model;
 
 import java.util.Date;
 
+import it.unical.mat.moviesquik.util.DateUtil;
+
 /**
  * @author Agostino
  *
@@ -67,6 +69,10 @@ public class MediaContent
 	public void setReleased(Date releasedDate)
 	{
 		this.released = releasedDate;
+	}
+	public String getHumanReadableReleasedDateTime()
+	{
+		return DateUtil.toHumanReadable(released);
 	}
 	public String getRuntime()
 	{
@@ -132,6 +138,10 @@ public class MediaContent
 	public void setRating(float rating)
 	{
 		this.rating = rating;
+	}
+	public int getRatingStarsCount()
+	{
+		return (int) (rating/10.0*5.0);
 	}
 	
 	public Long getViews()

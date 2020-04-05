@@ -207,4 +207,15 @@
 	<url-pattern>/notification</url-pattern>
 </servlet-mapping>
 
+
+<!-- MediaContentPageBroker Servlet -->
+<servlet>
+	<servlet-name>media_content_page</servlet-name>
+	<servlet-class>it.unical.mat.moviesquik.controller.media.MediaContentPage</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>media_content_page</servlet-name>
+	<url-pattern>/getmedia</url-pattern>
+</servlet-mapping>
+
 </web-app>

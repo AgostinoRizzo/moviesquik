@@ -111,6 +111,28 @@ public class MediaContentDaoJDBC implements MediaContentDao
 		return contents.get(0);
 	}
 	
+	@Override
+	public MediaContent findById(Long id)
+	{
+		try
+		{
+			final PreparedStatement statement = statementPrompter.prepareStatement(FIND_BY_PRIMARY_KEY_QUERY);
+			statement.setLong(1, id);
+			
+			ResultSet result = statement.executeQuery();
+			
+			if ( result.next() )
+				return createFromResult(result);
+			return null;
+		}
+		
+		catch (SQLException e)
+		{ e.printStackTrace(); return null; }
+		
+		finally 
+		{ statementPrompter.onFinalize(); }
+	}
+	
 	protected static void setDataToInsertStatement( final MediaContent mediaContent, final PreparedStatement statement ) throws SQLException
 	{
 		statement.setLong       (1 , mediaContent.getId());

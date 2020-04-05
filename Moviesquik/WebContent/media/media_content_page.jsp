@@ -6,11 +6,7 @@
 <div id="media-content-page-container" class="container">
 	<div class="row">
 		
-		<div class="col-3">
-			<img class="card-img-top can-point" src="${media_content.poster}">
-		</div>
-		
-		<div class="col-6 media-content-hader">
+		<div class="col-5 media-content-hader">
 		
 				<h2 class="media-content-title">${media_content.title}</h2>
 			    <p class="media-content-production note"><strong>${media_content.production}</strong></p>
@@ -28,6 +24,8 @@
 			    <br>
 			    <br>
 			    
+			    <div>Plot: &nbsp;<strong class="note">${media_content.plot}</strong></div>
+			    <br>
 		    	<div>Type: &nbsp;<strong class="note">${media_content.type}</strong></div>
 		    	<div>Year: &nbsp;<strong class="note">${media_content.year}</strong></div>
 		    	<div>Released: &nbsp;<strong class="note">${media_content.humanReadableReleasedDateTime}</strong></div>
@@ -35,19 +33,24 @@
 		    	<div>Runtime: &nbsp;<strong class="note">${media_content.runtime}</strong></div>
 		    	<div>Director: &nbsp;<strong class="note">${media_content.director}</strong></div>
 		    	<div>Actors: &nbsp;<strong class="note">${media_content.actors}</strong></div>
-		    	<br>
-		    	<div>Plot: &nbsp;<strong class="note">${media_content.plot}</strong></div>
 		    	
 		    	<br>
 		    	
 		    	&#128065;&nbsp;${media_content.views}&nbsp;&nbsp;&nbsp;&#129505;&nbsp;${media_content.likes}
 		</div>
 		
+		<div class="col-4">
+		</div>
+		
 		<div class="col-3">
+			<img class="card-img-top can-point" src="${media_content.poster}">
+		</div>
+		
+		<%-- <div class="col-3">
 			<c:set var="small_view" scope="request" value="true"/>
 			<jsp:include page="../contents.jsp"></jsp:include>
 			<c:remove var="small_view"/>
-		</div>
+		</div> --%>
 		
 	</div>
 </div>

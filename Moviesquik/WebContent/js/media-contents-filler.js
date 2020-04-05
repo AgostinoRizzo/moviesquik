@@ -11,6 +11,7 @@ function fill_media_contents(contents_items_tag_id, data)
 		if ( i < N_ITEMS_IN_ROW )
 		{
 			var media_content = data[i];
+			$(contents_items_tag_id + " #media-id").eq(i).attr("value", media_content.id);
 			$(contents_items_tag_id + " img").eq(i).attr("src", media_content.poster);
 			$(contents_items_tag_id + " .card-title").eq(i).text(media_content.title);
 			$(contents_items_tag_id + " .card-text").eq(i).text(media_content.production);

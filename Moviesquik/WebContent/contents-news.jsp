@@ -3,14 +3,6 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 
-<!-- Style sheet files -->
-<link href="css/contents.css" rel="stylesheet">
-
-<!-- JavaScript files -->
-<script src="js/contents.js"></script>
-<script src="js/media-contents-filler.js"></script>
-
-
 <c:if test="${user != null}">
 
 	<!-- Suggested Media Contents -->

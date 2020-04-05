@@ -4,11 +4,11 @@
 <!DOCTYPE html>
 
 <!-- Style sheet files -->
-<link href="css/contents.css" rel="stylesheet">
+<!-- <link href="css/contents.css" rel="stylesheet"> -->
 
 <!-- JavaScript files -->
-<script src="js/contents.js"></script>
-<script src="js/media-contents-filler.js"></script>
+<!-- <script src="js/contents.js"></script>
+<script src="js/media-contents-filler.js"></script> -->
 
 
 <c:if test="${user != null && empty no_view_suggested}">

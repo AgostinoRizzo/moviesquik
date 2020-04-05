@@ -18,6 +18,7 @@
 	<link href="css/contents.css" rel="stylesheet">
 	<link href="css/searching.css" rel="stylesheet">
 	<link href="css/user-profile.css" rel="stylesheet">
+	<link href="css/media.css" rel="stylesheet">
 	
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	
