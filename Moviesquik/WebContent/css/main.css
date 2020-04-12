@@ -20,7 +20,7 @@ body
 a
 {
 	transition: 0.5s;
-	color: inherit;
+	/* color: inherit; */
 }
 
 a:hover,
@@ -50,7 +50,8 @@ h6
 .navbar-brand > img
 {
 	/* height: 50px; */
-	height: 30px;
+	/* height: 30px; */
+	width: 167px;
 }
 
 .note

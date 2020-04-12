@@ -9,7 +9,7 @@
 
 <header id="header">
 		
-	<nav class="navbar navbar-expand lgnavbar-light">
+	<nav class="navbar navbar-expand-md lgnavbar-light">
 		
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="icon-bar top-bar"></span>

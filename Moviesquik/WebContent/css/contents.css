@@ -17,6 +17,7 @@
 	padding-bottom: 10px;
 	position: relative;
 	text-align: left;
+	margin-top: 0px !important;
 }
 
 .media-contents-icon-title
@@ -75,7 +76,7 @@
 
 .card-img-top
 {
-	border-radius: 20px;
+	border-radius: 3px;
 	/* height: 80%; */
 }
 
@@ -108,6 +109,7 @@
 	text-overflow: ellipsis;
 	overflow: hidden;
 	white-space: nowrap;
+	margin-bottom: 0px;
 }
 
 .media-content-card .btn
@@ -150,13 +152,18 @@
 
 .media-contents-list-items
 {
-	margin-right: 4% !important;
-	margin-left: 4% !important;
+	/* margin-right: 4% !important;
+	margin-left: 4% !important; */
+	margin-right: 1% !important;
+	margin-left: 1% !important;
 }
 
 .media-col-item
 {
-	padding: 15px;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	padding-right: 10px;
+	padding-left: 10px;
 }
 
 
@@ -165,10 +172,10 @@
 .content-ratings-box
 {
 	padding-top: 0px;
-	margin-bottom: 5px;
+	/* margin-bottom: 5px; */
 	margin-top: 0px;
-	margin-bottom: 12px;
-	font-size: small;
+	/* margin-bottom: 12px; */
+	font-size: x-small;
 }
 .content-ratings-box .checked 
 {

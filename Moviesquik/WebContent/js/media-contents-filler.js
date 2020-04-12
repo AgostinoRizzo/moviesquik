@@ -2,7 +2,7 @@
  * 
  */
 
-var N_ITEMS_IN_ROW = 6
+var N_ITEMS_IN_ROW = 8
 
 function fill_media_contents(contents_items_tag_id, data)
 {

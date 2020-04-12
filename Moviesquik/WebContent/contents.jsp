@@ -55,7 +55,7 @@
 			<!-- <img class="media-contents-list-header_icon" alt="" src="res/drawable/rate_star.png"> -->
 			<div class="media-contents-icon-title">
 				<c:if test="${empty small_view}">
-					<h3 class="media-contents-list-header-title"><span class="fa fa-star checked"></span> Trending Now</h3>
+					<h4 class="media-contents-list-header-title"><span class="fa fa-star checked"></span> Trending Now</h4>
 				</c:if>
 				<c:if test="${not empty small_view}">
 					<p class="media-contents-list-header-title"><span class="fa fa-star checked"></span> Trending Now</p>
@@ -91,7 +91,7 @@
 			<!-- <img class="media-contents-list-header_icon" alt="" src="res/drawable/rate_star.png"> -->
 			<div class="media-contents-icon-title">
 				<c:if test="${empty small_view}">
-					<h3 class="media-contents-list-header-title"><!-- <span class="fa fa-eye checked"></span>  -->Most Popular</h3>
+					<h4 class="media-contents-list-header-title"><!-- <span class="fa fa-eye checked"></span>  -->Most Popular</h4>
 				</c:if>
 				<c:if test="${not empty small_view}">
 					<p class="media-contents-list-header-title"><!-- <span class="fa fa-eye checked"></span>  -->Most Popular</p>
@@ -127,7 +127,7 @@
 			<!-- <img class="media-contents-list-header_icon" alt="" src="res/drawable/rate_star.png"> -->
 			<div class="media-contents-icon-title">
 				<c:if test="${empty small_view}">
-					<h3 class="media-contents-list-header-title"><span class="fa fa-heart checked"></span> Most Favorites</h3>
+					<h4 class="media-contents-list-header-title"><span class="fa fa-heart checked"></span> Most Favorites</h4>
 				</c:if>
 				<c:if test="${not empty small_view}">
 					<p class="media-contents-list-header-title"><span class="fa fa-heart checked"></span> Most Favorites</p>

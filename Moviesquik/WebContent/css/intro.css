@@ -260,3 +260,24 @@
 	font-size: 3.4rem !important;
 }
 
+
+/* Showcase Style */
+.showcase-row
+{
+	display: inline-block;
+	white-space: nowrap;
+}
+.showcase-card-img-top
+{
+	max-width: 150px;
+	border-radius: 0px !important;
+	/* position: absolute; */
+}
+.intro-text
+{
+	background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7) 20%, rgba(0, 0, 0, 1.0))
+}
+#most-popular-showcase-row
+{
+	margin-left: -100px;
+}

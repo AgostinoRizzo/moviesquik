@@ -41,6 +41,7 @@
 	<script src="js/media/show_media_content.js"></script>
 	<script src="js/contents.js"></script>
 	<script src="js/media-contents-filler.js"></script>
+	<%-- <c:if test="${user == null}"><script src="js/showcase/scrolling.js"></script></c:if> --%>
 	
 </head>
 <body>
@@ -78,7 +79,7 @@
 					
 					<div>
 						<form class="form-inline" id="join_form">
-							<a id="join_btn" href="registration" class="btn btn-outline-primary scrollto">JOIN FREE FOR A MONTH</a>
+							<a id="join_btn" href="registration" class="btn btn-outline-primary btn-lg scrollto">JOIN FREE FOR A MONTH</a>
 			      		</form>
 			      	</div>
 				
@@ -137,7 +138,23 @@
 	      		</div>
 	
 	    	</div> -->
-	
+	    	
+	    	<div class="row showcase-row" id="top-rated-showcase-row">
+		    	<c:forEach items="${showcase.topRated}" var="media_content">
+		    		<img class="card-img-top showcase-card-img-top" src="${media_content.poster}">
+		    	</c:forEach>
+	    	</div>
+	    	<div class="row showcase-row" id="most-popular-showcase-row">
+		    	<c:forEach items="${showcase.mostPopular}" var="media_content">
+		    		<img class="card-img-top showcase-card-img-top" src="${media_content.poster}">
+		    	</c:forEach>
+	    	</div>
+	    	<div class="row showcase-row" id="most-favorites-showcase-row">
+		    	<c:forEach items="${showcase.mostFavorites}" var="media_content">
+		    		<img class="card-img-top showcase-card-img-top" src="${media_content.poster}">
+		    	</c:forEach>
+	    	</div>
+	    	
 		</section>
 		
 		
