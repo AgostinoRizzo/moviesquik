@@ -43,17 +43,29 @@ public class DateUtil
 	
 	public static Timestamp toJDBC( final Date fromDate )
 	{
+		if ( fromDate == null )
+			return null;
 		return new Timestamp(fromDate.getTime());
 	}
 	
 	public static Date toJava( final Timestamp fromDate )
 	{
+		if ( fromDate == null )
+			return null;
 		return new Date(fromDate.getTime());
 	}
 	
 	public static Date getCurrent()
 	{
 		return new Date(System.currentTimeMillis());
+	}
+	
+	public static void setDaysHorizon( final Calendar c )
+	{
+		c.set(Calendar.HOUR, 0);
+		c.set(Calendar.MINUTE, 0);
+		c.set(Calendar.SECOND, 0);
+		c.set(Calendar.MILLISECOND, 0);
 	}
 	
 	public static String toHumanReadable( final Date when )

@@ -19,12 +19,12 @@ body
 	/* background-color: #041624; */
 }
 
-.signup-wrapper, .login-wrapper, .info-wrapper
+.signup-wrapper, .login-wrapper, .info-wrapper, .whoiswatching-wrapper
 {
 	right: 0px;
 	/* min-height: 560px; */
 	margin: 0px auto;
-	top: 50px;
+	top: 80px;
 	position: relative;
 	border-radius: 10px;
 	/* background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.4)), url("../res/drawable/intro_background.jpg") no-repeat; */
@@ -49,18 +49,66 @@ body
 
 .login-wrapper, .info-wrapper
 {
-	top: 130px !important;
+	top: 80px !important;
 	padding: 40px 50px 50px 50px !important;
 }
 
 .signup-wrapper, .info-wrapper
 {
-	width: 700px;
+	/* width: 700px; */
+	width: 600px;
+}
+
+.signup-wrapper.choose-plan-wrapper
+{
+	width: 1000px !important;
 }
 
 .login-wrapper
 {
 	width: 450px;
+}
+
+.whoiswatching-wrapper
+{
+	top: 130px !important;
+	padding: 40px 50px 50px 50px !important;
+	width: 80% !important;
+}
+.whoiswatching-wrapper.profile-select
+{
+	top: 200px !important;
+}
+
+#profile-insert-password-form .form-row
+{
+	justify-content: center;
+}
+#profile-insert-password-form .form-row.form-row-pin .col
+{
+	max-width: 30%;
+}
+.profile-insert-password-submit-div
+{
+	padding-right: 35%;
+	padding-left: 35%;
+}
+
+.profile-name
+{
+	margin-top: 10px;
+}
+
+#account-menu
+{
+	text-align: left;
+	padding-right: 10%;
+	padding-left: 10%;
+}
+
+.form-section-text
+{
+	text-align: left !important;
 }
 
 #plans-wrapper
@@ -97,6 +145,11 @@ body
 {
 	width: 100% !important;
 	height: 100% !important;
+}
+
+.form-check.form-check-inline
+{
+	text-align: left;
 }
 
 .form-radio-box
@@ -163,7 +216,7 @@ body
 
 .card
 {
-	color: #000 !important;
+	color: #fff !important;
 }
 
 .modal-dialog
@@ -183,9 +236,14 @@ body
 }
 
 
-@media(max-width: 1000px)
+@media(max-width: 800px)
 {
 	.signup-wrapper, .login-wrapper, .info-wrapper
+	{
+		width: 100% !important;
+	}
+	
+	.signup-wrapper.choose-plan-wrapper
 	{
 		width: 100% !important;
 	}
@@ -196,11 +254,17 @@ body
 	}
 }
 
-@media(min-width: 1001px)
+@media(min-width: 801px)
 {
 	.signup-wrapper, .info-wrapper
 	{
-		width: 700px !important;
+		/* width: 700px !important; */
+		width: 600px !important;
+	}
+	
+	.signup-wrapper.choose-plan-wrapper
+	{
+		width: 1000px !important;
 	}
 	
 	.login-wrapper

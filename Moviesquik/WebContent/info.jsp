@@ -60,7 +60,7 @@
 				  <div class="lead">
 					  	<h6>
 					  		<c:if test="${registration_done != null}">
-					  			<strong>Registration done.</strong> Welcome ${registration_done.firstName}, now you can start enjoy watching Movies, TV Shows and more.
+					  			<strong>Registration done.</strong> Welcome <strong>${registration_done.email}</strong>. Before you can start enjoy watching Movies, TV Shows and more, please create your first profile.
 					  		</c:if>
 					  		
 					  		<c:if test="${error != null}">
@@ -81,7 +81,7 @@
 				  
 				  <div class="lead">
 				    <a class="btn btn-main" href="." role="button">
-				    		<c:if test="${registration_done != null}"><h4>Start experience</h4></c:if>
+				    		<c:if test="${registration_done != null}"><h4>Continue</h4></c:if>
 				    		<c:if test="${error != null}"><h4>Continue to Homepage</h4></c:if>
 				    </a>
 				  </div>

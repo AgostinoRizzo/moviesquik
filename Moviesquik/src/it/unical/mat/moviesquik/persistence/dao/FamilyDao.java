@@ -13,4 +13,6 @@ import it.unical.mat.moviesquik.model.User;
 public interface FamilyDao extends DataAccessObject<Family>
 {
 	public Family findByMember( final User component );
+	public Family findByEmail( final String email );
+	public Family findByLogin( final String email, final String password );
 }

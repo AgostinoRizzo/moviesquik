@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 
 <div class="card-deck mb-3 text-center">
-       <div class="card mb-4 box-shadow">
+       <div class="card mb-4 box-shadow bg-dark">
          <div class="card-header">
            <h4 class="my-0 font-weight-normal">Basic</h4>
          </div>
@@ -16,13 +16,13 @@
              <li>Email support</li>
              <li>Help center access</li>
            </ul>
-           <c:if test="${new_user != null and plan == null}">
-           		<button class="btn btn-main btn-main-light" type="submit" name="plan" value="basic"><h5>Choose basic</h5></button>
+           <c:if test="${(new_account != null and plan == null) or changeplan != null}">
+           		<button class="btn btn-main" type="submit" name="plan" value="basic"><h5>Choose basic</h5></button>
            </c:if>
          </div>
        </div>
        
-       <div class="card mb-4 box-shadow">
+       <div class="card mb-4 box-shadow bg-dark">
          <div class="card-header">
            <h4 class="my-0 font-weight-normal">Standard</h4>
          </div>
@@ -34,13 +34,13 @@
              <li>Priority email support</li>
              <li>Help center access</li>
            </ul>
-           <c:if test="${new_user != null and plan == null}">
-           		<button class="btn btn-main btn-main-light" type="submit" name="plan" value="standard"><h5>Choose standard</h5></button>
+           <c:if test="${(new_account != null and plan == null) or changeplan != null}">
+           		<button class="btn btn-main" type="submit" name="plan" value="standard"><h5>Choose standard</h5></button>
            </c:if>
          </div>
        </div>
        
-       <div class="card mb-4 box-shadow">
+       <div class="card mb-4 box-shadow bg-dark">
          <div class="card-header">
            <h4 class="my-0 font-weight-normal">Premium</h4>
          </div>
@@ -52,8 +52,8 @@
              <li>Phone and email support</li>
              <li>Help center access</li>
            </ul>
-           <c:if test="${new_user != null and plan == null}">
-           		<button class="btn btn-main btn-main-light" type="submit" name="plan" value="premium"><h5>Choose premium</h5></button>
+           <c:if test="${(new_account != null and plan == null) or changeplan != null}">
+           		<button class="btn btn-main" type="submit" name="plan" value="premium"><h5>Choose premium</h5></button>
            </c:if>
          </div>
        </div>

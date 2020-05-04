@@ -181,8 +181,8 @@
 }
 #nav-user-avatar-box img
 {
-	width: 30px !important;
-	height: 30px !important;
+	width: 40px !important;
+	height: 40px !important;
 }
 
 #nav-user-avatar-dropdown-menu a
@@ -249,7 +249,7 @@
 	margin-bottom: 0px;
 }
 
-.badge
+.badge.badge-pill
 {
 	position: relative;
 	top: -12px !important;

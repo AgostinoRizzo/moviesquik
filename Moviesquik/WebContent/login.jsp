@@ -19,13 +19,17 @@
 	<link href="css/intro.css" rel="stylesheet">
 	<link href="css/glyphicon.css" rel="stylesheet">
 	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	
 	<!-- JavaScript files -->
 	<script src="lib/jquery/jquery.min.js"></script>
 	<script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
 	
 	<script src="js/bootstrap-validate.js"></script>
+	<script src="js/header.js"></script>
 	<script src="js/validation.js"></script>
 	<script src="js/popup.js"></script>
+	<script src="js/login/login.js"></script>
 	
 </head>
 <body>
@@ -47,6 +51,7 @@
 			
 			<div id="form-header">
 				<h1>Sign In</h1>
+				<p class="note">Login into your Moviesquik account</p>
 			</div>
 			
 			
@@ -58,8 +63,8 @@
 						<label for="email">Email address</label>
 						<div class="input-group">
 							
-							<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-							<input type="text" id="email" name="email" class="form-control" placeholder="email@example.com" value="admin.admin@email.com" required>
+							<span class="input-group-addon"><span class="fa fa-envelope"></span></span>
+							<input type="text" id="email" name="email" class="form-control" placeholder="email@example.com" value="myfamily@email.com" required>
 							
 						</div>
 					</div>
@@ -69,8 +74,8 @@
 					<div class="col">
 						<label for="password">Password</label>
 						<div class="input-group">
-							<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-							<input type="password" id="password" name="password" class="form-control" placeholder="Password" value="adminadmin" required>
+							<span class="input-group-addon"><span class="fa fa-lock"></span></span>
+							<input type="password" id="password" name="password" class="form-control" placeholder="Password" value="password1234" required>
 							
 							<c:if test="${error != null && error.type == 'invalid_login'}">
 										
@@ -104,7 +109,7 @@
 				
 				<div class="form-row btn-form-row">
 					<div class="col">
-						<button class="btn btn-main" type="submit"><h5>Sign In</h5></button>
+						<button class="btn btn-main" type="submit" id="signin-submit-btn"><h5>Sign In</h5></button>
 					</div>
 				</div>
 				<div class="form-check form-check-inline">
@@ -117,6 +122,9 @@
 			
 		</div>
 	</section>
+	
+	<br><br><br>
+	<jsp:include page="footer.html"></jsp:include>
 	
 </body>
 </html>

@@ -4,6 +4,7 @@
 package it.unical.mat.moviesquik.persistence.dao.jdbc;
 
 import it.unical.mat.moviesquik.persistence.DataSource;
+import it.unical.mat.moviesquik.persistence.dao.BillingDao;
 import it.unical.mat.moviesquik.persistence.dao.CommentDao;
 import it.unical.mat.moviesquik.persistence.dao.CreditCardDao;
 import it.unical.mat.moviesquik.persistence.dao.DaoFactory;
@@ -14,6 +15,7 @@ import it.unical.mat.moviesquik.persistence.dao.MediaContentDao;
 import it.unical.mat.moviesquik.persistence.dao.MediaContentGenreDao;
 import it.unical.mat.moviesquik.persistence.dao.MediaContentSearchDao;
 import it.unical.mat.moviesquik.persistence.dao.NotificationDao;
+import it.unical.mat.moviesquik.persistence.dao.PlanBillingUpdateTransaction;
 import it.unical.mat.moviesquik.persistence.dao.PostDao;
 import it.unical.mat.moviesquik.persistence.dao.PostFeedbackDao;
 import it.unical.mat.moviesquik.persistence.dao.RegistrationTransaction;
@@ -51,9 +53,9 @@ public class DaoFactoryJDBC implements DaoFactory
 	}
 	
 	@Override
-	public RegistrationTransaction getRegistrationTransaction()
+	public BillingDao getBillingDao()
 	{
-		return new RegistrationTransactionJDBC(getNewStatementPrompter());
+		return new BillingDaoJDBC(getNewStatementPrompter());
 	}
 	
 	@Override
@@ -108,6 +110,18 @@ public class DaoFactoryJDBC implements DaoFactory
 	public PostFeedbackDao getPostFeedbackDao()
 	{
 		return new PostFeedbackDaoJDBC(getNewStatementPrompter());
+	}
+	
+	@Override
+	public RegistrationTransaction getRegistrationTransaction()
+	{
+		return new RegistrationTransactionJDBC(getNewStatementPrompter());
+	}
+	
+	@Override
+	public PlanBillingUpdateTransaction getPlanBillingUpdateTransaction()
+	{
+		return new PlanBillingUpdateTransactionJDBC(getNewStatementPrompter());
 	}
 	
 	private StatementPrompterJDBC getNewStatementPrompter()

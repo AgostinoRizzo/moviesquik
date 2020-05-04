@@ -12,6 +12,7 @@ public interface DaoFactory
 	public UserDao getUserDao();
 	public FamilyDao getFamilyDao();
 	public CreditCardDao getCreditCardDao();
+	public BillingDao getBillingDao();
 	public MediaContentDao getMediaContentDao();
 	public MediaContentSearchDao getMediaContentSearchDao();
 	public MediaContentGenreDao getMediaContentGenreDao();
@@ -23,4 +24,5 @@ public interface DaoFactory
 	public PostFeedbackDao getPostFeedbackDao();
 	
 	public RegistrationTransaction getRegistrationTransaction();
+	public PlanBillingUpdateTransaction getPlanBillingUpdateTransaction();
 }

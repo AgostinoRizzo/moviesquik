@@ -17,7 +17,10 @@ public class Family
 	private String name;
 	private List<User> members;
 	private CreditCard creditCard;
-	private Billing currentBilling;
+	private BillingReport billingReport;
+	private String email;
+	private String password;
+	private Boolean autoUpdate;
 	
 	public Long getId()
 	{
@@ -54,13 +57,37 @@ public class Family
 		this.creditCard = creditCard;
 	}
 	
-	public Billing getCurrentBilling()
+	public BillingReport getBillingReport()
 	{
-		return currentBilling;
+		return billingReport;
 	}
-	public void setCurrentBilling(Billing currentBilling)
+	public void setBillingReport(BillingReport billingReport)
 	{
-		this.currentBilling = currentBilling;
+		this.billingReport = billingReport;
+	}
+	public String getEmail()
+	{
+		return email;
+	}
+	public void setEmail(String email)
+	{
+		this.email = email;
+	}
+	public String getPassword()
+	{
+		return password;
+	}
+	public void setPassword(String password)
+	{
+		this.password = password;
+	}
+	public Boolean getAutoUpdate()
+	{
+		return autoUpdate;
+	}
+	public void setAutoUpdate(Boolean autoUpdate)
+	{
+		this.autoUpdate = autoUpdate;
 	}
 	
 }

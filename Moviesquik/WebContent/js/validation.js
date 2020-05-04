@@ -24,7 +24,7 @@ $(document).ready(function()
 	{
 	    bootstrapValidate('#email', 'email:Please enter a valid email address.');
 	    bootstrapValidate('#email', 'required:Email address required.');
-	    bootstrapValidate('#first_name', 'max:320:Please enter no more than 320 characters.');
+	    bootstrapValidate('#email', 'max:320:Please enter no more than 320 characters.');
 	}
     
 	if ( $("#birthday").length )
@@ -70,6 +70,23 @@ $(document).ready(function()
 		bootstrapValidate('#cc-cvv', 'max:3:Please enter exactly 3 digits.');
 		bootstrapValidate('#cc-cvv', 'required:CVV required.');
 		bootstrapValidate('#cc-cvv', 'numeric:CVV must contain only numeric digits.');
+	}
+	
+	if ( $("#pin").length )
+	{
+		bootstrapValidate('#pin', 'min:4:Please enter exactly 4 digits.');
+		bootstrapValidate('#pin', 'max:4:Please enter exactly 4 digits.');
+		bootstrapValidate('#pin', 'required:PIN required.');
+		bootstrapValidate('#pin', 'numeric:PIN must contain only numeric digits.');
+	}
+	
+	if ( $("#confirm_pin").length )
+	{
+		bootstrapValidate('#confirm_pin', 'min:4:Please enter exactly 4 digits.');
+		bootstrapValidate('#confirm_pin', 'max:4:Please enter exactly 4 digits.');
+		bootstrapValidate('#confirm_pin', 'required:PIN required.');
+		bootstrapValidate('#confirm_pin', 'numeric:PIN must contain only numeric digits.');
+		bootstrapValidate('#confirm_pin', 'matches:#pin:Confirmed PIN does not match provided PIN.');
 	}
 
 });

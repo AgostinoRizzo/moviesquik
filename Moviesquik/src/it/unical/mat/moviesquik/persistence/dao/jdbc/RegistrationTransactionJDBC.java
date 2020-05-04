@@ -6,10 +6,11 @@ package it.unical.mat.moviesquik.persistence.dao.jdbc;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.List;
 
+import it.unical.mat.moviesquik.model.Billing;
+import it.unical.mat.moviesquik.model.BillingReport;
 import it.unical.mat.moviesquik.model.Family;
-import it.unical.mat.moviesquik.model.User;
+import it.unical.mat.moviesquik.persistence.DBManager;
 import it.unical.mat.moviesquik.persistence.dao.RegistrationTransaction;
 
 /**
@@ -28,31 +29,48 @@ public class RegistrationTransactionJDBC implements RegistrationTransaction
 	@Override
 	public boolean execute(Family family)
 	{
-		final List<User> members = family.getMembers();
-		if ( members.size() != 1 )
-			return false;
-		
-		final User user = members.get(0);
 		Connection connection = null;
 		try
 		{
 			connection = statementPrompter.getDataSource().getNewConnection();
 			connection.setAutoCommit(false);
 			
+			if ( !DBManager.getInstance().canRegister(family) )
+			{
+				connection.rollback();
+				return false;
+			}
+			
 			final PreparedStatement familyInsertStatement = connection.prepareStatement(FamilyDaoJDBC.INSERT_STATEMENT);
 			family.setId(IdBroker.getNextId(statementPrompter));
 			FamilyDaoJDBC.setDataToInsertStatement(family, familyInsertStatement);
 			familyInsertStatement.executeUpdate();
 			
+			/*
 			final PreparedStatement userInsertStatement = connection.prepareStatement(UserDaoJDBC.INSERT_STATEMENT);
 			user.setId(IdBroker.getNextId(statementPrompter));
 			UserDaoJDBC.setDataToInsertStatement(user, userInsertStatement);
 			userInsertStatement.executeUpdate();
+			*/
 			
-			final PreparedStatement billingInsertStatement = connection.prepareStatement(BillingDaoJDBC.INSERT_STATEMENT);
-			family.getCurrentBilling().setId(IdBroker.getNextId(statementPrompter));
-			BillingDaoJDBC.setDataToInsertStatement(family.getCurrentBilling(), billingInsertStatement);
-			billingInsertStatement.executeUpdate();
+			
+			/* billing report */
+			
+			final BillingReport billingReport = family.getBillingReport();
+			final Billing currentTrialBilling = billingReport.getCurrent();
+			final Billing nextBillingUpdate = billingReport.getNextUpdate();
+			
+			// current trial billing
+			final PreparedStatement currentTrialBillingInsertStatement = connection.prepareStatement(BillingDaoJDBC.INSERT_STATEMENT);
+			currentTrialBilling.setId(IdBroker.getNextId(statementPrompter));
+			BillingDaoJDBC.setDataToInsertStatement(currentTrialBilling, currentTrialBillingInsertStatement);
+			currentTrialBillingInsertStatement.executeUpdate();
+			
+			// next billing update
+			final PreparedStatement nextBillingInsertStatement = connection.prepareStatement(BillingDaoJDBC.INSERT_STATEMENT);
+			nextBillingUpdate.setId(IdBroker.getNextId(statementPrompter));
+			BillingDaoJDBC.setDataToInsertStatement(nextBillingUpdate, nextBillingInsertStatement);
+			nextBillingInsertStatement.executeUpdate();
 			
 			connection.commit();
 			return true;

@@ -5,7 +5,6 @@ package it.unical.mat.moviesquik.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,7 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import it.unical.mat.moviesquik.model.Billing;
+import it.unical.mat.moviesquik.model.BillingPlan;
+import it.unical.mat.moviesquik.model.BillingReport;
 import it.unical.mat.moviesquik.model.CreditCard;
 import it.unical.mat.moviesquik.model.Exception;
 import it.unical.mat.moviesquik.model.Family;
@@ -41,20 +41,19 @@ public class Signup extends HttpServlet
 			return;
 		}
 		
-		final User user = (User) req.getSession().getAttribute("new_user");
-		final String choosenPlan = getChoosenPlan(req);
+		final Family account = (Family) req.getSession().getAttribute("new_account");
+		final BillingPlan choosenPlan = BillingPlan.parseBillingPlan( getChoosenPlan(req) );
 		
-		if ( user == null)
+		if ( account == null)
 			req.getSession().invalidate();
-		else if ( user != null && choosenPlan != null )
+		else if ( account != null && choosenPlan != null )
 		{
-			final Billing currentBilling = new Billing();
+			final BillingReport billingReport = BillingReport.createNewBillingReport(account);
+			billingReport.initNextBillingUpdate(choosenPlan);
 			
-			currentBilling.setPlan(choosenPlan);
-			currentBilling.setFamily(user.getFamily());
-			user.getFamily().setCurrentBilling(currentBilling);
+			account.setBillingReport(billingReport);
 			
-			req.getSession().setAttribute("plan", choosenPlan);
+			req.getSession().setAttribute("plan", choosenPlan.toString());
 		}
 		
 		//ServletUtils.printSessionAttributes(req);
@@ -65,34 +64,24 @@ public class Signup extends HttpServlet
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) 
 			throws ServletException, IOException
 	{
-		final User user = (User) req.getSession().getAttribute("new_user");
+		final Family account = (Family) req.getSession().getAttribute("new_account");
 		
-		if ( user == null )
+		if ( account == null )
 		{			
-			final User new_user = new User
-					( req.getParameter("first_name"),
-					  req.getParameter("last_name"),
-					  req.getParameter("email"),
-					  DateUtil.parse(req.getParameter("birthday")),
-					  req.getParameter("gender"),
-					  req.getParameter("password") );
+			final Family new_account = new Family();
+			new_account.setEmail( req.getParameter("email") );
+			new_account.setPassword( req.getParameter("password") );
 			
-			final List<User> members = new ArrayList<User>();
-			final Family new_family = new Family();
+			new_account.setName(Family.DEFAULT_NAME);
+			new_account.setMembers( new ArrayList<User>() );
 			
-			members.add(new_user);
-			new_family.setName(Family.DEFAULT_NAME);
-			new_family.setMembers(members);
-			
-			new_user.setFamily(new_family);
-			
-			if ( DBManager.getInstance().canRegister(new_user) )
-				req.getSession().setAttribute("existing_user", new_user);
-			else
+			if ( DBManager.getInstance().canRegister(new_account) )
 			{
-				req.getSession().removeAttribute("existing_user");
-				req.getSession().setAttribute("new_user", new_user);
+				req.getSession().removeAttribute("existing_account");
+				req.getSession().setAttribute("new_account", new_account);
 			}
+			else
+				req.getSession().setAttribute("existing_account", new_account);
 		}
 		else
 		{
@@ -111,20 +100,16 @@ public class Signup extends HttpServlet
 					req.getSession().setAttribute("invalid_credit_card", card);
 				else
 				{
-					final Family family = user.getFamily();
-					final Billing currentBilling = family.getCurrentBilling();
+					account.setCreditCard(card);
+					account.getBillingReport().initCurrentTrialBilling();
 					
-					family.setCreditCard(card);
-					currentBilling.setTrial(true);
-					currentBilling.setStartDate(DateUtil.getCurrent());
-					
-					if ( db.register(family) ) 
+					if ( db.register(account) ) 
 					{
 						ServletUtils.removeAllSessionAttributes(req);
-						req.getSession().setAttribute("registration_done", user);
-						req.getSession().setAttribute("user", user);
+						req.getSession().setAttribute("registration_done", account);
+						req.getSession().setAttribute("account", account);
 						
-						req.getRequestDispatcher("info.jsp").forward(req, resp);
+						req.getRequestDispatcher("info.jsp").forward(req, resp);///
 						return;
 					}
 					else
@@ -145,9 +130,9 @@ public class Signup extends HttpServlet
 	
 	private String getChoosenPlan( final HttpServletRequest req )
 	{
-		final String choosenPlan = (String) req.getSession().getAttribute("plan");
-		if ( choosenPlan != null )
-			return choosenPlan;
+		final Object choosenPlanObj = req.getSession().getAttribute("plan");
+		if ( choosenPlanObj != null )
+			return (String) choosenPlanObj;
 		
 		/*
 		final String[] plans = {"basic", "standard", "premium"};

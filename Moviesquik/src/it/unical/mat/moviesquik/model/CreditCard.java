@@ -5,6 +5,8 @@ package it.unical.mat.moviesquik.model;
 
 import java.util.Date;
 
+import it.unical.mat.moviesquik.util.DateUtil;
+
 /**
  * @author Agostino
  *
@@ -16,6 +18,7 @@ public class CreditCard
 	private String number;
 	private Date expiration;
 	private String cvv;
+	private Double balance;
 	
 	public CreditCard()
 	{}
@@ -70,6 +73,11 @@ public class CreditCard
 	{
 		return expiration;
 	}
+	
+	public String getExpirationString()
+	{
+		return DateUtil.toString(expiration);
+	}
 
 	public void setExpiration(Date expiration)
 	{
@@ -84,6 +92,16 @@ public class CreditCard
 	public void setCvv(String cvv)
 	{
 		this.cvv = cvv;
+	}
+	
+	public Double getBalance()
+	{
+		return balance;
+	}
+	
+	public void setBalance(Double balance)
+	{
+		this.balance = balance;
 	}
 	
 }

@@ -25,6 +25,26 @@
 	<url-pattern>/registration</url-pattern>
 </servlet-mapping>
 
+<!-- Add Profile Servlet -->
+<servlet>
+	<servlet-name>addprofile</servlet-name>
+	<servlet-class>it.unical.mat.moviesquik.controller.AddProfile</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>addprofile</servlet-name>
+	<url-pattern>/addprofile</url-pattern>
+</servlet-mapping>
+
+<!-- Profiles Manager Servlet -->
+<servlet>
+	<servlet-name>profile_manager</servlet-name>
+	<servlet-class>it.unical.mat.moviesquik.controller.ProfilesManager</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>profile_manager</servlet-name>
+	<url-pattern>/whoiswatching</url-pattern>
+</servlet-mapping>
+
 <!-- Login Servlet -->
 <servlet>
 	<servlet-name>login</servlet-name>
@@ -33,6 +53,26 @@
 <servlet-mapping>
 	<servlet-name>login</servlet-name>
 	<url-pattern>/login</url-pattern>
+</servlet-mapping>
+
+<!-- Account Info Servlet -->
+<servlet>
+	<servlet-name>account_manager</servlet-name>
+	<servlet-class>it.unical.mat.moviesquik.controller.AccountManager</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>account_manager</servlet-name>
+	<url-pattern>/account</url-pattern>
+</servlet-mapping>
+
+<!-- Billing Info Servlet -->
+<servlet>
+	<servlet-name>billing_manager</servlet-name>
+	<servlet-class>it.unical.mat.moviesquik.controller.BillingManager</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>billing_manager</servlet-name>
+	<url-pattern>/billing</url-pattern>
 </servlet-mapping>
 
 <!-- User Profile Servlet -->

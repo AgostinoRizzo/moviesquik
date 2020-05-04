@@ -28,7 +28,7 @@
 						<a class="nav-link" href="#">About <span class="sr-only">(current)</span></a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#">Prices</a>
+						<a class="nav-link" href="#pricing-section">Prices</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link disabled" href="registration">Sign Up</a>
@@ -40,7 +40,10 @@
 			
 			</c:if>
 			
-			<c:if test="${user != null}">
+		</div>
+		
+		<c:if test="${user != null}">
+			<div class="collapse navbar-collapse justify-content-end" id="navbarToggler">
 				
 				<ul id="navbar-nav-links" class="navbar-nav">
 						
@@ -61,12 +64,7 @@
 						</li>
 						
 				</ul>
-			</c:if>
-		</div>
-		
-		<c:if test="${user != null}">
-			<div class="collapse navbar-collapse justify-content-end" id="navbarToggler">
-			
+				
 				<form method="GET" action="search" class="form-inline my-2 my-lg-0 header-search-form">
 					<!-- <span class="input-group-addon fa fa-search"></span> -->
 					<span id="search-icon" class="input-group-addon fa fa-search clickable"></span>
@@ -114,7 +112,7 @@
 					        	<a class="dropdown-item" href="#">Dashboard</a>
 					        	<a class="dropdown-item" href="#">Edit Profile</a>
 					        	<div class="dropdown-divider"></div>
-					        	<a class="dropdown-item" href="login?logout=true">Sign Out</a>
+					        	<a class="dropdown-item" href="login?logout=true&subject=user">Sign Out</a>
 					        </div>
 					    </li>
 					      

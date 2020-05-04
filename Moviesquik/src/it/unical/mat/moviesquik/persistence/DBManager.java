@@ -5,6 +5,7 @@ package it.unical.mat.moviesquik.persistence;
 
 import java.util.List;
 
+import it.unical.mat.moviesquik.model.BillingReport;
 import it.unical.mat.moviesquik.model.CreditCard;
 import it.unical.mat.moviesquik.model.Family;
 import it.unical.mat.moviesquik.model.User;
@@ -83,7 +84,12 @@ public class DBManager
 	
 	public boolean canRegister( final User user )
 	{
-		return getDaoFactory().getUserDao().findByEmail( user.getEmail() ) != null;
+		return getDaoFactory().getUserDao().findByEmail( user.getEmail() ) == null;
+	}
+	
+	public boolean canRegister( final Family account )
+	{
+		return getDaoFactory().getFamilyDao().findByEmail( account.getEmail() ) == null;
 	}
 	
 	public boolean existsMatch( final CreditCard card )
@@ -96,9 +102,19 @@ public class DBManager
 		return getDaoFactory().getRegistrationTransaction().execute(family);
 	}
 
+	public Family accountLogin( final String email, final String password )
+	{
+		return getDaoFactory().getFamilyDao().findByLogin(email, password);
+	}
+	
 	public User login( final String email, final String password )
 	{
 		return getDaoFactory().getUserDao().findByLogin(email, password);
+	}
+	
+	public boolean updatePlanBilling( final BillingReport newBillingReport )
+	{
+		return getDaoFactory().getPlanBillingUpdateTransaction().execute(newBillingReport);
 	}
 	
 	public List<String> getMediaContentsGenres()

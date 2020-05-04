@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import it.unical.mat.moviesquik.controller.searching.MediaContentsSearch;
 import it.unical.mat.moviesquik.controller.searching.MediaContentsSearchFilter;
 import it.unical.mat.moviesquik.controller.searching.MediaContentsViewTemplate;
+import it.unical.mat.moviesquik.model.Family;
 import it.unical.mat.moviesquik.model.MediaContent;
 import it.unical.mat.moviesquik.model.MediaContentType;
 import it.unical.mat.moviesquik.model.Showcase;
@@ -40,12 +41,10 @@ public class Home extends HttpServlet
 			req.setAttribute("media_content_of_the_day", mediaContentOfTheDay);
 		req.setAttribute("genres", DBManager.getInstance().getMediaContentsGenres());
 		
-		final User user = (User) req.getSession().getAttribute("user");
+		final Family account = SessionManager.checkAccountAuthentication(req, resp, false, true);
+		final User user = SessionManager.checkUserAuthentication(req, resp, false);
 		
-		if ( user != null )
-			MediaContentsSearch.manageGroupViewTemplate
-				(req, resp, MediaContentType.ALL, MediaContentsViewTemplate.GROUP, user, MediaContentsSearchFilter.EMPTY, false);
-		else
+		if ( account == null )
 		{
 			final DaoFactory daofactory = DBManager.getInstance().getDaoFactory();
 			final Showcase sc = new Showcase();
@@ -58,10 +57,23 @@ public class Home extends HttpServlet
 					.searchMostFavorites(MediaContentType.ALL, SortingPolicy.NONE, 10, MediaContentsSearchFilter.EMPTY));
 			
 			req.setAttribute( "showcase", sc );
+			
+			final RequestDispatcher rd = req.getRequestDispatcher("index.jsp");
+			rd.forward(req, resp);
 		}
-		
-		final RequestDispatcher rd = req.getRequestDispatcher("index.jsp");
-		rd.forward(req, resp);
+		else if ( user == null )
+		{
+			final RequestDispatcher rd = req.getRequestDispatcher("whoiswatching.jsp");
+			rd.forward(req, resp);
+		}
+		else
+		{
+			MediaContentsSearch.manageGroupViewTemplate
+				(req, resp, MediaContentType.ALL, MediaContentsViewTemplate.GROUP, user, MediaContentsSearchFilter.EMPTY, false);
+			
+			final RequestDispatcher rd = req.getRequestDispatcher("index.jsp");
+			rd.forward(req, resp);
+		}
 	}
 	
 	@Override

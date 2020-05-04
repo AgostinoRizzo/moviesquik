@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import it.unical.mat.moviesquik.model.Exception;
-import it.unical.mat.moviesquik.model.User;
+import it.unical.mat.moviesquik.model.Family;
 import it.unical.mat.moviesquik.persistence.DBManager;
 
 /**
@@ -27,12 +27,20 @@ public class Login extends HttpServlet
 			throws ServletException, IOException
 	{
 		final String isLogout = req.getParameter("logout");
-		if ( isLogout != null && isLogout.equals("true") )
+		final String subject = req.getParameter("subject");
+		if ( isLogout != null && isLogout.equals("true") && subject != null )
 		{
-			req.getSession().invalidate();
-			req.getRequestDispatcher("").forward(req, resp);
+			if ( subject.equals("user") )
+			{
+				final Object account = req.getSession().getAttribute("account");
+				ServletUtils.removeAllSessionAttributes(req);
+				req.getSession().setAttribute("account", account);
+			}
+			else
+				req.getSession().invalidate();
+			resp.sendRedirect("");
 		}
-		else if ( req.getSession().getAttribute("user") == null )
+		else if ( req.getSession().getAttribute("account") == null )
 			req.getRequestDispatcher("login.jsp").forward(req, resp);
 		else
 			req.getRequestDispatcher("").forward(req, resp);
@@ -42,8 +50,8 @@ public class Login extends HttpServlet
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException
 	{
-		User user = (User) req.getSession().getAttribute("user");
-		if ( user != null )
+		Family account = (Family) req.getSession().getAttribute("account");
+		if ( account != null )
 		{
 			req.getRequestDispatcher("").forward(req, resp);
 			return;
@@ -52,12 +60,12 @@ public class Login extends HttpServlet
 		final String email = req.getParameter("email");
 		final String password = req.getParameter("password");
 		
-		user = DBManager.getInstance().login(email, password);
+		account = DBManager.getInstance().accountLogin(email, password);
 		
-		if ( user != null )
+		if ( account != null )
 		{
 			req.getSession().removeAttribute("invalid_login");
-			req.getSession().setAttribute("user", user);
+			req.getSession().setAttribute("account", account);
 			resp.sendRedirect("");
 		}
 		else

@@ -3,7 +3,10 @@
  */
 package it.unical.mat.moviesquik.model;
 
+import java.util.Calendar;
 import java.util.Date;
+
+import it.unical.mat.moviesquik.util.DateUtil;
 
 /**
  * @author Agostino
@@ -28,6 +31,10 @@ public class Billing
 	public Date getStartDate()
 	{
 		return startDate;
+	}
+	public String getStartDateString()
+	{
+		return DateUtil.toString(startDate);
 	}
 	public void setStartDate(Date startDate)
 	{
@@ -57,6 +64,25 @@ public class Billing
 	public void setFamily(Family family)
 	{
 		this.family = family;
+	}
+	
+	public Date getEndDate()
+	{
+		final Calendar c = Calendar.getInstance();
+		c.setTime(startDate);
+		c.add(Calendar.MONTH, 1);
+		
+		return c.getTime();
+	}
+	
+	public String getEndDateString()
+	{
+		return DateUtil.toString( getEndDate() );
+	}
+	
+	public Double getBalance()
+	{
+		return PlanPricesManager.getInstance().getBillingPrice(this);
 	}
 	
 }

@@ -22,6 +22,7 @@ public class User
 	private Date birthday;
 	private String gender;
 	private String password;
+	private Boolean isKid;
 	private Family family;
 	private List<User> friends;
 	private Integer followersCount;
@@ -48,6 +49,7 @@ public class User
 		this.birthday = birthday;
 		this.gender = gender;
 		this.password = password;
+		this.isKid = false;
 	}
 
 	public Long getId()
@@ -123,6 +125,16 @@ public class User
 	public void setPassword(String password)
 	{
 		this.password = password;
+	}
+	
+	public Boolean getIsKid()
+	{
+		return isKid;
+	}
+	
+	public void setIsKid(Boolean isKid)
+	{
+		this.isKid = isKid;
 	}
 
 	public Family getFamily()

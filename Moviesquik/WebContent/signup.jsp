@@ -18,6 +18,8 @@
 	<link href="css/signup.css" rel="stylesheet">
 	<link href="css/glyphicon.css" rel="stylesheet">
 	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	
 	<!-- JavaScript files -->
 	<script src="lib/jquery/jquery.min.js"></script>
 	<script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -48,9 +50,9 @@
 	</header>
 	
 	<div id="intro" class="intro-section">
-		<div class="signup-wrapper foreground-box" id=<c:if test="${new_user != null and plan == null}">"plans-wrapper"</c:if> >
+		<div class="signup-wrapper foreground-box <c:if test="${new_account != null and plan == null}">choose-plan-wrapper</c:if>" id=<c:if test="${new_user != null and plan == null}">"plans-wrapper"</c:if> >
 			
-			<c:if test="${new_user == null}">
+			<c:if test="${new_account == null}">
 			
 				<div id="form-header">
 					<div class="note">STEP 1 OF 3</div>
@@ -61,7 +63,7 @@
 				<form method="POST" id="signupform" action="registration" class="well form-horizontal" onsubmit="return onSubmitUserDataForm()">
 				<fieldset>
 					
-					<div class="form-row">
+					<!--(commented due to family registration) <div class="form-row">
 						<div class="col">
 							<label for="first_name" class="control-label">First name</label>
 							<div class="input-group">
@@ -77,16 +79,16 @@
 								</div>
 							</div>
 						</div>
-					</div>
+					</div> -->
 					
 					<div class="form-row">
 						<div class="col">
 							<label for="email">Email address</label>
 							<div class="input-group">
-								<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-								<input type="text" id="email" name="email" class="form-control" placeholder="email@example.com" required>
+								<span class="input-group-addon"><span class="fa fa-envelope"></span></span>
+								<input type="text" id="email" name="email" class="form-control" placeholder="email@example.com" required value="email@email.com">
 								
-								<c:if test="${existing_user != null}">
+								<c:if test="${existing_account != null}">
 										
 										<div id="existing-user-popup" class="modal" tabindex="-1">
 									        <div class="modal-dialog">
@@ -113,7 +115,7 @@
 						</div>
 					</div>
 					
-					<div class="form-row">
+					<!--(commented due to family registration) <div class="form-row">
 						<div class="col">
 							<label for="birthday">Birthday</label>
 							<div>
@@ -121,7 +123,7 @@
 							</div>
 						</div>
 						<div class="col">
-							<!-- <div class="form-check form-check-inline">
+							<div class="form-check form-check-inline">
 								<div class="form-radio-box">
 									<input class="form-check-input" type="checkbox" value="female" checked>
 									<label class="form-check-label">Female</label>
@@ -130,7 +132,7 @@
 									<input class="form-check-input" type="radio" value="male">
 									<label class="form-check-label">Male</label>
 								</div>
-							</div> -->
+							</div>
 							<label for="email">Gender</label>
 							<select class="custom-select" name="gender">
 								<option value="female">Female</option>
@@ -138,14 +140,14 @@
 								<option value="ignore" selected>Ignore</option>
 							</select>
 						</div>
-					</div>
+					</div> -->
 					
 					<div class="form-row">
 						<div class="col">
 							<label for="password">Choose a password (8-40 characters)</label>
 							<div class="input-group">
-								<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-								<input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+								<span class="input-group-addon"><span class="fa fa-lock"></span></span>
+								<input type="password" id="password" name="password" class="form-control" placeholder="Password" required value="password">
 							</div>
 						</div>
 					</div>
@@ -153,8 +155,8 @@
 						<div class="col">
 							<label for="confirm_password">Confirm Password</label>
 							<div class="input-group">
-								<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-								<input type="password" id="confirm_password" name="confirm_password" class="form-control" placeholder="Confirm password" required>
+								<span class="input-group-addon"><span class="fa fa-lock"></span></span>
+								<input type="password" id="confirm_password" name="confirm_password" class="form-control" placeholder="Confirm password" required value="password">
 							</div>
 						</div>
 					</div>
@@ -180,7 +182,7 @@
 				</form>
 			
 			</c:if>
-			<c:if test="${new_user != null and plan == null}">
+			<c:if test="${new_account != null and plan == null}">
 				
 				<div id="form-header">
 					<div class="note">STEP 2 OF 3</div>
@@ -194,7 +196,7 @@
 				
 			</c:if>
 			
-			<c:if test="${new_user != null and plan != null}">
+			<c:if test="${new_account != null and plan != null}">
 				
 				<c:if test="${invalid_credit_card != null}">
 										
@@ -247,8 +249,8 @@
 		              <div class="col">
 		                <label for="cc-name">Name on card</label>
 		                <div class="input-group">
-								<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-		                		<input class="form-control" id="cc-name" name="cc-name" type="text" required placeholder="Full name as displayed on card">
+								<span class="input-group-addon"><span class="fa fa-user"></span></span>
+		                		<input class="form-control" id="cc-name" name="cc-name" type="text" required placeholder="Full name as displayed on card" value="Admin Admin">
 		                </div>
 		              </div>
 		            </div>
@@ -256,8 +258,8 @@
 		              <div class="col">
 		                <label for="cc-number">Credit card number (16 digits)</label>
 		                <div class="input-group">
-								<span class="input-group-addon"><i class="glyphicon glyphicon-credit-card"></i></span>
-		                		<input class="form-control" id="cc-number" name="cc-number" required type="number" placeholder="Credit card number">
+								<span class="input-group-addon"><span class="fa fa-credit-card"></span></span>
+		                		<input class="form-control" id="cc-number" name="cc-number" required type="number" placeholder="Credit card number" value="1234123412341234">
 		                </div>
 		              </div>
 		            </div>
@@ -266,15 +268,15 @@
 		              <div class="col mb-3">
 		                <label for="cc-expiration">Expiration</label>
 		                <div class="input-group">
-								<span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+								<span class="input-group-addon"><span class="fa fa-calendar"></span></span>
 		                		<input class="form-control" id="cc-expiration-month" name="cc-expiration-month" required type="month" value="2019-12" placeholder="Month">
 		                </div>
 		              </div>
 		              <div class="col mb-3">
 		                <label for="cc-expiration">CVV</label>
 		                <div class="input-group">
-								<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-		                		<input class="form-control" id="cc-cvv" name="cc-cvv" required type="number" placeholder="CVV">
+								<span class="input-group-addon"><span class="fa fa-lock"></span></span>
+		                		<input class="form-control" id="cc-cvv" name="cc-cvv" required type="number" placeholder="CVV" value="123">
 		                </div>
 		              </div>
 		            </div>
@@ -305,6 +307,8 @@
 			
 		</div>
 	</div>
+	
+	<jsp:include page="footer.html"></jsp:include>
 	
 </body>
 </html>

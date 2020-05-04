@@ -160,7 +160,7 @@
 		
 		<jsp:include page="contents.jsp"></jsp:include>
 		
-		<div class="pricing-section">
+		<div class="pricing-section" id="pricing-section">
 			<div class="pricing-header">
 				<div class="note">TRY IT FREE FOR A MONTH</div>
 				<h2>Choose a plan that's right for you.</h2>
