@@ -6,6 +6,8 @@
 <div id="media-content-page-container" class="container">
 	<div class="row">
 		
+		<div class="col-1"></div>
+		
 		<div class="col-5 media-content-hader">
 		
 				<h2 class="media-content-title">${media_content.title}</h2>
@@ -39,12 +41,14 @@
 		    	&#128065;&nbsp;${media_content.views}&nbsp;&nbsp;&nbsp;&#129505;&nbsp;${media_content.likes}
 		</div>
 		
-		<div class="col-4">
+		<div class="col-2">
 		</div>
 		
 		<div class="col-3">
 			<img class="card-img-top can-point" src="${media_content.poster}">
 		</div>
+		
+		<div class="col-1"></div>
 		
 		<%-- <div class="col-3">
 			<c:set var="small_view" scope="request" value="true"/>
@@ -53,4 +57,34 @@
 		</div> --%>
 		
 	</div>
+	
+	<br><br><br>
+	
+	<div class="row">
+		
+		<div class="col-1"></div>
+		
+		<div class="col-10">
+			<h4 class="media-content-title">Trailer</h4><br>
+			<iframe class="media-content-trailer-frame" src="https://www.youtube.com/embed/vcLU0DhDhi0"></iframe>
+		</div>
+		
+		<div class="col-1"></div>
+		
+	</div>
+	
+	<br><br><br>
+	
+	<div class="row">
+		
+		<div class="col-1"></div>
+		
+		<div class="col-10">
+			<h4 class="media-content-title">Reviews</h4><br>
+		</div>
+		
+		<div class="col-1"></div>
+		
+	</div>
+	
 </div>

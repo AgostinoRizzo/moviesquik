@@ -8,7 +8,7 @@ $(document).ready(function() {
 		
 		var ajax_url = "getmedia?key=" + $(this).closest(".media-content-card").find("#media-id").val();
 		
-		$("#page-content").html('<div class="container"><div class="loader loader-sm"></div></div');
+		$("#page-content").html('<div class="container" id="media-content-loading-container"><div class="loader loader-sm"></div></div');
 		
 		$.ajax(
 				{

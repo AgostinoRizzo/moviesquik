@@ -141,7 +141,7 @@ footer
 	margin-top: 0px !important;
 }
 
-.clickable, .can-point
+.clickable, .clickable-light, .can-point
 {
 	cursor: pointer;
 }
@@ -149,7 +149,11 @@ footer
 {
 	transform: scale(1.2);
 }
-.clickable
+.clickable-light:hover
+{
+	transform: scale(1.1);
+}
+.clickable, .clickable-light
 {
 	transition: 0.5s;
 }
@@ -179,6 +183,15 @@ footer
 	padding-left: 5px;
 }
 
+.col-thin-left
+{
+	padding-right: 0px;
+}
+.col-thin-right
+{
+	padding-left: 0px;
+}
+
 .col-left
 {
 	text-align: left;
@@ -191,6 +204,31 @@ footer
 .p-light
 {
 	margin-bottom: 0px;
+}
+
+a.a-hidden
+{
+	color: white !important;
+}
+
+/* scrollable row cols */
+
+.home-container-wrapper.row
+{
+	height: 100vh;
+}
+.scollable-col
+{
+	height: 100%;
+	overflow-y: scroll;
+}
+.scollable-col::-webkit-scrollbar
+{
+	display: none;
+}
+.scollable-col
+{
+	-ms-overflow-style: none;
 }
 
 @keyframes spin {

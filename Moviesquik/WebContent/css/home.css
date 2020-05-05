@@ -10,6 +10,11 @@
 	
 	/* margin-top: 140px; */
 }
+.home-container-wrapper
+{
+	padding-right: 30px;
+	padding-left: 30px;
+}
 .home-container .home-container-col
 {
 	/* padding-right: 30px;
@@ -48,19 +53,25 @@
 }
 .users-col-title
 {
-	margin-top: 30px;
+	margin-top: 10px;
 	margin-bottom: 10px;
 }
 .user-list-row
 {
 	margin-bottom: 10px;
 	cursor: pointer;
+	padding: 3px;
+}
+.sidenav-list-row
+{
+	cursor: pointer;
+	padding: 3px;
 }
 .users-list-name
 {
 	margin: auto;
 	max-width: 180px;
-	padding-left: 10px;
+	/* padding-left: 10px; */
 }
 .users-list-name p
 {
@@ -72,7 +83,16 @@
 }
 .users-list-name .users-list-name-text
 {
-	font-weight: bold;
+	/* font-weight: bold; */
+}
+.users-list-name .note
+{
+	font-size: 80%;
+	font-weight: 400;
+}
+.users-list-name
+{
+	/* padding-left: 0px; */
 }
 .line-status
 {
@@ -95,7 +115,7 @@
 /* Media contents Style */
 .home-container .news-media-contents-col
 {
-	max-width: 40%;
+	/* max-width: 40%; */
 }
 .home-container .media-contents-list-header
 {
@@ -106,12 +126,21 @@
 /* News contents Style */
 .media
 {
-	background: transparent;
+	/* background: transparent; */
+}
+.media-post-box
+{
+	/* background-color: rgba(20, 20, 20, 1) !important; */
+}
+#news-list
+{
+	/* overflow-y: scroll;
+	height: 50%; */
 }
 #news-list>.media
 {
 	/* background: linear-gradient(#000, rgba(27, 28, 33, 1.0) 80%, rgba(171, 89, 210, 0.1)) !important; */
-	border-radius: 20px !important;
+	/* border-radius: 10px !important; */
 }
 .posts-col
 {
@@ -164,7 +193,7 @@
 {
 	/* margin-left: 250px; */
 	/* margin-top: 40px; */
-	padding-top: 60px;
+	padding-top: 80px;
 }
 .sidenav-col
 {
@@ -176,7 +205,7 @@
 }
 .home-col
 {
-	max-width: 80%;
+	width: 80%;
 	left: 20%;
 	padding-top: 10px;
 }

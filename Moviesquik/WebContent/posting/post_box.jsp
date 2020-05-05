@@ -3,7 +3,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 
-<div class="media p-3 media-post-box main-media-post-box">
+<div class="media p-3 media-post-box main-media-post-box tile">
 
 	  <input type="hidden" id="post-id" value="${post_to_display.id}">
 	  
@@ -13,9 +13,9 @@
 				<c:if test="${post_to_display.owner.profileImagePath != null && post_to_display.owner.profileImagePath.length() > 0}">
 					<c:set var = "post_owner_profile_img_src" scope = "request" value = "res/user/${post_to_display.owner.profileImagePath}"/>
 				</c:if>
-		  		<div class="col-1"><a href="user?id=${post_to_display.owner.id}"><img src="${post_owner_profile_img_src}" width="30px" class="avatar-img rounded-circle"></a></div>
-			    <div class="col header-text">
-			    	<h5><a href="user?id=${post_to_display.owner.id}">${post_to_display.owner.fullName}</a></h5>
+		  		<div class="col-auto col-light-left"><a href="user?id=${post_to_display.owner.id}"><img src="${post_owner_profile_img_src}" width="30px" class="avatar-img rounded-circle"></a></div>
+			    <div class="col col-light-right header-text">
+			    	<h6><a class="a-hidden" href="user?id=${post_to_display.owner.id}">${post_to_display.owner.fullName}</a><%-- &nbsp;&nbsp;<small class="note">${post_to_display.owner.email}</small> --%></h6>
 			    	<small class="note" data-toggle="tooltip" data-placement="top" title="${post_to_display.dateTime}">Posted ${post_to_display.humanReadableDateTime}</small>
 			    </div>
 		    </div>

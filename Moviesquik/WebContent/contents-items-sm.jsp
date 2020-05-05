@@ -3,13 +3,22 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 
-<div class="col-12 col-sm-12 col-md-6 col-xl-4 media-col-item">
+<div class="col-12 col-sm-12 col-md-4 col-xl-2 media-col-item">
 	<jsp:include page="contents-item.jsp"></jsp:include>
 </div>
-<div class="col-12 col-sm-12 col-md-6 col-xl-4 media-col-item">
+<div class="col-12 col-sm-12 col-md-4 col-xl-2 media-col-item">
 	<jsp:include page="contents-item.jsp"></jsp:include>
 </div>
-<div class="col-12 col-sm-12 col-md-6 col-xl-4 media-col-item">
+<div class="col-12 col-sm-12 col-md-4 col-xl-2 media-col-item">
+	<jsp:include page="contents-item.jsp"></jsp:include>
+</div>
+<div class="col-12 col-sm-12 col-md-4 col-xl-2 media-col-item">
+	<jsp:include page="contents-item.jsp"></jsp:include>
+</div>
+<div class="col-12 col-sm-12 col-md-4 col-xl-2 media-col-item">
+	<jsp:include page="contents-item.jsp"></jsp:include>
+</div>
+<div class="col-12 col-sm-12 col-md-4 col-xl-2 media-col-item">
 	<jsp:include page="contents-item.jsp"></jsp:include>
 </div>
  

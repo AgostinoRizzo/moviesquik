@@ -8,6 +8,15 @@
 <!-- New post box -->
 <jsp:include page="./new_post_box.jsp"></jsp:include>
 
+<!-- Media contents -->
+<div class="col-auto news-media-contents-col home-container-col">
+	<c:set var="small_view" scope="request" value="true"/>
+	<%-- <c:set var="no_view_suggested" scope="request" value="true"/> ### uncomment to hide suggested contents ### --%>
+	<jsp:include page="../contents.jsp"></jsp:include>
+	<c:remove var="small_view"/>
+	<%-- <c:remove var="no_view_suggested"/> ### uncomment to hide suggested contents ### --%>
+</div>
+				
 <!-- List all personal posts -->
 <div id="news-list">
 	<jsp:include page="./news_content.jsp"></jsp:include>

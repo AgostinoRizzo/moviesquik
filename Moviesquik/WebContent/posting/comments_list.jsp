@@ -21,10 +21,10 @@
 					<c:if test="${comment.owner.profileImagePath != null && comment.owner.profileImagePath.length() > 0}">
 						<c:set var = "post_owner_profile_img_src" scope = "request" value = "res/user/${comment.owner.profileImagePath}"/>
 					</c:if>
-			  		<div class="col-1"><a href="user?id=${comment.owner.id}"><img src="${post_owner_profile_img_src}" width="30px" class="avatar-img rounded-circle"></a></div>
+			  		<div class="col-auto col-light-left"><a href="user?id=${comment.owner.id}"><img src="${post_owner_profile_img_src}" width="30px" class="avatar-img rounded-circle"></a></div>
 				    
-				    <div class="col header-text">
-				    	<a href="user?id=${comment.owner.id}">${comment.owner.fullName}</a>
+				    <div class="col header-text col-light-right">
+				    	<a class="a-hidden" href="user?id=${comment.owner.id}">${comment.owner.fullName}</a>
 				    	&nbsp;
 				    	<small class="note" data-toggle="tooltip" data-placement="top" title="${comment.dateTime}">${comment.humanReadableDateTime}</small>
 				    	<p class="post-text">${comment.text}</p>

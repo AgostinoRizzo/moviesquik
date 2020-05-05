@@ -91,6 +91,6 @@ public class ProfilesManager extends HttpServlet
 		req.getSession().removeAttribute("login_user");
 		req.getSession().removeAttribute("invalid_login");
 		req.getSession().setAttribute("user", user);
-		resp.sendRedirect("");
+		resp.sendRedirect(".");
 	}
 }

@@ -38,7 +38,7 @@ public class Login extends HttpServlet
 			}
 			else
 				req.getSession().invalidate();
-			resp.sendRedirect("");
+			resp.sendRedirect(".");
 		}
 		else if ( req.getSession().getAttribute("account") == null )
 			req.getRequestDispatcher("login.jsp").forward(req, resp);
@@ -66,7 +66,7 @@ public class Login extends HttpServlet
 		{
 			req.getSession().removeAttribute("invalid_login");
 			req.getSession().setAttribute("account", account);
-			resp.sendRedirect("");
+			resp.sendRedirect(".");
 		}
 		else
 		{
