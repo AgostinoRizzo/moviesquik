@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import it.unical.mat.moviesquik.persistence.DBConnectionPool;
 import it.unical.mat.moviesquik.persistence.DataSource;
 
 /**
@@ -26,7 +27,7 @@ public class StatementPrompterJDBC
 	public PreparedStatement prepareStatement( final String sql ) throws SQLException
 	{
 		onFinalize();
-		connection = dataSource.getNewConnection();
+		connection = DBConnectionPool.getInstance().getConnection();
 		return connection.prepareStatement(sql);
 	}
 	
@@ -46,12 +47,9 @@ public class StatementPrompterJDBC
 	{
 		try
 		{
-			if ( connection != null )
-				connection.close();
-		} 
-		catch (SQLException e)
-		{ e.printStackTrace(); }
-		
+			//if ( connection != null )
+			DBConnectionPool.getInstance().releaseConnection();
+		}		
 		finally 
 		{ connection = null; }
 	}

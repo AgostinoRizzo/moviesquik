@@ -36,6 +36,7 @@ public class PostDaoJDBC extends AbstractDaoJDBC<Post> implements PostDao
 																			 "from \"comment\"\r\n" + 
 																			 "where post_id = ?";
 	
+	private User currentOwner = null;
 	
 	protected PostDaoJDBC(StatementPrompterJDBC statementPrompter)
 	{
@@ -52,6 +53,7 @@ public class PostDaoJDBC extends AbstractDaoJDBC<Post> implements PostDao
 			statement.setLong(1, id);
 			
 			ResultSet result = statement.executeQuery();
+			currentOwner = null;
 			
 			if ( result.next() )
 				return createFromResult(result);
@@ -105,6 +107,7 @@ public class PostDaoJDBC extends AbstractDaoJDBC<Post> implements PostDao
 			statement.setInt(3, page.getOffset());
 			
 			ResultSet result = statement.executeQuery();
+			currentOwner = user;
 			
 			while ( result.next() )
 				posts.add(createFromResult(result));
@@ -134,6 +137,7 @@ public class PostDaoJDBC extends AbstractDaoJDBC<Post> implements PostDao
 			statement.setInt(4, page.getOffset());
 			
 			ResultSet result = statement.executeQuery();
+			currentOwner = user;
 			
 			while ( result.next() )
 				posts.add(createFromResult(result));
@@ -162,6 +166,8 @@ public class PostDaoJDBC extends AbstractDaoJDBC<Post> implements PostDao
 		
 		if ( result.wasNull() )
 			post.setOwner(null);
+		else if ( currentOwner != null )
+			post.setOwner(currentOwner);
 		else
 			post.setOwner(daoFactory.getUserDao().findByPrimaryKey(subjectUserId));
 		

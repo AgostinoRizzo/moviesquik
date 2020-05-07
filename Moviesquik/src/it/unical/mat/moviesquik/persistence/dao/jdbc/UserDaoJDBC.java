@@ -374,5 +374,4 @@ public class UserDaoJDBC implements UserDao
 		
 		return genres;
 	}
-
 }

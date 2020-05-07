@@ -27,8 +27,8 @@
 	<strong class="note">Friends</strong><br>
 </div>
 	
-<c:forEach begin="0" end="10" step="1">
 <c:forEach items="${user.friends}" var="friend">
+<c:forEach begin="0" end="10" step="1">
 	<div class="row user-list-row">
 		            			
 		  <c:if test="${friend.profileImagePath != null && friend.profileImagePath.length() > 0}">

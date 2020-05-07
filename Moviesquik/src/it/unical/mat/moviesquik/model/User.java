@@ -149,7 +149,8 @@ public class User
 	
 	public List<User> getFriends()
 	{
-		friends = DBManager.getInstance().getDaoFactory().getUserDao().findFriends(this, 10);
+		if ( friends == null || friends.isEmpty() )
+			friends = DBManager.getInstance().getDaoFactory().getUserDao().findFriends(this, 10);
 		return friends;
 	}
 	
@@ -190,7 +191,8 @@ public class User
 	
 	public List<Notification> getNotifications()
 	{
-		setNotifications(DBManager.getInstance().getDaoFactory().getNotificationDao()
+		if ( notifications == null || notifications.isEmpty() )
+			setNotifications(DBManager.getInstance().getDaoFactory().getNotificationDao()
 				.findByUser(this, DataListPage.DEFAULT_NOTIFICATIONS_PAGE));
 		return notifications;
 	}
@@ -202,7 +204,8 @@ public class User
 	
 	public List<Notification> getUnreadNotifications()
 	{
-		setUnreadNotifications(DBManager.getInstance().getDaoFactory().getNotificationDao()
+		if ( unreadNotifications == null || unreadNotifications.isEmpty() )
+			setUnreadNotifications(DBManager.getInstance().getDaoFactory().getNotificationDao()
 				.findUnreadByUser(this, DataListPage.DEFAULT_NOTIFICATIONS_PAGE));
 		return unreadNotifications;
 	}
@@ -214,13 +217,15 @@ public class User
 	
 	public List<Post> getPersonalPosts()
 	{
-		personalPosts = DBManager.getInstance().getDaoFactory().getPostDao().findByUser(this, DataListPage.DEFAULT_POSTS_PAGE);
+		if ( personalPosts == null || personalPosts.isEmpty() )
+			personalPosts = DBManager.getInstance().getDaoFactory().getPostDao().findByUser(this, DataListPage.DEFAULT_POSTS_PAGE);
 		return personalPosts;
 	}
 	
 	public List<Post> getAllPosts()
 	{
-		allPosts = DBManager.getInstance().getDaoFactory().getPostDao().findByFollowedUsers(this, DataListPage.DEFAULT_POSTS_PAGE);
+		if ( allPosts == null || allPosts.isEmpty() )
+			allPosts = DBManager.getInstance().getDaoFactory().getPostDao().findByFollowedUsers(this, DataListPage.DEFAULT_POSTS_PAGE);
 		return allPosts;
 	}
 }

@@ -11,9 +11,7 @@ import java.util.List;
 
 import it.unical.mat.moviesquik.model.Notification;
 import it.unical.mat.moviesquik.model.User;
-import it.unical.mat.moviesquik.persistence.DBManager;
 import it.unical.mat.moviesquik.persistence.DataListPage;
-import it.unical.mat.moviesquik.persistence.dao.DaoFactory;
 import it.unical.mat.moviesquik.persistence.dao.NotificationDao;
 import it.unical.mat.moviesquik.util.DateUtil;
 
@@ -79,7 +77,7 @@ public class NotificationDaoJDBC implements NotificationDao
 			ResultSet result = statement.executeQuery();
 			
 			while ( result.next() )
-				notifications.add(createFromResult(result));
+				notifications.add(createFromResult(result, user));
 			
 			return notifications;
 		}
@@ -107,7 +105,7 @@ public class NotificationDaoJDBC implements NotificationDao
 			ResultSet result = statement.executeQuery();
 			
 			while ( result.next() )
-				notifications.add(createFromResult(result));
+				notifications.add(createFromResult(result, user));
 			
 			return notifications;
 		}
@@ -138,7 +136,7 @@ public class NotificationDaoJDBC implements NotificationDao
 		{ statementPrompter.onFinalize(); }
 	}
 	
-	private Notification createFromResult( final ResultSet result ) throws SQLException
+	private Notification createFromResult( final ResultSet result, final User owner ) throws SQLException
 	{
 		final Notification notification = new Notification();
 		
@@ -148,13 +146,8 @@ public class NotificationDaoJDBC implements NotificationDao
 		notification.setDescription(result.getString("description"));
 		notification.setIsRead(result.getBoolean("is_read"));
 		
-		final DaoFactory daoFactory = DBManager.getInstance().getDaoFactory();
-		final Long subjectUserId = result.getLong("subject_user_id");
-		
-		if ( result.wasNull() )
-			notification.setSubjectUser(null);
-		else
-			notification.setSubjectUser(daoFactory.getUserDao().findByPrimaryKey(subjectUserId));
+		result.getLong("subject_user_id");
+		notification.setSubjectUser( result.wasNull() ? null : owner );
 		
 		return notification;
 	}

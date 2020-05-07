@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import it.unical.mat.moviesquik.model.Family;
 import it.unical.mat.moviesquik.model.User;
+import it.unical.mat.moviesquik.persistence.DBManager;
 
 /**
  * @author Agostino
@@ -34,12 +35,19 @@ public class SessionManager
 			return null;
 		}
 		
-		final User user = (User) req.getSession().getAttribute("user");
+		User user = (User) req.getSession().getAttribute("user");
 		if ( user == null && finalize )
 		{
 			final RequestDispatcher rd = req.getRequestDispatcher("whoiswatching.jsp");
 			rd.forward(req, resp);
 		}
+		
+		if ( user != null )
+		{
+			user = DBManager.getInstance().getDaoFactory().getUserDao().findByPrimaryKey(user.getId());
+			req.getSession().setAttribute("user", user);
+		}
+		
 		return user;
 	}
 	public static Family checkAccountAuthentication( final HttpServletRequest req, final HttpServletResponse resp ) 

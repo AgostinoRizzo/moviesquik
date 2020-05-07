@@ -4,7 +4,7 @@
 
 $(document).ready(function() {
 	
-	$(".card-img-top").click(function() {
+	$(document).on("click", ".card-img-top", function() {
 		
 		var ajax_url = "getmedia?key=" + $(this).closest(".media-content-card").find("#media-id").val();
 		

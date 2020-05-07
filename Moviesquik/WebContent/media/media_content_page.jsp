@@ -8,7 +8,7 @@
 		
 		<div class="col-1"></div>
 		
-		<div class="col-5 media-content-hader">
+		<div class="col-6 media-content-hader">
 		
 				<h2 class="media-content-title">${media_content.title}</h2>
 			    <p class="media-content-production note"><strong>${media_content.production}</strong></p>
@@ -41,10 +41,8 @@
 		    	&#128065;&nbsp;${media_content.views}&nbsp;&nbsp;&nbsp;&#129505;&nbsp;${media_content.likes}
 		</div>
 		
-		<div class="col-2">
-		</div>
 		
-		<div class="col-3">
+		<div class="col-4">
 			<img class="card-img-top can-point" src="${media_content.poster}">
 		</div>
 		
@@ -58,7 +56,7 @@
 		
 	</div>
 	
-	<br><br><br>
+	<br>
 	
 	<div class="row">
 		

@@ -59,3 +59,4 @@
 </div>
 
 <jsp:include page="./new_comment_box.jsp"></jsp:include>
+

@@ -16,9 +16,14 @@ public class IdBroker
 	
 	public static Long getNextId( StatementPrompterJDBC statementPrompter ) throws SQLException
 	{
-		final ResultSet result = statementPrompter.prepareStatement(NEXT_ID_QUERY).executeQuery();
-		if ( result.next() )
-			return result.getLong("id");
-		throw new SQLException();
+		try
+		{
+			final ResultSet result = statementPrompter.prepareStatement(NEXT_ID_QUERY).executeQuery();
+			if ( result.next() )
+				return result.getLong("id");
+			throw new SQLException();
+		}
+		finally 
+		{ statementPrompter.onFinalize(); }
 	}
 }

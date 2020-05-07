@@ -106,7 +106,7 @@
 					          	<img src="${user_profile_img_src}" class="avatar-img rounded-circle">
 					          	
 					        </a>
-					        <div id="nav-user-avatar-dropdown-menu" class="dropdown-menu dropdown-menu-right bg-dark text-white" aria-labelledby="navbarDropdownMenuLink">
+					        <div id="nav-user-avatar-dropdown-menu" class="dropdown-menu dropdown-menu-right user-dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 					        	<a class="dropdown-item" href="user"><small>Signed in as</small><br><strong>${user.firstName} ${user.lastName}</strong></a>
 					        	<div class="dropdown-divider"></div>
 					        	<a class="dropdown-item" href="#">Dashboard</a>

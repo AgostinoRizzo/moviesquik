@@ -170,6 +170,21 @@
 }
 
 
+/******************************************************
+	nav user menu style.
+******************************************************/
+
+.user-dropdown-menu
+{
+	color: #fff;
+	border-radius: 20px;
+	background-color: #212121 !important;
+}
+.user-dropdown-menu .dropdown-item
+{
+	border-radius: 10px;
+}
+
 
 /******************************************************
 	nav user avatar style.

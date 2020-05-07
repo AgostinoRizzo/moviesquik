@@ -8,6 +8,7 @@ import java.io.File;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
+import it.unical.mat.moviesquik.persistence.DBConnectionPool;
 import it.unical.mat.moviesquik.persistence.DBManager;
 
 /**
@@ -22,5 +23,10 @@ public class Initializer implements ServletContextListener
 		DBManager.getInstance().getFiller()
 			.fillMediaContents(sce.getServletContext().getRealPath(File.separator));
 		DBManager.getFileSystemDataSource().setSrcPath(sce.getServletContext().getRealPath(""));
+	}
+	@Override
+	public void contextDestroyed(ServletContextEvent sce)
+	{
+		DBConnectionPool.getInstance().finalize();
 	}
 }
