@@ -8,7 +8,7 @@ var VIDEO_AUDIO_CODEC = 'video/mp4; codecs="avc1.64001e, mp4a.40.2"';
 var mediaSource = null;
 var sourceBuffer = null;
 var manifest = null;
-var videotag = null;
+window.videotag = null;
 
 var nextSegmentIndex = null;
 var currentServerIndex = null;
@@ -93,7 +93,7 @@ function onSourceBufferUpdateEnd(e)
 	//videotag.play();
 	
 	if ( nextSegmentIndex == 0)
-		{ watchingPageSetup(videotag); }
+		{ watchingPageSetup(); }
 	
 	cachedSegments[nextSegmentIndex] = true;
 	console.log("SEGMENT: " + nextSegmentIndex);
@@ -195,19 +195,12 @@ function getNextSegmentIndex(seekTime, manifest)
 	return last_min;
 }
 
-function watchingPageSetup(videotag) 
+function watchingPageSetup() 
 {
 	$("#loading-wrapper").hide();
-	$(videotag).removeClass("d-none");
-	setFullscreenVideo(videotag);
-}
-
-function setFullscreenVideo(videotag) 
-{
-	if      ( videotag.requestFullscreen )       { videotag.requestFullscreen();       }
-	else if ( videotag.mozRequestFullscreen )    { videotag.mozRequestFullscreen();    }  // Firefox browser.
-	else if ( videotag.webkitRequestFullscreen ) { videotag.webkitRequestFullscreen(); }  // Chrome, Safari and Opera browsers.
-	else if ( videotag.msRequestFullscreen )     { videotag.msRequestFullscreen();     }  // IE and Edge browsers.
+	
+	var player = $("#player");
+	player.removeClass("d-none");
 }
 
 function onMediaSourceOpen(e) 
@@ -218,8 +211,8 @@ function onMediaSourceOpen(e)
 
 function initalizeStreaming(manifest) 
 {
-	alert(manifest.segments);
-	alert(manifest.servers);
+	//alert(manifest.segments);
+	//alert(manifest.servers);
 	
 	if ( !'MediaSource' in window )
 		{
@@ -247,7 +240,7 @@ function initalizeStreaming(manifest)
 	mediaSource.addEventListener('sourceopen', onMediaSourceOpen);	
 }
 
-function requestManifest(media_content_id) 
+window.requestManifest = function(media_content_id) 
 {
 	$.ajax(
 		{
@@ -264,7 +257,7 @@ function requestManifest(media_content_id)
 }
 
 var seek = 10.2;
-function onSeek() 
+window.onSeek = function() 
 {
 	sourceBuffer.remove(0, 1000);  // TODO: check conditions.
 	seekTime = seek;
@@ -273,9 +266,3 @@ function onSeek()
 	start_segment = false;
 }
 
-$(document).ready( function()
-	{
-		requestManifest( $(this).find("#media-id").val() );
-		
-		$("#seek-btn").click( function() { onSeek(); } );
-	});

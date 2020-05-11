@@ -13,14 +13,17 @@
 	
 	<!-- Style sheet files -->
 	<link href="css/main.css" rel="stylesheet">
+	<link href="css/common.css" rel="stylesheet">
 	<link href="css/streaming.css" rel="stylesheet">
+	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	
 	<!-- JavaScript files -->
 	<script src="lib/jquery/jquery.min.js"></script>
 	<script src="lib/jquery/jquery-migrate.min.js"></script>
 	<script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<script src="lib/typeahead/bootstrap3-typeahead.js"></script>
-	<script src="js/streaming/main.js"></script>
+	<script src="js/streaming/player.js" type="module"></script>
 	
 </head>
 <body>
@@ -32,8 +35,7 @@
 		<div class="loader loader-sm"></div>
 	</div>
 	
-	<video id="video-stream-tag" controls autoplay class="d-none"></video>
-	
-	<button id="seek-btn">Seek</button>
+	<jsp:include page="player.jsp"></jsp:include>
 	
 </body>
+</html>

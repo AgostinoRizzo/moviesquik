@@ -4,6 +4,19 @@
 	streaming style.
 ******************************************************/
 
+:root
+{
+	--player-controls-wrapper-height: 80px;
+	--video-timeline-height: 20px;
+	--player-controls-height: 70px;
+}
+
+html, body
+{
+	height: 100%;
+	margin: 0px;
+	max-height: 100%;
+}
 
 /******************************************************
 	stream loading page style.
@@ -11,6 +24,7 @@
 #brand-icon > img
 {
 	width: 167px;
+	margin-top: 50px;
 }
 #loading-wrapper
 {
@@ -34,8 +48,12 @@
 
 
 /******************************************************
-	video tag style.
+	video player style.
 ******************************************************/
+#player
+{
+	height: 100%;
+}
 #video-stream-tag
 {
 	margin: auto;
@@ -44,4 +62,233 @@
 	bottom: 0px;
 	right: 0px;
 	left: 0px;
+	width: 100%;
+}
+#player-controls-wrapper
+{
+	position: absolute;
+	left: 0px;
+	bottom: 0px;
+	
+	/* width: 500px; */
+	width: 100%;
+	height: var(--player-controls-wrapper-height);
+	
+	padding-right: 30px;
+	padding-left: 30px;
+	
+	z-index: 10;
+	
+	background-color: rgba(0,0,0,.5);
+	color: white;
+}
+
+#video-timeline-wrapper
+{
+	width: 100%;
+	height: var(--video-timeline-height);
+	position: relative;
+}
+#video-timeline
+{
+	display: inline-block;
+	width: calc(100% - 60px);
+	height: 100%;
+	position: absolute;
+}
+#video-timings
+{
+	display: inline-block;
+	width: 50px;
+	height: 100%;
+	float: right;
+	text-align: right;
+}
+
+#player-controls
+{
+	width: 100%;
+	height: var(--player-controls-height);
+	padding-top: 20px;
+	padding-bottom: 20px;
+	padding-right: 2px;
+	padding-left: 2px;
+}
+.player-control
+{
+	height: 100%;
+	display: inline-block;
+	vertical-align:middle;
+}
+.right-player-control
+{
+	float: right;
+}
+.player-control > .fa
+{
+	font-size: 20px;
+}
+
+#play-btn
+{
+	width: 30px;
+}
+#step-backward-btn
+{
+	margin-left: 50px;
+}
+#step-forward-btn
+{
+	margin-left: 30px;
+}
+#volume-btn
+{
+	margin-left: 30px;
+	width: 20px;
+}
+#volume-slider-wrapper
+{
+	margin-left: 10px;
+	width: 70px;
+}
+#volume-slider-wrapper > input[type=range]
+{
+	margin: 0px !important;
+}
+#media-title
+{
+	margin-left: 50px;
+	max-width: 300px;
+}
+
+#timeline
+{
+	height: 6px;
+	width: 100%;
+	position: absolute;
+	top: 7px;
+	left: 0px;
+	padding-right: 7px;
+	background-clip: content-box;
+	background-color: gray;
+}
+#cursor
+{
+	width: 14px;
+	height: 14px;
+	border-radius: 50%;
+	position: absolute;
+	top: 3px;
+	z-index: 10;
+	background-color: rgb(182, 112, 216);
+	box-shadow: 0px 0px 10px 1px #000;
+	
+	left: calc(50% - 7px); /* change 0% to x% */
+}
+
+#backward-timeline
+{
+	width: 50%; /* change 0% to x% */
+	height: 100%;
+	background: linear-gradient(to right, rgb(73, 143, 193), rgb(171, 89, 210));
+}
+
+/* #forward-timeline
+{
+	display: inline-block;
+	width: 50%;
+	background-color: 
+} */
+
+
+/* custom volume input range (slider) style */
+input[type=range] {
+  height: 18px;
+  -webkit-appearance: none;
+  margin: 10px 0;
+  width: 100%;
+  background-color: transparent !important;
+}
+input[type=range]:focus {
+  outline: none;
+}
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 3px;
+  cursor: pointer;
+  animate: 0.2s;
+  box-shadow: 0px 0px 0px #000000;
+  background: #fff;
+  border-radius: 1px;
+  border: 0px solid #000000;
+}
+input[type=range]::-webkit-slider-thumb {
+  box-shadow: 0px 0px 2px #000000;
+  border: 0px solid #2497E3;
+  height: 12px;
+  width: 12px;
+  border-radius: 50px;
+  background: #FFFFFF;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -4.5px;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: #fff;
+}
+input[type=range]::-moz-range-track {
+  width: 100%;
+  height: 3px;
+  cursor: pointer;
+  animate: 0.2s;
+  box-shadow: 0px 0px 0px #000000;
+  background: #fff;
+  border-radius: 1px;
+  border: 0px solid #000000;
+}
+input[type=range]::-moz-range-thumb {
+  box-shadow: 0px 0px 2px #000000;
+  border: 0px solid #2497E3;
+  height: 12px;
+  width: 12px;
+  border-radius: 50px;
+  background: #FFFFFF;
+  cursor: pointer;
+}
+input[type=range]::-ms-track {
+  width: 100%;
+  height: 3px;
+  cursor: pointer;
+  animate: 0.2s;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+  background: #fff;
+  border: 0px solid #000000;
+  border-radius: 2px;
+  box-shadow: 0px 0px 0px #000000;
+}
+input[type=range]::-ms-fill-upper {
+  background: #fff;
+  border: 0px solid #000000;
+  border-radius: 2px;
+  box-shadow: 0px 0px 0px #000000;
+}
+input[type=range]::-ms-thumb {
+  margin-top: 1px;
+  box-shadow: 0px 0px 2px #000000;
+  border: 0px solid #2497E3;
+  height: 12px;
+  width: 12px;
+  border-radius: 50px;
+  background: #FFFFFF;
+  cursor: pointer;
+}
+input[type=range]:focus::-ms-fill-lower {
+  background: #fff;
+}
+input[type=range]:focus::-ms-fill-upper {
+  background: #fff;
 }

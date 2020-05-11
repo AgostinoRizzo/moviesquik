@@ -13,3 +13,11 @@
 	background-color: #1c1c1e;
 	border-radius: 5px;
 }
+
+/* Text overflow style */
+.text-overflow
+{
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
