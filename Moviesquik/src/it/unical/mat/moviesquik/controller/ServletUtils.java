@@ -6,6 +6,7 @@ package it.unical.mat.moviesquik.controller;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.util.Enumeration;
 
 import javax.servlet.RequestDispatcher;
@@ -14,6 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
+
+import com.google.gson.JsonObject;
 
 import it.unical.mat.moviesquik.model.Exception;
 
@@ -88,5 +91,18 @@ public class ServletUtils
 		} catch 
 		(IOException e)
 		{ return ""; }
+	}
+	public static void setJsonContentAndEncoding( final HttpServletResponse resp )
+	{
+		resp.setContentType("application/json");
+		resp.setCharacterEncoding("UTF-8");
+	}
+	public static void sendJson( final JsonObject json, final HttpServletResponse resp ) throws IOException
+	{
+		setJsonContentAndEncoding(resp);
+		
+		final PrintWriter out = resp.getWriter();
+		out.print(json);
+		out.flush();
 	}
 }

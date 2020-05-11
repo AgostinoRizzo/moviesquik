@@ -4,9 +4,14 @@
 <!DOCTYPE html>
 
 <div id="media-content-page-container" class="container">
+	
+	<input type="hidden" id="media-id" value="${media_content.id}">
+	
 	<div class="row">
 		
-		<div class="col-1"></div>
+		<div class="col-1">
+			<h3><span id="mc-page-back" class="fa fa-arrow-left clickable"></span></h3>
+		</div>
 		
 		<div class="col-6 media-content-hader">
 		
@@ -14,12 +19,12 @@
 			    <p class="media-content-production note"><strong>${media_content.production}</strong></p>
 				
 		    	<jsp:include page="media_content_ratings.jsp"></jsp:include>
-		   
+		   		
 		    	<p class="">${media_content.genre}</p>
 		    	<c:if test="${user != null}">
 				    <div class="btn-group">
-					    <a href="#" class="btn btn-outline-success btn-sm"><i class="fa fa-play"></i> Watch</a>
-					    <a href="#" class="btn btn-outline-warning btn-sm"><i class="fa fa-plus"></i> Add</a>
+					    <a class="btn btn-outline-success btn-sm btn-watch" href="watch?key=${media_content.id}"><i class="fa fa-play"></i> Watch</a>
+					    <div class="btn btn-outline-warning btn-sm"><i class="fa fa-plus"></i> Add</div>
 				    </div>
 			    </c:if>
 			    

@@ -258,4 +258,25 @@
 	<url-pattern>/getmedia</url-pattern>
 </servlet-mapping>
 
+
+<!-- Watch Servlet -->
+<servlet>
+	<servlet-name>watch</servlet-name>
+	<servlet-class>it.unical.mat.moviesquik.controller.streaming.Watch</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>watch</servlet-name>
+	<url-pattern>/watch</url-pattern>
+</servlet-mapping>
+
+<!-- Stream Manifest Servlet -->
+<servlet>
+	<servlet-name>stream_manifest</servlet-name>
+	<servlet-class>it.unical.mat.moviesquik.controller.streaming.StreamManifest</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>stream_manifest</servlet-name>
+	<url-pattern>/stream</url-pattern>
+</servlet-mapping>
+
 </web-app>
