@@ -14,13 +14,13 @@
 			<div id="video-timeline">
 				<div id="timeline" class="can-point">
 					<div id="backward-timeline"></div>
-					<!-- <div id="forward-timeline"></div> -->
+					<div id="forward-timeline"></div>
 				</div>
 				<div id="cursor" class="clickable"></div>
 			</div>
 			
 			<div id="video-timings">
-				00:00
+				00:00:00
 			</div>
 			
 		</div>
@@ -49,6 +49,9 @@
 			<div id="expand-compress-btn" class="player-control right-player-control"><i class="fa fa-expand clickable"></i></div>
 			
 		</div>
+		
 	</div>
+	
+	<div id="video-loader-wrapper"><div class="loader loader-sm"></div></div>
 	
 </div>

@@ -31,6 +31,7 @@
 	<script src="js/anim.js"></script>
 	<script src="js/header.js"></script>
 	<script src="js/searching.js"></script>
+	<script src="js/media/show_media_content.js"></script>
 	
 </head>
 <body>
@@ -45,6 +46,8 @@
 	<!-- ======================
 		  Search results
 	======================= -->
+	
+	<div id="page-content">
 	
 	<div id="search-results-content">
 	
@@ -195,6 +198,7 @@
 		</div>
 		
 	</c:if>
+	</div>
 	</div>
 	
 </body>

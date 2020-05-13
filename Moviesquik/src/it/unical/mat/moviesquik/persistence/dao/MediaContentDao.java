@@ -18,4 +18,5 @@ public interface MediaContentDao
 	public List<MediaContent> findByTitleYear( final String title, final short year );
 	public MediaContent getMediaContentOfTheDay();
 	public MediaContent findById( final Long id );
+	public boolean updateNewViewById( final Long id );
 }

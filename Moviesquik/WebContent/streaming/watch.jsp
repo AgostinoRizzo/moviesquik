@@ -23,7 +23,7 @@
 	<script src="lib/jquery/jquery-migrate.min.js"></script>
 	<script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<script src="lib/typeahead/bootstrap3-typeahead.js"></script>
-	<script src="js/streaming/player.js" type="module"></script>
+	<script src="js/streaming/stream-player.js" type="module"></script>
 	
 </head>
 <body>
@@ -36,6 +36,24 @@
 	</div>
 	
 	<jsp:include page="player.jsp"></jsp:include>
+	
+	<div class="modal" tabindex="-1">
+	    <div class="modal-dialog">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <h5 class="modal-title">Unable to connect</h5>
+	                <button type="button" class="close" data-dismiss="modal">&times;</button>
+	            </div>
+	            <div class="modal-body">
+	                <p>There seems to be an issue connecting to the streaming servers.</p>
+	                <p class="text-secondary"><small>Please try again later if the issue persists.</small></p>
+	            </div>
+	            <div class="modal-footer">
+	                <button type="button" class="btn btn-primary" data-dismiss="modal">Retry</button>
+	            </div>
+	        </div>
+	    </div>
+	</div>
 	
 </body>
 </html>

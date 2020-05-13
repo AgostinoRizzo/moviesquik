@@ -23,6 +23,7 @@ public class MediaContentDaoJDBC implements MediaContentDao
 			"insert into media_content(media_content_id, title, type, year, release_date, runtime, genre, plot, poster, production, director, actors, rating) " +
 			"values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	protected static final String UPDATE_RATING_STATEMENT = "update media_content SET rating = ? WHERE media_content_id = ?";
+	protected static final String UPDATE_NEW_VIEW_STATEMENT = "update media_content SET views = views + 1 WHERE media_content_id = ?";
 	protected static final String FIND_BY_PRIMARY_KEY_QUERY = "select * from media_content where media_content_id = ?";
 	protected static final String FIND_BY_TITLE_YEAR_QUERY = "select * from media_content where title = ? and year = ?";
 	
@@ -128,6 +129,26 @@ public class MediaContentDaoJDBC implements MediaContentDao
 		
 		catch (SQLException e)
 		{ e.printStackTrace(); return null; }
+		
+		finally 
+		{ statementPrompter.onFinalize(); }
+	}
+	
+	@Override
+	public boolean updateNewViewById(Long id)
+	{
+		try
+		{
+			final PreparedStatement statement = statementPrompter.prepareStatement(UPDATE_NEW_VIEW_STATEMENT);
+			
+			statement.setLong (1, id);
+			statement.executeUpdate();
+			
+			return true;
+		}
+		
+		catch (SQLException e)
+		{ e.printStackTrace(); return false; }
 		
 		finally 
 		{ statementPrompter.onFinalize(); }

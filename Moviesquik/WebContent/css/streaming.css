@@ -168,7 +168,7 @@ html, body
 	position: absolute;
 	top: 7px;
 	left: 0px;
-	padding-right: 7px;
+	/* padding-right: 7px; */
 	background-clip: content-box;
 	background-color: gray;
 }
@@ -183,22 +183,25 @@ html, body
 	background-color: rgb(182, 112, 216);
 	box-shadow: 0px 0px 10px 1px #000;
 	
-	left: calc(50% - 7px); /* change 0% to x% */
+	left: calc(0% - 7px); /* change 0% to x% */
+	transition: left 0s;
 }
 
 #backward-timeline
 {
-	width: 50%; /* change 0% to x% */
+	width: 0%; /* change 0% to x% */
 	height: 100%;
 	background: linear-gradient(to right, rgb(73, 143, 193), rgb(171, 89, 210));
 }
-
-/* #forward-timeline
+#forward-timeline
 {
-	display: inline-block;
-	width: 50%;
-	background-color: 
-} */
+	width: 0%; /* change 0% to x% */
+	height: 100%;
+	position: absolute;
+	top: 0px;
+	left: 0%; /* change 0% to x% */
+	background-color: white;
+}
 
 
 /* custom volume input range (slider) style */
@@ -291,4 +294,17 @@ input[type=range]:focus::-ms-fill-lower {
 }
 input[type=range]:focus::-ms-fill-upper {
   background: #fff;
+}
+
+
+#video-loader-wrapper
+{
+	position: absolute;
+	margin: auto;
+	top: 0px;
+	bottom: 0px;
+	right: 0px;
+	left: 0px;
+	width: fit-content;
+	height: fit-content;
 }

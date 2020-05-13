@@ -15,6 +15,7 @@ import com.google.gson.JsonObject;
 
 import it.unical.mat.moviesquik.controller.ServletUtils;
 import it.unical.mat.moviesquik.model.User;
+import it.unical.mat.moviesquik.persistence.DBManager;
 
 /**
  * @author Agostino
@@ -34,7 +35,6 @@ public class StreamManifest extends HttpServlet
 			return;
 		}
 		
-		/*
 		Long mediaContentId;
 		try { mediaContentId = Long.parseLong( req.getParameter("key") ); }
 		catch (NumberFormatException e) 
@@ -42,7 +42,8 @@ public class StreamManifest extends HttpServlet
 			ServletUtils.manageParameterError(req, resp);
 			return;
 		}
-		*/
+		
+		DBManager.getInstance().getDaoFactory().getMediaContentDao().updateNewViewById(mediaContentId);
 		
 		ServletUtils.sendJson(createJsonManifest(), resp);
 	}
@@ -53,25 +54,8 @@ public class StreamManifest extends HttpServlet
 		final JsonArray servers = new JsonArray();
 		servers.add("http://192.168.1.92:8000");
 		
-		final JsonArray times = new JsonArray();
-		times.add(0.0);
-		times.add(10.28);
-		times.add(20.57);
-		times.add(22.94);
-		times.add(33.23);
-		times.add(38.4);
-		times.add(48.7);
-		times.add(53.88);
-		times.add(64.17);
-		times.add(69.34);
-		times.add(79.64);
-		times.add(89.94);
-		
-		manifest.addProperty("duration", 94.48);
-		manifest.addProperty("segments", 12);
-		manifest.addProperty("streamspath", "/streams/mc-1/");
+		manifest.addProperty("streamspath", "/streams/mc-12/");
 		manifest.add("servers", servers);
-		manifest.add("times", times);
 		
 		return manifest;
 	}
