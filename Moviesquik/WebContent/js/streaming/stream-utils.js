@@ -100,11 +100,16 @@ window.requestFullManifest = function(media_content_id, manifest, stream_manager
 	fetch(choosenServer + manifest.streamspath + "manifest")
 		.then( function(response) 
 		{
-			response.text().then( function(text) 
+			if ( response.ok )
 			{
-				fillManifestOfStreamInfo(manifestToFillOfStreamInfo, text);
-				stream_manager.onFullManifestReceived(manifestToFillOfStreamInfo);
-			});
+				response.text().then( function(text) 
+				{
+					fillManifestOfStreamInfo(manifestToFillOfStreamInfo, text);
+					stream_manager.onFullManifestReceived(manifestToFillOfStreamInfo);
+				});
+			}
+			else
+				stream_manager.onFullManifestReceived(null);
 		})
 		.catch( function() 
 		{

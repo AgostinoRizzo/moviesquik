@@ -37,7 +37,7 @@
 	
 	<jsp:include page="player.jsp"></jsp:include>
 	
-	<div class="modal" tabindex="-1">
+	<div id="no-connection-modal" class="modal" tabindex="-1">
 	    <div class="modal-dialog">
 	        <div class="modal-content">
 	            <div class="modal-header">
@@ -50,6 +50,24 @@
 	            </div>
 	            <div class="modal-footer">
 	                <button type="button" class="btn btn-primary" data-dismiss="modal">Retry</button>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+	
+	<div id="no-servers-modal" class="modal" tabindex="-1">
+	    <div class="modal-dialog">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <h5 class="modal-title">Unable to connect</h5>
+	                <button type="button" class="close" data-dismiss="modal">&times;</button>
+	            </div>
+	            <div class="modal-body">
+	                <p>There seems to be an issue connecting to the streaming servers.</p>
+	                <p class="text-secondary"><strong>The content does not exist or is not available in your country.</strong></p>
+	            </div>
+	            <div class="modal-footer">
+	                <button type="button" class="btn btn-primary" data-dismiss="modal">Okay</button>
 	            </div>
 	        </div>
 	    </div>

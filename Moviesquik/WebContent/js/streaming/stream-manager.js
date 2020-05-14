@@ -11,7 +11,7 @@ var VIDEO_AUDIO_CODEC = 'video/mp4; codecs="avc1.64001e, mp4a.40.2"';
 var MIN_BUFFERED_WINDOW = 20.0;           // expressed in seconds. it must be <= MIN_PLAYABLE_BUFFERED_WINDOW
 var MIN_PLAYABLE_BUFFERED_WINDOW = 10.0;  // expressed in seconds.
 var MANAGING_INTERVAL = 1000;             // expressed in milliseconds.
-var MAX_SOURCE_BUFFER_TIME = 1000;
+var MAX_SOURCE_BUFFER_TIME = 100;
 
 const STREAM_MANAGER_STATE =
 {
@@ -55,7 +55,10 @@ window.StreamManager = function(mediaId, playPauseBtn, mediaTimeline, videoLoade
 	this.onManifestReceived = function(manifest)
 	{
 		this.manifest = manifest;
-		requestFullManifest(this.mediaId, this.manifest, this);
+		if ( this.manifest.servers.length > 0 )
+			requestFullManifest(this.mediaId, this.manifest, this);
+		else
+			self.videoLoader.showServersError();
 	};
 	
 	this.onFullManifestReceived = function(manifest)
@@ -120,7 +123,9 @@ window.StreamManager = function(mediaId, playPauseBtn, mediaTimeline, videoLoade
 			//this.playPauseBtn.syncToVideoTag();
 		}
 		else                                                // on seeking state.
+		{
 			this.startLoading();
+		}
 	}
 	
 	/* on seek managing routine. */
@@ -132,6 +137,8 @@ window.StreamManager = function(mediaId, playPauseBtn, mediaTimeline, videoLoade
 		this.state = STREAM_MANAGER_STATE.SEEKING;
 		this.firstSegmentFlag = false;
 		this.seekTime = value;
+		this.mediaTimeline.updateSeekingVirtualTime(this.seekTime, this.manifest);
+		this.startLoading();
 		//playPauseBtn.onPause();
 		this.sourceBuffer.remove(0, MAX_SOURCE_BUFFER_TIME);  // TODO: check conditions.
 	}

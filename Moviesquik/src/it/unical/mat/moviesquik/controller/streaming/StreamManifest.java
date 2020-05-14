@@ -4,6 +4,7 @@
 package it.unical.mat.moviesquik.controller.streaming;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -15,6 +16,8 @@ import com.google.gson.JsonObject;
 
 import it.unical.mat.moviesquik.controller.ServletUtils;
 import it.unical.mat.moviesquik.model.User;
+import it.unical.mat.moviesquik.model.streaming.StreamService;
+import it.unical.mat.moviesquik.model.streaming.StreamServiceTable;
 import it.unical.mat.moviesquik.persistence.DBManager;
 
 /**
@@ -45,16 +48,19 @@ public class StreamManifest extends HttpServlet
 		
 		DBManager.getInstance().getDaoFactory().getMediaContentDao().updateNewViewById(mediaContentId);
 		
-		ServletUtils.sendJson(createJsonManifest(), resp);
+		ServletUtils.sendJson(createJsonManifest(mediaContentId), resp);
 	}
-	private JsonObject createJsonManifest()
+	private JsonObject createJsonManifest( final long mediaContentId )
 	{
 		final JsonObject manifest = new JsonObject();
 		
+		final List<StreamService> services = StreamServiceTable.getInstance().getStreamServices();
 		final JsonArray servers = new JsonArray();
-		servers.add("http://192.168.1.92:8000");
 		
-		manifest.addProperty("streamspath", "/streams/mc-12/");
+		for ( final StreamService s : services )
+			servers.add(s.getUrl());
+		
+		manifest.addProperty("streamspath", "/streams/mc-" + mediaContentId + "/");
 		manifest.add("servers", servers);
 		
 		return manifest;

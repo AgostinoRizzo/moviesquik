@@ -19,9 +19,7 @@
 				<div id="cursor" class="clickable"></div>
 			</div>
 			
-			<div id="video-timings">
-				00:00:00
-			</div>
+			<div id="video-timings">00:00:00</div>
 			
 		</div>
 		

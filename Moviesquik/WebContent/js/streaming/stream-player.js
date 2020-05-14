@@ -189,7 +189,17 @@ function MediaTimeline(timelineTagId, backwardTimelineTagId, forwardTimelineTagI
 	
 	this.updateCurrentTime = function(manifest, bufferedWindow) 
 	{
-		var fullCurrTime = this.getCurrentTime();  // expressed in seconds.
+		this.updateTime(this.getCurrentTime(), manifest, bufferedWindow);
+	};
+	
+	this.updateSeekingVirtualTime = function(seekTime, manifest)
+	{
+		this.updateTime(seekTime * manifest.duration, manifest, 0);
+	};
+	
+	this.updateTime = function(time, manifest, bufferedWindow) 
+	{
+		var fullCurrTime = time;  // expressed in seconds.
 		var currTime = fullCurrTime + 1;
 		var hours = Math.floor(currTime / 3600);
 		currTime %= 3600;
@@ -253,7 +263,12 @@ function VideoLoader(videoLoaderTagId)
 	
 	this.showLoadingError = function() 
 	{
-		$(".modal").modal('show');
+		$("#no-connection-modal").modal('show');
+	};
+	
+	this.showServersError = function() 
+	{
+		$("#no-servers-modal").modal('show');
 	};
 }
 
