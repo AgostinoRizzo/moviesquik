@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import it.unical.mat.moviesquik.model.Family;
 import it.unical.mat.moviesquik.model.User;
+import it.unical.mat.moviesquik.model.Watchlist;
 import it.unical.mat.moviesquik.persistence.DBManager;
 import it.unical.mat.moviesquik.persistence.dao.DaoFactory;
 import it.unical.mat.moviesquik.util.DateUtil;
@@ -68,6 +69,9 @@ public class AddProfile extends HttpServlet
 		
 		final DaoFactory daoFacotry = DBManager.getInstance().getDaoFactory();
 		daoFacotry.getUserDao().save(new_user);
+		
+		daoFacotry.getWatchlistDao().insert(Watchlist.createNewWatchLaterWatchlist(new_user));
+		daoFacotry.getWatchlistDao().insert(Watchlist.createNewFavoritesWatchlist(new_user));
 		
 //		final RequestDispatcher rd = req.getRequestDispatcher("whoiswatching.jsp");
 //		rd.forward(req, resp);

@@ -22,6 +22,8 @@ public interface DaoFactory
 	public PostDao getPostDao();
 	public CommentDao getCommentDao();
 	public PostFeedbackDao getPostFeedbackDao();
+	public WatchlistDao getWatchlistDao();
+	public WatchlistItemDao getWatchlistItemDao();
 	
 	public RegistrationTransaction getRegistrationTransaction();
 	public PlanBillingUpdateTransaction getPlanBillingUpdateTransaction();

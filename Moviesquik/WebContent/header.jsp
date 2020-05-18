@@ -57,7 +57,7 @@
 							<a class="nav-link" href="mcsearch?type=tv_show&view=group">TV Shows</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#">Watch List</a>
+							<a class="nav-link" href="watchlist">Watch List</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="#">Family</a>

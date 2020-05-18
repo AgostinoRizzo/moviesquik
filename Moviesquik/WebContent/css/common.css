@@ -21,3 +21,23 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
+
+/* Disabled element style */
+*.disabled
+{
+	pointer-events: none;
+	opacity: .5;
+}
+
+.fa-check.colored
+{
+	color: #28a745;
+}
+.fa-remove.colored
+{
+	color: #c82333;
+}
+.fa-exclamation-triangle.colored
+{
+	color: #ffc107;
+}

@@ -24,7 +24,7 @@
 		    	<c:if test="${user != null}">
 				    <div class="btn-group">
 					    <a class="btn btn-outline-success btn-sm btn-watch" href="watch?key=${media_content.id}"><i class="fa fa-play"></i> Watch</a>
-					    <div class="btn btn-outline-warning btn-sm"><i class="fa fa-plus"></i> Add</div>
+					    <jsp:include page="../watchlist/add-item.jsp"></jsp:include>
 				    </div>
 			    </c:if>
 			    

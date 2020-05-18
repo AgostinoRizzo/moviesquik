@@ -279,4 +279,35 @@
 	<url-pattern>/stream</url-pattern>
 </servlet-mapping>
 
+
+<!-- Watchlist Servlet -->
+<servlet>
+	<servlet-name>watchlist</servlet-name>
+	<servlet-class>it.unical.mat.moviesquik.controller.watchlist.Watchlist</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>watchlist</servlet-name>
+	<url-pattern>/watchlist</url-pattern>
+</servlet-mapping>
+
+<!-- Add Watchlist Item Servlet -->
+<servlet>
+	<servlet-name>addtowatchlist</servlet-name>
+	<servlet-class>it.unical.mat.moviesquik.controller.watchlist.AddWatchlistItem</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>addtowatchlist</servlet-name>
+	<url-pattern>/addtowatchlist</url-pattern>
+</servlet-mapping>
+
+<!-- Edit Watchlist Servlet -->
+<servlet>
+	<servlet-name>editwatchlist</servlet-name>
+	<servlet-class>it.unical.mat.moviesquik.controller.watchlist.EditWatchlist</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>editwatchlist</servlet-name>
+	<url-pattern>/editwatchlist</url-pattern>
+</servlet-mapping>
+
 </web-app>

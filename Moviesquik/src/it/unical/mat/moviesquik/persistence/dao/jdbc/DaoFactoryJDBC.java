@@ -20,6 +20,8 @@ import it.unical.mat.moviesquik.persistence.dao.PostDao;
 import it.unical.mat.moviesquik.persistence.dao.PostFeedbackDao;
 import it.unical.mat.moviesquik.persistence.dao.RegistrationTransaction;
 import it.unical.mat.moviesquik.persistence.dao.UserDao;
+import it.unical.mat.moviesquik.persistence.dao.WatchlistDao;
+import it.unical.mat.moviesquik.persistence.dao.WatchlistItemDao;
 
 /**
  * @author Agostino
@@ -110,6 +112,18 @@ public class DaoFactoryJDBC implements DaoFactory
 	public PostFeedbackDao getPostFeedbackDao()
 	{
 		return new PostFeedbackDaoJDBC(getNewStatementPrompter());
+	}
+	
+	@Override
+	public WatchlistDao getWatchlistDao()
+	{
+		return new WatchlistDaoJDBC(getNewStatementPrompter());
+	}
+	
+	@Override
+	public WatchlistItemDao getWatchlistItemDao()
+	{
+		return new WatchlistItemDaoJDBC(getNewStatementPrompter());
 	}
 	
 	@Override

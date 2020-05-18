@@ -40,7 +40,7 @@ $(document).ready(function()
 		
 		/* WatchList sidenav link item */
 		$("#watchlist-link-item").click(function() {
-			alert("TODO");
+			location.replace("watchlist");
 		});
 		
 		/* RecentlyWatched sidenav link item */

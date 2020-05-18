@@ -23,6 +23,7 @@
 	<link href="css/home.css" rel="stylesheet">
 	<link href="css/contents.css" rel="stylesheet">
 	<link href="css/common.css" rel="stylesheet">
+	<link href="css/watchlist.css" rel="stylesheet">
 	
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	
@@ -43,6 +44,7 @@
 	<script src="js/contents.js"></script>
 	<script src="js/media-contents-filler.js"></script>
 	<script src="js/home/sidenav.js"></script>
+	<script src="js/watchlist/add-item.js"></script>
 	<%-- <c:if test="${user == null}"><script src="js/showcase/scrolling.js"></script></c:if> --%>
 	
 </head>

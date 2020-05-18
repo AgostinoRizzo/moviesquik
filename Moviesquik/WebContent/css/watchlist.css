@@ -1,0 +1,125 @@
+@charset "ISO-8859-1";
+
+
+/******************************************************
+	add to watchlist dropdown style.
+******************************************************/
+.dropdown-watchlists
+{
+	width: 300px;
+}
+.add-to-watchlist-btn
+{
+	border-top-right-radius: 3px !important;
+	border-bottom-right-radius: 3px !important;
+}
+.watchlist-dropdown-item .badge
+{
+	float: right;
+}
+.watchlist-dropdown-item .fa
+{
+	color: #212529 !important;
+}
+.watchlist-name
+{
+	display: inline-block;
+}
+.new-watchlist-dropdown-item
+{
+	color: #007bff;
+}
+#add-watchlist-item-modal .fa-check
+{
+	color: #28a745;
+}
+#add-watchlist-item-modal .fa-warning
+{
+	color: #c82333;
+}
+
+
+/******************************************************
+	watchlists page style.
+******************************************************/
+#watchlist-page-content
+{
+	margin-top: 100px;
+}
+.media-contents-list-header-title > .fa
+{
+	/* color: #fff; */
+}
+.watchlist-description
+{
+	margin-bottom: 0px;
+}
+#watchlist-page-content .view-all-contents
+{
+	top: 0px;
+}
+#watchlist-header
+{
+	margin-right: 20px;
+	margin-left: 20px;
+	margin-bottom: 30px;
+	text-align: center;
+}
+#watchlists-title
+{
+	display: inline-block;
+}
+#new-watchlist-btn
+{
+	margin-top: 10px;
+}
+.watchlist-edit-btn
+{
+	color: #e0a800;
+}
+.watchlist-share-btn
+{
+	color: #28a745;
+}
+.edit-dropdown
+{
+	display: inline-block;
+}
+/* .media-contents-list-header
+{
+	margin-right: 20px !important;
+	margin-left: 20px !important;
+} */
+
+/******************************************************
+	new watchlist form style.
+******************************************************/
+#new-watchlist-form
+{
+	/* text-align: center;
+	max-width: 500px;
+	margin: auto; */
+	max-width: 500px;
+	margin-right: 5%;
+	margin-left: 5%;
+}
+#new-watchlist-form textarea
+{
+	background-color: #1D1A23 !important;
+	color: #fff !important;
+}
+
+
+/******************************************************
+	remove watchlist item style.
+******************************************************/
+#watchlist-page-content .media-content-card:hover .card-img-top
+{
+	opacity: .2;
+	
+}
+#watchlist-page-content .media-content-card:hover .remove-media-item-btn
+{
+	display: block;
+	
+}

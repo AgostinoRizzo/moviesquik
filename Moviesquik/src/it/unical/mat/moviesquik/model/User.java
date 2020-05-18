@@ -32,6 +32,7 @@ public class User
 	private List<Notification> unreadNotifications;
 	private List<Post> personalPosts;
 	private List<Post> allPosts;
+	private List<Watchlist> watchlists;
 	
 	public User()
 	{}
@@ -227,5 +228,16 @@ public class User
 		if ( allPosts == null || allPosts.isEmpty() )
 			allPosts = DBManager.getInstance().getDaoFactory().getPostDao().findByFollowedUsers(this, DataListPage.DEFAULT_POSTS_PAGE);
 		return allPosts;
+	}
+	
+	public List<Watchlist> getWatchlists()
+	{
+		if ( watchlists == null )
+			watchlists = DBManager.getInstance().getDaoFactory().getWatchlistDao().findByUser(this);
+		return watchlists;
+	}
+	public void setWatchlists(List<Watchlist> watchlists)
+	{
+		this.watchlists = watchlists;
 	}
 }
