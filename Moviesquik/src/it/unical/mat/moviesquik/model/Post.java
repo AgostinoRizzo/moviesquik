@@ -20,6 +20,7 @@ public class Post
 	private Date dateTime;
 	private String text;
 	private User owner;
+	private Watchlist watchlist;
 	private List<Comment> comments;
 	private Long numAllComments;
 	private Long numLikes;
@@ -60,6 +61,14 @@ public class Post
 	public void setOwner(User owner)
 	{
 		this.owner = owner;
+	}
+	public Watchlist getWatchlist()
+	{
+		return watchlist;
+	}
+	public void setWatchlist(Watchlist watchlist)
+	{
+		this.watchlist = watchlist;
 	}
 	public List<Comment> getComments()
 	{

@@ -11,6 +11,7 @@ import java.util.List;
 
 import it.unical.mat.moviesquik.model.Post;
 import it.unical.mat.moviesquik.model.User;
+import it.unical.mat.moviesquik.model.Watchlist;
 import it.unical.mat.moviesquik.persistence.DBManager;
 import it.unical.mat.moviesquik.persistence.DataListPage;
 import it.unical.mat.moviesquik.persistence.dao.DaoFactory;
@@ -23,7 +24,7 @@ import it.unical.mat.moviesquik.util.DateUtil;
  */
 public class PostDaoJDBC extends AbstractDaoJDBC<Post> implements PostDao
 {
-	protected static final String INSERT_STATEMENT             = "insert into post(post_id, date_time, text, user_id) values (?,?,?,?)";
+	protected static final String INSERT_STATEMENT             = "insert into post(post_id, date_time, text, user_id, watchlist_id) values (?,?,?,?,?)";
 	protected static final String FIND_BY_ID_QUERY             = "select * from post where post_id = ?";
 	protected static final String FIND_BY_USER_QUERY           = "select * from post where user_id = ? order by date_time desc limit ? offset ?";
 	protected static final String FIND_BY_FOLLOWED_USERS_QUERY = "select * from post where user_id = ? or user_id in (" + 
@@ -80,6 +81,9 @@ public class PostDaoJDBC extends AbstractDaoJDBC<Post> implements PostDao
 			statement.setTimestamp   (2, DateUtil.toJDBC(post.getDateTime()));
 			statement.setString      (3, post.getText());
 			statement.setLong        (4, post.getOwner().getId());
+			
+			final Watchlist wl = post.getWatchlist();
+			statement.setLong        (5, wl == null ? null : wl.getId());
 			
 			statement.executeUpdate();
 			
@@ -170,6 +174,12 @@ public class PostDaoJDBC extends AbstractDaoJDBC<Post> implements PostDao
 			post.setOwner(currentOwner);
 		else
 			post.setOwner(daoFactory.getUserDao().findByPrimaryKey(subjectUserId));
+		
+		final Long watchlistId = result.getLong("watchlist_id");
+		if ( result.wasNull() )
+			post.setWatchlist(null);
+		else
+			post.setWatchlist(daoFactory.getWatchlistDao().findByUser(post.getOwner(), watchlistId));
 		
 		addPostCounters(post);
 		

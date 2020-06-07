@@ -19,6 +19,7 @@
 	<link href="css/contents.css" rel="stylesheet">
 	<link href="css/media.css" rel="stylesheet">
 	<link href="css/watchlist.css" rel="stylesheet">
+	<link href="css/posting.css" rel="stylesheet">
 	
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	
@@ -31,6 +32,7 @@
 	<script src="js/header.js"></script>
 	<script src="js/watchlist/create-watchlist.js"></script>
 	<script src="js/watchlist/edit-watchlist.js"></script>
+	<script src="js/watchlist/share.js"></script>
 	<script src="js/bootstrap-validate.js"></script>
 	<script src="js/media/show_media_content.js"></script>
 	
@@ -139,8 +141,41 @@
 						
 						<div class="view-all-contents">
 							
-							<button class="btn btn-link view-all-btn"><i class="fa fa-share"></i> Share</button>
+							<button class="btn btn-link view-all-btn btn-share-watchlist"><i class="fa fa-share"></i> Share</button>
 							
+							<form method="POST" action="sharewatchlist?action=my" class="modal share-watchlist-input-modal" tabindex="-1">
+								
+								<input type="hidden" name="watchlist_id" value="${watchlist.id}">
+								
+							    <div class="modal-dialog">
+							        <div class="modal-content">
+							            <div class="modal-header">
+							                <p class="modal-title">Share <strong>${watchlist.name}</strong></p>
+							                <button type="button" class="close" data-dismiss="modal">&times;</button>
+							            </div>
+							            <div class="modal-body">
+							            	<fieldset>
+												<label for="name">Enter a text to share</label>&nbsp;&nbsp;<span class="badge badge-warning">Optional</span>
+												<div class="input-group">
+													<textarea class="form-control share-watchlist-text" rows="2" placeholder="Type a text here" name="text"></textarea>
+												</div>
+												
+												<!-- Emoji post action -->
+										    		<div class="btn btn-secondary dropdown-toggle dropdown-emoji-panel-link" role="button" id="dropdown-emoji-panel-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										    			&#128522;&nbsp;Emoji
+										    		</div>
+										    		<jsp:include page="../posting/emoji_panel.jsp"></jsp:include>
+											    	
+											</fieldset>
+							            </div>
+							            <div class="modal-footer">
+							                <button type="submit" class="btn btn-primary share-watchlist-submit-btn"><i class="fa fa-share"></i> Share</button>
+							                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+							            </div>
+							        </div>
+							    </div>
+							</form>
+		
 							<c:if test="${!watchlist.isDefault}">
 								<div class="dropdown edit-dropdown">
 									<button type="button" class="btn btn-link view-all-btn dropdown-toggle" data-toggle="dropdown"><i class="fa fa-edit"></i> Edit</button>
@@ -259,6 +294,42 @@
 			    </div>
 			</div>
 		</c:if>
+		
+		<c:if test="${on_shared != null}">
+			<div id="share-watchlist-modal" class="modal" tabindex="-1">
+			    <div class="modal-dialog">
+			        <div class="modal-content">
+			            <div class="modal-header">
+			                <h5 class="modal-title">
+			                
+			                	<c:if test="${on_shared.equals(\"success\")}">
+			                		<i class="fa fa-check colored"></i> Watchlist shared
+			                	</c:if>
+			                	<c:if test="${!on_shared.equals(\"success\")}">
+			                		<i class="fa fa-warning colored"></i> Watchlist not shared
+			                	</c:if>
+			                
+			                </h5>
+			                <button type="button" class="close" data-dismiss="modal">&times;</button>
+			            </div>
+			            <div class="modal-body">
+			            
+			            	<c:if test="${on_shared.equals(\"success\")}">
+		                		Watchlist successfully shared with your friends
+		                	</c:if>
+		                	<c:if test="${!on_shared.equals(\"success\")}">
+		                		Your watchlist is empty
+		                	</c:if>
+			            
+			            </div>
+			            <div class="modal-footer">
+			                <button type="button" class="btn btn-primary" data-dismiss="modal">Okay</button>
+			            </div>
+			        </div>
+			    </div>
+			</div>
+		</c:if>
+
 		
 	</div>
 	</div>

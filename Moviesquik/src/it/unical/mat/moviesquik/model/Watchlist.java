@@ -81,6 +81,12 @@ public class Watchlist
 	{
 		this.items = items;
 	}
+	public List<WatchlistItem> getPreviewItems()
+	{
+		if ( items.size() <= 8 )
+			return items;
+		return items.subList(0, 8);
+	}
 	
 	public boolean contains( final Long mediaContentId )
 	{

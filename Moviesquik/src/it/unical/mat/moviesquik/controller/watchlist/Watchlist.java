@@ -32,13 +32,42 @@ public class Watchlist extends HttpServlet
 			return;
 		}
 		
-		final String onRemove = req.getParameter("remove");
-		if ( onRemove != null )
-			req.setAttribute("on_" + onRemove + "_removed", true);
-			
+		final String action = req.getParameter("action");
 		
-		req.setAttribute("watchlists", user.getWatchlists());
-		req.getRequestDispatcher("watchlist/watchlists.jsp").forward(req, resp);
+		if ( action != null && action.equals("page") )
+		{
+			Long watchlistId;
+			
+			try
+			{ watchlistId = Long.parseLong(req.getParameter("key")); }
+			catch (NumberFormatException e) 
+			{
+				ServletUtils.manageParameterError(req, resp);
+				return;
+			}
+			
+			final it.unical.mat.moviesquik.model.Watchlist watchlist = 
+					DBManager.getInstance().getDaoFactory().getWatchlistDao().findById(watchlistId);
+			
+			if ( watchlist == null )
+			{
+				ServletUtils.manageParameterError(req, resp);
+				return;
+			}
+			
+			req.setAttribute("watchlist", watchlist);
+			req.getRequestDispatcher("watchlist/watchlist-page.jsp").forward(req, resp);
+		}
+		else
+		{
+			final String onRemove = req.getParameter("remove");
+			if ( onRemove != null )
+				req.setAttribute("on_" + onRemove + "_removed", true);
+				
+			
+			req.setAttribute("watchlists", user.getWatchlists());
+			req.getRequestDispatcher("watchlist/watchlists.jsp").forward(req, resp);
+		}
 	}
 	
 	@Override

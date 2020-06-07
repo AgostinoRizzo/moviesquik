@@ -8,7 +8,8 @@ $(document).ready( function()
 		$(document).on("click", ".emoji-panel .emoji", function() 
 		{
 			var emoji_code = $(this).text();
-			$(this).closest(".media-body").find(".text-area-post").append(emoji_code);
+			var textArea = $(this).closest(".media-body").find(".text-area-post");
+			textArea.val(textArea.val() + emoji_code);
 		});
 		
 		
@@ -49,6 +50,11 @@ $(document).ready( function()
 		$(document).on("click", ".share-post-submit-btn", function() 
 		{
 			$(this).closest("form").submit();
+		});
+		
+		$(document).on("click", ".shared-watchlist-box", function() 
+		{
+			location.href = "watchlist?action=page&key=" + $(this).closest(".media-post-box").find("#shared-watchlist-id").val();
 		});
 	}
 );

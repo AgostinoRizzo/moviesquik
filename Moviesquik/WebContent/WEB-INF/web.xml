@@ -310,4 +310,14 @@
 	<url-pattern>/editwatchlist</url-pattern>
 </servlet-mapping>
 
+<!-- Share Watchlist Servlet -->
+<servlet>
+	<servlet-name>sharewatchlist</servlet-name>
+	<servlet-class>it.unical.mat.moviesquik.controller.watchlist.ShareWatchlist</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>sharewatchlist</servlet-name>
+	<url-pattern>/sharewatchlist</url-pattern>
+</servlet-mapping>
+
 </web-app>

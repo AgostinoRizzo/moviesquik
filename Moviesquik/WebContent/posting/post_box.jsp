@@ -22,6 +22,22 @@
 		    
 		    <p class="post-text">${post_to_display.text}</p>
 		    
+		    <!-- additional post information -->
+		    <c:if test="${post_to_display.watchlist != null}">
+		    	<div class="shared-watchlist-box can-point">
+			    	<input type="hidden" id="shared-watchlist-id" value="${post_to_display.watchlist.id}">
+			    	<p class="post-text">
+			    		<i class="fa fa-list-ul"></i>&nbsp;${watchlist.name}${post_to_display.watchlist.name}<br>
+			    		<small class="note">${post_to_display.watchlist.description}</small></p>
+				    <div class="card-image-container watchlist-item-card-img-container row">
+				    	<c:forEach items="${post_to_display.watchlist.previewItems}" var="watchlist_item">
+							<img class="watchlist-item-card-img col-4 clickable" src="${watchlist_item.mediaContent.poster}">
+						</c:forEach>
+				  </div>
+			  </div>
+			  <br>
+		    </c:if>
+		    
 		    <div class="row" id="count-row">
 		    	<div class="col">
 		    		<small class="fa-container"><a class="add-like"><i class="fa fa-thumbs-up rounded-circle clickable"></i></a></small>

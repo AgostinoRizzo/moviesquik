@@ -25,7 +25,9 @@ public class WatchlistDaoJDBC extends AbstractDaoJDBC<Watchlist> implements Watc
 	protected static final String INSERT_STATEMENT   = "insert into watchlist(watchlist_id, name, description, date_time, is_default, user_id) values (?,?,?,?,?,?)";
 	protected static final String UPDATE_STATEMENT   = "update watchlist SET name = ?, description = ?, date_time = ?) WHERE watchlist_id = ?";
 	protected static final String REMOVE_STATEMENT   = "delete from watchlist where watchlist_id = ?";
+	protected static final String FIND_BY_ID_QUERY   = "select * from watchlist where watchlist_id = ?";
 	protected static final String FIND_BY_USER_QUERY = "select * from watchlist where user_id = ? order by date_time asc";
+	protected static final String FIND_BY_ID_AND_USER_QUERY = "select * from watchlist where watchlist_id = ? and user_id = ?";
 	
 	private User currentOwner = null;
 	
@@ -106,6 +108,31 @@ public class WatchlistDaoJDBC extends AbstractDaoJDBC<Watchlist> implements Watc
 	}
 	
 	@Override
+	public Watchlist findById(Long id)
+	{
+		try
+		{
+			final PreparedStatement statement = statementPrompter.prepareStatement(FIND_BY_ID_QUERY);
+			
+			statement.setLong(1, id);
+			
+			ResultSet result = statement.executeQuery();
+			currentOwner = null;
+			
+			if ( result.next() )
+				return createFromResult(result);
+			
+			return null;
+		}
+		
+		catch (SQLException e)
+		{ e.printStackTrace(); return null; }
+		
+		finally 
+		{ statementPrompter.onFinalize(); }
+	}
+	
+	@Override
 	public List<Watchlist> findByUser(User usr)
 	{
 		final List<Watchlist> watchlists = new ArrayList<Watchlist>();
@@ -133,6 +160,32 @@ public class WatchlistDaoJDBC extends AbstractDaoJDBC<Watchlist> implements Watc
 		
 		catch (SQLException e)
 		{ e.printStackTrace(); return watchlists; }
+		
+		finally 
+		{ statementPrompter.onFinalize(); }
+	}
+	
+	@Override
+	public Watchlist findByUser(User usr, Long watchlistId)
+	{		
+		try
+		{
+			final PreparedStatement statement = statementPrompter.prepareStatement(FIND_BY_ID_AND_USER_QUERY);
+			
+			statement.setLong(1, watchlistId);
+			statement.setLong(2, usr.getId());
+			
+			ResultSet result = statement.executeQuery();
+			currentOwner = usr;
+			
+			if ( result.next() )
+				return createFromResult(result);
+			
+			return null;
+		}
+		
+		catch (SQLException e)
+		{ e.printStackTrace(); return null; }
 		
 		finally 
 		{ statementPrompter.onFinalize(); }

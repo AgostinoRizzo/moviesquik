@@ -35,6 +35,9 @@ public class NotificationFactory
 	public Notification createPostShareNotification( final User sender )
 	{ return createNotification("Post share", sender.getFullName() + " shared your post", sender); }
 	
+	public Notification createWatchlistShareNotification( final User sender, final Watchlist watchlist )
+	{ return createNotification("Watchlist share", sender.getFullName() + " shared your " + watchlist.getName() + " watchlist", sender); }
+	
 	private Notification createNotification( final String title, final String description, final User sender )
 	{
 		final Notification notification = new Notification();
