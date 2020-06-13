@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import it.unical.mat.moviesquik.controller.ServletUtils;
+import it.unical.mat.moviesquik.controller.SessionManager;
 import it.unical.mat.moviesquik.model.Friendship;
 import it.unical.mat.moviesquik.model.User;
 import it.unical.mat.moviesquik.persistence.DBManager;
@@ -40,7 +41,7 @@ public class FriendshipManager extends HttpServlet
 		{
 			final Long otherUserId = Long.parseLong( req.getParameter("user_id") );
 			
-			final User currentUser = (User) req.getSession().getAttribute("user");
+			final User currentUser = SessionManager.checkUserAuthentication(req, resp, false);
 			if ( currentUser == null )
 			{
 				ServletUtils.manageSessionError(req, resp);

@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.JsonObject;
 
 import it.unical.mat.moviesquik.controller.ServletUtils;
+import it.unical.mat.moviesquik.controller.SessionManager;
 import it.unical.mat.moviesquik.model.User;
 import it.unical.mat.moviesquik.model.Watchlist;
 
@@ -28,7 +29,7 @@ public class AddWatchlistItem extends HttpServlet
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
 	{
-		final User user = (User) req.getSession().getAttribute("user");
+		final User user = SessionManager.checkUserAuthentication(req, resp, false);
 		if ( user == null )
 		{
 			ServletUtils.manageSessionError(req, resp);

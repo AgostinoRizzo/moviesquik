@@ -18,7 +18,7 @@ public class CreditCard
 	private String number;
 	private Date expiration;
 	private String cvv;
-	private Double balance;
+	private Float balance;
 	
 	public CreditCard()
 	{}
@@ -94,12 +94,12 @@ public class CreditCard
 		this.cvv = cvv;
 	}
 	
-	public Double getBalance()
+	public Float getBalance()
 	{
 		return balance;
 	}
 	
-	public void setBalance(Double balance)
+	public void setBalance(Float balance)
 	{
 		this.balance = balance;
 	}

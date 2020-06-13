@@ -17,6 +17,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import it.unical.mat.moviesquik.controller.ServletUtils;
+import it.unical.mat.moviesquik.controller.SessionManager;
 import it.unical.mat.moviesquik.model.MediaContent;
 import it.unical.mat.moviesquik.model.MediaContentGroup;
 import it.unical.mat.moviesquik.model.MediaContentSearchResult;
@@ -59,7 +60,7 @@ public class MediaContentsSearch extends HttpServlet
 			return;
 		}
 		
-		final User user = (User) req.getSession().getAttribute("user");
+		final User user = SessionManager.checkUserAuthentication(req, resp, false);
 		
 		switch ( viewTemplate ) {
 		case FULL:  manageFullViewTemplate(req, resp, type, viewTemplate, user, filter); break;

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import it.unical.mat.moviesquik.controller.ServletUtils;
+import it.unical.mat.moviesquik.controller.SessionManager;
 import it.unical.mat.moviesquik.model.Comment;
 import it.unical.mat.moviesquik.model.Notification;
 import it.unical.mat.moviesquik.model.NotificationFactory;
@@ -33,7 +34,7 @@ private static final long serialVersionUID = 1L;
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) 
 			throws ServletException, IOException
 	{
-		final User user = (User) req.getSession().getAttribute("user");
+		final User user = SessionManager.checkUserAuthentication(req, resp, false);
 		
 		if ( user == null )
 		{

@@ -80,7 +80,7 @@ public class Billing
 		return DateUtil.toString( getEndDate() );
 	}
 	
-	public Double getBalance()
+	public Float getBalance()
 	{
 		return PlanPricesManager.getInstance().getBillingPrice(this);
 	}

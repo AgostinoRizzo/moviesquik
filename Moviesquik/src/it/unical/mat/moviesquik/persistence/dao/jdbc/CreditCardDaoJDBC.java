@@ -17,7 +17,7 @@ import it.unical.mat.moviesquik.util.DateUtil;
  */
 public class CreditCardDaoJDBC implements CreditCardDao
 {
-	protected static final String INSERT_STATEMENT          = "insert into credit_card(credit_card_id, number, full_name, expiration, cvv) values (?,?,?,?,?)";
+	protected static final String INSERT_STATEMENT          = "insert into credit_card(credit_card_id, number, full_name, expiration, cvv, balance) values (?,?,?,?,?,?)";
 	protected static final String FIND_QUERY                = "select * from credit_card where number = ? and full_name = ? and expiration = ? and cvv = ?";
 	protected static final String FIND_BY_PRIMARY_KEY_QUERY = "select * from credit_card where credit_card_id = ?";
 	
@@ -106,6 +106,7 @@ public class CreditCardDaoJDBC implements CreditCardDao
 		statement.setString(3, card.getName());
 		statement.setTimestamp(4, DateUtil.toJDBC(card.getExpiration()));
 		statement.setString(5, card.getCvv());
+		statement.setFloat(6, card.getBalance());
 	}
 	
 	private CreditCard createCreditCardFromResult( final ResultSet result ) throws SQLException
@@ -117,6 +118,7 @@ public class CreditCardDaoJDBC implements CreditCardDao
 		card.setNumber(result.getString("number"));
 		card.setExpiration(DateUtil.toJava(result.getTimestamp("expiration")));
 		card.setCvv(result.getString("cvv"));
+		card.setBalance(result.getFloat("balance"));
 		
 		return card;
 	}

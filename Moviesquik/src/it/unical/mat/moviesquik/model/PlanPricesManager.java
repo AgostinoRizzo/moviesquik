@@ -12,12 +12,12 @@ import java.util.Map;
  */
 public class PlanPricesManager
 {
-	public static final Double BASIC_PLAN_PRICE    =  8.99;
-	public static final Double STANDARD_PLAN_PRICE = 12.99;
-	public static final Double PREMIUM_PLAN_PRICE  = 15.99;
+	public static final Float BASIC_PLAN_PRICE    =  8.99f;
+	public static final Float STANDARD_PLAN_PRICE = 12.99f;
+	public static final Float PREMIUM_PLAN_PRICE  = 15.99f;
 	
 	private static PlanPricesManager instance = null;
-	private final Map<BillingPlan, Double> prices = new HashMap<BillingPlan, Double>();
+	private final Map<BillingPlan, Float> prices = new HashMap<BillingPlan, Float>();
 	
 	public static PlanPricesManager getInstance()
 	{
@@ -26,15 +26,15 @@ public class PlanPricesManager
 		return instance;
 	}
 	
-	public Double getPlanPrice( final BillingPlan plan )
+	public Float getPlanPrice( final BillingPlan plan )
 	{
 		return prices.get(plan);
 	}
 	
-	public Double getBillingPrice( final Billing billing )
+	public Float getBillingPrice( final Billing billing )
 	{
 		if ( billing.isTrial() )
-			return 0.0;
+			return 0.0f;
 		return prices.get( BillingPlan.parseBillingPlan(billing.getPlan()) );
 	}
 	

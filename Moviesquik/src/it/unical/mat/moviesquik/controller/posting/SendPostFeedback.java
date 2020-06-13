@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.JsonObject;
 
 import it.unical.mat.moviesquik.controller.ServletUtils;
+import it.unical.mat.moviesquik.controller.SessionManager;
 import it.unical.mat.moviesquik.model.Notification;
 import it.unical.mat.moviesquik.model.NotificationFactory;
 import it.unical.mat.moviesquik.model.Post;
@@ -34,7 +35,7 @@ public class SendPostFeedback extends HttpServlet
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) 
 			throws ServletException, IOException
 	{
-		final User user = (User) req.getSession().getAttribute("user");
+		final User user = SessionManager.checkUserAuthentication(req, resp, false);
 		
 		if ( user == null )
 		{

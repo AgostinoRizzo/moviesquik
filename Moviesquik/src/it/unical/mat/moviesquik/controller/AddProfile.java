@@ -75,6 +75,6 @@ public class AddProfile extends HttpServlet
 		
 //		final RequestDispatcher rd = req.getRequestDispatcher("whoiswatching.jsp");
 //		rd.forward(req, resp);
-		resp.sendRedirect("");
+		resp.sendRedirect(".");
 	}
 }

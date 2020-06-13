@@ -58,7 +58,7 @@ public class MediaContentsBroker extends HttpServlet
 		
 		else if ( policy.equals("suggested") || policy.equals("recently") )
 		{
-			final User user = (User) req.getSession().getAttribute("user");
+			final User user = SessionManager.checkUserAuthentication(req, resp, false);
 			if ( user != null )
 				mediaContents = 
 				(policy.equals("suggested"))
