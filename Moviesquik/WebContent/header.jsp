@@ -80,7 +80,7 @@
 				    
 				<ul class="navbar-nav notifications-navbar-nav">
 						
-						<li class="nav-item dropdown">
+						<li class="nav-item last-nav-item dropdown">
 					        <a id="nav-user-avatar-box" class="nav-link" href="#" id="notifications-menu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					          	<span class="fa fa-envelope checked" id="notifications-menu-btn"></span>
 					          	

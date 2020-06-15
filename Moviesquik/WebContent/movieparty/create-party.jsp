@@ -88,7 +88,7 @@
 					<div class="col-4">
 						<label for="name">Party Name</label>
 						<div class="input-group">
-							<input name="name" class="form-control" id="name" required type="text" placeholder="Type a party name here">
+							<input name="name" class="form-control" id="name" required type="text" placeholder="Type a party name here" maxlength="30">
 						</div>
 					</div>
 					<div class="col-8">
@@ -212,6 +212,9 @@
 					<label>Invited friends</label><br>
 					<p class="note" id="invited-firends-note">
 					No invited friends for this event. Please select at least one guest.
+					</p>
+					<p class="note">
+					<strong>All invited friends will receive an invitation for this event.</strong>
 					</p>
 				</div>
 			</div>

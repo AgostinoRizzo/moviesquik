@@ -3,6 +3,7 @@
  */
 package it.unical.mat.moviesquik.model;
 
+import it.unical.mat.moviesquik.model.movieparty.MovieParty;
 import it.unical.mat.moviesquik.util.DateUtil;
 
 /**
@@ -37,6 +38,9 @@ public class NotificationFactory
 	
 	public Notification createWatchlistShareNotification( final User sender, final Watchlist watchlist )
 	{ return createNotification("Watchlist share", sender.getFullName() + " shared your " + watchlist.getName() + " watchlist", sender); }
+	
+	public Notification createMoviePartyInvitationNotification( final MovieParty party )
+	{ return createNotification("Movie party invitation", party.getAdminstrator().getFullName() + " invited you to \"" + party.getName() + "\" movie party", party.getAdminstrator()); }
 	
 	private Notification createNotification( final String title, final String description, final User sender )
 	{

@@ -12,7 +12,9 @@ import java.util.List;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 /**
  * @author Agostino
@@ -65,5 +67,10 @@ public class JSONUtil
 			e.printStackTrace();
 		}
 		return new Gson().fromJson(reader, JsonObject.class);
+	}
+	
+	public static JsonArray fromStringToArray( final String json )
+	{
+		return (JsonArray) JsonParser.parseString(json);
 	}
 }

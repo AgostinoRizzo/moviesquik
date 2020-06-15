@@ -11,7 +11,7 @@
 	<c:forEach items="${user.notifications}" var="notification">
 		
 		<div class="notification-box">
-	           <div class="row">
+	           <div class="row notification-box-row">
 	           
 	           		 <c:if test="${notification.subjectUser != null}">
 			             <div class="col-lg-1 col-sm-1 col-1 text-center">

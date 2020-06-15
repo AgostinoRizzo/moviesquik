@@ -18,6 +18,7 @@ public class DateUtil
 {
 	private static final SimpleDateFormat STANDARD_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 	private static final SimpleDateFormat MONTH_FORMAT = new SimpleDateFormat("yyy-MM");
+	private static final SimpleDateFormat DATETIME_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	
 	public static Date parse( final String stringDate )
 	{
@@ -27,6 +28,16 @@ public class DateUtil
 	public static Date parseMonthFormat( final String stringDate )
 	{
 		return parse(stringDate, MONTH_FORMAT);
+	}
+	
+	public static Date parseDateTimeFormat( final String stringDateTime )
+	{
+		return parse(stringDateTime, DATETIME_FORMAT);
+	}
+	
+	public static Date parseDateTimeFormat( final String stringDate, final String stringTime )
+	{
+		return parseDateTimeFormat(stringDate + " " + stringTime);
 	}
 	
 	public static Date parse( final String stringDate, final SimpleDateFormat format )

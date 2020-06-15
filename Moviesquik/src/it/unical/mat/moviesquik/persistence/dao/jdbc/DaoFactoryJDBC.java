@@ -22,6 +22,12 @@ import it.unical.mat.moviesquik.persistence.dao.RegistrationTransaction;
 import it.unical.mat.moviesquik.persistence.dao.UserDao;
 import it.unical.mat.moviesquik.persistence.dao.WatchlistDao;
 import it.unical.mat.moviesquik.persistence.dao.WatchlistItemDao;
+import it.unical.mat.moviesquik.persistence.dao.jdbc.movieparty.MoviePartyDaoJDBC;
+import it.unical.mat.moviesquik.persistence.dao.jdbc.movieparty.MoviePartyInvitationDaoJDBC;
+import it.unical.mat.moviesquik.persistence.dao.jdbc.movieparty.MoviePartyParticipationDaoJDBC;
+import it.unical.mat.moviesquik.persistence.dao.movieparty.MoviePartyDao;
+import it.unical.mat.moviesquik.persistence.dao.movieparty.MoviePartyInvitationDao;
+import it.unical.mat.moviesquik.persistence.dao.movieparty.MoviePartyParticipationDao;
 
 /**
  * @author Agostino
@@ -124,6 +130,24 @@ public class DaoFactoryJDBC implements DaoFactory
 	public WatchlistItemDao getWatchlistItemDao()
 	{
 		return new WatchlistItemDaoJDBC(getNewStatementPrompter());
+	}
+	
+	@Override
+	public MoviePartyDao getMoviePartyDao()
+	{
+		return new MoviePartyDaoJDBC(getNewStatementPrompter());
+	}
+	
+	@Override
+	public MoviePartyInvitationDao getMoviePartyInvitationDao()
+	{
+		return new MoviePartyInvitationDaoJDBC(getNewStatementPrompter());
+	}
+	
+	@Override
+	public MoviePartyParticipationDao getMoviePartyParticipationDao()
+	{
+		return new MoviePartyParticipationDaoJDBC(getNewStatementPrompter());
 	}
 	
 	@Override

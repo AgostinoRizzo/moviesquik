@@ -64,6 +64,12 @@
 	margin-right: 20px;
 }
 
+.notification-box-row
+{
+	margin-right: 0px;
+	margin-left: 0px;
+}
+
 .nav-item:not(.last-nav-item)
 {
 	margin-right: 50px;

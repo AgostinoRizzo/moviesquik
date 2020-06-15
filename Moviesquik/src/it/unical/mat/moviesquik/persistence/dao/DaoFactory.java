@@ -3,6 +3,10 @@
  */
 package it.unical.mat.moviesquik.persistence.dao;
 
+import it.unical.mat.moviesquik.persistence.dao.movieparty.MoviePartyDao;
+import it.unical.mat.moviesquik.persistence.dao.movieparty.MoviePartyInvitationDao;
+import it.unical.mat.moviesquik.persistence.dao.movieparty.MoviePartyParticipationDao;
+
 /**
  * @author Agostino
  *
@@ -24,6 +28,9 @@ public interface DaoFactory
 	public PostFeedbackDao getPostFeedbackDao();
 	public WatchlistDao getWatchlistDao();
 	public WatchlistItemDao getWatchlistItemDao();
+	public MoviePartyDao getMoviePartyDao();
+	public MoviePartyInvitationDao getMoviePartyInvitationDao();
+	public MoviePartyParticipationDao getMoviePartyParticipationDao();
 	
 	public RegistrationTransaction getRegistrationTransaction();
 	public PlanBillingUpdateTransaction getPlanBillingUpdateTransaction();
