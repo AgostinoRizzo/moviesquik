@@ -53,4 +53,9 @@ $(document).ready(function()
 			window.location.replace("user");
 		});
 		
+		/* Create Movie Party sidenav link item */
+		$("#create-party-link-item").click(function() {
+			location.replace("movieparty");
+		});
+		
 	});

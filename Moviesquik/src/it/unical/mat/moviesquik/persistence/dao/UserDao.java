@@ -19,4 +19,5 @@ public interface UserDao extends DataAccessObject<User>
 	public User findByLogin( final String email, final String password );
 	public List<User> findFriends( final User user, final int maxCount );
 	public List<User> findByName( final String name, final int limit );
+	public List<User> findFriendsByName( final String name, final User user, final int limit );
 }

@@ -148,6 +148,16 @@
 	<url-pattern>/mcsearch</url-pattern>
 </servlet-mapping>
 
+<!-- Lookup Servlet -->
+<servlet>
+	<servlet-name>lookup</servlet-name>
+	<servlet-class>it.unical.mat.moviesquik.controller.searching.Lookup</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>lookup</servlet-name>
+	<url-pattern>/lookup</url-pattern>
+</servlet-mapping>
+
 
 
 <!-- MediaContentsBroker Servlet -->
@@ -319,5 +329,17 @@
 	<servlet-name>sharewatchlist</servlet-name>
 	<url-pattern>/sharewatchlist</url-pattern>
 </servlet-mapping>
+
+
+<!-- Movie Party Servlet -->
+<servlet>
+	<servlet-name>movieparty</servlet-name>
+	<servlet-class>it.unical.mat.moviesquik.controller.movieparty.MovieParty</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>movieparty</servlet-name>
+	<url-pattern>/movieparty</url-pattern>
+</servlet-mapping>
+
 
 </web-app>

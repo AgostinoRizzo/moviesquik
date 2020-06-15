@@ -22,24 +22,25 @@ import it.unical.mat.moviesquik.util.DateUtil;
  */
 public class UserDaoJDBC implements UserDao
 {
-	protected static final String INSERT_STATEMENT          = "insert into \"user\"(user_id, first_name, last_name, email, birthday, gender, password, family_id, kid) values (?,?,?,?,?,?,?,?,?)";
-	protected static final String FIND_BY_PRIMARY_KEY_QUERY = "select * from \"user\" where user_id = ?";
-	protected static final String FIND_ALL_QUERY            = "select * from \"user\"";
-	protected static final String UPDATE_STATEMENT          = "update \"user\" SET first_name = ?, last_name = ?, email = ?, birthday = ?, gender = ?, password = ?, profile_img = ?, family_id = ?, kid = ? WHERE user_id = ?";
-	protected static final String DELETE_STATEMENT          = "delete from \"user\" where user_id = ?";
-	protected static final String FIND_BY_FAMILY_QUERY      = "select * from \"user\" where family_id = ?";
-	protected static final String FIND_BY_EMAIL_QUERY       = "select * from \"user\" where email = ?";
-	protected static final String FIND_BY_LOGIN_QUERY       = "select * from \"user\" where email = ? and password = ?";
-	protected static final String FIND_FRIENDS_QUERY        =   "select * \r\n" + 
-																"from following INNER JOIN \"user\" ON (followed_id = user_id)\r\n" + 
-																"where follower_id = ? and EXISTS \r\n" + 
-																"	(\r\n" + 
-																"		select * from following AS back_following\r\n" + 
-																"		where back_following.follower_id = following.followed_id and back_following.followed_id = ?\r\n" + 
-																"	)";
-	protected static final String FOLLOWERS_COUNT_QUERY     = "select COUNT(*) from following where (followed_id = ?)";
-	protected static final String FIND_BY_NAME_QUERY        = "select * from \"user\" where lower(first_name) like lower(concat('%', ?, '%')) or (lower(last_name) like lower(concat('%', ?, '%')) and char_length(?) > 0) limit ?";
-	protected static final String FIND_FOLLOWED_IDS_QUERY   = "select followed_id from following where (follower_id = ?)";
+	protected static final String INSERT_STATEMENT           = "insert into \"user\"(user_id, first_name, last_name, email, birthday, gender, password, family_id, kid) values (?,?,?,?,?,?,?,?,?)";
+	protected static final String FIND_BY_PRIMARY_KEY_QUERY  = "select * from \"user\" where user_id = ?";
+	protected static final String FIND_ALL_QUERY             = "select * from \"user\"";
+	protected static final String UPDATE_STATEMENT           = "update \"user\" SET first_name = ?, last_name = ?, email = ?, birthday = ?, gender = ?, password = ?, profile_img = ?, family_id = ?, kid = ? WHERE user_id = ?";
+	protected static final String DELETE_STATEMENT           = "delete from \"user\" where user_id = ?";
+	protected static final String FIND_BY_FAMILY_QUERY       = "select * from \"user\" where family_id = ?";
+	protected static final String FIND_BY_EMAIL_QUERY        = "select * from \"user\" where email = ?";
+	protected static final String FIND_BY_LOGIN_QUERY        = "select * from \"user\" where email = ? and password = ?";
+	protected static final String FIND_FRIENDS_QUERY         =   "select \"user\".* \r\n" + 
+																 "from following INNER JOIN \"user\" ON (followed_id = user_id)\r\n" + 
+																 "where follower_id = ? and EXISTS \r\n" + 
+																 "	(\r\n" + 
+																 "		select * from following AS back_following\r\n" + 
+																 "		where back_following.follower_id = following.followed_id and back_following.followed_id = ?\r\n" + 
+																 "	)";
+	protected static final String FOLLOWERS_COUNT_QUERY      = "select COUNT(*) from following where (followed_id = ?)";
+	protected static final String FIND_BY_NAME_QUERY         = "select * from \"user\" where lower(first_name) like lower(concat('%', ?, '%')) or (lower(last_name) like lower(concat('%', ?, '%')) and char_length(?) > 0) limit ?";
+	protected static final String FIND_FOLLOWED_IDS_QUERY    = "select followed_id from following where (follower_id = ?)";
+	protected static final String FIND_FRIENDS_BY_NAME_QUERY = FIND_FRIENDS_QUERY + " INTERSECT " + FIND_BY_NAME_QUERY;
 
 	private final StatementPrompterJDBC statementPrompter;
 	
@@ -297,6 +298,37 @@ public class UserDaoJDBC implements UserDao
 		
 		catch (SQLException e)
 		{ e.printStackTrace(); return users; }
+		
+		finally 
+		{ statementPrompter.onFinalize(); }
+	}
+	
+	@Override
+	public List<User> findFriendsByName(String name, User user, int limit)
+	{
+		final List<User> friends = new ArrayList<User>();
+		final String[] fullname = name.split(" ", 2);
+		
+		try
+		{
+			final PreparedStatement statement = statementPrompter.prepareStatement(FIND_FRIENDS_BY_NAME_QUERY);
+			statement.setLong  (1, user.getId());
+			statement.setLong  (2, user.getId());
+			
+			statement.setString(3, (fullname.length > 0) ? fullname[0] : "");
+			statement.setString(4, (fullname.length > 1) ? fullname[1] : "");
+			statement.setString(5, (fullname.length > 1) ? fullname[1] : "");
+			statement.setInt(6, limit);
+			
+			ResultSet result = statement.executeQuery();
+			
+			while ( result.next() )
+				friends.add( createUserFromResult(result, null) );
+			return friends;
+		}
+		
+		catch (SQLException e)
+		{ e.printStackTrace(); return friends; }
 		
 		finally 
 		{ statementPrompter.onFinalize(); }

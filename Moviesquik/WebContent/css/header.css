@@ -64,7 +64,7 @@
 	margin-right: 20px;
 }
 
-.nav-item:not(.dropdown)
+.nav-item:not(.last-nav-item)
 {
 	margin-right: 50px;
 }
@@ -171,16 +171,34 @@
 
 
 /******************************************************
-	nav user menu style.
+	movie party menu style.
 ******************************************************/
 
-.user-dropdown-menu
+.movie-party-dropdown-menu
 {
 	color: #fff;
 	border-radius: 20px;
 	background-color: #212121 !important;
 }
-.user-dropdown-menu .dropdown-item
+.movie-party-dropdown-menu .dropdown-item
+{
+	border-radius: 10px;
+}
+
+
+/******************************************************
+	header dropdown menu style.
+******************************************************/
+
+.header-dropdown-menu
+{
+	color: #fff;
+	border-radius: 20px;
+	background-color: #212121 !important;
+	
+	box-shadow: 0px 0px 20px 0px #000;
+}
+.header-dropdown-menu .dropdown-item
 {
 	border-radius: 10px;
 }
@@ -223,20 +241,12 @@
 .notifications-dropdown-menu
 {
 	width: 500px;
-	color: #fff;
-	border-radius: 20px;
-	background-color: #212121 !important;
 	padding-top: 10px;
 }
 
 .notifications-dropdown-menu a
 {
 	/* color: #0056b3 !important; */
-}
-
-#nav-user-notifications-dropdown-menu .dropdown-item
-{
-	color: #fff;
 }
 
 .notifications-dropdown-menu .new-notification-marker
@@ -283,8 +293,8 @@
 
 .notification-box
 {
-	margin-right: 20px;
-	margin-left: 20px;
+	/* margin-right: 20px;
+	margin-left: 20px; */
 }
 
 .dropdown-divider

@@ -55,4 +55,10 @@
 </div>
 
 <br>
-	
+<div class="row user-list-row"><div class="col-auto note sidenav-item-title">MOVIE PARTY</div></div>
+
+<div class="row sidenav-list-row" id="create-party-link-item">
+	<div class="col-auto sidenav-item-col clickable"><i class="fa fa-plus sidenav-item-icon create-party-icon"></i></div>
+	<div class="col-auto clickable">Create Party</div>
+</div>
+

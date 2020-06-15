@@ -28,11 +28,11 @@ public class DBSearchEngine
 	public static final int FULL_MEDIA_CONTENTS_SEARCH_LIMIT = 12;
 	public static final int GROUP_MEDIA_CONTENTS_SEARCH_LIMIT = 6;
 	
-	public void searchMediaContentsByQuery( final String query, final SortingPolicy sortingPolicy, final SearchResult result )
+	public void searchMediaContentsByQuery( String query, final SortingPolicy sortingPolicy, final SearchResult result )
 	{
 		final DaoFactory daoFactory = DBManager.getInstance().getDaoFactory();
 		
-		clearQueryText(query);
+		query = clearQueryText(query);
 		result.setQuery(query);
 		
 		final List<MediaContent> mediaContents = daoFactory.getMediaContentSearchDao().searchByTitle(query, false, sortingPolicy, MEDIA_CONTENTS_SEARCH_LIMIT);
@@ -46,14 +46,21 @@ public class DBSearchEngine
 				.collect(Collectors.toList()));
 	}
 	
-	public void searchUsersByQuery( final String query, final SearchResult result )
+	public void searchUsersByQuery( String query, final SearchResult result )
+	{
+		searchUsersByQuery(query, result, null);
+	}
+	
+	public void searchUsersByQuery( String query, final SearchResult result, final User usr )
 	{
 		final DaoFactory daoFactory = DBManager.getInstance().getDaoFactory();
 		
-		clearQueryText(query);
+		query = clearQueryText(query);
 		result.setQuery(query);
 		
-		final List<User> users = daoFactory.getUserDao().findByName(query, MEDIA_CONTENTS_SEARCH_LIMIT);
+		final List<User> users = usr == null 
+									? daoFactory.getUserDao().findByName(query, MEDIA_CONTENTS_SEARCH_LIMIT)
+									: daoFactory.getUserDao().findFriendsByName(query, usr, MEDIA_CONTENTS_SEARCH_LIMIT);
 
 		result.setUsers(users.stream()
 				.distinct()
@@ -102,9 +109,9 @@ public class DBSearchEngine
 		return groupMediaContents;
 	}
 	
-	private static void clearQueryText( final String query )
+	private static String clearQueryText( final String query )
 	{
-		query.trim();
+		return query.trim();
 	}
 	
 }

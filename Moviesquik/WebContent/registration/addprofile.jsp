@@ -28,7 +28,7 @@
 	<script src="js/bootstrap-validate.js"></script>
 	<script src="js/validation.js"></script>
 	<script src="js/popup.js"></script>
-	<script src="js/registration/addprofile.js"></script>
+	<script src="js/registration/addprofile.js" type="module"></script>
 	
 </head>
 <body>

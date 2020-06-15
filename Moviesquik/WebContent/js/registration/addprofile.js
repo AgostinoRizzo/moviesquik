@@ -2,6 +2,8 @@
  * 
  */
 
+import '../widgets/switch.js';
+
 var PERSONAL_EMAIL_SWITCH = 
 	{ 
 		status:false,
@@ -26,69 +28,6 @@ var KIDS_PROFILE_SWITCH =
 	};
 
 var ADD_PROFILE_FORM_TAG_ID = "#addprofileform";
-
-
-function disable_section(tag) 
-{
-	$(tag + " input").each( function() {
-		$(this).val("");
-		$(this).attr("disabled", true);
-		$(this).removeAttr("required");
-	});
-	
-	$(tag).css("opacity", "0.3");
-}
-
-function enable_section(tag) 
-{
-	$(tag).find("input").each( function() {
-		$(this).attr("disabled", false);
-		$(this).attr("required", true);
-	});
-	
-	$(tag).css("opacity", "1.0");
-}
-
-
-function clearAndDisableSwitch( sw )
-{
-	if ( sw.status )
-		{
-			$(sw.tag_id).trigger("click");
-			manageSwitchToggle( sw, null );
-		}
-	
-	$(sw.tag_id).css("pointer-events", "none");
-	sw.enabled = false;
-}
-
-function enableSwitch( sw )
-{
-	$(sw.tag_id).css("pointer-events", "");
-	sw.enabled = true;
-}
-
-
-function updateSwitchStatus( sw, mouseup_event ) 
-{
-	//if ( mouseup_event.which != 1 )
-	//	return;
-	sw.status = $(sw.tag_id).find("input").prop("checked");
-}
-
-function manageSwitchToggle( sw, mouseup_event ) 
-{
-	if ( !sw.enabled )
-		{
-			mouse_event.stopPropagation();
-			return;
-		}
-	updateSwitchStatus( sw, mouseup_event );
-	if ( sw.status )
-		enable_section(sw.section_tag_id);
-	else
-		disable_section(sw.section_tag_id);
-}
 
 
 $(document).ready( function()

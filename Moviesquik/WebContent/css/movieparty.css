@@ -1,0 +1,108 @@
+@charset "ISO-8859-1";
+
+#create-party-page-content
+{
+	margin-top: 100px;
+	text-align: center;
+}
+
+#create-party-form
+{
+	margin-top: 50px;
+	margin-right: auto;
+	margin-left: auto;
+	/* max-width: 500px; */
+	text-align: left;
+}
+#create-party-form input,button
+{
+	max-width: 500px;
+	margin-right: 20px;
+	margin-left: 20px;
+}
+#create-party-form label,p.note
+{
+	margin-right: 20px;
+	margin-left: 20px;
+}
+#create-party-form p.note
+{
+	margin-bottom: 0px;
+}
+#create-party-form .media-contents-list
+{
+	padding: 0px;
+	margin-top: 0px;
+}
+#create-party-form #admin-user-item
+{
+	margin-right: 0px;
+	margin-left: 0px;
+	max-width: fit-content;
+}
+
+#party-administrator-label
+{
+	color: #28a745;
+}
+
+.query-btn-col .btn
+{
+	margin-left: 0px !important;
+	height: 38px;
+	padding-top: 7px;
+}
+
+.switch-col
+{
+	text-align: right;
+}
+
+#guests-selection-form
+{
+	margin-right: auto;
+	margin-left: auto;
+	/* max-width: 500px; */
+	text-align: left;
+}
+#guests-selection-form input,button
+{
+	max-width: 500px;
+	margin-right: 20px;
+	margin-left: 20px;
+}
+#guests-selection-form label,p.note
+{
+	margin-right: 20px;
+	margin-left: 20px;
+}
+#guests-selection-form p.note
+{
+	margin-bottom: 0px;
+}
+
+#create-party-submit-col
+{
+	text-align: left;
+}
+
+#user-guests-search-result
+{
+	margin-right: 5px;
+	margin-left: 5px;
+}
+
+#invited-users-list
+{
+	margin-right: 5px;
+	margin-left: 5px;
+}
+
+.user-guest-item
+{
+	margin-bottom: 10px;
+}
+.addeduser-guest-item
+{
+	margin-bottom: 10px;
+}

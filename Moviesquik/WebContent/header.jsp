@@ -31,7 +31,7 @@
 						<a class="nav-link" href="#pricing-section">Prices</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link disabled" href="registration">Sign Up</a>
+						<a class="nav-link" href="registration">Sign Up</a>
 					</li>
 				</ul>
 				<form class="form-inline my-2 my-lg-0">
@@ -59,6 +59,12 @@
 						<li class="nav-item">
 							<a class="nav-link" href="watchlist">Watch List</a>
 						</li>
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Movie Party</a>
+							<div class="dropdown-menu header-dropdown-menu">
+								<a class="dropdown-item" href="movieparty"><span class="fa fa-plus"></span> Create Party</a>
+							</div>
+						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="#">Family</a>
 						</li>
@@ -80,7 +86,7 @@
 					          	
 					          	
 					        </a>
-					        <div id="nav-user-notifications-dropdown-menu" class="dropdown-menu dropdown-menu-right bg-dark text-white notifications-dropdown-menu" aria-labelledby="notifications-menu">
+					        <div id="nav-user-notifications-dropdown-menu" class="dropdown-menu dropdown-menu-right notifications-dropdown-menu header-dropdown-menu" aria-labelledby="notifications-menu">
 					        	<jsp:include page="notifications/notifications-list.jsp"></jsp:include>
 					        </div>
 					    </li>
@@ -96,7 +102,7 @@
 				
 				<ul id="navbar-nav-user" class="navbar-nav">
 						
-						<li class="nav-item dropdown">
+						<li class="nav-item dropdown last-nav-item">
 					        <a id="nav-user-avatar-box" class="nav-link" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					          
 					          	<c:set var = "user_profile_img_src" scope = "request" value = "res/drawable/user_avatar.jpg"/>
@@ -106,7 +112,7 @@
 					          	<img src="${user_profile_img_src}" class="avatar-img rounded-circle">
 					          	
 					        </a>
-					        <div id="nav-user-avatar-dropdown-menu" class="dropdown-menu dropdown-menu-right user-dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+					        <div id="nav-user-avatar-dropdown-menu" class="dropdown-menu dropdown-menu-right header-dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 					        	<a class="dropdown-item" href="user"><small>Signed in as</small><br><strong>${user.firstName} ${user.lastName}</strong></a>
 					        	<div class="dropdown-divider"></div>
 					        	<a class="dropdown-item" href="#">Dashboard</a>
