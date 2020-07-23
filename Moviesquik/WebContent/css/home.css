@@ -272,6 +272,10 @@
 {
 	background: linear-gradient(#58A8FF, #3A6CEF);
 }
+.movie-party-icon
+{
+	background: linear-gradient(#474747, #474747);
+}
 .sidenav-item-col
 {
 	padding-right: 0px;
@@ -294,4 +298,28 @@
 	
 	text-align: center;
 	padding-top: 30px;
+}
+
+
+/* Movie Parties List Style */
+.movieparty-media-box
+{
+	position: relative;
+}
+.participants-row, .invitations-row, .administrator-row
+{
+	margin-top: 5px;
+}
+.movieparty-media-card-img
+{
+	padding-right: 0px;
+	padding-left: 0px;
+	border-radius: 10px !important;
+	
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	height: 100%;
+	
+	-webkit-mask: linear-gradient(to right, transparent 0%, rgba(0,0,0,.1) 50%, rgba(0,0,0,.3) 100%);
 }

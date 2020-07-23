@@ -341,5 +341,15 @@
 	<url-pattern>/movieparty</url-pattern>
 </servlet-mapping>
 
+<!-- Movie Party Broker Servlet -->
+<servlet>
+	<servlet-name>moviepartybroker</servlet-name>
+	<servlet-class>it.unical.mat.moviesquik.controller.movieparty.MoviePartyBroker</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>moviepartybroker</servlet-name>
+	<url-pattern>/getmovieparties</url-pattern>
+</servlet-mapping>
+
 
 </web-app>

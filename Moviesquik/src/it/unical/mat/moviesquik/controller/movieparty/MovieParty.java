@@ -75,6 +75,7 @@ public class MovieParty extends HttpServlet
 		party.setName( req.getParameter("name") );
 		party.setDescription( req.getParameter("description") );
 		party.setStartDateTime( DateUtil.parseDateTimeFormat( req.getParameter("date"), req.getParameter("time") ) );
+		party.setCreationDateTime( DateUtil.getCurrent() );
 		
 		Long mediaContentId;
 		try { mediaContentId = Long.parseLong( req.getParameter("choosen-media-content") ); }
@@ -100,7 +101,7 @@ public class MovieParty extends HttpServlet
 		}
 		
 		party.setPrivate(!invitations.isEmpty());
-		party.setAdminstrator(user);
+		party.setAdministrator(user);
 		party.setInvitations(invitations);
 		party.setParticipations(new ArrayList<MoviePartyParticipation>());
 		

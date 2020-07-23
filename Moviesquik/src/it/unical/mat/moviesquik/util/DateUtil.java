@@ -81,6 +81,11 @@ public class DateUtil
 	
 	public static String toHumanReadable( final Date when )
 	{
+		return toHumanReadable(when, false);
+	}
+	
+	public static String toHumanReadable( final Date when, final boolean forceTimeString )
+	{
 		final Calendar right_now = Calendar.getInstance();
 		final Calendar target_date = Calendar.getInstance();
 		target_date.setTime(when);
@@ -88,7 +93,7 @@ public class DateUtil
 		if ( target_date.after(right_now) ||
 				target_date.get(Calendar.YEAR) != right_now.get(Calendar.YEAR) || 
 				target_date.get(Calendar.MONTH) != right_now.get(Calendar.MONTH) )
-			return toString(when);
+			return toString(when, forceTimeString);
 		
 		final int days = right_now.get(Calendar.DATE) - target_date.get(Calendar.DATE);
 		
@@ -105,13 +110,32 @@ public class DateUtil
 		if ( days == 1 )
 			return "yesterday at " + getTimeString(target_date);
 		
-		return toString(when);
+		return toString(when, forceTimeString);
 	}
 	
 	public static String toString( final Date when )
 	{
+		return toString(when, false);
+	}
+	
+	public static String toString( final Date when, final boolean includeTime )
+	{
 		final SimpleDateFormat format = new SimpleDateFormat("dd MMMM yyyy", Locale.ENGLISH);
-		return format.format(when);
+		String ans = format.format(when);
+		
+		if ( includeTime )
+		{
+			final Calendar target_date = Calendar.getInstance();
+			target_date.setTime(when);
+			ans += " at " + getTimeString(target_date);
+		}
+		
+		return ans;
+	}
+	
+	public static boolean isExpired( final Date when )
+	{
+		return getCurrent().after(when);
 	}
 	
 	private static String getPluralChar( final int n )

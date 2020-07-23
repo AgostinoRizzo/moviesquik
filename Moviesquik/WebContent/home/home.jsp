@@ -65,12 +65,12 @@
 		<div class="col-4 scollable-col" id="movie-parties-column">
 					<!-- New post box -->
 					<%-- <jsp:include page="../posting/new_post_box.jsp"></jsp:include> --%>
-					<div id="news-list">
-						<jsp:include page="../posting/news_content.jsp"></jsp:include>
+					<div id="movieparties-list">
+						<jsp:include page="../movieparty/party-list.jsp"></jsp:include>
 					</div>
-					<div class="text-center" id="view-more-posts-tag">
+					<div class="text-center" id="view-more-movieparties-tag">
 						<div class="loader loader-sm d-none"></div>
-						<button class="btn btn-link view-all-btn" id="posts-view-more-btn">view more</button>
+						<button class="btn btn-link view-all-btn" id="movieparties-view-more-btn">view more</button>
 					</div>
 		</div>
 		

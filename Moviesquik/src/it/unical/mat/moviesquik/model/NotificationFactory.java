@@ -40,7 +40,7 @@ public class NotificationFactory
 	{ return createNotification("Watchlist share", sender.getFullName() + " shared your " + watchlist.getName() + " watchlist", sender); }
 	
 	public Notification createMoviePartyInvitationNotification( final MovieParty party )
-	{ return createNotification("Movie party invitation", party.getAdminstrator().getFullName() + " invited you to \"" + party.getName() + "\" movie party", party.getAdminstrator()); }
+	{ return createNotification("Movie party invitation", party.getAdministrator().getFullName() + " invited you to \"" + party.getName() + "\" movie party", party.getAdministrator()); }
 	
 	private Notification createNotification( final String title, final String description, final User sender )
 	{

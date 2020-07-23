@@ -6,6 +6,7 @@ package it.unical.mat.moviesquik.model;
 import java.util.Date;
 import java.util.List;
 
+import it.unical.mat.moviesquik.model.movieparty.MovieParty;
 import it.unical.mat.moviesquik.persistence.DBManager;
 import it.unical.mat.moviesquik.persistence.DataListPage;
 
@@ -33,6 +34,7 @@ public class User
 	private List<Post> personalPosts;
 	private List<Post> allPosts;
 	private List<Watchlist> watchlists;
+	private List<MovieParty> allParties;
 	
 	public User()
 	{}
@@ -239,5 +241,12 @@ public class User
 	public void setWatchlists(List<Watchlist> watchlists)
 	{
 		this.watchlists = watchlists;
+	}
+	
+	public List<MovieParty> getAllMovieParties()
+	{
+		if ( allParties == null || allParties.isEmpty() )
+			allParties = DBManager.getInstance().getDaoFactory().getMoviePartyDao().findAll(this, DataListPage.DEFAULT_MOVIE_PARTIES_PAGE);
+		return allParties;
 	}
 }

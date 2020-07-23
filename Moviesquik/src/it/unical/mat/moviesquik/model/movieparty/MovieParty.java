@@ -8,6 +8,7 @@ import java.util.List;
 
 import it.unical.mat.moviesquik.model.MediaContent;
 import it.unical.mat.moviesquik.model.User;
+import it.unical.mat.moviesquik.util.DateUtil;
 
 /**
  * @author Agostino
@@ -19,9 +20,10 @@ public class MovieParty
 	private String name;
 	private String description;
 	private Date startDateTime;
+	private Date creationDateTime;
 	private MediaContent media;
 	private Boolean isPrivate;
-	private User adminstrator;
+	private User administrator;
 	private List<MoviePartyInvitation> invitations;
 	private List<MoviePartyParticipation> participations;
 	
@@ -57,6 +59,22 @@ public class MovieParty
 	{
 		this.startDateTime = startDateTime;
 	}
+	public String getHumanReadableStartDateTime()
+	{
+		return DateUtil.toHumanReadable(startDateTime, true);
+	}
+	public Date getCreationDateTime()
+	{
+		return creationDateTime;
+	}
+	public void setCreationDateTime(Date creationDateTime)
+	{
+		this.creationDateTime = creationDateTime;
+	}
+	public String getHumanReadableCreationDateTime()
+	{
+		return DateUtil.toHumanReadable(creationDateTime);
+	}
 	public MediaContent getMedia()
 	{
 		return media;
@@ -73,13 +91,13 @@ public class MovieParty
 	{
 		this.isPrivate = isPrivate;
 	}
-	public User getAdminstrator()
+	public User getAdministrator()
 	{
-		return adminstrator;
+		return administrator;
 	}
-	public void setAdminstrator(User adminstrator)
+	public void setAdministrator(User administrator)
 	{
-		this.adminstrator = adminstrator;
+		this.administrator = administrator;
 	}
 	public List<MoviePartyInvitation> getInvitations()
 	{
@@ -96,5 +114,13 @@ public class MovieParty
 	public void setParticipations(List<MoviePartyParticipation> participations)
 	{
 		this.participations = participations;
+	}
+	public boolean isExpired()
+	{
+		return DateUtil.isExpired(startDateTime);
+	}
+	public boolean isPlaying()
+	{
+		return isExpired() && DateUtil.getCurrent().getTime() < startDateTime.getTime() + 120*60;  // TODO: manage media content duration
 	}
 }

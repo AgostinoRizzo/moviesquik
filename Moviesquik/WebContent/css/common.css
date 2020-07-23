@@ -3,7 +3,7 @@
 /* Tile group style */
 .tile
 {
-	background-color: #1c1c1e;
+	background-color: #1c1c1e82; /*#1c1c1e;*/
 	border-radius: 12px;
 }
 

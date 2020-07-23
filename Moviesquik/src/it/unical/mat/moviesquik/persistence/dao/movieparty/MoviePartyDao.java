@@ -3,7 +3,11 @@
  */
 package it.unical.mat.moviesquik.persistence.dao.movieparty;
 
+import java.util.List;
+
+import it.unical.mat.moviesquik.model.User;
 import it.unical.mat.moviesquik.model.movieparty.MovieParty;
+import it.unical.mat.moviesquik.persistence.DataListPage;
 
 /**
  * @author Agostino
@@ -12,4 +16,5 @@ import it.unical.mat.moviesquik.model.movieparty.MovieParty;
 public interface MoviePartyDao
 {
 	public boolean save( final MovieParty party );
+	public List<MovieParty> findAll( final User user, final DataListPage page );
 }
