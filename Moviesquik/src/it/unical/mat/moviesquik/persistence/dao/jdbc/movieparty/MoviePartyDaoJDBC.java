@@ -29,7 +29,12 @@ public class MoviePartyDaoJDBC extends AbstractDaoJDBC<MovieParty> implements Mo
 {
 	protected static final String INSERT_STATEMENT = 
 			"insert into movie_party(movie_party_id, name, description, start_date_time, date_time, is_private, user_id, media_content_id) values (?,?,?,?,?,?,?,?)";
-	protected static final String FIND_ALL_QUERY = "select * from movie_party order by start_date_time, date_time desc limit ? offset ?";
+	protected static final String FIND_ALL_QUERY   = "select * from movie_party order by start_date_time desc, date_time desc limit ? offset ?";
+	protected static final String FIND_ALL_BY_USER_QUERY   = "select * from movie_party " + 
+			"where movie_party_id in (select MP_INV.movie_party_id from movie_party_invitation as MP_INV where MP_INV.user_id = ?) or user_id = ? " + 
+			"order by start_date_time desc, date_time desc limit ? offset ?";
+	protected static final String FIND_BY_ID_QUERY = "select * from movie_party " + 
+			"where movie_party_id = ? and (movie_party_id in (select MP_INV.movie_party_id from movie_party_invitation as MP_INV where MP_INV.user_id = ?) or user_id = ?)";
 	
 	
 	public MoviePartyDaoJDBC(StatementPrompterJDBC statementPrompter)
@@ -71,7 +76,7 @@ public class MoviePartyDaoJDBC extends AbstractDaoJDBC<MovieParty> implements Mo
 	}
 	
 	@Override
-	public List<MovieParty> findAll(User user, DataListPage page)
+	public List<MovieParty> findAll(DataListPage page)
 	{
 		final List<MovieParty> parties = new ArrayList<MovieParty>();
 		
@@ -92,6 +97,60 @@ public class MoviePartyDaoJDBC extends AbstractDaoJDBC<MovieParty> implements Mo
 		
 		catch (SQLException e)
 		{ e.printStackTrace(); return parties; }
+		
+		finally 
+		{ statementPrompter.onFinalize(); }
+	}
+	
+	@Override
+	public List<MovieParty> findAllByUser(User user, DataListPage page)
+	{
+		final List<MovieParty> parties = new ArrayList<MovieParty>();
+		
+		try
+		{
+			final PreparedStatement statement = statementPrompter.prepareStatement(FIND_ALL_BY_USER_QUERY);
+			
+			statement.setLong(1, user.getId());
+			statement.setLong(2, user.getId());
+			statement.setInt (3, page.getLimit());
+			statement.setInt (4, page.getOffset());
+			
+			ResultSet result = statement.executeQuery();
+			
+			while ( result.next() )
+				parties.add(createFromResult(result));
+			
+			return parties;
+		}
+		
+		catch (SQLException e)
+		{ e.printStackTrace(); return parties; }
+		
+		finally 
+		{ statementPrompter.onFinalize(); }
+	}
+	
+	@Override
+	public MovieParty findById(Long id, User user)
+	{
+		try
+		{
+			final PreparedStatement statement = statementPrompter.prepareStatement(FIND_BY_ID_QUERY);
+			
+			statement.setLong(1, id);
+			statement.setLong(2, user.getId());
+			statement.setLong(3, user.getId());
+			ResultSet result = statement.executeQuery();
+			
+			if ( result.next() )
+				return createFromResult(result);
+			
+			return null;
+		}
+		
+		catch (SQLException e)
+		{ e.printStackTrace(); return null; }
 		
 		finally 
 		{ statementPrompter.onFinalize(); }

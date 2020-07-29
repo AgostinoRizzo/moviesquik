@@ -62,7 +62,7 @@
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Movie Party</a>
 							<div class="dropdown-menu header-dropdown-menu">
-								<a class="dropdown-item" href="movieparty"><span class="fa fa-plus"></span> Create Party</a>
+								<a class="dropdown-item" href="movieparty?action=new"><span class="fa fa-plus"></span> Create Party</a>
 							</div>
 						</li>
 						<li class="nav-item">

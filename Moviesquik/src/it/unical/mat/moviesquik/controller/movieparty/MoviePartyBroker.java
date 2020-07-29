@@ -52,7 +52,7 @@ public class MoviePartyBroker extends HttpServlet
 		final int pageIndex = (pageIndexString == null) ? 0 : page_index;
 		final DataListPage page = new DataListPage(pageIndex, DataListPage.MOVIE_PARTIES_PAGE_LIMIT);
 		
-		final List<MovieParty> parties = DBManager.getInstance().getDaoFactory().getMoviePartyDao().findAll(user, page);
+		final List<MovieParty> parties = DBManager.getInstance().getDaoFactory().getMoviePartyDao().findAllByUser(user, page);
 		
 		req.setAttribute("parties", parties);
 		sendView(req, resp);		

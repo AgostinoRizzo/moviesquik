@@ -16,5 +16,7 @@ import it.unical.mat.moviesquik.persistence.DataListPage;
 public interface MoviePartyDao
 {
 	public boolean save( final MovieParty party );
-	public List<MovieParty> findAll( final User user, final DataListPage page );
+	public List<MovieParty> findAll( final DataListPage page );
+	public List<MovieParty> findAllByUser( final User user, final DataListPage page );
+	public MovieParty findById( final Long id, final User user );
 }

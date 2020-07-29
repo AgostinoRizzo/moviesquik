@@ -21,7 +21,7 @@
 		  			<div class="col-auto col-light-left"><img src="res/drawable/movie_party_icon.png" width="50px" class=""></div>
 				    <div class="col col-light-right header-text">
 				    	<h6>
-				    		<a href="">${party.name}</a>
+				    		<a href="movieparty?key=${party.id}">${party.name}</a>
 				    		<c:if test="${party.description != null && party.description.length() > 0}"> - ${party.description}</c:if>
 				    	
 				    	</h6>

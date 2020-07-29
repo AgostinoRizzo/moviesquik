@@ -22,7 +22,7 @@ import it.unical.mat.moviesquik.persistence.dao.movieparty.MoviePartyParticipati
  */
 public class MoviePartyParticipationDaoJDBC extends AbstractDaoJDBC<MoviePartyParticipation> implements MoviePartyParticipationDao
 {
-	protected static final String INSERT_STATEMENT = "insert into movie_party_participation(movie_party_id, user_id) values (?,?)";
+	protected static final String INSERT_STATEMENT    = "insert into movie_party_participation(movie_party_id, user_id) values (?,?)";
 	protected static final String FIND_BY_PARTY_QUERY = "select * from movie_party_participation where movie_party_id = ?";
 	
 	private MovieParty party = null;

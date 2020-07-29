@@ -63,7 +63,8 @@
 </div>
 
 <c:forEach items="${user.allMovieParties}" var="party">
-	<div class="row sidenav-list-row" id="open-party-link-item">
+	<div class="row sidenav-list-row open-party-link-item">
+		<input type="hidden" id="party-id" value="${party.id}">
 		<div class="col-auto sidenav-item-col clickable"><i class="fa fa-calendar sidenav-item-icon movie-party-icon"></i></div>
 		<div class="col clickable text-overflow">
 			${party.name}

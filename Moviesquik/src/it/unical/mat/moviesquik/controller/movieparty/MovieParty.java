@@ -46,17 +46,35 @@ public class MovieParty extends HttpServlet
 			return;
 		}
 		
-		/*
 		final String action = req.getParameter("action");
-		
-		if ( action != null && action.equals("page") )
+		if ( action != null && action.equals("new") )
 		{
-			
+			req.setAttribute("watchlist", user.getWatchlists().get(0));
+			req.getRequestDispatcher("movieparty/create-party.jsp").forward(req, resp);
+			return;
 		}
-		*/
 		
-		req.setAttribute("watchlist", user.getWatchlists().get(0));
-		req.getRequestDispatcher("movieparty/create-party.jsp").forward(req, resp);
+		Long partyId;
+		try
+		{ 
+			partyId = Long.parseLong(req.getParameter("key"));
+		}
+		catch (NumberFormatException e) 
+		{
+			ServletUtils.manageParameterError(req, resp);
+			return;
+		}
+		
+		final it.unical.mat.moviesquik.model.movieparty.MovieParty party = 
+				DBManager.getInstance().getDaoFactory().getMoviePartyDao().findById(partyId, user);
+		if ( party == null )
+		{
+			ServletUtils.manageParameterError(req, resp);
+			return;
+		}
+		
+		req.setAttribute("party", party);
+		req.getRequestDispatcher("movieparty/movie-party.jsp").forward(req, resp);
 	}
 	
 	@Override

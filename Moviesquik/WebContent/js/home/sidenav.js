@@ -55,7 +55,13 @@ $(document).ready(function()
 		
 		/* Create Movie Party sidenav link item */
 		$("#create-party-link-item").click(function() {
-			location.replace("movieparty");
+			location.replace("movieparty?action=new");
+		});
+		
+		/* Movie Party page sidenav link item */
+		$(".open-party-link-item").click(function() {
+			var key = $(this).find("#party-id").val();
+			location.replace("movieparty?key=" + key);
 		});
 		
 	});

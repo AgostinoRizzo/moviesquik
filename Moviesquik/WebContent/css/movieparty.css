@@ -106,3 +106,37 @@
 {
 	margin-bottom: 10px;
 }
+
+.movieparty-media-box
+{
+	text-align: left;
+}
+
+#movie-party-header
+{
+	
+}
+
+#chat-send-btn-col
+{
+	max-width: 80px;
+}
+#new-msg-text
+{
+	border-color: white !important;
+}
+#chat-send-btn
+{
+	max-width:  40px;
+	max-height: 40px;
+	min-width:  40px;
+	min-height: 40px;
+	position: absolute;
+	right: 10px;
+	border-radius: 50%;
+}
+#chat-participants
+{
+	text-align: left;
+	margin-top: 0px;
+}

@@ -246,7 +246,7 @@ public class User
 	public List<MovieParty> getAllMovieParties()
 	{
 		if ( allParties == null || allParties.isEmpty() )
-			allParties = DBManager.getInstance().getDaoFactory().getMoviePartyDao().findAll(this, DataListPage.DEFAULT_MOVIE_PARTIES_PAGE);
+			allParties = DBManager.getInstance().getDaoFactory().getMoviePartyDao().findAllByUser(this, DataListPage.DEFAULT_MOVIE_PARTIES_PAGE);
 		return allParties;
 	}
 }
