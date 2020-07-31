@@ -10,4 +10,8 @@ $(document).ready( function()
 				var textArea = $(this).closest(".media-body").find(".text-area-post");
 				textArea.val(textArea.val() + emoji_code);
 			});
+	
+	$("#chat-send-btn").click( function() {
+		alert("Check foreign user. If not then send message.");
+	});
 });

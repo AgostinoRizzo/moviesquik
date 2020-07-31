@@ -25,10 +25,11 @@
 				    		<c:if test="${party.description != null && party.description.length() > 0}"> - ${party.description}</c:if>
 				    	
 				    	</h6>
+				    	
+				    	<c:if test="${party.isPrivate()}"><span class="badge badge-warning"><i class="fa fa-lock"></i> Private event</span></c:if>
+				    	<c:if test="${!party.isPrivate()}"><span class="badge badge-success"><i class="fa fa-globe"></i> Public event</span></c:if>
 				    	<small class="note" data-toggle="tooltip" data-placement="top" title="${party.creationDateTime}">
-				    		<c:if test="${party.isPrivate()}"><span class="badge badge-warning">Private event</span></c:if>
-				    		<c:if test="${!party.isPrivate()}"><span class="badge badge-success">Public event</span></c:if>
-				    		 Posted ${party.humanReadableCreationDateTime}
+				    		Posted ${party.humanReadableCreationDateTime}
 				    	</small>
 				    </div>
 		  		</div>
@@ -43,9 +44,10 @@
 							<div class="note row">
 								<div class="col-2"><span class="badge badge-dark">Start time</span></div>
 								<div class="col-10 text-overflow">
-									<c:if test="${party.isPlaying()}"><span class="badge badge-success">playing now</span></c:if>
+									<c:if test="${party.isPlaying()}"><span class="badge badge-success"><i class="fa fa-play"></i> playing now</span></c:if>
 									<c:if test="${party.isExpired() && !party.isPlaying()}"><span class="badge badge-danger">expired</span></c:if>
-									${party.humanReadableStartDateTime}
+									<c:if test="${!party.isExpired() && !party.isPlaying()}"><span class="badge badge-info"><i class="fa fa-calendar"></i> Upcoming</span></c:if>
+									<c:if test="${party.isExpired()}">started </c:if>${party.humanReadableStartDateTime}
 								</div>
 							</div>
 							
@@ -78,22 +80,25 @@
 							<br>
 							<!-- <div class="row"> -->
 							
-							<div class="">
-							<div class="note row"><div class="col text-overflow"><span class="badge badge-dark">${party.invitations.size()} total invitations</span></div></div>
-							<div class="row invitations-row text-overflow">
-						    	
-					  			<c:forEach items="${party.invitations}" var="invitation">
-					  				<c:set var = "party_guest_profile_img_src" scope = "request" value = "res/drawable/user_avatar.jpg"/>
-									<c:if test="${invitation.guest.profileImagePath != null && invitation.guest.profileImagePath.length() > 0}">
-										<c:set var = "party_guest_profile_img_src" scope = "request" value = "res/user/${invitation.guest.profileImagePath}"/>
-									</c:if>
-							  		<div class="col-auto col-light-left"><a href="user?id=${invitation.guest.id}"><img src="${party_guest_profile_img_src}" width="30px" class="avatar-img rounded-circle"></a></div>
-					  			</c:forEach>
-					  			
-					  		</div>
-					  		</div>
-					  		
-					  		<br>
+							<c:if test="${party.isPrivate()}">
+								<div class="">
+								<div class="note row"><div class="col text-overflow"><span class="badge badge-dark">${party.invitations.size()} total invitations</span></div></div>
+								<div class="row invitations-row text-overflow">
+							    	
+						  			<c:forEach items="${party.invitations}" var="invitation">
+						  				<c:set var = "party_guest_profile_img_src" scope = "request" value = "res/drawable/user_avatar.jpg"/>
+										<c:if test="${invitation.guest.profileImagePath != null && invitation.guest.profileImagePath.length() > 0}">
+											<c:set var = "party_guest_profile_img_src" scope = "request" value = "res/user/${invitation.guest.profileImagePath}"/>
+										</c:if>
+								  		<div class="col-auto col-light-left"><a href="user?id=${invitation.guest.id}"><img src="${party_guest_profile_img_src}" width="30px" class="avatar-img rounded-circle"></a></div>
+						  			</c:forEach>
+						  			
+						  		</div>
+						  		</div>
+						  		
+						  		
+						  		<br>
+					  		</c:if>
 					  		
 							<div class="">
 							<div class="note row"><div class="col text-overflow"><span class="badge badge-dark">${party.participations.size() + 1} participants</span></div></div>

@@ -90,10 +90,12 @@ public class DateUtil
 		final Calendar target_date = Calendar.getInstance();
 		target_date.setTime(when);
 		
-		if ( target_date.after(right_now) ||
-				target_date.get(Calendar.YEAR) != right_now.get(Calendar.YEAR) || 
-				target_date.get(Calendar.MONTH) != right_now.get(Calendar.MONTH) )
+		if ( target_date.get(Calendar.YEAR) != right_now.get(Calendar.YEAR) || 
+			 target_date.get(Calendar.MONTH) != right_now.get(Calendar.MONTH) )
 			return toString(when, forceTimeString);
+		
+		if ( target_date.after(right_now) )
+			return toFutureHumanReadable(right_now, target_date, forceTimeString);
 		
 		final int days = right_now.get(Calendar.DATE) - target_date.get(Calendar.DATE);
 		
@@ -154,5 +156,28 @@ public class DateUtil
 		if ( time < 10 )
 			return "0" + time;
 		return Integer.toString(time);
+	}
+	
+	private static String toFutureHumanReadable( final Calendar right_now, final Calendar target_date, final boolean forceTimeString )
+	{
+		final int days = target_date.get(Calendar.DATE) - right_now.get(Calendar.DATE);
+		
+		if ( days < 0 )
+			return toString(target_date.getTime(), forceTimeString);
+		
+		if ( days == 0 )
+		{
+			final int hours = target_date.get(Calendar.HOUR_OF_DAY) - right_now.get(Calendar.HOUR_OF_DAY);
+			if ( hours > 0 )
+				return "today at " + getTimeString(target_date);
+			
+			final int mins = target_date.get(Calendar.MINUTE) - right_now.get(Calendar.MINUTE);
+			return (mins == 0) ? "in a few seconds" : "in " + mins + " minute" + getPluralChar(mins);
+		}
+		
+		if ( days == 1 )
+			return "tomorrow at " + getTimeString(target_date);
+		
+		return toString(target_date.getTime(), forceTimeString);
 	}
 }

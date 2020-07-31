@@ -121,6 +121,6 @@ public class MovieParty
 	}
 	public boolean isPlaying()
 	{
-		return isExpired() && DateUtil.getCurrent().getTime() < startDateTime.getTime() + 120*60;  // TODO: manage media content duration
+		return isExpired() && (DateUtil.getCurrent().getTime() < startDateTime.getTime() + 120*60*1000);  // TODO: manage media content duration
 	}
 }

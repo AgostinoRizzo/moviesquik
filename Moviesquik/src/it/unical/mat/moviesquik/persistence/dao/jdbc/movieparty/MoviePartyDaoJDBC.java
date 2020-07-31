@@ -31,10 +31,20 @@ public class MoviePartyDaoJDBC extends AbstractDaoJDBC<MovieParty> implements Mo
 			"insert into movie_party(movie_party_id, name, description, start_date_time, date_time, is_private, user_id, media_content_id) values (?,?,?,?,?,?,?,?)";
 	protected static final String FIND_ALL_QUERY   = "select * from movie_party order by start_date_time desc, date_time desc limit ? offset ?";
 	protected static final String FIND_ALL_BY_USER_QUERY   = "select * from movie_party " + 
-			"where movie_party_id in (select MP_INV.movie_party_id from movie_party_invitation as MP_INV where MP_INV.user_id = ?) or user_id = ? " + 
-			"order by start_date_time desc, date_time desc limit ? offset ?";
+			"where movie_party_id in (select MP_INV.movie_party_id from movie_party_invitation as MP_INV where MP_INV.user_id = ?) or user_id = ? or not is_private " + 
+			"order by start_date_time desc, date_time desc";
 	protected static final String FIND_BY_ID_QUERY = "select * from movie_party " + 
-			"where movie_party_id = ? and (movie_party_id in (select MP_INV.movie_party_id from movie_party_invitation as MP_INV where MP_INV.user_id = ?) or user_id = ?)";
+			"where movie_party_id = ? and (movie_party_id in (select MP_INV.movie_party_id from movie_party_invitation as MP_INV where MP_INV.user_id = ?) or user_id = ? or not is_private)";
+	
+	protected static final String FIND_ALL_BY_USER_FILTER_QUERY = "with PARTIES as (" + FIND_ALL_BY_USER_QUERY + ") " +
+																  "select * from ( " +
+																  		"(select * from PARTIES where start_date_time <= now() and (start_date_time + interval '120 minutes') > now() " +
+																  		"order by start_date_time desc, date_time desc) union all " + 
+																  		"(select * from PARTIES where start_date_time > now() " +
+																  		"order by start_date_time, date_time desc) union all " +
+																  		"(select * from PARTIES where (start_date_time + interval '120 minutes') <= now() " +
+																  		"order by start_date_time desc, date_time desc) " + 
+																  ") as ALL_PARTIES limit ? offset ?";
 	
 	
 	public MoviePartyDaoJDBC(StatementPrompterJDBC statementPrompter)
@@ -109,7 +119,7 @@ public class MoviePartyDaoJDBC extends AbstractDaoJDBC<MovieParty> implements Mo
 		
 		try
 		{
-			final PreparedStatement statement = statementPrompter.prepareStatement(FIND_ALL_BY_USER_QUERY);
+			final PreparedStatement statement = statementPrompter.prepareStatement(FIND_ALL_BY_USER_FILTER_QUERY);
 			
 			statement.setLong(1, user.getId());
 			statement.setLong(2, user.getId());

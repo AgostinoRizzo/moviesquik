@@ -21,6 +21,7 @@ import it.unical.mat.moviesquik.model.Exception;
 import it.unical.mat.moviesquik.model.Notification;
 import it.unical.mat.moviesquik.model.NotificationFactory;
 import it.unical.mat.moviesquik.model.User;
+import it.unical.mat.moviesquik.model.movieparty.InvitationAnswer;
 import it.unical.mat.moviesquik.model.movieparty.MoviePartyInvitation;
 import it.unical.mat.moviesquik.model.movieparty.MoviePartyParticipation;
 import it.unical.mat.moviesquik.persistence.DBManager;
@@ -65,7 +66,7 @@ public class MovieParty extends HttpServlet
 			return;
 		}
 		
-		final it.unical.mat.moviesquik.model.movieparty.MovieParty party = 
+		it.unical.mat.moviesquik.model.movieparty.MovieParty party = 
 				DBManager.getInstance().getDaoFactory().getMoviePartyDao().findById(partyId, user);
 		if ( party == null )
 		{
@@ -73,8 +74,21 @@ public class MovieParty extends HttpServlet
 			return;
 		}
 		
+		MoviePartyInvitation userInvitation = findUserInvitation(party, user);
+		
+		if ( action != null && action.equals("invitation") )
+		{
+			final MoviePartyInvitation newUserInvitation = manageInvitationAction( req, userInvitation, party, user );
+			if ( !newUserInvitation.equals(userInvitation) )
+			{
+				party = DBManager.getInstance().getDaoFactory().getMoviePartyDao().findById(partyId, user);
+				userInvitation = newUserInvitation;
+			}
+		}
+		
 		req.setAttribute("party", party);
-		req.getRequestDispatcher("movieparty/movie-party.jsp").forward(req, resp);
+		req.setAttribute("invitation", userInvitation);
+		req.getRequestDispatcher("movieparty/movie-party-wrapper.jsp").forward(req, resp);
 	}
 	
 	@Override
@@ -147,5 +161,66 @@ public class MovieParty extends HttpServlet
 			req.setAttribute("error", new Exception("datetime_error"));
 		
 		req.getRequestDispatcher("/movieparty/info.jsp").forward(req, resp);
+	}
+	
+	private MoviePartyInvitation manageInvitationAction( final HttpServletRequest req, MoviePartyInvitation currentInvitation, 
+														 final it.unical.mat.moviesquik.model.movieparty.MovieParty currParty, final User usr )
+	{
+		if ( currentInvitation == null && currParty.isPrivate() )
+			return null;
+		
+		String value = req.getParameter("value");
+		if ( value == null )
+			return currentInvitation;
+		
+		value = value.trim();
+		InvitationAnswer answer = null;
+		String takenAction = null;
+		
+		final DaoFactory daoFactory = DBManager.getInstance().getDaoFactory();
+		
+		if ( currParty.isPrivate() )
+		{
+			if ( value.equals("participate") )
+				{ answer = InvitationAnswer.PARTICIPATE; takenAction = "on_participate"; }
+			else if ( value.equals("maybe") )
+				{ answer = InvitationAnswer.MAYBE; takenAction = "on_maybe"; }
+			else if ( value.equals("not") )
+				{ answer = InvitationAnswer.NOT; takenAction = "on_not"; }
+			
+			if ( answer != null )
+			{
+				final InvitationAnswer prevAnswer = currentInvitation.getAnswer();
+				currentInvitation.setAnswer(answer);
+				if ( !daoFactory.getMoviePartyInvitationDao().update(currentInvitation) )
+					currentInvitation.setAnswer(prevAnswer);
+				else if ( takenAction != null )
+					req.setAttribute(takenAction, true);
+			}
+		}
+		else if ( value.equals("participate") )
+		{
+			final MoviePartyInvitation newInvitation = new MoviePartyInvitation();
+			newInvitation.setParty(currParty);
+			newInvitation.setGuest(usr);
+			newInvitation.setAnswer(InvitationAnswer.PARTICIPATE);
+			
+			if ( daoFactory.getMoviePartyInvitationDao().save(newInvitation) )
+			{
+				req.setAttribute("on_participate", true);
+				return newInvitation;
+			}
+		}
+		
+		return currentInvitation;
+	}
+	
+	private static MoviePartyInvitation findUserInvitation( final it.unical.mat.moviesquik.model.movieparty.MovieParty party, final User usr )
+	{
+		final List<MoviePartyInvitation> invitations = party.getInvitations();
+		for ( final MoviePartyInvitation invitation : invitations )
+			if ( invitation.getGuest().getId().equals( usr.getId() ) )
+				return invitation;
+		return null;
 	}
 }

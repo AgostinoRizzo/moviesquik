@@ -22,36 +22,13 @@ import it.unical.mat.moviesquik.persistence.dao.movieparty.MoviePartyParticipati
  */
 public class MoviePartyParticipationDaoJDBC extends AbstractDaoJDBC<MoviePartyParticipation> implements MoviePartyParticipationDao
 {
-	protected static final String INSERT_STATEMENT    = "insert into movie_party_participation(movie_party_id, user_id) values (?,?)";
-	protected static final String FIND_BY_PARTY_QUERY = "select * from movie_party_participation where movie_party_id = ?";
+	protected static final String FIND_BY_PARTY_QUERY = "select * from movie_party_invitation where movie_party_id = ? and answer = 'P'";
 	
 	private MovieParty party = null;
 	
 	public MoviePartyParticipationDaoJDBC(StatementPrompterJDBC statementPrompter)
 	{
 		super(statementPrompter);
-	}
-
-	@Override
-	public boolean save(MoviePartyParticipation participation)
-	{
-		try
-		{
-			final PreparedStatement statement = statementPrompter.prepareStatement(INSERT_STATEMENT);
-			
-			statement.setLong     (1, participation.getParty().getId());
-			statement.setLong     (2, participation.getParticipant().getId());
-			
-			statement.executeUpdate();
-			
-			return true;
-		}
-		
-		catch (SQLException e)
-		{ e.printStackTrace(); return false; }
-		
-		finally 
-		{ statementPrompter.onFinalize(); }
 	}
 	
 	@Override

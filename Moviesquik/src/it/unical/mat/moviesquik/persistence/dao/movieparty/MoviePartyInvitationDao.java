@@ -15,5 +15,6 @@ import it.unical.mat.moviesquik.model.movieparty.MoviePartyInvitation;
 public interface MoviePartyInvitationDao
 {
 	public boolean save( final MoviePartyInvitation invitation );
+	public boolean update( final MoviePartyInvitation invitation );
 	public List<MoviePartyInvitation> findByMovieParty( final MovieParty party );
 }
