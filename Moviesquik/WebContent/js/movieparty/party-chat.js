@@ -12,6 +12,6 @@ $(document).ready( function()
 			});
 	
 	$("#chat-send-btn").click( function() {
-		alert("Check foreign user. If not then send message.");
+		alert("TODO: Check foreign user. If not then send message.");
 	});
 });

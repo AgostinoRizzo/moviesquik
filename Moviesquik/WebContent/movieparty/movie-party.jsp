@@ -5,6 +5,11 @@
 
 <c:set var="foreign_user" scope="request" value="${party.isPrivate() && (invitation == null || (invitation.answer == null || invitation.answer != 'PARTICIPATE')) && !party.administrator.getId().equals(user.getId())}"/>
 
+<c:set var = "user_profile_img_src" scope = "request" value = "res/drawable/user_avatar.jpg"/>
+<c:if test="${user.profileImagePath != null && user.profileImagePath.length() > 0}">
+	<c:set var = "user_profile_img_src" scope = "request" value = "res/user/${user.profileImagePath}"/>
+</c:if>
+
 <div id="create-party-page-content" class="">
 	
 	<div id="movie-party-header">
@@ -179,7 +184,7 @@
 			</div>
 			
 			<!-- movie party chat section -->
-			<div class="col-6">
+			<div class="col-6" id="movie-party-chat-container">
 			
 				<div class="media p-3 new-post-media">
 

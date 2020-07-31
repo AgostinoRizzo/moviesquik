@@ -88,7 +88,14 @@ public class MovieParty extends HttpServlet
 		
 		req.setAttribute("party", party);
 		req.setAttribute("invitation", userInvitation);
-		req.getRequestDispatcher("movieparty/movie-party-wrapper.jsp").forward(req, resp);
+		
+		String path = "movieparty/movie-party-wrapper.jsp";
+		if ( req.getParameter("update") != null )
+		{
+			req.setAttribute("user", user);
+			path = "movieparty/movie-party.jsp";
+		}
+		req.getRequestDispatcher(path).forward(req, resp);
 	}
 	
 	@Override

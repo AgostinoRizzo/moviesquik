@@ -31,8 +31,9 @@
 	<script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<script src="js/anim.js"></script>
 	<script src="js/header.js"></script>
+	<script src="js/notifications.js"></script>
 	<script src="js/bootstrap-validate.js"></script>
-	<script src="js/movieparty/movie-party.js"></script>
+	<script src="js/movieparty/movie-party.js" type="module"></script>
 	<script src="js/movieparty/party-chat.js"></script>
 	
 </head>
@@ -48,7 +49,7 @@
 	<!-- ======================
 		  Create Party contents
 	======================= -->
-	<div id="movie-party-content">
+	<div id="movie-party-page-container">
 		<jsp:include page="movie-party.jsp"></jsp:include>
 	</div>
 	

@@ -140,6 +140,11 @@ public class DateUtil
 		return getCurrent().after(when);
 	}
 	
+	public static boolean isInCurrentDay( final Date when )
+	{
+		return true;
+	}
+	
 	private static String getPluralChar( final int n )
 	{
 		return (n != 1 && n != -1) ? "s" : "";
