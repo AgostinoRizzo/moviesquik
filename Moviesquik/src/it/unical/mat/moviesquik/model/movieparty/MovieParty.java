@@ -123,4 +123,10 @@ public class MovieParty
 	{
 		return isExpired() && (DateUtil.getCurrent().getTime() < startDateTime.getTime() + 120*60*1000);  // TODO: manage media content duration
 	}
+	public Long getCurrentWatchingTimestamp()
+	{
+		if ( isPlaying() )
+			return DateUtil.getCurrent().getTime() - startDateTime.getTime();
+		return null;
+	}
 }

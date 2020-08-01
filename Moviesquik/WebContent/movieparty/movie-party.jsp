@@ -50,7 +50,7 @@
 	<c:if test="${party.isExpired() && party.isPlaying()}">
 		<h5><span class="badge badge-success"><i class="fa fa-circle"></i> Being played now...</span> - started ${party.humanReadableStartDateTime}</h5><br>
 		<c:if test="${!foreign_user}">
-			<div class="btn btn-link btn-sm"><i class="fa fa-play"></i> Join now</div>
+			<div class="btn btn-link btn-sm" id="join-btn"><i class="fa fa-play"></i> Join now</div>
 		</c:if>
 	</c:if>
 	
@@ -184,80 +184,8 @@
 			</div>
 			
 			<!-- movie party chat section -->
-			<div class="col-6" id="movie-party-chat-container">
-			
-				<div class="media p-3 new-post-media">
-
-					  <div class="media-body">
-					  		<div class="row">
-						  		<div class="col-auto col-light-left"><img src="${user_profile_img_src}" width="30px" class="avatar-img rounded-circle"></div>
-							    <div class="col col-light-right col-light-left">
-							    	<textarea class="form-control text-area-post" rows="2" id="new-msg-text" placeholder="What do you think about ${party.media.title}, ${user.firstName}?" name="post-text"></textarea>
-							    </div>
-							    
-							    <div class="col col-light-right" id="chat-send-btn-col">
-							    	<button class="col post-action btn btn-success btn-sm" id="chat-send-btn"><i class="fa fa-paper-plane"></i></button>
-							    </div>
-						    </div>
-						    
-						    
-						    <div class="dropdown-divider"></div>
-						    
-						    <div class="row post-action-row">
-						    		<div class="row new-post-action-row">
-						    			
-						    			<!-- Emoji post action -->
-								    	<div class="post-action dropdown row-item">
-								    		
-								    		<div class="btn btn-secondary dropdown-toggle" role="button" id="dropdown-emoji-panel-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								    			<h5>&#128522;</h5>&nbsp;Emoji
-								    		</div>
-								    		<jsp:include page="../posting/emoji_panel.jsp"></jsp:include>
-								    	</div>
-								    	
-								    </div>
-								    
-								    <div class="row participants-row text-overflow" id="chat-participants">
-					    	
-							  			<c:set var = "party_admin_profile_img_src" scope = "request" value = "res/drawable/user_avatar.jpg"/>
-										<c:if test="${party.administrator.profileImagePath != null && party.administrator.profileImagePath.length() > 0}">
-											<c:set var = "party_admin_profile_img_src" scope = "request" value = "res/user/${party.administrator.profileImagePath}"/>
-										</c:if>
-								  		<div class="col-auto col-light-left"><a href="user?id=${party.administrator.id}"><img src="${party_admin_profile_img_src}" width="30px" class="avatar-img rounded-circle"></a></div>
-							  			
-							  			<c:forEach items="${party.participations}" var="participation">
-							  				<c:set var = "party_participant_profile_img_src" scope = "request" value = "res/drawable/user_avatar.jpg"/>
-											<c:if test="${participation.participant.profileImagePath != null && participation.participant.profileImagePath.length() > 0}">
-												<c:set var = "party_participant_profile_img_src" scope = "request" value = "res/user/${participation.participant.profileImagePath}"/>
-											</c:if>
-									  		<div class="col-auto col-light-right col-light-left"><a href="user?id=${participation.participant.id}"><img src="${party_participant_profile_img_src}" width="30px" class="avatar-img rounded-circle"></a></div>
-							  			</c:forEach>
-							  			
-							  		</div>
-		  		
-								    
-						    </div>
-						    
-						    <br>
-					  </div>
-				</div>
-				
-				
-		  		
-		  		<br>
-		  		
-		  		<!-- movie party chat messages section -->
-		  		<c:if test="${foreign_user}">
-		  			<div>
-			  			<strong><i class="fa fa-lock"></i> The party conversation is private.</strong><br>Please take part to this event to access it.
-			  		</div>
-		  		</c:if>
-		  		<c:if test="${!foreign_user}">
-			  		<div>
-			  			There are no messages for this party.
-			  		</div>
-				</c:if>
-			
+			<div class="col-6">
+				<jsp:include page="movie-party-chat.jsp"></jsp:include>
 			</div>
 		
 		</div>

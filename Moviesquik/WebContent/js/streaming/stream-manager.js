@@ -20,7 +20,7 @@ const STREAM_MANAGER_STATE =
 	SEEKING:   'seeking'
 }
 
-window.StreamManager = function(mediaId, playPauseBtn, mediaTimeline, videoLoader, videotag)
+window.StreamManager = function(mediaId, playPauseBtn, mediaTimeline, videoLoader, videotag, startTimestamp=0)
 {	
 	var self = this;
 	
@@ -30,6 +30,7 @@ window.StreamManager = function(mediaId, playPauseBtn, mediaTimeline, videoLoade
 	this.playPauseBtn = playPauseBtn;
 	this.mediaTimeline = mediaTimeline;
 	this.videoLoader = videoLoader;
+	this.startTimestamp = startTimestamp;
 	
 	this.mediaSource = null;
 	this.sourceBuffer = null;
@@ -43,6 +44,8 @@ window.StreamManager = function(mediaId, playPauseBtn, mediaTimeline, videoLoade
 	this.newSeekTime = null;
 	this.onMinPlayableWindow = false;
 	this.fetchErrorCount = 0;
+	this.startTimestampSeek = null;
+	this.startedWithTimestampSeek = false;
 	
 	// state variable.
 	this.state = STREAM_MANAGER_STATE.BOOTSTRAP;
@@ -115,7 +118,10 @@ window.StreamManager = function(mediaId, playPauseBtn, mediaTimeline, videoLoade
 				this.stopLoading();
 				this.onMinPlayableWindow = false;
 			}
-				
+			
+			this.stopLoading();
+			this.onMinPlayableWindow = false;
+			
 			if ( this.isThereSegmentsToFetch() )
 				this.fetchNextSegment();
 			
@@ -162,6 +168,16 @@ window.StreamManager = function(mediaId, playPauseBtn, mediaTimeline, videoLoade
 		
 		if ( this.manifest.segments > 0 && this.manifest.duration > 0.0 )
 		{
+			if ( this.startTimestamp > 0 && this.startTimestamp < this.manifest.duration )
+			{
+				var startSegmentIndex = getNextSegmentIndex(startTimestamp, this.manifest);
+				if ( startSegmentIndex > 0 )
+				{
+					this.startTimestampSeek = this.startTimestamp / this.manifest.duration;
+					this.startedWithTimestampSeek = true;
+					this.videotag.volume = 0.0;
+				}
+			}
 			this.fetchNextSegment();
 		}
 	};
@@ -174,8 +190,11 @@ window.StreamManager = function(mediaId, playPauseBtn, mediaTimeline, videoLoade
 		
 		if ( this.state == STREAM_MANAGER_STATE.BOOTSTRAP )  // on bootstrap state.
 		{
-			if ( this.nextSegmentIndex == 0 )
+			if ( this.nextSegmentIndex == 0 && !this.startedWithTimestampSeek )
 				{ watchingPageSetup(); }
+			
+			//if ( this.startTimestampSeek != null && this.nextSegmentIndex != 0 )
+			//{ watchingPageSetup(); this.startTimestampSeek = null; this.videotag.volume = 1.0; }
 			
 			++this.nextSegmentIndex;
 			
@@ -191,10 +210,16 @@ window.StreamManager = function(mediaId, playPauseBtn, mediaTimeline, videoLoade
 		}
 		else if ( this.state == STREAM_MANAGER_STATE.BUFFERING )  // on buffering state.
 		{
-			++this.nextSegmentIndex;
+			if ( this.startTimestampSeek != null )
+			{
+				this.onSeek(this.startTimestampSeek);
+				this.startTimestampSeek = null;
+			}
+			else
+				++this.nextSegmentIndex;
 		}
 		else                                                      // on seeking state.
-		{
+		{	
 			if ( this.newSeekTime != null )
 			{
 				this.videotag.currentTime = this.newSeekTime;
@@ -214,6 +239,13 @@ window.StreamManager = function(mediaId, playPauseBtn, mediaTimeline, videoLoade
 				
 				if ( this.isThereSegmentsToFetch() )
 					this.fetchNextSegment();
+				
+				if ( this.startedWithTimestampSeek ) // activate view
+				{ 
+					this.startedWithTimestampSeek = false;
+					watchingPageSetup();
+					this.videotag.volume = 1.0;
+				}
 			}
 			else
 			{

@@ -298,10 +298,16 @@ $(document).ready( function()
 	
 		var videotag = document.querySelector("video");
 		
+		// current timestamp for movie party streaming
+		var currTimestamp = $("#curr-timestamp").val();
+		var multicasting = currTimestamp != undefined;
+		if ( multicasting )
+			currTimestamp = currTimestamp/1000.0;
+		
 		// play/pause button setup.
 		playPauseBtn = new PlayPauseButton(playPauseBtnTag, videotag);
 		playPauseBtn.onPause();
-		$(playPauseBtnTag).click( function() { playPauseBtn.onClick(); });
+		$(playPauseBtnTag).click( function() { if (!multicasting) playPauseBtn.onClick(); });
 		
 		// expand/reduce button setup.
 		expandCompressBtn = new ExpandCompressButton(expandCompressBtnTag);
@@ -315,13 +321,13 @@ $(document).ready( function()
 		
 		// media timeline setup.
 		mediaTimeline = new MediaTimeline(timelineTag, backwardTimelineTag, forwardTimelineTag, cursorTag, videoTimingsTag, videotag);
-		$(timelineTag).click( function(e) { mediaTimeline.onSeek(e); } );
+		$(timelineTag).click( function(e) { if (!multicasting) mediaTimeline.onSeek(e); } );
 		
 		// video loader setup.
 		videoLoader = new VideoLoader(videoLoaderTag);
 		
 		/* stream manager setup.*/
-		streamManager = new StreamManager($(this).find("#media-id").val(), playPauseBtn, mediaTimeline, videoLoader, videotag);
+		streamManager = new StreamManager($(this).find("#media-id").val(), playPauseBtn, mediaTimeline, videoLoader, videotag, currTimestamp != undefined ? currTimestamp : 0);
 		mediaTimeline.streamManager = streamManager;
 		streamManager.onStart();
 		

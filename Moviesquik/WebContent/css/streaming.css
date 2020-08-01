@@ -308,3 +308,61 @@ input[type=range]:focus::-ms-fill-upper {
 	width: fit-content;
 	height: fit-content;
 }
+
+
+/******************************************************
+	movie party chat style.
+******************************************************/
+#movie-party-chat-container
+{
+	width: 500px;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	bottom: 0px;
+	text-align: center;
+	z-index: 10;
+	
+	background-color: rgba(0,0,0,.8);
+}
+#watching-chat-btn
+{
+	width: 40px;
+	height: 40px;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	margin-top: 30px;
+	margin-right: 30px;
+	
+	background-image: linear-gradient(to left bottom, rgb(73, 143, 193), rgb(171, 89, 210));
+	box-shadow: 2px 2px 4px black;
+	
+	border-radius: 50%;
+	text-align: center;
+	z-index: 10;
+}
+#watching-chat-btn .fa
+{
+	margin-top: 5px;
+}
+#hide-chat-btn
+{
+	width: 40px;
+	height: 40px;
+	position: absolute;
+	top: 0px;
+	right: 500px;
+	margin-top: 10px;
+	margin-right: 10px;
+	
+	border-radius: 50%;
+	text-align: center;
+	z-index: 10;
+	
+	background-color: black;
+}
+#hide-chat-btn .fa
+{
+	margin-top: 5px;
+}

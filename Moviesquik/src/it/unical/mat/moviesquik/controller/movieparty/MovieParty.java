@@ -222,7 +222,7 @@ public class MovieParty extends HttpServlet
 		return currentInvitation;
 	}
 	
-	private static MoviePartyInvitation findUserInvitation( final it.unical.mat.moviesquik.model.movieparty.MovieParty party, final User usr )
+	public static MoviePartyInvitation findUserInvitation( final it.unical.mat.moviesquik.model.movieparty.MovieParty party, final User usr )
 	{
 		final List<MoviePartyInvitation> invitations = party.getInvitations();
 		for ( final MoviePartyInvitation invitation : invitations )

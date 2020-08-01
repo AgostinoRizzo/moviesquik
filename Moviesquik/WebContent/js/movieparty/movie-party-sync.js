@@ -6,6 +6,14 @@ const WEB_APPLICATION_NAME = "Moviesquik";
 const PAGE_UPDATE_BASE_URL = "movieparty";
 
 var webSocket;
+var mediaStarted;
+
+window.onJoin = function() 
+{
+	var partyId = $("#party-id").val();
+	if ( partyId != undefined )
+		location.href = 'watch?key=' + partyId + '&party=true';
+}
 
 function onPageUpdate() 
 {
@@ -21,6 +29,12 @@ function onPageUpdate()
 					$("#movie-party-page-container").html(data);
 					if ( prevChatContainerHtml != undefined )
 						$("#movie-party-chat-container").html(prevChatContainerHtml);
+					
+					if ( !mediaStarted && $("#join-btn").length )
+					{
+						onJoin();
+						mediaStarted = true;
+					}
 				}
 		}
 	);

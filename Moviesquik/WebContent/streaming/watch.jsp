@@ -15,6 +15,8 @@
 	<link href="css/main.css" rel="stylesheet">
 	<link href="css/common.css" rel="stylesheet">
 	<link href="css/streaming.css" rel="stylesheet">
+	<link href="css/movieparty.css" rel="stylesheet">
+	<link href="css/posting.css" rel="stylesheet">
 	
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	
@@ -24,11 +26,23 @@
 	<script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<script src="lib/typeahead/bootstrap3-typeahead.js"></script>
 	<script src="js/streaming/stream-player.js" type="module"></script>
+	<script src="js/movieparty/party-chat.js"></script>
+	<script src="js/watching/movie-watching.js"></script>
 	
 </head>
 <body>
 	
 	<input type="hidden" id="media-id" value="${media_content.id}">
+	
+	<c:if test="${party != null}">
+		<div class="clickable" id="watching-chat-btn"><h3><i class="fa fa-comments"></i></h3></div>
+		<div class="clickable" id="hide-chat-btn"><h3><i class="fa fa-times"></i></h3></div>
+		<jsp:include page="../movieparty/movie-party-chat.jsp"></jsp:include>
+	</c:if>
+	
+	<c:if test="${curr_watch_timestamp != null}">
+		<input type="hidden" id="curr-timestamp" value="${curr_watch_timestamp}">
+	</c:if>
 	
 	<div id="loading-wrapper">
 		<div id="brand-icon"><img alt="" src="res/drawable/logo3.png"></div>
