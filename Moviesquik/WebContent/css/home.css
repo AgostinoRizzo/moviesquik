@@ -323,3 +323,32 @@
 	
 	-webkit-mask: linear-gradient(to right, transparent 0%, rgba(0,0,0,.1) 50%, rgba(0,0,0,.3) 100%);
 }
+#party-list-header-container
+{
+	margin-bottom: 20px;
+	padding: 1rem;
+}
+#party-list-header-container .party-list-header-item
+{
+	margin-right: 5px;
+}
+#party-list-header-container .party-list-header-main-item
+{
+	background: linear-gradient(#F7586F, #EC4CA5);
+	border-color: black;
+}
+#calendar-container
+{
+	margin-bottom: 20px;
+	padding: 1rem;
+	min-height: 70px;
+}
+#calendar-container .loader
+{
+	left: 45%;
+}
+#calendar-container .badge
+{
+	font-size: medium;
+	font-weight: 400;
+}

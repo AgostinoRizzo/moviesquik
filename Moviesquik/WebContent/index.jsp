@@ -38,13 +38,15 @@
 	<script src="js/posting.js"></script>
 	<script src="js/commenting.js"></script>
 	<script src="js/send-feedback.js"></script>
-	<script src="js/more-news.js"></script>
+	<script src="js/more-news.js" type="module"></script>
 	<script src="js/notifications.js"></script>
 	<script src="js/media/show_media_content.js"></script>
 	<script src="js/contents.js"></script>
 	<script src="js/media-contents-filler.js"></script>
 	<script src="js/home/sidenav.js"></script>
 	<script src="js/watchlist/add-item.js"></script>
+	<script src="js/movieparty/movie-party-search.js"></script>
+	<script src="js/movieparty/movie-party-calendar.js"></script>
 	<%-- <c:if test="${user == null}"><script src="js/showcase/scrolling.js"></script></c:if> --%>
 	
 </head>

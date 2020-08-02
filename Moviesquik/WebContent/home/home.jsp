@@ -63,8 +63,7 @@
 		
 		<!-- MovieParty posts -->
 		<div class="col-4 scollable-col" id="movie-parties-column">
-					<!-- New post box -->
-					<%-- <jsp:include page="../posting/new_post_box.jsp"></jsp:include> --%>
+					<jsp:include page="../movieparty/party-list-header.jsp"></jsp:include>
 					<div id="movieparties-list">
 						<jsp:include page="../movieparty/party-list.jsp"></jsp:include>
 					</div>

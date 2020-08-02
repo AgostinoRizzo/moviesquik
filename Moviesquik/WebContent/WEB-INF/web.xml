@@ -351,5 +351,15 @@
 	<url-pattern>/getmovieparties</url-pattern>
 </servlet-mapping>
 
+<!-- Movie Party Calendar Servlet -->
+<servlet>
+	<servlet-name>movieparty_calendar_broker</servlet-name>
+	<servlet-class>it.unical.mat.moviesquik.controller.movieparty.MoviePartyCalendarBroker</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>movieparty_calendar_broker</servlet-name>
+	<url-pattern>/movieparty/calendar</url-pattern>
+</servlet-mapping>
+
 
 </web-app>

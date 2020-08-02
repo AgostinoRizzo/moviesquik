@@ -8,7 +8,7 @@
 </c:if>
 
 <c:forEach items="${parties}" var="party">
-
+	
 	<div class="media p-3 media-post-box main-media-post-box tile movieparty-media-box">
 	
 		  <input type="hidden" id="party-id" value="${party.id}">

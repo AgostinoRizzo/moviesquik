@@ -23,10 +23,10 @@ import it.unical.mat.moviesquik.persistence.DataListPage;
  * @author Agostino
  *
  */
-public class MoviePartyBroker extends HttpServlet
+public class MoviePartyCalendarBroker extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
-
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
 	{
@@ -38,34 +38,18 @@ public class MoviePartyBroker extends HttpServlet
 			return;
 		}
 		
-		final String pageIndexString = req.getParameter("pageid");
-		int page_index;
-		
-		try
-		{ page_index = Integer.parseInt(pageIndexString); }
-		catch (Exception e)
-		{
-			ServletUtils.manageParameterError(req, resp);
-			return;
-		}
-		
-		final MoviePartySearchFilter filter = MoviePartySearchFilter.parse( req.getParameter("filter") );
-		
-		final int pageIndex = (pageIndexString == null) ? 0 : page_index;
-		final DataListPage page = new DataListPage(pageIndex, DataListPage.MOVIE_PARTIES_PAGE_LIMIT);
-		
-		final List<MovieParty> parties = DBManager.getInstance().getDaoFactory().getMoviePartyDao().findAllByUser(user, filter, page);
+		final List<MovieParty> parties = DBManager.getInstance().getDaoFactory().getMoviePartyDao()
+				.findCommitmentsByUser(user, MoviePartySearchFilter.UPCOMING, DataListPage.DEFAULT_MOVIE_PARTIES_CALENDAR_PAGE);
 		
 		req.setAttribute("parties", parties);
-		sendView(req, resp);		
+		sendView(req, resp);
 	}
 	
 	public static void sendView(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
 	{
-		final String jspPage = "movieparty/party-list.jsp";
+		final String jspPage = "../movieparty/movie-party-calendar.jsp";
 		
 		final RequestDispatcher rd = req.getRequestDispatcher(jspPage);
 		rd.forward(req, resp);
 	}
-	
 }

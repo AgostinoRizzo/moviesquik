@@ -13,11 +13,13 @@ public class DataListPage
 	public static final int COMMENTS_PAGE_LIMIT = 2;
 	public static final int NOTIFICATIONS_PAGE_LIMIT = 5;
 	public static final int MOVIE_PARTIES_PAGE_LIMIT = 3;
+	public static final int MOVIE_PARTIES_CALENDAR_PAGE_LIMIT = 10;
 	
 	public static final DataListPage DEFAULT_POSTS_PAGE = new DataListPage(POSTS_PAGE_LIMIT);
 	public static final DataListPage DEFAULT_COMMENTS_PAGE = new DataListPage(COMMENTS_PAGE_LIMIT);
 	public static final DataListPage DEFAULT_NOTIFICATIONS_PAGE = new DataListPage(NOTIFICATIONS_PAGE_LIMIT);
 	public static final DataListPage DEFAULT_MOVIE_PARTIES_PAGE = new DataListPage(MOVIE_PARTIES_PAGE_LIMIT);
+	public static final DataListPage DEFAULT_MOVIE_PARTIES_CALENDAR_PAGE = new DataListPage(MOVIE_PARTIES_CALENDAR_PAGE_LIMIT);
 	
 	public static final DataListPage INFINITE_PAGE = new DataListPage(Integer.MAX_VALUE);
 	

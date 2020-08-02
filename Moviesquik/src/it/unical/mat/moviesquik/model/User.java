@@ -6,6 +6,7 @@ package it.unical.mat.moviesquik.model;
 import java.util.Date;
 import java.util.List;
 
+import it.unical.mat.moviesquik.controller.movieparty.MoviePartySearchFilter;
 import it.unical.mat.moviesquik.model.movieparty.MovieParty;
 import it.unical.mat.moviesquik.persistence.DBManager;
 import it.unical.mat.moviesquik.persistence.DataListPage;
@@ -246,7 +247,8 @@ public class User
 	public List<MovieParty> getAllMovieParties()
 	{
 		if ( allParties == null || allParties.isEmpty() )
-			allParties = DBManager.getInstance().getDaoFactory().getMoviePartyDao().findAllByUser(this, DataListPage.DEFAULT_MOVIE_PARTIES_PAGE);
+			allParties = DBManager.getInstance().getDaoFactory().getMoviePartyDao()
+				.findAllByUser(this, MoviePartySearchFilter.ALL, DataListPage.DEFAULT_MOVIE_PARTIES_PAGE);
 		return allParties;
 	}
 }

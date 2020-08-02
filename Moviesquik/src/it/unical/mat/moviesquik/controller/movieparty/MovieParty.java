@@ -230,4 +230,5 @@ public class MovieParty extends HttpServlet
 				return invitation;
 		return null;
 	}
+	
 }
