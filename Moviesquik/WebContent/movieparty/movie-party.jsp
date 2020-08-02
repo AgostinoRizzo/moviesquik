@@ -68,7 +68,7 @@
 	<div class="container">
 		<div class="row">
 		
-			<div class="media p-3 media-post-box main-media-post-box movieparty-media-box col-6">
+			<div class="media p-3 media-post-box main-media-post-box movieparty-media-box col-lg-6">
 			
 				  <input type="hidden" id="party-id" value="${party.id}">
 				  
@@ -99,8 +99,8 @@
 							<div class="col-12">
 									
 									<div class="row">
-										<div class="col-auto">Start time</div>
-										<div class="col-auto note text-overflow">
+										<div class="col">Start time</div>
+										<div class="col col-right note text-overflow">
 											<c:if test="${party.isPlaying()}"><span class="badge badge-success"><i class="fa fa-play"></i> playing now</span></c:if>
 											<c:if test="${party.isExpired() && !party.isPlaying()}"><span class="badge badge-danger">expired</span></c:if>
 											<c:if test="${!party.isExpired() && !party.isPlaying()}"><span class="badge badge-info"><i class="fa fa-calendar"></i> Upcoming</span></c:if>
@@ -108,8 +108,8 @@
 										</div>
 									</div>
 									
-									<div class="row"><div class="col-auto">Movie&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div><div class="col-auto note text-overflow">${party.media.title}</div></div>
-									<div class="row"><div class="col-auto">Duration&nbsp;&nbsp;</div><div class="col-auto note text-overflow">120 min</div></div>
+									<div class="row"><div class="col">Movie</div><div class="col col-right note text-overflow">${party.media.title}</div></div>
+									<div class="row"><div class="col">Duration</div><div class="col col-right note text-overflow">120 min</div></div>
 									
 									<hr class="mb-4">
 									
@@ -184,7 +184,7 @@
 			</div>
 			
 			<!-- movie party chat section -->
-			<div class="col-6">
+			<div class="col-lg-6">
 				<jsp:include page="movie-party-chat.jsp"></jsp:include>
 			</div>
 		

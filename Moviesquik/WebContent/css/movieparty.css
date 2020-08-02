@@ -111,6 +111,14 @@
 {
 	text-align: left;
 }
+.new-post-media
+{
+	padding: 0px !important;
+}
+.movieparty-media-box
+{
+	padding-bottom: 50px !important;
+}
 
 #movie-party-header
 {
