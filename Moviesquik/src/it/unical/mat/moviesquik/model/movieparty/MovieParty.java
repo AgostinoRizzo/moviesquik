@@ -6,8 +6,8 @@ package it.unical.mat.moviesquik.model.movieparty;
 import java.util.Date;
 import java.util.List;
 
-import it.unical.mat.moviesquik.model.MediaContent;
 import it.unical.mat.moviesquik.model.User;
+import it.unical.mat.moviesquik.model.media.MediaContent;
 import it.unical.mat.moviesquik.util.DateUtil;
 
 /**
@@ -121,7 +121,7 @@ public class MovieParty
 	}
 	public boolean isPlaying()
 	{
-		return isExpired() && (DateUtil.getCurrent().getTime() < startDateTime.getTime() + 120*60*1000);  // TODO: manage media content duration
+		return isExpired() && (DateUtil.getCurrent().getTime() < startDateTime.getTime() + (media.getStreamTime() * 1000));
 	}
 	public Long getCurrentWatchingTimestamp()
 	{

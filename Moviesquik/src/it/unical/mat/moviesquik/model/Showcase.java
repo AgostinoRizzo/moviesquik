@@ -5,6 +5,8 @@ package it.unical.mat.moviesquik.model;
 
 import java.util.List;
 
+import it.unical.mat.moviesquik.model.media.MediaContent;
+
 /**
  * @author Agostino
  *

@@ -109,7 +109,7 @@
 									</div>
 									
 									<div class="row"><div class="col">Movie</div><div class="col col-right note text-overflow">${party.media.title}</div></div>
-									<div class="row"><div class="col">Duration</div><div class="col col-right note text-overflow">120 min</div></div>
+									<div class="row"><div class="col">Duration</div><div class="col col-right note text-overflow">${party.media.getMinStreamTime()} min</div></div>
 									
 									<hr class="mb-4">
 									

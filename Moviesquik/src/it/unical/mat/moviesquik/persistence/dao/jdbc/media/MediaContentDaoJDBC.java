@@ -1,7 +1,7 @@
 /**
  * 
  */
-package it.unical.mat.moviesquik.persistence.dao.jdbc;
+package it.unical.mat.moviesquik.persistence.dao.jdbc.media;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,8 +9,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import it.unical.mat.moviesquik.model.MediaContent;
+import it.unical.mat.moviesquik.model.media.MediaContent;
 import it.unical.mat.moviesquik.persistence.dao.MediaContentDao;
+import it.unical.mat.moviesquik.persistence.dao.jdbc.IdBroker;
+import it.unical.mat.moviesquik.persistence.dao.jdbc.StatementPrompterJDBC;
 import it.unical.mat.moviesquik.util.DateUtil;
 
 /**
@@ -20,8 +22,8 @@ import it.unical.mat.moviesquik.util.DateUtil;
 public class MediaContentDaoJDBC implements MediaContentDao
 {
 	protected static final String INSERT_STATEMENT = 
-			"insert into media_content(media_content_id, title, type, year, release_date, runtime, genre, plot, poster, production, director, actors, rating) " +
-			"values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			"insert into media_content(media_content_id, title, type, year, release_date, runtime, genre, plot, poster, production, director, actors, rating, stream_time) " +
+			"values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	protected static final String UPDATE_RATING_STATEMENT = "update media_content SET rating = ? WHERE media_content_id = ?";
 	protected static final String UPDATE_NEW_VIEW_STATEMENT = "update media_content SET views = views + 1 WHERE media_content_id = ?";
 	protected static final String FIND_BY_PRIMARY_KEY_QUERY = "select * from media_content where media_content_id = ?";
@@ -169,6 +171,7 @@ public class MediaContentDaoJDBC implements MediaContentDao
 		statement.setString     (11, mediaContent.getDirector());
 		statement.setString     (12, mediaContent.getActors());
 		statement.setFloat      (13, mediaContent.getRating());
+		statement.setInt        (14, mediaContent.getStreamTime());
 	}
 	
 	protected static MediaContent createFromResult( final ResultSet result ) throws SQLException
@@ -190,6 +193,7 @@ public class MediaContentDaoJDBC implements MediaContentDao
 		mediaContent.setRating(result.getFloat("rating"));
 		mediaContent.setViews(result.getLong("views"));
 		mediaContent.setLikes(result.getLong("likes"));
+		mediaContent.setStreamTime(result.getInt("stream_time"));
 		
 		return mediaContent;
 	}

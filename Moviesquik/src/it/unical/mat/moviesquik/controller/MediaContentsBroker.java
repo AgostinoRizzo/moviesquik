@@ -15,9 +15,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import it.unical.mat.moviesquik.controller.searching.MediaContentsSearchFilter;
-import it.unical.mat.moviesquik.model.MediaContent;
-import it.unical.mat.moviesquik.model.MediaContentType;
 import it.unical.mat.moviesquik.model.User;
+import it.unical.mat.moviesquik.model.media.MediaContent;
+import it.unical.mat.moviesquik.model.media.MediaContentType;
 import it.unical.mat.moviesquik.persistence.DBManager;
 import it.unical.mat.moviesquik.persistence.searching.SortingPolicy;
 import it.unical.mat.moviesquik.util.JSONUtil;

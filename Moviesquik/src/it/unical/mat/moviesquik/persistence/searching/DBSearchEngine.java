@@ -9,11 +9,11 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import it.unical.mat.moviesquik.controller.searching.MediaContentsSearchFilter;
-import it.unical.mat.moviesquik.model.MediaContent;
-import it.unical.mat.moviesquik.model.MediaContentType;
-import it.unical.mat.moviesquik.model.MediaContentGroup;
 import it.unical.mat.moviesquik.model.SearchResult;
 import it.unical.mat.moviesquik.model.User;
+import it.unical.mat.moviesquik.model.media.MediaContent;
+import it.unical.mat.moviesquik.model.media.MediaContentGroup;
+import it.unical.mat.moviesquik.model.media.MediaContentType;
 import it.unical.mat.moviesquik.persistence.DBManager;
 import it.unical.mat.moviesquik.persistence.dao.DaoFactory;
 

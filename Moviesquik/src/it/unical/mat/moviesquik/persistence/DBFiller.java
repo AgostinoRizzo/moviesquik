@@ -6,7 +6,7 @@ package it.unical.mat.moviesquik.persistence;
 import java.io.File;
 import java.util.List;
 
-import it.unical.mat.moviesquik.model.MediaContent;
+import it.unical.mat.moviesquik.model.media.MediaContent;
 import it.unical.mat.moviesquik.persistence.dao.MediaContentDao;
 import it.unical.mat.moviesquik.util.JSONUtil;
 

@@ -5,6 +5,7 @@ package it.unical.mat.moviesquik.model;
 
 import java.util.Date;
 
+import it.unical.mat.moviesquik.model.media.MediaContent;
 import it.unical.mat.moviesquik.persistence.DBManager;
 import it.unical.mat.moviesquik.util.DateUtil;
 

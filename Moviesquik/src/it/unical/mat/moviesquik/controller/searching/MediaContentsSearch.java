@@ -18,11 +18,11 @@ import com.google.gson.JsonObject;
 
 import it.unical.mat.moviesquik.controller.ServletUtils;
 import it.unical.mat.moviesquik.controller.SessionManager;
-import it.unical.mat.moviesquik.model.MediaContent;
-import it.unical.mat.moviesquik.model.MediaContentGroup;
-import it.unical.mat.moviesquik.model.MediaContentSearchResult;
-import it.unical.mat.moviesquik.model.MediaContentType;
 import it.unical.mat.moviesquik.model.User;
+import it.unical.mat.moviesquik.model.media.MediaContent;
+import it.unical.mat.moviesquik.model.media.MediaContentGroup;
+import it.unical.mat.moviesquik.model.media.MediaContentSearchResult;
+import it.unical.mat.moviesquik.model.media.MediaContentType;
 import it.unical.mat.moviesquik.persistence.DBManager;
 import it.unical.mat.moviesquik.persistence.searching.SortingPolicy;
 

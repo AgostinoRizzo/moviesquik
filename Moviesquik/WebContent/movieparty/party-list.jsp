@@ -52,7 +52,7 @@
 							</div>
 							
 							<div class="note row"><div class="col-2"><span class="badge badge-dark">Movie</span></div><div class="col-10 text-overflow">${party.media.title}</div></div>
-							<div class="note row"><div class="col-2"><span class="badge badge-dark">Duration</span></div><div class="col-10 text-overflow">120 min</div></div>
+							<div class="note row"><div class="col-2"><span class="badge badge-dark">Duration</span></div><div class="col-10 text-overflow">${party.media.getMinStreamTime()} min</div></div>
 							
 							<!-- <div class="dropdown-divider"></div> --><br>
 							

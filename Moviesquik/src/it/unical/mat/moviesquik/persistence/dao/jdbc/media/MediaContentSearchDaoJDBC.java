@@ -1,7 +1,7 @@
 /**
  * 
  */
-package it.unical.mat.moviesquik.persistence.dao.jdbc;
+package it.unical.mat.moviesquik.persistence.dao.jdbc.media;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,10 +10,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.unical.mat.moviesquik.controller.searching.MediaContentsSearchFilter;
-import it.unical.mat.moviesquik.model.MediaContent;
-import it.unical.mat.moviesquik.model.MediaContentType;
 import it.unical.mat.moviesquik.model.User;
+import it.unical.mat.moviesquik.model.media.MediaContent;
+import it.unical.mat.moviesquik.model.media.MediaContentType;
 import it.unical.mat.moviesquik.persistence.dao.MediaContentSearchDao;
+import it.unical.mat.moviesquik.persistence.dao.jdbc.DaoUtilJDBC;
+import it.unical.mat.moviesquik.persistence.dao.jdbc.StatementPrompterJDBC;
 import it.unical.mat.moviesquik.persistence.searching.SortingPolicy;
 
 /**

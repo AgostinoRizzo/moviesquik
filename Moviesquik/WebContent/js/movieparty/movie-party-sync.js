@@ -8,6 +8,11 @@ const PAGE_UPDATE_BASE_URL = "movieparty";
 var webSocket;
 var mediaStarted;
 
+window.setMediaStartedFlag = function(flag) 
+{
+	mediaStarted = flag;
+}
+
 window.onJoin = function() 
 {
 	var partyId = $("#party-id").val();

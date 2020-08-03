@@ -38,6 +38,7 @@
 		    	<div>Released: &nbsp;<strong class="note">${media_content.humanReadableReleasedDateTime}</strong></div>
 		    	<div>Type: &nbsp;<strong class="note">${media_content.type}</strong></div>
 		    	<div>Runtime: &nbsp;<strong class="note">${media_content.runtime}</strong></div>
+		    	<div>Stream time: &nbsp;<strong class="note">${media_content.getMinStreamTime()} min</strong></div>
 		    	<div>Director: &nbsp;<strong class="note">${media_content.director}</strong></div>
 		    	<div>Actors: &nbsp;<strong class="note">${media_content.actors}</strong></div>
 		    	

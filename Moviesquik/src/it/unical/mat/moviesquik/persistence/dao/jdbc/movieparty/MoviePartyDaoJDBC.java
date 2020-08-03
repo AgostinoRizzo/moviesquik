@@ -37,9 +37,9 @@ public class MoviePartyDaoJDBC extends AbstractDaoJDBC<MovieParty> implements Mo
 	protected static final String FIND_BY_ID_QUERY = "select * from movie_party " + 
 			"where movie_party_id = ? and (movie_party_id in (select MP_INV.movie_party_id from movie_party_invitation as MP_INV where MP_INV.user_id = ?) or user_id = ? or not is_private)";
 	
-	protected static final String PLAYING_PARTY_CONDITION  = " start_date_time <= now() and (start_date_time + interval '120 minutes') > now() ";
+	protected static final String PLAYING_PARTY_CONDITION  = " start_date_time <= now() and (start_date_time + (\"getMediaContentStreamTime\"(movie_party_id) * interval '1 second')) > now() ";
 	protected static final String UPCOMING_PARTY_CONDITION = " start_date_time > now() ";
-	protected static final String EXPIRED_PARTY_CONDITION  = " (start_date_time + interval '120 minutes') <= now() ";
+	protected static final String EXPIRED_PARTY_CONDITION  = " (start_date_time + (\"getMediaContentStreamTime\"(movie_party_id) * interval '1 second')) <= now() ";
 	protected static final String FIND_ALL_BY_USER_FILTER_QUERY = "with PARTIES as (" + FIND_ALL_BY_USER_QUERY + ") " +
 																  "select * from ( " +
 																  		"(select * from PARTIES where " + PLAYING_PARTY_CONDITION +

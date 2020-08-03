@@ -1,7 +1,7 @@
 /**
  * 
  */
-package it.unical.mat.moviesquik.model;
+package it.unical.mat.moviesquik.model.media;
 
 import java.util.Date;
 
@@ -29,6 +29,7 @@ public class MediaContent
 	private Long views;
 	private Long likes;
 	private float imdbRating;
+	private Integer streamTime;
 	
 	public Long getId()
 	{
@@ -169,6 +170,21 @@ public class MediaContent
 	public void setImdbRating(float imdbRating)
 	{
 		this.imdbRating = imdbRating;
+	}
+	public Integer getStreamTime()
+	{
+		if ( streamTime != null && streamTime > 0 )
+			return streamTime;
+		try { return Integer.parseInt(runtime.replaceAll("[^0-9]", "")) * 60; }
+		catch (NumberFormatException e) { return 7200; }
+	}
+	public void setStreamTime(Integer streamTime)
+	{
+		this.streamTime = streamTime;
+	}
+	public Integer getMinStreamTime()
+	{
+		return getStreamTime() / 60;
 	}
 	
 	@Override

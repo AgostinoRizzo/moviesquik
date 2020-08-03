@@ -1,7 +1,7 @@
 /**
  * 
  */
-package it.unical.mat.moviesquik.persistence.dao.jdbc;
+package it.unical.mat.moviesquik.persistence.dao.jdbc.media;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,6 +13,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import it.unical.mat.moviesquik.persistence.dao.MediaContentGenreDao;
+import it.unical.mat.moviesquik.persistence.dao.jdbc.StatementPrompterJDBC;
 
 /**
  * @author Agostino
