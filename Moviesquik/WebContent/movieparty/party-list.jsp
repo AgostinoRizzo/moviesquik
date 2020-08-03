@@ -12,6 +12,7 @@
 	<div class="media p-3 media-post-box main-media-post-box tile movieparty-media-box">
 	
 		  <input type="hidden" id="party-id" value="${party.id}">
+		  <input type="hidden" id="media-id" value="${party.media.id}">
 		  
 		  <img class="movieparty-media-card-img" src="${party.media.poster}">
 		  
@@ -51,7 +52,7 @@
 								</div>
 							</div>
 							
-							<div class="note row"><div class="col-2"><span class="badge badge-dark">Movie</span></div><div class="col-10 text-overflow">${party.media.title}</div></div>
+							<div class="note row"><div class="col-2"><span class="badge badge-dark">Movie</span></div><div class="col-auto text-overflow clickable-light media-content-link text-info">${party.media.title}</div></div>
 							<div class="note row"><div class="col-2"><span class="badge badge-dark">Duration</span></div><div class="col-10 text-overflow">${party.media.getMinStreamTime()} min</div></div>
 							
 							<!-- <div class="dropdown-divider"></div> --><br>

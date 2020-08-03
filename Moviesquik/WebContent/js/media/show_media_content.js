@@ -2,38 +2,47 @@
  * 
  */
 
+var previous_page_content = "";
+
+function onMediaContentShow(mckey) 
+{
+	var ajax_url = "getmedia?key=" + mckey;
+	
+	previous_page_content = $("#page-content, #movie-party-page-container").html();
+	$("#page-content, #movie-party-page-container").html('<div class="container" id="media-content-loading-container"><div class="loader loader-sm"></div></div');
+	
+	$.ajax(
+			{
+				type: "GET",
+				url: ajax_url,
+				dataType: "html",
+				success: function(data)
+					{
+						$("#page-content, #movie-party-page-container").html(data);
+					}
+			}
+		);
+}
+
 $(document).ready(function() {
 	
 //	$(document).on("click", ".card-img-top", function() { 
 //		location.href="getmedia?key=" + $(this).closest(".media-content-card").find("#media-id").val(); });
 	
-	var previous_page_content = "";
-	
 	$(document).on("click", ".card-img-top", function() {
-		
-		var ajax_url = "getmedia?key=" + $(this).closest(".media-content-card").find("#media-id").val();
-		
-		previous_page_content = $("#page-content").html();
-		$("#page-content").html('<div class="container" id="media-content-loading-container"><div class="loader loader-sm"></div></div');
-		
-		$.ajax(
-				{
-					type: "GET",
-					url: ajax_url,
-					dataType: "html",
-					success: function(data)
-						{
-							$("#page-content").html(data);
-						}
-				}
-			);
-		
+		var key = $(this).closest(".media-content-card").find("#media-id").val();
+		onMediaContentShow(key);
+	});
+	
+	$(document).on("click", ".media-content-link", function() {
+		var key = $(this).closest(".media-post-box").find("#media-id").val();
+		onMediaContentShow(key);
 	});
 	
 	$(document).on("click", "#mc-page-back", function() {
 		if ( previous_page_content.length > 0 )
 			{
-				$("#page-content").html(previous_page_content);
+				$("#page-content, #movie-party-page-container").html(previous_page_content);
 				previous_page_content = "";
 			}
 	});

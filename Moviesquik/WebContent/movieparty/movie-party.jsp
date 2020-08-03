@@ -71,6 +71,7 @@
 			<div class="media p-3 media-post-box main-media-post-box movieparty-media-box col-lg-6">
 			
 				  <input type="hidden" id="party-id" value="${party.id}">
+				  <input type="hidden" id="media-id" value="${party.media.id}">
 				  
 				  <div class="media-body">
 				  
@@ -108,7 +109,7 @@
 										</div>
 									</div>
 									
-									<div class="row"><div class="col">Movie</div><div class="col col-right note text-overflow">${party.media.title}</div></div>
+									<div class="row"><div class="col">Movie</div><div class="col col-right note text-overflow clickable-light media-content-link text-info">${party.media.title}</div></div>
 									<div class="row"><div class="col">Duration</div><div class="col col-right note text-overflow">${party.media.getMinStreamTime()} min</div></div>
 									
 									<hr class="mb-4">
