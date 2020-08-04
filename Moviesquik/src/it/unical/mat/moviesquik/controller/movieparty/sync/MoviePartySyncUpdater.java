@@ -4,10 +4,16 @@
 package it.unical.mat.moviesquik.controller.movieparty.sync;
 
 import java.util.Calendar;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+
+import it.unical.mat.moviesquik.model.NotificationFactory;
+import it.unical.mat.moviesquik.model.movieparty.MovieParty;
+import it.unical.mat.moviesquik.persistence.DBManager;
+import it.unical.mat.moviesquik.persistence.dao.DaoFactory;
 
 /**
  * @author Agostino
@@ -59,7 +65,10 @@ public class MoviePartySyncUpdater extends Thread
 			}
 			
 			if ( !stop )
+			{
 				MoviePartySynchronizer.sendUpdateCheck();
+				sendMoviePartyNotifications();
+			}
 		}
 		
 		lock.unlock();
@@ -94,5 +103,31 @@ public class MoviePartySyncUpdater extends Thread
 			residual = 0;
 		
 		return currMillisTime + residual;
+	}
+	
+	private void sendMoviePartyNotifications()
+	{
+		final DaoFactory daoFactory = DBManager.getInstance().getDaoFactory();
+		final NotificationFactory notificationFactory = NotificationFactory.getInstance();
+		
+		List<MovieParty> parties = daoFactory.getMoviePartyDao().findAllStartedNow();
+		for ( final MovieParty party : parties )
+			it.unical.mat.moviesquik.controller.movieparty.MovieParty
+				.sendNotificationToAllParticipants( notificationFactory.createMoviePartyStartedNotification(party), party, null, true );
+		
+		parties = daoFactory.getMoviePartyDao().findAllEndedNow();
+		for ( final MovieParty party : parties )
+			it.unical.mat.moviesquik.controller.movieparty.MovieParty
+				.sendNotificationToAllParticipants( notificationFactory.createMoviePartyEndedNotification(party), party, null, true );
+		
+		final int[] minutes = {5, 3, 1};
+		for ( final int min : minutes )
+		{
+			parties = daoFactory.getMoviePartyDao().findAllStarting(min);
+			for ( final MovieParty party : parties )
+				it.unical.mat.moviesquik.controller.movieparty.MovieParty
+					.sendNotificationToAllParticipants( notificationFactory.createMoviePartyReminderNotification(party, min), party, null, true );
+		}
+			
 	}
 }

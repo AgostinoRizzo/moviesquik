@@ -5,6 +5,7 @@ package it.unical.mat.moviesquik.model;
 
 import java.util.Date;
 
+import it.unical.mat.moviesquik.model.movieparty.MovieParty;
 import it.unical.mat.moviesquik.util.DateUtil;
 
 /**
@@ -19,6 +20,7 @@ public class Notification
 	private String description;
 	private Boolean isRead;
 	private User subjectUser;
+	private MovieParty movieParty;
 	
 	public Long getId()
 	{
@@ -71,5 +73,13 @@ public class Notification
 	public void setSubjectUser(User subjectUser)
 	{
 		this.subjectUser = subjectUser;
+	}
+	public MovieParty getMovieParty()
+	{
+		return movieParty;
+	}
+	public void setMovieParty(MovieParty movieParty)
+	{
+		this.movieParty = movieParty;
 	}
 }

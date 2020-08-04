@@ -201,8 +201,12 @@ public class MovieParty extends HttpServlet
 				currentInvitation.setAnswer(answer);
 				if ( !daoFactory.getMoviePartyInvitationDao().update(currentInvitation) )
 					currentInvitation.setAnswer(prevAnswer);
-				else if ( takenAction != null )
-					req.setAttribute(takenAction, true);
+				else 
+				{
+					sendMoviePartyParticipationNotification( currParty, usr, answer );
+					if ( takenAction != null )
+						req.setAttribute(takenAction, true);
+				}
 			}
 		}
 		else if ( value.equals("participate") )
@@ -229,6 +233,39 @@ public class MovieParty extends HttpServlet
 			if ( invitation.getGuest().getId().equals( usr.getId() ) )
 				return invitation;
 		return null;
+	}
+	
+	public static void sendNotificationToAllParticipants( final Notification notification, 
+														  final it.unical.mat.moviesquik.model.movieparty.MovieParty movieParty,
+														  final User sender,
+														  final boolean includeAdmin )
+	{
+		final DaoFactory daoFactory = DBManager.getInstance().getDaoFactory();
+		final List<MoviePartyParticipation> participations = movieParty.getParticipations();
+		final User admin = movieParty.getAdministrator();
+		
+		if ( includeAdmin && ( sender == null || !admin.getId().equals(sender.getId()) ) )
+			daoFactory.getNotificationDao().save(notification, admin);
+		
+		User receiver;
+		for ( final MoviePartyParticipation participation : participations )
+		{
+			receiver = participation.getParticipant();
+			if ( sender == null || !receiver.getId().equals(sender.getId()) )
+				daoFactory.getNotificationDao().save(notification, receiver);
+		}
+	}
+	
+	private static void sendMoviePartyParticipationNotification( final it.unical.mat.moviesquik.model.movieparty.MovieParty party, 
+															  	 final User participant, 
+															  	 final InvitationAnswer invitationAnswer )
+	{
+		if ( invitationAnswer != InvitationAnswer.PARTICIPATE && invitationAnswer != InvitationAnswer.NOT )
+			return;
+		
+		final Notification notification = NotificationFactory.getInstance()
+							.createMoviePartyParticipationNotification(party, participant, invitationAnswer == InvitationAnswer.PARTICIPATE);
+		sendNotificationToAllParticipants(notification, party, participant, true);
 	}
 	
 }

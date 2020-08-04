@@ -13,6 +13,7 @@ import it.unical.mat.moviesquik.controller.movieparty.MoviePartySearchFilter;
 import it.unical.mat.moviesquik.model.User;
 import it.unical.mat.moviesquik.model.movieparty.MovieParty;
 import it.unical.mat.moviesquik.model.movieparty.MoviePartyInvitation;
+import it.unical.mat.moviesquik.model.movieparty.MoviePartyProxy;
 import it.unical.mat.moviesquik.persistence.DBManager;
 import it.unical.mat.moviesquik.persistence.DataListPage;
 import it.unical.mat.moviesquik.persistence.dao.DaoFactory;
@@ -52,6 +53,11 @@ public class MoviePartyDaoJDBC extends AbstractDaoJDBC<MovieParty> implements Mo
 	protected static final String DATA_LIST_PAGE_QUERY = " limit ? offset ?";
 	protected static final String COMMITMENT_CONSTRAINT_QUERY = " (? = user_id or ? in (select INV.user_id from movie_party_invitation as INV where INV.movie_party_id = ALL_PARTIES.movie_party_id and answer = 'P')) ";
 	
+	protected static final String FIND_ALL_STARTED_NOW_QUERY = "select * from movie_party where date_trunc('minute', start_date_time) = date_trunc('minute', now())";
+	protected static final String FIND_ALL_ENDED_NOW_QUERY   = "select * from movie_party where " + 
+															   		"date_trunc('minute', start_date_time + (\"getMediaContentStreamTime\"(movie_party_id) * interval '1 second')) + (interval '1 minute') = " + 
+															   		"date_trunc('minute', now())";
+	protected static final String FIND_ALL_STARTING_QUERY    = "select * from movie_party where date_trunc('minute', start_date_time - (? * interval '1 minute')) = date_trunc('minute', now())";
 	
 	public MoviePartyDaoJDBC(StatementPrompterJDBC statementPrompter)
 	{
@@ -210,11 +216,81 @@ public class MoviePartyDaoJDBC extends AbstractDaoJDBC<MovieParty> implements Mo
 		finally 
 		{ statementPrompter.onFinalize(); }
 	}
+	
+	@Override
+	public List<MovieParty> findAllStartedNow()
+	{
+		final List<MovieParty> parties = new ArrayList<MovieParty>();
+		
+		try
+		{
+			final PreparedStatement statement = statementPrompter.prepareStatement(FIND_ALL_STARTED_NOW_QUERY);
+			ResultSet result = statement.executeQuery();
+			
+			while ( result.next() )
+				parties.add(createFromResult(result));
+			
+			return parties;
+		}
+		
+		catch (SQLException e)
+		{ e.printStackTrace(); return parties; }
+		
+		finally 
+		{ statementPrompter.onFinalize(); }
+	}
+	
+	@Override
+	public List<MovieParty> findAllEndedNow()
+	{
+		final List<MovieParty> parties = new ArrayList<MovieParty>();
+		
+		try
+		{
+			final PreparedStatement statement = statementPrompter.prepareStatement(FIND_ALL_ENDED_NOW_QUERY);
+			ResultSet result = statement.executeQuery();
+			
+			while ( result.next() )
+				parties.add(createFromResult(result));
+			
+			return parties;
+		}
+		
+		catch (SQLException e)
+		{ e.printStackTrace(); return parties; }
+		
+		finally 
+		{ statementPrompter.onFinalize(); }
+	}
+	
+	@Override
+	public List<MovieParty> findAllStarting(int minutes)
+	{
+		final List<MovieParty> parties = new ArrayList<MovieParty>();
+		
+		try
+		{
+			final PreparedStatement statement = statementPrompter.prepareStatement(FIND_ALL_STARTING_QUERY);
+			statement.setInt(1, minutes > 0 ? minutes : 0);
+			ResultSet result = statement.executeQuery();
+			
+			while ( result.next() )
+				parties.add(createFromResult(result));
+			
+			return parties;
+		}
+		
+		catch (SQLException e)
+		{ e.printStackTrace(); return parties; }
+		
+		finally 
+		{ statementPrompter.onFinalize(); }
+	}
 
 	@Override
 	protected MovieParty createFromResult(ResultSet result) throws SQLException
 	{
-		final MovieParty party = new MovieParty();
+		final MovieParty party = new MoviePartyProxy();
 		
 		party.setId( result.getLong("movie_party_id") );
 		party.setName( result.getString("name") );
@@ -230,8 +306,8 @@ public class MoviePartyDaoJDBC extends AbstractDaoJDBC<MovieParty> implements Mo
 		party.setMedia( daoFactory.getMediaContentDao().findById(mediaId) );
 		party.setAdministrator( daoFactory.getUserDao().findByPrimaryKey(adminId) );
 		
-		party.setInvitations( daoFactory.getMoviePartyInvitationDao().findByMovieParty(party) );
-		party.setParticipations( daoFactory.getMoviePartyParticipationDao().findByMovieParty(party) );
+		//party.setInvitations( daoFactory.getMoviePartyInvitationDao().findByMovieParty(party) );
+		//party.setParticipations( daoFactory.getMoviePartyParticipationDao().findByMovieParty(party) );
 		
 		return party;
 	}
