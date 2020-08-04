@@ -327,6 +327,7 @@ window.StreamManager = function(mediaId, playPauseBtn, mediaTimeline, videoLoade
 	{
 		this.videoLoader.hide();
 		this.playPauseBtn.enable();
-		playPauseBtn.onPlay(); 
+		this.playPauseBtn.syncToVideoTag();
+		//playPauseBtn.onPlay(); 
 	};
 }

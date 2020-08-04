@@ -69,9 +69,9 @@ function PlayPauseButton(tagid, videotag)
 	};
 	this.syncToVideoTag = function() 
 	{
-		if ( this.tagid.paused && !this.isOnPause() )
+		if ( this.videotag.paused && !this.isOnPause() )
 			this.onPause();
-		else if ( !this.tagid.paused && this.isOnPause() )
+		else if ( !this.videotag.paused && this.isOnPause() )
 			this.onPlay();
 	};
 	this.enable = function() 
