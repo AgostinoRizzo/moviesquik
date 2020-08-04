@@ -13,6 +13,8 @@
 		<div class="notification-box">
 	           <div class="row notification-box-row">
 	           
+	           		 <!-- notification icon -->
+	           		 
 	           		 <c:if test="${notification.subjectUser != null}">
 			             <div class="col-lg-1 col-sm-1 col-1 text-center">
 			      			
@@ -24,6 +26,15 @@
 			               		
 			             </div>    
 		             </c:if>
+		             
+		             <c:if test="${notification.subjectUser == null && notification.movieParty != null}">
+			             <div class="col-lg-1 col-sm-1 col-1 text-center">
+			               			<img src="res/drawable/movie_party_icon.png" class="notification-avatar-img">
+			             </div>    
+		             </c:if>
+		             
+		             
+		             <!-- notification content -->
 		             
 		             <div class="col-lg-10 col-sm-10 col-10 notification-body">
 		             	   

@@ -37,32 +37,32 @@ public class NotificationFactory
 	{ return createSimpleNotification("Post share", sender.getFullName() + " shared your post", sender); }
 	
 	public Notification createWatchlistShareNotification( final User sender, final Watchlist watchlist )
-	{ return createSimpleNotification("Watchlist share", sender.getFullName() + " shared your " + watchlist.getName() + " watchlist", sender); }
+	{ return createSimpleNotification("Watchlist share", sender.getFullName() + " shared your <strong>" + watchlist.getName() + "</strong> watchlist", sender); }
 	
 	public Notification createMoviePartyInvitationNotification( final MovieParty party )
-	{ return createSimpleNotification("Movie party invitation", party.getAdministrator().getFullName() + " invited you to \"" + party.getName() + "\" movie party", party.getAdministrator()); }
+	{ return createSimpleNotification("Movie party invitation", party.getAdministrator().getFullName() + " invited you to <strong>" + party.getName() + "</strong> movie party", party.getAdministrator()); }
 	
 	public Notification createMoviePartyParticipationNotification( final MovieParty party, final User participant, final boolean participate )
 	{
 		return createMoviePartyNotification
-				("Movie party participation", participant.getFullName() + " will " + (participate ? "" : "not ")  + "participate at the party \"" + 
-						party.getName() + "\"", party);
+				("Movie party participation", participant.getFullName() + " will " + (participate ? "" : "not ")  + "participate at the party <strong>" + 
+						party.getName() + "</strong>", participant, party);
 	}
 	public Notification createMoviePartyStartedNotification( final MovieParty party )
 	{
 		return createMoviePartyNotification
-				("Movie party event", "The movie party \"" + party.getName() + "\" is started right now", party);
+				("Movie party event", "The movie party <strong>" + party.getName() + "</strong> is started right now", null, party);
 	}
 	public Notification createMoviePartyEndedNotification( final MovieParty party )
 	{
 		return createMoviePartyNotification
-				("Movie party event", "The movie party \"" + party.getName() + "\" is ended right now", party);
+				("Movie party event", "The movie party <strong>" + party.getName() + "</strong> is ended right now", null, party);
 	}
 	public Notification createMoviePartyReminderNotification( final MovieParty party, final int minutesToStart )
 	{
 		return createMoviePartyNotification
-				("Movie party event", "The movie party \"" + party.getName() + "\" will start in " +
-				 minutesToStart + (minutesToStart == 1 ? " minute" : " minutes"), party);
+				("Movie party event", "The movie party <strong>" + party.getName() + "</strong> will start in " +
+				 minutesToStart + (minutesToStart == 1 ? " minute" : " minutes"), null, party);
 	}
 	
 	private Notification createSimpleNotification( final String title, final String description, final User sender )
@@ -76,13 +76,10 @@ public class NotificationFactory
 		return notification;
 	}
 	
-	private Notification createMoviePartyNotification( final String title, final String description, final MovieParty movieParty )
+	private Notification createMoviePartyNotification( final String title, final String description, 
+													   final User sender, final MovieParty movieParty )
 	{
-		final Notification notification = new Notification();
-		notification.setDateTime(DateUtil.getCurrent());
-		notification.setTitle(title);
-		notification.setDescription(description);
-		notification.setIsRead(false);
+		final Notification notification = createSimpleNotification(title, description, sender);
 		notification.setMovieParty(movieParty);
 		return notification;
 	}
