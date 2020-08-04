@@ -70,7 +70,7 @@ public class SendPostFeedback extends HttpServlet
 			json_response.addProperty("ncomments", post.getNumAllComments());
 			
 			final User receiver = referred_post.getOwner();
-			if ( receiver.getId() != user.getId() )
+			if ( !receiver.getId().equals(user.getId()) )
 			{
 				final Notification notification = feedback.isLike() 
 												  ? NotificationFactory.getInstance().createPostLikeFeedbackNotification(user)

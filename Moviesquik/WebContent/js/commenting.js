@@ -76,8 +76,8 @@ $(document).ready( function()
 		$(document).on("click", ".new-comment-submit-btn", function() 
 		{
 			var post_id = $(this).closest(".new-comment-media").prev(".media-post-box").find("#post-id").val();
-			var comment_text = $(this).closest(".media").find(".new-comment-text").text().trim();
-			
+			var comment_text = $(this).closest(".media").find(".new-comment-text").val();
+			comment_text = comment_text.trim();
 			comment_text = encodeToHtmlDecimal(comment_text);
 			submit_new_comment(post_id, comment_text, $(this).closest(".media"));
 			

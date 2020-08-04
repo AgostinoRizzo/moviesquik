@@ -37,9 +37,9 @@ function request_more_posts(view_more_tag) {
 
 function request_all_posts(view_more_tag) {
 	
-	var ajax_url = "getcomments?postid=" + view_more_tag.closest(".media").find("#post-id").val();
+	var ajax_url = "getcomments?postid=" + view_more_tag.closest(".main-media-post-box").find("#post-id").val();
 	
-	view_more_tag.find("#comments-view-more-btn").addClass("d-none");
+	view_more_tag.find(".comments-view-more-btn").addClass("d-none");
 	view_more_tag.find(".loader").removeClass("d-none");
 	
 	$.ajax(
@@ -49,7 +49,7 @@ function request_all_posts(view_more_tag) {
 				dataType: "html",
 				success: function(data)
 					{
-						view_more_tag.prev(".comments-list").html(data);
+						view_more_tag.closest(".comments-list").html(data);
 						view_more_tag.find(".loader").addClass("d-none");
 					}
 			}
@@ -60,7 +60,7 @@ function request_all_posts(view_more_tag) {
 $(document).ready( function()
 	{
 		$(document).on("click", "#posts-view-more-btn", function() { request_more_posts($(this).closest("#view-more-posts-tag")) } );
-		$(document).on("click", "#comments-view-more-btn", function() { request_all_posts($(this).closest("#view-more-comments-tag")) } );
+		$(document).on("click", ".comments-view-more-btn", function() { request_all_posts($(this).closest(".view-more-comments-tag")) } );
 		
 		$(document).on("click", "#movieparties-view-more-btn", function() { request_more_movieparties($(this).closest("#view-more-movieparties-tag")) } );
 		

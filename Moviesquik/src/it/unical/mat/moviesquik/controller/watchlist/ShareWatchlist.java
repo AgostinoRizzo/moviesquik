@@ -62,7 +62,7 @@ public class ShareWatchlist extends HttpServlet
 		if ( text != null )
 			text.trim();
 		
-		final Watchlist watchlist = DBManager.getInstance().getDaoFactory().getWatchlistDao().findByUser(user, watchlistId);
+		final Watchlist watchlist = DBManager.getInstance().getDaoFactory().getWatchlistDao().findById(watchlistId);
 		if ( watchlist == null )
 		{
 			ServletUtils.manageParameterError(req, resp);
@@ -83,7 +83,7 @@ public class ShareWatchlist extends HttpServlet
 			shared = daoFactory.getPostDao().save(newPost);
 			
 			final User receiver = watchlist.getOwner();
-			if ( shared && receiver.getId() != user.getId() )
+			if ( shared && !receiver.getId().equals(user.getId()) )
 			{
 				final Notification notification = NotificationFactory.getInstance().createWatchlistShareNotification(user, watchlist);
 				daoFactory.getNotificationDao().save(notification, receiver);

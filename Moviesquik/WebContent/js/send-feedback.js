@@ -17,7 +17,7 @@ function sendPostFeedback(element, is_like) {
 			url: sendPostFeedbackUrl,
 			data: { postid:post_id, islike: is_like ? 'true' : 'false' },
 			success: function(data)
-				{alert(data);
+				{
 					if ( data.added )
 						element.closest(".media").find("#likes-loves-count")
 							.html("&nbsp;&nbsp; " + data.nlikes + " likes, " + data.nloves + " loves");

@@ -57,7 +57,7 @@ private static final long serialVersionUID = 1L;
 		daoFactory.getCommentDao().save(newComment);
 		
 		final User receiver = referredPost.getOwner();
-		if ( receiver.getId() != user.getId() )
+		if ( !receiver.getId().equals(user.getId()) )
 		{
 			final Notification notification = NotificationFactory.getInstance().createPostCommentNotification(user);
 			daoFactory.getNotificationDao().save(notification, receiver);

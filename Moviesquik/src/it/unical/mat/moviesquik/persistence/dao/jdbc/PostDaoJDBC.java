@@ -6,6 +6,7 @@ package it.unical.mat.moviesquik.persistence.dao.jdbc;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -83,7 +84,8 @@ public class PostDaoJDBC extends AbstractDaoJDBC<Post> implements PostDao
 			statement.setLong        (4, post.getOwner().getId());
 			
 			final Watchlist wl = post.getWatchlist();
-			statement.setLong        (5, wl == null ? null : wl.getId());
+			if ( wl != null ) statement.setLong(5, wl.getId());
+			else statement.setNull(5, Types.NULL);
 			
 			statement.executeUpdate();
 			
@@ -141,7 +143,7 @@ public class PostDaoJDBC extends AbstractDaoJDBC<Post> implements PostDao
 			statement.setInt(4, page.getOffset());
 			
 			ResultSet result = statement.executeQuery();
-			currentOwner = user;
+			currentOwner = null;
 			
 			while ( result.next() )
 				posts.add(createFromResult(result));
@@ -179,7 +181,7 @@ public class PostDaoJDBC extends AbstractDaoJDBC<Post> implements PostDao
 		if ( result.wasNull() )
 			post.setWatchlist(null);
 		else
-			post.setWatchlist(daoFactory.getWatchlistDao().findByUser(post.getOwner(), watchlistId));
+			post.setWatchlist(daoFactory.getWatchlistDao().findById(watchlistId));
 		
 		addPostCounters(post);
 		

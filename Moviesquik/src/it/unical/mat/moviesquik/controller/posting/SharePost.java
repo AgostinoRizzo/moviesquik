@@ -48,11 +48,12 @@ public class SharePost extends HttpServlet
 		newPost.setDateTime( DateUtil.getCurrent() );
 		newPost.setText(source_post.getText());
 		newPost.setOwner(user);
+		newPost.setWatchlist(source_post.getWatchlist());
 		
 		daoFactory.getPostDao().save(newPost);
 		
 		final User receiver = source_post.getOwner();
-		if ( receiver.getId() != user.getId() )
+		if ( !receiver.getId().equals(user.getId()) )
 		{
 			final Notification notification = NotificationFactory.getInstance().createPostShareNotification(user);
 			daoFactory.getNotificationDao().save(notification, receiver);

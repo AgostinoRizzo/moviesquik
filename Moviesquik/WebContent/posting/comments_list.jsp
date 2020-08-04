@@ -38,4 +38,11 @@
 
 </c:forEach>
 
+<c:if test="${post_to_display.comments.size() != post_to_display.numAllComments}">
+    <div class="text-center view-more-comments-tag">
+		<div class="loader loader-sm more-comments-loader d-none"></div>
+		<button class="btn btn-link view-all-btn comments-view-more-btn">view all</button>
+	</div>
+</c:if>
+
 
