@@ -13,8 +13,6 @@ import javax.websocket.Session;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 
-import it.unical.mat.moviesquik.util.DateUtil;
-
 /**
  * @author Agostino
  *
@@ -24,34 +22,42 @@ import it.unical.mat.moviesquik.util.DateUtil;
 				decoders=ChatMessagePacketDecoder.class)
 public class GruopChatCommunicatorEndpoint
 {
+	private static final GroupChatManager groupChatManager = GroupChatManager.getInstance();
+	
 	@OnOpen
 	public void onOpen( final Session session, @PathParam("group_id") final String groupIdStr, 
 											   @PathParam("user_id")  final String userIdStr )
 	{
 		System.out.println("New group chat connecton [group_id: " + groupIdStr + ", user_id: " + userIdStr + "]: " + session.getId());
+		try
+		{
+			final Long groupId = Long.parseLong(groupIdStr);
+			final Long userId  = Long.parseLong(userIdStr);
+			
+			groupChatManager.register( userId, session, groupId );
+		}
+		catch (NumberFormatException e) {}
 	}
 	
 	@OnMessage
 	public void onMessage( final ChatMessagePacket messagePacket, final Session session ) throws IOException, EncodeException
 	{
 		System.out.println("On message packet from " + session.getId() + ": " + messagePacket.getText());
-		
-		messagePacket.setAck(true);
-		messagePacket.setTime(DateUtil.getCurrentClockTime());
-		session.getBasicRemote().sendObject(messagePacket);
-		
-		final ChatMessagePacket newMessagePacket = new ChatMessagePacket();
-		newMessagePacket.setAck(false);
-		newMessagePacket.setText(messagePacket.getText());
-		newMessagePacket.setSenderIconSrc(messagePacket.getSenderIconSrc());
-		newMessagePacket.setSenderId((long) 3540);
-		newMessagePacket.setTime(DateUtil.getCurrentClockTime());
-		session.getBasicRemote().sendObject(newMessagePacket);
+		groupChatManager.onSendMessage(messagePacket);
 	}
 	
 	@OnClose
-	public void onClose( final Session session )
+	public void onClose( final Session session, @PathParam("group_id") final String groupIdStr, 
+												@PathParam("user_id")  final String userIdStr )
 	{
 		System.out.println("On close: " + session.getId());
+		try
+		{
+			final Long groupId = Long.parseLong(groupIdStr);
+			final Long userId  = Long.parseLong(userIdStr);
+			
+			groupChatManager.unregister( userId, groupId );
+		}
+		catch (NumberFormatException e) {}
 	}
 }
