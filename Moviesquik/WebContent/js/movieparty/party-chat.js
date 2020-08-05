@@ -2,8 +2,16 @@
  * 
  */
 
+import '../chat/chat-controller.js';
+
+function onChact() {
+	
+}
+
 $(document).ready( function() 
 {
+	const foreignUser = $("#foreign-user-flag").length;
+	
 	$(document).on("click", ".emoji-panel .emoji", function() 
 			{
 				var emoji_code = $(this).text();
@@ -11,7 +19,21 @@ $(document).ready( function()
 				textArea.val(textArea.val() + emoji_code);
 			});
 	
-	$("#chat-send-btn").click( function() {
-		alert("TODO: Check foreign user. If not then send message.");
+	$("#chat-send-btn").click( function() 
+	{
+		if ( foreignUser )
+			$("#cannot-send-msg-modal").modal('show');
+		else
+			onChatSend();
 	});
+	
+	if ( !foreignUser )
+	{
+		const userId = $("#user-id").val();
+		const userIconSrc = $("#user-icon").attr('src');
+		const partyId = $("#party-id").val();
+		var textArea = $(this).find("#new-msg-text");
+		
+		onChatInit( textArea, userId, userIconSrc, partyId, true );
+	}
 });

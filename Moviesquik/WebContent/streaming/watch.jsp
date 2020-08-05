@@ -17,6 +17,7 @@
 	<link href="css/streaming.css" rel="stylesheet">
 	<link href="css/movieparty.css" rel="stylesheet">
 	<link href="css/posting.css" rel="stylesheet">
+	<c:if test="${party != null}"><link href="css/chat.css" rel="stylesheet"></c:if>
 	
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	

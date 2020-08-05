@@ -16,7 +16,7 @@
 
 		  <div class="media-body">
 		  		<div class="row">
-			  		<div class="col-auto col-light-left"><img src="${user_profile_img_src}" width="30px" class="avatar-img rounded-circle"></div>
+			  		<div class="col-auto col-light-left"><img src="${user_profile_img_src}" width="30px" class="avatar-img rounded-circle" id="user-icon"></div>
 				    <div class="col col-light-right col-light-left">
 				    	<textarea class="form-control text-area-post" rows="2" id="new-msg-text" placeholder="What do you think about ${party.media.title}, ${user.firstName}?" name="post-text"></textarea>
 				    </div>
@@ -72,14 +72,36 @@
 	
 	<!-- movie party chat messages section -->
 	<c:if test="${foreign_user}">
+	
 		<div>
+			<input type="hidden" id="foreign-user-flag" value="${true}">
 			<strong><i class="fa fa-lock"></i> The party conversation is private.</strong><br>Please take part to this event to access it.
 		</div>
-	</c:if>
-	<c:if test="${!foreign_user}">
-		<div>
-			There are no messages for this party.
+		
+		<div class="modal" id="cannot-send-msg-modal" tabindex="-1">
+		    <div class="modal-dialog">
+		        <div class="modal-content">
+		            <div class="modal-header">
+		                <h5 class="modal-title">
+		                	<i class="fa fa-warning colored"></i> Private party conversation
+		                </h5>
+		                <button type="button" class="close" data-dismiss="modal">&times;</button>
+		            </div>
+		            <div class="modal-body">
+		            	<strong>You cannot send messages to this conversation.</strong> 
+		            	Please take part to this event to access and communicate with all the participants of this group. 
+		            </div>
+		            <div class="modal-footer">
+		                <button type="button" class="btn btn-primary" data-dismiss="modal">Okay</button>
+		            </div>
+		        </div>
+		    </div>
 		</div>
+		
+	</c:if>
+	
+	<c:if test="${!foreign_user}">
+		<jsp:include page="../chat/chat-content.jsp"></jsp:include>
 	</c:if>
 
 </div>

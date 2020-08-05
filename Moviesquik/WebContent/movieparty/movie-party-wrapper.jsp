@@ -21,6 +21,7 @@
 	<link href="css/media.css" rel="stylesheet">
 	<link href="css/home.css" rel="stylesheet">
 	<link href="css/posting.css" rel="stylesheet">
+	<link href="css/chat.css" rel="stylesheet">
 	
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	
@@ -35,7 +36,7 @@
 	<script src="js/media/show_media_content.js"></script>
 	<script src="js/bootstrap-validate.js"></script>
 	<script src="js/movieparty/movie-party.js" type="module"></script>
-	<script src="js/movieparty/party-chat.js"></script>
+	<script src="js/movieparty/party-chat.js" type="module"></script>
 	
 </head>
 <body>

@@ -71,6 +71,14 @@ public class DateUtil
 		return new Date(System.currentTimeMillis());
 	}
 	
+	public static String getCurrentClockTime()
+	{
+		final Date currentDate = getCurrent();
+		final Calendar currentCal = Calendar.getInstance();
+		currentCal.setTime(currentDate);
+		return getTimeString(currentCal);
+	}
+	
 	public static void setDaysHorizon( final Calendar c )
 	{
 		c.set(Calendar.HOUR, 0);

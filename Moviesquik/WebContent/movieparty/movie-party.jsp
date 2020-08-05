@@ -10,6 +10,8 @@
 	<c:set var = "user_profile_img_src" scope = "request" value = "res/user/${user.profileImagePath}"/>
 </c:if>
 
+<input type="hidden" id="user-id" value="${user.id}">
+
 <div id="create-party-page-content" class="">
 	
 	<div id="movie-party-header">
@@ -199,7 +201,7 @@
 <c:if test="${party.isPrivate()}">
 
 	<c:if test="${on_participate != null}">
-		<div class="modal" tabindex="-1">
+		<div class="modal party-info-modal" tabindex="-1">
 		    <div class="modal-dialog">
 		        <div class="modal-content">
 		            <div class="modal-header">
@@ -221,7 +223,7 @@
 	</c:if>
 	
 	<c:if test="${on_maybe != null}">
-		<div class="modal" tabindex="-1">
+		<div class="modal party-info-modal" tabindex="-1">
 		    <div class="modal-dialog">
 		        <div class="modal-content">
 		            <div class="modal-header">
@@ -243,7 +245,7 @@
 	</c:if>
 	
 	<c:if test="${on_not != null}">
-		<div class="modal" tabindex="-1">
+		<div class="modal party-info-modal" tabindex="-1">
 		    <div class="modal-dialog">
 		        <div class="modal-content">
 		            <div class="modal-header">
@@ -267,7 +269,7 @@
 </c:if>
 
 <c:if test="${on_participate != null && !party.isPrivate()}">
-	<div class="modal" tabindex="-1">
+	<div class="modal party-info-modal" tabindex="-1">
 	    <div class="modal-dialog">
 	        <div class="modal-content">
 	            <div class="modal-header">
