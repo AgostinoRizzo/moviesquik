@@ -1,0 +1,85 @@
+/**
+ * 
+ */
+package it.unical.mat.moviesquik.model.chat;
+
+import java.util.Date;
+
+import it.unical.mat.moviesquik.controller.chat.ChatMessagePacket;
+import it.unical.mat.moviesquik.model.User;
+import it.unical.mat.moviesquik.model.movieparty.MovieParty;
+import it.unical.mat.moviesquik.util.DateUtil;
+
+/**
+ * @author Agostino
+ *
+ */
+public class ChatMessage
+{
+	private Long id;
+	private String text;
+	private Date dateTime;
+	private User sender;
+	private User receiver;
+	private MovieParty movieParty;
+	
+	public ChatMessage()
+	{}
+	public ChatMessage( final ChatMessagePacket messagePacket, final User sender, final MovieParty movieParty )
+	{		
+		this.text = messagePacket.getText();
+		this.dateTime = DateUtil.getCurrent();
+		
+		this.sender = sender;
+		this.movieParty = movieParty;
+	}
+	public Long getId()
+	{
+		return id;
+	}
+	public void setId(Long id)
+	{
+		this.id = id;
+	}
+	public String getText()
+	{
+		return text;
+	}
+	public void setText(String text)
+	{
+		this.text = text;
+	}
+	public Date getDateTime()
+	{
+		return dateTime;
+	}
+	public void setDateTime(Date dateTime)
+	{
+		this.dateTime = dateTime;
+	}
+	public User getSender()
+	{
+		return sender;
+	}
+	public void setSender(User sender)
+	{
+		this.sender = sender;
+	}
+	public User getReceiver()
+	{
+		return receiver;
+	}
+	public void setReceiver(User receiver)
+	{
+		this.receiver = receiver;
+	}
+	public MovieParty getMovieParty()
+	{
+		return movieParty;
+	}
+	public void setMovieParty(MovieParty movieParty)
+	{
+		this.movieParty = movieParty;
+	}
+	
+}

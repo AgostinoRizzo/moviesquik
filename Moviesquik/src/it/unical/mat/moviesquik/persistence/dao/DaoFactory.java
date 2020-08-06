@@ -31,6 +31,7 @@ public interface DaoFactory
 	public MoviePartyDao getMoviePartyDao();
 	public MoviePartyInvitationDao getMoviePartyInvitationDao();
 	public MoviePartyParticipationDao getMoviePartyParticipationDao();
+	public ChatMessageDao getChatMessageDao();
 	
 	public RegistrationTransaction getRegistrationTransaction();
 	public PlanBillingUpdateTransaction getPlanBillingUpdateTransaction();

@@ -13,6 +13,11 @@ import java.util.concurrent.locks.ReentrantLock;
 import javax.websocket.EncodeException;
 import javax.websocket.Session;
 
+import it.unical.mat.moviesquik.model.User;
+import it.unical.mat.moviesquik.model.chat.ChatMessage;
+import it.unical.mat.moviesquik.model.movieparty.MovieParty;
+import it.unical.mat.moviesquik.persistence.DBManager;
+import it.unical.mat.moviesquik.persistence.dao.DaoFactory;
 import it.unical.mat.moviesquik.util.DateUtil;
 
 /**
@@ -62,28 +67,43 @@ public class GroupChatManager extends ChatManager
 	
 	public void onSendMessage( final ChatMessagePacket messagePacket )
 	{
-		lock.lock();
-		
-		final Long senderId = messagePacket.getSenderId();
-		final Long groupId = userGroupMap.get(senderId);
-		final Map<Long, Session> usersMap = getUserMap(groupId);
-		final Set<Long> usersIds = usersMap.keySet();
-		
-		// complete message packet info
-		messagePacket.setAck(false);
-		messagePacket.setTime(DateUtil.getCurrentClockTime());
-		
-		// TODO: store message to DB
-		
-		for ( final Long uId : usersIds )
-			if ( !uId.equals(senderId) )
-				sendMessageFromSession(messagePacket, usersMap.get(uId));
-		
-		// send ACK to sender
-		messagePacket.setAck(true);
-		sendMessageFromSession(messagePacket, usersMap.get(senderId));
-		
-		lock.unlock();
+		try
+		{
+			lock.lock();
+			
+			final Long senderId = messagePacket.getSenderId();
+			final Long groupId = userGroupMap.get(senderId);
+			final Map<Long, Session> usersMap = getUserMap(groupId);
+			final Set<Long> usersIds = usersMap.keySet();
+			
+			// complete message packet info
+			messagePacket.setAck(false);
+			messagePacket.setTime(DateUtil.getCurrentClockTime());
+			
+			// store message to DB
+			final DaoFactory daoFactory = DBManager.getInstance().getDaoFactory();
+			
+			final User sender = daoFactory.getUserDao().findByPrimaryKey( messagePacket.getSenderId() );
+			if ( sender == null ) return;
+			final MovieParty movieParty = daoFactory.getMoviePartyDao().findById(groupId, sender);
+			if ( movieParty == null ) return;
+			
+			final ChatMessage message = new ChatMessage(messagePacket, sender, movieParty);
+			final boolean saved = DBManager.getInstance().getDaoFactory().getChatMessageDao().save(message);
+			if ( !saved ) return;
+			
+			for ( final Long uId : usersIds )
+				if ( !uId.equals(senderId) )
+					sendMessageFromSession(messagePacket, usersMap.get(uId));
+			
+			// send ACK to sender
+			messagePacket.setAck(true);
+			sendMessageFromSession(messagePacket, usersMap.get(senderId));
+		}
+		finally 
+		{
+			lock.unlock();
+		}
 	}
 	
 	private Map<Long, Session> getUserMap( final Long groupId )
