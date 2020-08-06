@@ -42,7 +42,7 @@ function onUserGuestSearch(searchQuery)
 						if ( user.profileimg == null || !user.profileimg.length )
 							user.profileimg = "res/drawable/user_avatar.jpg";
 						else
-							user.profileimg = "res/user/" + user.profileimg;
+							user.profileimg = user.profileimg;
 						
 						searchedUsers.set(user.id.toString(), user);
 						

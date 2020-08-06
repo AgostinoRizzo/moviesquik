@@ -115,6 +115,7 @@ public class MovieParty
 	{
 		this.participations = participations;
 	}
+	
 	public boolean isExpired()
 	{
 		return DateUtil.isExpired(startDateTime);

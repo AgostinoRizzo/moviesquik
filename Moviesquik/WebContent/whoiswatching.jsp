@@ -116,7 +116,7 @@
 								
 								<c:set var = "profile_img_src" scope = "request" value = "res/drawable/user_avatar.jpg"/>
 								<c:if test="${profile.profileImagePath != null && profile.profileImagePath.length() > 0}">
-									<c:set var = "profile_img_src" scope = "request" value = "res/user/${profile.profileImagePath}"/>
+									<c:set var = "profile_img_src" scope = "request" value = "${profile.profileImagePath}"/>
 								</c:if>
 								<a href="whoiswatching?action=login&userid=${profile.id}" class="profile-img-button">
 									<img alt="" src="${profile_img_src}" class="profile-img rounded-circle clickable">
@@ -141,7 +141,7 @@
 								
 							<c:set var = "profile_img_src" scope = "request" value = "res/drawable/user_avatar.jpg"/>
 							<c:if test="${login_user.profileImagePath != null && login_user.profileImagePath.length() > 0}">
-								<c:set var = "profile_img_src" scope = "request" value = "res/user/${login_user.profileImagePath}"/>
+								<c:set var = "profile_img_src" scope = "request" value = "${login_user.profileImagePath}"/>
 							</c:if>
 							<img alt="" src="${profile_img_src}" class="profile-img rounded-circle clickable">
 							
@@ -210,7 +210,7 @@
 									
 							<c:set var = "profile_img_src" scope = "request" value = "res/drawable/user_avatar.jpg"/>
 							<c:if test="${login_user.profileImagePath != null && login_user.profileImagePath.length() > 0}">
-								<c:set var = "profile_img_src" scope = "request" value = "res/user/${login_user.profileImagePath}"/>
+								<c:set var = "profile_img_src" scope = "request" value = "${login_user.profileImagePath}"/>
 							</c:if>
 							<a href="whoiswatching?action=login" class="profile-img-button"><img alt="" src="${profile_img_src}" class="login-profile-img rounded-circle clickable"></a>
 							

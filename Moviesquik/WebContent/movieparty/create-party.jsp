@@ -64,7 +64,7 @@
 						<div class="row user-list-row clickable-light" id="admin-user-item">
 								            			
 							  <c:if test="${user.profileImagePath != null && user.profileImagePath.length() > 0}">
-							  		<a href="user?id=${user.id}" class="col-auto col-light-left"><img src="res/user/${user.profileImagePath}" class="avatar-img card-list-avatar-img rounded-circle">
+							  		<a href="user?id=${user.id}" class="col-auto col-light-left"><img src="${user.profileImagePath}" class="avatar-img card-list-avatar-img rounded-circle">
 							  			<i class="fa fa-check-circle fa-xs line-status online-status"></i>
 							  		</a>
 							  </c:if>

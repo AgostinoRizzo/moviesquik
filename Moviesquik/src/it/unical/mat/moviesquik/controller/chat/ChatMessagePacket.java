@@ -3,6 +3,10 @@
  */
 package it.unical.mat.moviesquik.controller.chat;
 
+import it.unical.mat.moviesquik.model.User;
+import it.unical.mat.moviesquik.model.chat.ChatMessage;
+import it.unical.mat.moviesquik.util.DateUtil;
+
 /**
  * @author Agostino
  *
@@ -10,14 +14,24 @@ package it.unical.mat.moviesquik.controller.chat;
 public class ChatMessagePacket
 {
 	private String text;
-	private int id;
-	private boolean ack;
+	private Long id;
+	private boolean ack = false;
 	private String time;
 	private Long senderId;
 	private String senderIconSrc;
 	
 	public ChatMessagePacket()
 	{}
+	public ChatMessagePacket( final ChatMessage message )
+	{
+		final User sender = message.getSender();
+		
+		text = message.getText();
+		id = message.getId();
+		time = DateUtil.getClockTime(message.getDateTime());
+		senderId = sender.getId();
+		senderIconSrc = sender.getProfileImagePath();
+	}
 	public String getText()
 	{
 		return text;
@@ -26,11 +40,11 @@ public class ChatMessagePacket
 	{
 		this.text = text;
 	}
-	public int getId()
+	public Long getId()
 	{
 		return id;
 	}
-	public void setId(int id)
+	public void setId(Long id)
 	{
 		this.id = id;
 	}

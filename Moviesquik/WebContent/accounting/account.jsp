@@ -104,7 +104,7 @@
 										
 										<c:set var = "profile_img_src" scope = "request" value = "res/drawable/user_avatar.jpg"/>
 										<c:if test="${profile.profileImagePath != null && profile.profileImagePath.length() > 0}">
-											<c:set var = "profile_img_src" scope = "request" value = "res/user/${profile.profileImagePath}"/>
+											<c:set var = "profile_img_src" scope = "request" value = "${profile.profileImagePath}"/>
 										</c:if>
 										<img alt="" src="${profile_img_src}" class="avatar-img card-list-avatar-img rounded-circle">
 										

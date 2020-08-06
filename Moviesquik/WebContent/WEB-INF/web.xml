@@ -362,4 +362,14 @@
 </servlet-mapping>
 
 
+<!-- Chat Messages Broker Servlet -->
+<servlet>
+	<servlet-name>chat_broker</servlet-name>
+	<servlet-class>it.unical.mat.moviesquik.controller.chat.ChatBroker</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>chat_broker</servlet-name>
+	<url-pattern>/getchat</url-pattern>
+</servlet-mapping>
+
 </web-app>

@@ -20,7 +20,7 @@
 			      			
 			             			<c:set var = "user_profile_img_src" scope = "request" value = "res/drawable/user_avatar.jpg"/>
 									<c:if test="${notification.subjectUser.profileImagePath != null && notification.subjectUser.profileImagePath.length() > 0}">
-										<c:set var = "user_profile_img_src" scope = "request" value = "res/user/${notification.subjectUser.profileImagePath}"/>
+										<c:set var = "user_profile_img_src" scope = "request" value = "${notification.subjectUser.profileImagePath}"/>
 									</c:if>
 			               			<img src="${user_profile_img_src}" class="notification-avatar-img rounded-circle">
 			               		

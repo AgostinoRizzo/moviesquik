@@ -65,7 +65,7 @@
 				
 				<c:set var = "user_profile_img_src" scope = "request" value = "res/drawable/user_avatar.jpg"/>
 				<c:if test="${user_to_display.profileImagePath != null && user_to_display.profileImagePath.length() > 0}">
-					<c:set var = "user_profile_img_src" scope = "request" value = "res/user/${user_to_display.profileImagePath}"/>
+					<c:set var = "user_profile_img_src" scope = "request" value = "${user_to_display.profileImagePath}"/>
 				</c:if>
 				<img src="${user_profile_img_src}" width="100" height="100" class="rounded-circle user-avatar-image">
 		</div>
@@ -348,7 +348,7 @@
 		            	
 		            		<div class="media">
 		            			  <c:if test="${member.profileImagePath != null && member.profileImagePath.length() > 0}">
-								  		<a href="user?id=${member.id}"><img src="res/user/${member.profileImagePath}" class="avatar-img card-list-avatar-img rounded-circle"></a>
+								  		<a href="user?id=${member.id}"><img src="${member.profileImagePath}" class="avatar-img card-list-avatar-img rounded-circle"></a>
 								  </c:if>
 								  <c:if test="${member.profileImagePath == null || member.profileImagePath.length() == 0}">
 								  		<a href="user?id=${member.id}"><img src="res/drawable/user_avatar.jpg" class="avatar-img card-list-avatar-img rounded-circle"></a>
@@ -373,7 +373,7 @@
 		            		<div class="media">
 		            			
 								  <c:if test="${friend.profileImagePath != null && friend.profileImagePath.length() > 0}">
-								  		<a href="user?id=${friend.id}"><img src="res/user/${friend.profileImagePath}" class="avatar-img card-list-avatar-img rounded-circle"></a>
+								  		<a href="user?id=${friend.id}"><img src="${friend.profileImagePath}" class="avatar-img card-list-avatar-img rounded-circle"></a>
 								  </c:if>
 								  <c:if test="${friend.profileImagePath == null || friend.profileImagePath.length() == 0}">
 								  		<a href="user?id=${friend.id}"><img src="res/drawable/user_avatar.jpg" class="avatar-img card-list-avatar-img rounded-circle"></a>
@@ -442,7 +442,7 @@
 		            		<div class="col-4 user-col-item">
 		            			<a href="user?id=${member.id}" data-toggle="tooltip" data-placement="top" title="${member.firstName} ${member.lastName}">
 		            					<c:if test="${member.profileImagePath != null && member.profileImagePath.length() > 0}">
-										  		<img src="res/user/${member.profileImagePath}" class="avatar-img card-list-avatar-img rounded-circle">
+										  		<img src="${member.profileImagePath}" class="avatar-img card-list-avatar-img rounded-circle">
 										</c:if>
 										<c:if test="${member.profileImagePath == null || member.profileImagePath.length() == 0}">
 										  		<img src="res/drawable/user_avatar.jpg" class="avatar-img card-list-avatar-img rounded-circle">
@@ -467,7 +467,7 @@
 									<a href="user?id=${friend.id}" data-toggle="tooltip" data-placement="top" title="${friend.firstName} ${friend.lastName}">
 									
 										<c:if test="${friend.profileImagePath != null && friend.profileImagePath.length() > 0}">
-										  		<img src="res/user/${friend.profileImagePath}" class="avatar-img card-list-avatar-img rounded-circle">
+										  		<img src="${friend.profileImagePath}" class="avatar-img card-list-avatar-img rounded-circle">
 										</c:if>
 										<c:if test="${friend.profileImagePath == null || friend.profileImagePath.length() == 0}">
 										  		<img src="res/drawable/user_avatar.jpg" class="avatar-img card-list-avatar-img rounded-circle">

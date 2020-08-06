@@ -3,6 +3,8 @@
  */
 package it.unical.mat.moviesquik.persistence.dao;
 
+import java.util.List;
+
 import it.unical.mat.moviesquik.model.chat.ChatMessage;
 
 /**
@@ -12,4 +14,5 @@ import it.unical.mat.moviesquik.model.chat.ChatMessage;
 public interface ChatMessageDao
 {
 	public boolean save( final ChatMessage message );
+	public List<ChatMessage> findAll( final Long groupId, final Long messageOffsetId );
 }

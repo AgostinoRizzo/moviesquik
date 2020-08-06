@@ -100,7 +100,7 @@
 					<div class="media col-3">
 		            			
 						  <c:if test="${user.profileImagePath != null && user.profileImagePath.length() > 0}">
-						  		<a href="user?id=${user.id}"><img src="res/user/${user.profileImagePath}" class="avatar-img card-list-avatar-img rounded-circle"></a>
+						  		<a href="user?id=${user.id}"><img src="${user.profileImagePath}" class="avatar-img card-list-avatar-img rounded-circle"></a>
 						  </c:if>
 						  <c:if test="${user.profileImagePath == null || user.profileImagePath.length() == 0}">
 						  		<a href="user?id=${user.id}"><img src="res/drawable/user_avatar.jpg" class="avatar-img card-list-avatar-img rounded-circle"></a>

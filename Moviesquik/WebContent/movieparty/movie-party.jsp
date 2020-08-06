@@ -7,7 +7,7 @@
 
 <c:set var = "user_profile_img_src" scope = "request" value = "res/drawable/user_avatar.jpg"/>
 <c:if test="${user.profileImagePath != null && user.profileImagePath.length() > 0}">
-	<c:set var = "user_profile_img_src" scope = "request" value = "res/user/${user.profileImagePath}"/>
+	<c:set var = "user_profile_img_src" scope = "request" value = "${user.profileImagePath}"/>
 </c:if>
 
 <input type="hidden" id="user-id" value="${user.id}">
@@ -123,7 +123,7 @@
 											<div class="row">
 									  			<c:set var = "party_admin_profile_img_src" scope = "request" value = "res/drawable/user_avatar.jpg"/>
 												<c:if test="${party.administrator.profileImagePath != null && party.administrator.profileImagePath.length() > 0}">
-													<c:set var = "party_admin_profile_img_src" scope = "request" value = "res/user/${party.administrator.profileImagePath}"/>
+													<c:set var = "party_admin_profile_img_src" scope = "request" value = "${party.administrator.profileImagePath}"/>
 												</c:if>
 										  		<div class="col-auto col-light-left"><a href="user?id=${party.administrator.id}"><img src="${party_admin_profile_img_src}" width="30px" class="avatar-img rounded-circle"></a></div>
 											    <div class="col col-light-right header-text text-overflow">
@@ -147,7 +147,7 @@
 								  			<c:forEach items="${party.invitations}" var="invitation">
 								  				<c:set var = "party_guest_profile_img_src" scope = "request" value = "res/drawable/user_avatar.jpg"/>
 												<c:if test="${invitation.guest.profileImagePath != null && invitation.guest.profileImagePath.length() > 0}">
-													<c:set var = "party_guest_profile_img_src" scope = "request" value = "res/user/${invitation.guest.profileImagePath}"/>
+													<c:set var = "party_guest_profile_img_src" scope = "request" value = "${invitation.guest.profileImagePath}"/>
 												</c:if>
 										  		<div class="col-auto col-light-left"><a href="user?id=${invitation.guest.id}"><img src="${party_guest_profile_img_src}" width="30px" class="avatar-img rounded-circle"></a></div>
 								  			</c:forEach>
@@ -164,14 +164,14 @@
 					    	
 							  			<c:set var = "party_admin_profile_img_src" scope = "request" value = "res/drawable/user_avatar.jpg"/>
 										<c:if test="${party.administrator.profileImagePath != null && party.administrator.profileImagePath.length() > 0}">
-											<c:set var = "party_admin_profile_img_src" scope = "request" value = "res/user/${party.administrator.profileImagePath}"/>
+											<c:set var = "party_admin_profile_img_src" scope = "request" value = "${party.administrator.profileImagePath}"/>
 										</c:if>
 								  		<div class="col-auto col-light-left"><a href="user?id=${party.administrator.id}"><img src="${party_admin_profile_img_src}" width="30px" class="avatar-img rounded-circle"></a></div>
 							  			
 							  			<c:forEach items="${party.participations}" var="participation">
 							  				<c:set var = "party_participant_profile_img_src" scope = "request" value = "res/drawable/user_avatar.jpg"/>
 											<c:if test="${participation.participant.profileImagePath != null && participation.participant.profileImagePath.length() > 0}">
-												<c:set var = "party_participant_profile_img_src" scope = "request" value = "res/user/${participation.participant.profileImagePath}"/>
+												<c:set var = "party_participant_profile_img_src" scope = "request" value = "${participation.participant.profileImagePath}"/>
 											</c:if>
 									  		<div class="col-auto col-light-right col-light-left"><a href="user?id=${participation.participant.id}"><img src="${party_participant_profile_img_src}" width="30px" class="avatar-img rounded-circle"></a></div>
 							  			</c:forEach>

@@ -73,9 +73,13 @@ public class DateUtil
 	
 	public static String getCurrentClockTime()
 	{
-		final Date currentDate = getCurrent();
+		return getClockTime(getCurrent());
+	}
+	
+	public static String getClockTime( final Date when )
+	{
 		final Calendar currentCal = Calendar.getInstance();
-		currentCal.setTime(currentDate);
+		currentCal.setTime(when);
 		return getTimeString(currentCal);
 	}
 	

@@ -5,5 +5,5 @@
 
 <c:set var = "user_profile_img_src" scope = "request" value = "res/drawable/user_avatar.jpg"/>
 <c:if test="${usr.profileImagePath != null && usr.profileImagePath.length() > 0}">
-	<c:set var = "user_profile_img_src" scope = "request" value = "res/user/${usr.profileImagePath}"/>
+	<c:set var = "user_profile_img_src" scope = "request" value = "${usr.profileImagePath}"/>
 </c:if>

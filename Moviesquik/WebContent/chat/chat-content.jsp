@@ -7,8 +7,8 @@
 
 	
 	
-	<!-- <div id="empty-chat-content">
+	<div id="empty-chat-content">
 		There are no messages for this party.
-	</div> -->
+	</div>
 	
 </div>

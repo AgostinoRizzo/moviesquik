@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 import it.unical.mat.moviesquik.model.Exception;
@@ -98,6 +99,14 @@ public class ServletUtils
 		resp.setCharacterEncoding("UTF-8");
 	}
 	public static void sendJson( final JsonObject json, final HttpServletResponse resp ) throws IOException
+	{
+		setJsonContentAndEncoding(resp);
+		
+		final PrintWriter out = resp.getWriter();
+		out.print(json);
+		out.flush();
+	}
+	public static void sendJsonArray( final JsonArray json, final HttpServletResponse resp ) throws IOException
 	{
 		setJsonContentAndEncoding(resp);
 		

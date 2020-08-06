@@ -19,7 +19,7 @@
 		  		<div class="row">
 		  			<c:set var = "post_owner_profile_img_src" scope = "request" value = "res/drawable/user_avatar.jpg"/>
 					<c:if test="${comment.owner.profileImagePath != null && comment.owner.profileImagePath.length() > 0}">
-						<c:set var = "post_owner_profile_img_src" scope = "request" value = "res/user/${comment.owner.profileImagePath}"/>
+						<c:set var = "post_owner_profile_img_src" scope = "request" value = "${comment.owner.profileImagePath}"/>
 					</c:if>
 			  		<div class="col-auto col-light-left"><a href="user?id=${comment.owner.id}"><img src="${post_owner_profile_img_src}" width="30px" class="avatar-img rounded-circle"></a></div>
 				    

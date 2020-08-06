@@ -16,7 +16,7 @@ function getNextChatMessageId()
 	return id;
 }
 
-function addNewMessageCloud( messagePacket, received=false ) 
+function addNewMessageCloud( messagePacket, received=false, append=false ) 
 {
 	var chatContent =$("#chat-content");
 	const messageText = messagePacket.text.replace(/\n/g, '<br>');
@@ -38,7 +38,11 @@ function addNewMessageCloud( messagePacket, received=false )
 				
 				'<div class="chat-message-cloud">' + messageText + 
 					'<div class="chat-message-cloud-info">' +
-						'<small>sending... <i class="fa fa-cloud-upload"></i></small>' +
+						'<small>' + 
+							(append ?
+							messagePacket.time + ' <i class="fa fa-check"></i>':
+							'sending... <i class="fa fa-cloud-upload"></i>')	+ 
+						'</small>' +
 					'</div>' +
 				'</div>' +
 				
@@ -46,7 +50,12 @@ function addNewMessageCloud( messagePacket, received=false )
 				
 			'</div>';
 	
-	chatContent.prepend(html);
+	if ( append )
+		chatContent.append(html);
+	else
+		chatContent.prepend(html);
+	
+	chatContent.find("#empty-chat-content").hide();
 }
 
 function createNewMessagePacket( messageText, userId, userIconSrc ) 
@@ -75,6 +84,24 @@ window.onChatInit = function( textArea, userId, userIconSrc, otherId, isGroup=fa
 	currentUserId = userId;
 	currentUserIconSrc = userIconSrc;
 	messageTextArea = textArea;
+	
+	// request previous stored messages
+	$.ajax(
+		{
+			type: "GET",
+			url: 'getchat?groupid=' + otherId,
+			dataType: "json",
+			success: function(data)
+				{
+					data.forEach( function( msgPacket ) {
+						addNewMessageCloud( msgPacket, msgPacket.senderId != currentUserId, true );
+					});
+					
+					//$("#calendar-container").html(data);
+					//$("#calendar-container .loader").addClass("d-none");
+				}
+		}
+	);
 	chatInit( onChatMessageReceived, userId, otherId, isGroup );
 }
 
