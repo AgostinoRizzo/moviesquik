@@ -30,7 +30,7 @@ function onPageUpdate()
 			url: PAGE_UPDATE_BASE_URL + '?key=' + $("#party-id").val() + '&update=true',
 			dataType: "html",
 			success: function(data)
-				{return; // TODO: remove
+				{
 					$("#movie-party-page-container").html(data);
 					if ( prevChatContainerHtml != undefined )
 						$("#movie-party-chat-container").html(prevChatContainerHtml);

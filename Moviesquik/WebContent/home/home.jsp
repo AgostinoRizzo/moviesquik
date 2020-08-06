@@ -86,8 +86,9 @@
 		</div>
 		
 		<!-- Chats sidenav -->
-		<div class="col-2 scollable-col" id="chats-sidenav-column">
+		<div class="col-2 scollable-col chat-list" id="chats-sidenav-column">
 					<jsp:include page="users.jsp"></jsp:include>
+					<jsp:include page="../chat/chat-popup.jsp"></jsp:include>
 		</div>
 		
 		

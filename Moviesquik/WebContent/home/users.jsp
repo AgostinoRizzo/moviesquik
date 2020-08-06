@@ -24,13 +24,14 @@
 </div> --%>
 
 <div class="users-col-title">
-	<strong class="note">Friends</strong><br>
+	<strong class="note">FRIENDS</strong><br>
 </div>
 	
 <c:forEach items="${user.friends}" var="friend">
-<c:forEach begin="0" end="10" step="1">
-	<div class="row user-list-row">
-		            			
+	<div class="row user-list-row clickable-light">
+		  
+		  <input type="hidden" id="friend-id" value="${friend.id}">
+		  			
 		  <c:if test="${friend.profileImagePath != null && friend.profileImagePath.length() > 0}">
 		  		<a href="user?id=${friend.id}" class="col-auto col-light-left"><img src="${friend.profileImagePath}" class="avatar-img card-list-avatar-img rounded-circle">
 		  			<i class="fa fa-check-circle fa-xs line-status online-status"></i>
@@ -48,5 +49,4 @@
 		    <%-- <p><a href="#">${friend.email}</a></p> --%>
 		  </div>
 	</div>
-</c:forEach>
 </c:forEach>

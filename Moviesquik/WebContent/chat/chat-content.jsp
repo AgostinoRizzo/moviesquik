@@ -4,8 +4,6 @@
 <!DOCTYPE html>
 
 <div id="chat-content">
-
-	
 	
 	<div id="empty-chat-content">
 		There are no messages for this party.

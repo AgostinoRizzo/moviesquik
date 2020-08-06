@@ -1,5 +1,11 @@
 @charset "ISO-8859-1";
 
+:root
+{
+	--char-tile-border-radius: 10px;
+	--chat-tile-border-color: #4A4D52;
+}
+
 .chat-message-container
 {
 	position: relative;
@@ -101,4 +107,114 @@
 .chat-message-cloud-info .fa-check
 {
 	/* color: var(--success); */
+}
+
+.chat-list
+{
+	/* background-color: #EAE9E7;
+	color: black; */
+	border-radius: var(--char-tile-border-radius);
+	box-shadow: 0px 0px 20px 12px black;
+}
+.chat-popup
+{
+	background-color: #1B1B1D;
+	color: white;
+	border-radius: var(--char-tile-border-radius);
+	
+	width: 400px;
+	height: 500px;
+	
+	position: fixed;
+	right: 0px;
+	top: 0px;
+	margin-right: 280px;
+	margin-top: 80px;
+	
+	box-shadow: 0px 0px 20px 20px black;
+	
+	/* border-color: var(--chat-tile-border-color);
+	border-style: solid;
+	border-width: 1px; */
+}
+.chat-popup-header
+{
+	width: 100%;
+	height: 55px;
+	
+	color: white;
+	background-color: #2B2B2D;
+	border-bottom-color: var(--chat-tile-border-color);
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	
+	border-top-right-radius: var(--char-tile-border-radius);
+	border-top-left-radius: var(--char-tile-border-radius);
+	
+	padding: 5px;
+}
+.chat-popup-header .users-list-name
+{
+	max-width: 250px;
+}
+.chat-popup-header .fa-times
+{
+	color: var(--primary);
+}
+.chat-popup-body
+{
+	height: 90%;
+	
+	border-bottom-right-radius: var(--char-tile-border-radius);
+	border-bottom-left-radius: var(--char-tile-border-radius);
+}
+.chat-popup-body #chat-content
+{
+	height: 77%;
+	padding: 10px;
+}
+.chat-popup-body #chat-popup-text-form
+{
+	height: 23%;
+	
+	border-bottom-right-radius: var(--char-tile-border-radius);
+	border-bottom-left-radius: var(--char-tile-border-radius);
+	
+	background-color: #1B1B1D;
+	
+	border-top-color: var(--chat-tile-border-color);
+	border-top-width: 1px;
+	border-top-style: solid;
+}
+#chat-popup-text-form .media
+{
+	padding: 8px !important;
+}
+#chat-popup-text-form #chat-send-btn
+{
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+}
+#chat-popup-text-form textarea
+{
+	background-color: white !important;
+	border-radius: var(--char-tile-border-radius);
+	color: black !important;
+}
+#chat-popup-text-form #dropdown-emoji-panel-link
+{
+	margin-top: 3px;
+	background-color: #2B2B2D;
+	border-color: var(--chat-tile-border-color);
+	/* color: black; */
+}
+
+.user-list-row
+{
+	border-radius: 5px;	
+}
+.selected-user-list-row
+{
+	background-color: #B7B7B7 !important;
 }

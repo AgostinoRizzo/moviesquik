@@ -109,6 +109,10 @@
 {
 	display: inline;
 }
+.new-post-action-row h6
+{
+	display: inline;
+}
 
 .new-post-action-row .dropdown-toggle
 {
