@@ -28,7 +28,7 @@ window.createNewMessageCloudHtml = function( messagePacket, received=false, appe
 				
 				'<div class="chat-message-cloud">' + messageText + 
 					'<div class="chat-message-cloud-info">' +
-						'<small>' + messagePacket.time + '</small>' +
+						'<small>' + (messagePacket.isRead ? '' : '<span class="badge badge-success">NEW</span>&nbsp;') + messagePacket.time + '</small>' +
 					'</div>' +
 				'</div>' +
 				
@@ -70,6 +70,11 @@ window.addNewMessageCloud = function( messageHtml, append=false )
 function createNewMessagePacket( messageText, userId, userIconSrc, recvId=-1 ) 
 {
 	return { text : messageText, id : getNextChatMessageId(), ack : false, time : '', senderId : userId, senderIconSrc : userIconSrc, receiverId : recvId };
+}
+
+window.createNewInfoMessagePacket = function( infoText, userId ) 
+{
+	return { info : true, senderId : userId, text : infoText };
 }
 
 function onChatMessageReceived( messagePacket ) 
@@ -149,6 +154,20 @@ window.onChatSend = function(otherUserId=-1)
 		
 		addNewMessageCloud( createNewMessageCloudHtml(messagePacket) );
 		messageTextArea.val('');
+		chatSend( messagePacket );
+	}
+}
+
+window.onChatInfoSend = function(infoText) 
+{
+	if ( infoText == undefined )
+		return;
+	
+	infoText = infoText.trim();
+	
+	if ( infoText.length )
+	{
+		const messagePacket = createNewInfoMessagePacket(infoText, currentUserId);
 		chatSend( messagePacket );
 	}
 }

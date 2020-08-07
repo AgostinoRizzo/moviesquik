@@ -37,6 +37,9 @@ public class ChatMessageDaoJDBC extends AbstractDaoJDBC<ChatMessage> implements 
 	protected static final String FIND_ALL_USER_WITH_OFFSET_QUERY = 
 			"select * from message where movie_party_id is null and (sender_id = ? or receiver_id = ?) and message_id <= ? order by date_time desc";
 	
+	protected static final String READ_ALL_USER_STATEMENT = 
+			"UPDATE message SET is_read = true WHERE movie_party_id is null and receiver_id = ? AND NOT is_read";
+	
 	protected ChatMessageDaoJDBC(StatementPrompterJDBC statementPrompter)
 	{
 		super(statementPrompter);
@@ -133,6 +136,25 @@ public class ChatMessageDaoJDBC extends AbstractDaoJDBC<ChatMessage> implements 
 		finally 
 		{ statementPrompter.onFinalize(); }
 	}
+	
+	@Override
+	public boolean readAllUser(Long userId)
+	{
+		try
+		{
+			final PreparedStatement statement = statementPrompter.prepareStatement(READ_ALL_USER_STATEMENT);
+			statement.setLong(1, userId);
+			statement.executeUpdate();
+			
+			return true;
+		}
+		
+		catch (SQLException e)
+		{ e.printStackTrace(); return false; }
+		
+		finally 
+		{ statementPrompter.onFinalize(); }
+	}
 
 	@Override
 	protected ChatMessage createFromResult(ResultSet result) throws SQLException
@@ -154,6 +176,8 @@ public class ChatMessageDaoJDBC extends AbstractDaoJDBC<ChatMessage> implements 
 		final Long moviePartyId = result.getLong("movie_party_id");
 		if ( moviePartyId != null )
 			message.setMovieParty( daoFactory.getMoviePartyDao().findById(moviePartyId, sender) );
+		
+		message.setIsRead(result.getBoolean("is_read"));
 		
 		return message;
 	}

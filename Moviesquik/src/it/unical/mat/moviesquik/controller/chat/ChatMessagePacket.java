@@ -20,6 +20,8 @@ public class ChatMessagePacket
 	private Long senderId;
 	private String senderIconSrc;
 	private Long receiverId;
+	private boolean isRead;
+	private boolean info;
 	
 	public ChatMessagePacket()
 	{}
@@ -34,6 +36,7 @@ public class ChatMessagePacket
 		senderId = sender.getId();
 		senderIconSrc = sender.getProfileImagePath();
 		receiverId = receiverUser == null ? message.getMovieParty().getId() : receiverUser.getId();
+		isRead = message.getIsRead();
 	}
 	public String getText()
 	{
@@ -90,6 +93,22 @@ public class ChatMessagePacket
 	public void setReceiverId(Long receiverId)
 	{
 		this.receiverId = receiverId;
+	}
+	public boolean getIsRead()
+	{
+		return isRead;
+	}
+	public void setIsRead(boolean isRead)
+	{
+		this.isRead = isRead;
+	}
+	public boolean getInfo()
+	{
+		return info;
+	}
+	public void setInfo(boolean info)
+	{
+		this.info = info;
 	}
 	
 }

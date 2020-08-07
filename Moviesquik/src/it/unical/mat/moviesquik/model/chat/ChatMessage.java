@@ -22,6 +22,7 @@ public class ChatMessage
 	private User sender;
 	private User receiver;
 	private MovieParty movieParty;
+	private Boolean isRead;
 	
 	public ChatMessage()
 	{}
@@ -88,6 +89,14 @@ public class ChatMessage
 	public void setMovieParty(MovieParty movieParty)
 	{
 		this.movieParty = movieParty;
+	}
+	public Boolean getIsRead()
+	{
+		return isRead;
+	}
+	public void setIsRead(Boolean isRead)
+	{
+		this.isRead = isRead;
 	}
 	
 }

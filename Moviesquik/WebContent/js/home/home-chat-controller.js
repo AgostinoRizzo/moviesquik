@@ -9,6 +9,9 @@ var chatStatus = new Map();
 var currentUserId;
 var friendId;
 
+var lastChatTextAreaLength = 0;
+var userEmailMap = new Map();
+
 function appendChatStatus(newStatusHtml, id, fetching=false) 
 {
 	if ( chatStatus.has(id) )
@@ -28,6 +31,8 @@ function openChatPopup(friendId, friendName, friendEmail)
 	
 	chatPopup.show("slow");
 	clearUserChatMessageNotification(friendId);
+	
+	onChatInfoSend('readall');
 }
 
 function closeChatPopup() 
@@ -81,8 +86,55 @@ function clearUserChatMessageNotification(chatUserId)
 	});
 }
 
+function updateUserEmailMap(id, email) 
+{
+	if ( !userEmailMap.has(id) )
+		userEmailMap.set(id, email);
+}
+
+function onTypingInfoMessageReceived(id, start) 
+{
+	if ( id == friendId )
+	{
+		var chatPopup = $("#chats-sidenav-column .chat-popup");
+		var noteTag = chatPopup.find(".users-list-name .note");
+		updateUserEmailMap(id, noteTag.text());
+		noteTag.text( start ? 'typing...' : userEmailMap.get(id) );
+	}
+	else
+	{
+		$(".chat-list").find(".user-chat-row").each(function() 
+		{
+			const chatId = parseInt( $(this).find("#friend-id").val() );
+			if ( chatId == id )
+			{
+				var noteTag = $(this).find(".users-list-name .note");
+				updateUserEmailMap(id, noteTag.text());
+				noteTag.text( start ? 'typing...' : userEmailMap.get(id) );
+				return;
+			}
+		});
+	}
+}
+
+function onInfoMessageReceived(messagePacket) 
+{
+	var start = false;
+	if ( messagePacket.text == 'starttyping' )
+		start = true;
+	if ( start || messagePacket.text == 'stoptyping' )
+		onTypingInfoMessageReceived(messagePacket.senderId, start);
+	
+}
+
 function onMessageReceived(messagePacket, fetching=false) 
 {
+	if ( messagePacket.info && !fetching )
+	{
+		onInfoMessageReceived(messagePacket);
+		return;
+	}
+	
 	const newMessageCloudHtml = createNewMessageCloudHtml( messagePacket, messagePacket.senderId != currentUserId, true);
 	const chatId = messagePacket.senderId == currentUserId ? messagePacket.receiverId : messagePacket.senderId;
 	
@@ -90,8 +142,16 @@ function onMessageReceived(messagePacket, fetching=false)
 	
 	if ( messagePacket.senderId == friendId )
 		addNewMessageCloud( newMessageCloudHtml, false );
-	else
+	else if ( !messagePacket.isRead && messagePacket.receiverId == currentUserId )
 		increaseUserChatMessageNotification(chatId, messagePacket); // add new message notification
+}
+
+function onTyping(start) 
+{
+	if ( start )
+		onChatInfoSend('starttyping');
+	else
+		onChatInfoSend('stoptyping');
 }
 
 $(document).ready(function() 
@@ -116,6 +176,21 @@ $(document).ready(function()
 		$("#chat-send-btn").click( function() 
 		{
 			onChatSend(friendId);
+			lastChatTextAreaLength = 0;
+			onTyping(false);
+		});
+		
+		$("#new-msg-text").on('input', function() 
+		{
+			const messageText = $(this).val();
+			const currLength = messageText.length;
+			
+			if ( lastChatTextAreaLength == 0 && currLength >= 1 )
+				onTyping(true);
+			else if ( lastChatTextAreaLength >= 1 && currLength == 0 )
+				onTyping(false);
+			
+			lastChatTextAreaLength = currLength;
 		});
 		
 		var chatPopup = $("#chats-sidenav-column .chat-popup");
