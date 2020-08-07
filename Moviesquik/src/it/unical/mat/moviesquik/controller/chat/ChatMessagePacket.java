@@ -26,12 +26,14 @@ public class ChatMessagePacket
 	public ChatMessagePacket( final ChatMessage message )
 	{
 		final User sender = message.getSender();
+		final User receiverUser = message.getReceiver();
 		
 		text = message.getText();
 		id = message.getId();
 		time = DateUtil.getClockTime(message.getDateTime());
 		senderId = sender.getId();
 		senderIconSrc = sender.getProfileImagePath();
+		receiverId = receiverUser == null ? message.getMovieParty().getId() : receiverUser.getId();
 	}
 	public String getText()
 	{

@@ -33,9 +33,9 @@ public class ChatMessageDaoJDBC extends AbstractDaoJDBC<ChatMessage> implements 
 			"select * from message where movie_party_id = ? and message_id <= ? order by date_time desc";
 	
 	protected static final String FIND_ALL_USER_QUERY = 
-			"select * from message where sender_id = ? or receiver_id = ? order by date_time desc";
+			"select * from message where movie_party_id is null and (sender_id = ? or receiver_id = ?) order by date_time desc";
 	protected static final String FIND_ALL_USER_WITH_OFFSET_QUERY = 
-			"select * from message where (sender_id = ? or receiver_id = ?) and message_id <= ? order by date_time desc";
+			"select * from message where movie_party_id is null and (sender_id = ? or receiver_id = ?) and message_id <= ? order by date_time desc";
 	
 	protected ChatMessageDaoJDBC(StatementPrompterJDBC statementPrompter)
 	{

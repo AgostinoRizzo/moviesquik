@@ -8,6 +8,8 @@ var currentUserId;
 var currentUserIconSrc;
 var messageTextArea;
 var chatMessageCounter = 0;
+var messageReceivedCallback;
+var isGroupChat;
 
 function getNextChatMessageId() 
 {
@@ -16,7 +18,7 @@ function getNextChatMessageId()
 	return id;
 }
 
-function addNewMessageCloud( messagePacket, received=false, append=false ) 
+window.createNewMessageCloudHtml = function( messagePacket, received=false, append=false )
 {
 	var chatContent =$("#chat-content");
 	const messageText = messagePacket.text.replace(/\n/g, '<br>');
@@ -50,10 +52,17 @@ function addNewMessageCloud( messagePacket, received=false, append=false )
 				
 			'</div>';
 	
+	return html;
+}
+
+window.addNewMessageCloud = function( messageHtml, append=false )
+{
+	var chatContent =$("#chat-content");
+	
 	if ( append )
-		chatContent.append(html);
+		chatContent.append(messageHtml);
 	else
-		chatContent.prepend(html);
+		chatContent.prepend(messageHtml);
 	
 	chatContent.find("#empty-chat-content").hide();
 }
@@ -74,7 +83,10 @@ function onChatMessageReceived( messagePacket )
 	}
 	else if ( messagePacket.senderId != currentUserId )
 	{
-		addNewMessageCloud(messagePacket, true);
+		if ( isGroupChat )
+			addNewMessageCloud( createNewMessageCloudHtml( messagePacket, true ) );
+		else
+			messageReceivedCallback(messagePacket, false);
 	}
 	
 }
@@ -84,6 +96,7 @@ window.onChatInit = function( textArea, userId, userIconSrc, otherId=null, isGro
 	currentUserId = userId;
 	currentUserIconSrc = userIconSrc;
 	messageTextArea = textArea;
+	isGroupChat = isGroup;
 	
 	// request previous stored messages
 	if ( isGroup )
@@ -96,7 +109,7 @@ window.onChatInit = function( textArea, userId, userIconSrc, otherId=null, isGro
 				success: function(data)
 					{
 						data.forEach( function( msgPacket ) {
-							addNewMessageCloud( msgPacket, msgPacket.senderId != currentUserId, true );
+							addNewMessageCloud( createNewMessageCloudHtml( msgPacket, msgPacket.senderId != currentUserId, true), true );
 						});
 					}
 			}
@@ -112,7 +125,7 @@ window.onChatInit = function( textArea, userId, userIconSrc, otherId=null, isGro
 				success: function(data)
 					{
 						data.forEach( function( msgPacket ) {
-							addNewMessageCloud( msgPacket, msgPacket.senderId != currentUserId, true );
+							messageReceivedCallback(msgPacket, true);
 						});
 					}
 			}
@@ -134,8 +147,13 @@ window.onChatSend = function(otherUserId=-1)
 	{
 		const messagePacket = createNewMessagePacket(messageText, currentUserId, currentUserIconSrc, otherUserId);
 		
-		addNewMessageCloud(messagePacket);
+		addNewMessageCloud( createNewMessageCloudHtml(messagePacket) );
 		messageTextArea.val('');
 		chatSend( messagePacket );
 	}
+}
+
+window.setOnMessageReceivedCallback = function(callback) 
+{
+	messageReceivedCallback = callback;
 }
