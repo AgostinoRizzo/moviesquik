@@ -36,7 +36,7 @@ window.chatInit = function(recvCallback, userId, otherId, isGroup=false)
 	
 	var wsUrl = 'ws://' + location.host + '/' + WEB_APPLICATION_NAME;
 	if ( isGroup ) wsUrl += '/groupchat/' + otherId + '/' + userId;
-	else           wsUrl += '/chat/' + userId + '/' + otherId;
+	else           wsUrl += '/userchat/' + userId;
 		
 	chatWebSocket = new WebSocket( wsUrl );
 	

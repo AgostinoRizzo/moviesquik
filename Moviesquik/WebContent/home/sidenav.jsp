@@ -7,12 +7,12 @@
 <div class="row user-list-row clickable-light" id="current-user-link-item">
 		            			
 	  <c:if test="${user.profileImagePath != null && user.profileImagePath.length() > 0}">
-	  		<a href="user?id=${user.id}" class="col-auto col-light-left"><img src="${user.profileImagePath}" class="avatar-img card-list-avatar-img rounded-circle">
+	  		<a href="user?id=${user.id}" class="col-auto col-light-left"><img src="${user.profileImagePath}" class="avatar-img card-list-avatar-img rounded-circle" id="user-icon">
 	  			<i class="fa fa-check-circle fa-xs line-status online-status"></i>
 	  		</a>
 	  </c:if>
 	  <c:if test="${user.profileImagePath == null || user.profileImagePath.length() == 0}">
-	  		<a href="user?id=${user.id}" class="col-auto col-light-left"><img src="res/drawable/user_avatar.jpg" class="avatar-img card-list-avatar-img rounded-circle">
+	  		<a href="user?id=${user.id}" class="col-auto col-light-left"><img src="res/drawable/user_avatar.jpg" class="avatar-img card-list-avatar-img rounded-circle" id="user-icon">
 	  			<i class="fa fa-check-circle fa-xs line-status online-status"></i>
 	  		</a>
 	  </c:if>		  

@@ -184,7 +184,7 @@
   border-right-color: #474747;
   
   -ms-overflow-style: none;
-  overflow: -moz-scrollbars-none
+  overflow: -moz-scrollbars-none;
 }
 .sidenav::-webkit-scrollbar {
     display: none;

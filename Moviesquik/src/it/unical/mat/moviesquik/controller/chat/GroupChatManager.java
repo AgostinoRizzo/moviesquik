@@ -3,14 +3,12 @@
  */
 package it.unical.mat.moviesquik.controller.chat;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import javax.websocket.EncodeException;
 import javax.websocket.Session;
 
 import it.unical.mat.moviesquik.model.User;
@@ -24,7 +22,7 @@ import it.unical.mat.moviesquik.util.DateUtil;
  * @author Agostino
  *
  */
-public class GroupChatManager extends ChatManager
+public class GroupChatManager implements ChatManager
 {
 	private static GroupChatManager instance = null;
 	
@@ -65,6 +63,7 @@ public class GroupChatManager extends ChatManager
 		lock.unlock();
 	}
 	
+	@Override
 	public void onSendMessage( final ChatMessagePacket messagePacket )
 	{
 		try
@@ -83,7 +82,7 @@ public class GroupChatManager extends ChatManager
 			// store message to DB
 			final DaoFactory daoFactory = DBManager.getInstance().getDaoFactory();
 			
-			final User sender = daoFactory.getUserDao().findByPrimaryKey( messagePacket.getSenderId() );
+			final User sender = daoFactory.getUserDao().findByPrimaryKey( senderId );
 			if ( sender == null ) return;
 			final MovieParty movieParty = daoFactory.getMoviePartyDao().findById(groupId, sender);
 			if ( movieParty == null ) return;
@@ -94,11 +93,11 @@ public class GroupChatManager extends ChatManager
 			
 			for ( final Long uId : usersIds )
 				if ( !uId.equals(senderId) )
-					sendMessageFromSession(messagePacket, usersMap.get(uId));
+					ChatManager.sendMessageFromSession(messagePacket, usersMap.get(uId));
 			
 			// send ACK to sender
 			messagePacket.setAck(true);
-			sendMessageFromSession(messagePacket, usersMap.get(senderId));
+			ChatManager.sendMessageFromSession(messagePacket, usersMap.get(senderId));
 		}
 		finally 
 		{
@@ -117,11 +116,4 @@ public class GroupChatManager extends ChatManager
 		return usersMap;
 	}
 	
-	private boolean sendMessageFromSession( final ChatMessagePacket messagePacket, final Session session )
-	{
-		try
-		{ session.getBasicRemote().sendObject(messagePacket); return true;	} 
-		catch (IOException | EncodeException e)
-		{ return false; }
-	}
 }

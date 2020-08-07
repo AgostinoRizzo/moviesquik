@@ -19,6 +19,7 @@ public class ChatMessagePacket
 	private String time;
 	private Long senderId;
 	private String senderIconSrc;
+	private Long receiverId;
 	
 	public ChatMessagePacket()
 	{}
@@ -79,6 +80,14 @@ public class ChatMessagePacket
 	public void setSenderIconSrc(String senderIconSrc)
 	{
 		this.senderIconSrc = senderIconSrc;
+	}
+	public Long getReceiverId()
+	{
+		return receiverId;
+	}
+	public void setReceiverId(Long receiverId)
+	{
+		this.receiverId = receiverId;
 	}
 	
 }

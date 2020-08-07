@@ -38,20 +38,32 @@ public class ChatBroker extends HttpServlet
 			return;
 		}
 		
-		Long groupId;
-		try { groupId = Long.parseLong(req.getParameter("groupid"));}
-		catch (NumberFormatException e) 
-		{
-			ServletUtils.manageParameterError(req, resp);
-			return;
-		}
-		
 		Long messageOffsetId = null;
 		try { messageOffsetId = Long.parseLong(req.getParameter("offsetid")); }
 		catch (NumberFormatException e) {}
 		
-		final List<ChatMessage> messages = DBManager.getInstance().getDaoFactory().getChatMessageDao()
-												.findAll(groupId, messageOffsetId);
+		List<ChatMessage> messages;
+		
+		try 
+		{
+			final Long groupId = Long.parseLong(req.getParameter("groupid"));
+			messages = DBManager.getInstance().getDaoFactory().getChatMessageDao()
+													.findAllGroup(groupId, messageOffsetId);
+		}
+		catch (NumberFormatException e) 
+		{
+			try
+			{
+				final Long userId = Long.parseLong(req.getParameter("userid"));
+				messages = DBManager.getInstance().getDaoFactory().getChatMessageDao()
+														.findAllUser(userId, messageOffsetId);
+			}
+			catch (NumberFormatException e2) 
+			{
+				ServletUtils.manageParameterError(req, resp);
+				return;
+			}
+		}
 		
 		ServletUtils.sendJsonArray( createJsonMessagesArray(messages), resp );
 	}

@@ -27,10 +27,15 @@ public class ChatMessageDaoJDBC extends AbstractDaoJDBC<ChatMessage> implements 
 	protected static final String INSERT_STATEMENT = 
 			"insert into message(message_id, text, date_time, sender_id, receiver_id, movie_party_id) values (?,?,?,?,?,?)";
 	
-	protected static final String FIND_ALL_QUERY = 
+	protected static final String FIND_ALL_GROUP_QUERY = 
 			"select * from message where movie_party_id = ? order by date_time desc";
-	protected static final String FIND_ALL_WITH_OFFSET_QUERY = 
+	protected static final String FIND_ALL_GROUP_WITH_OFFSET_QUERY = 
 			"select * from message where movie_party_id = ? and message_id <= ? order by date_time desc";
+	
+	protected static final String FIND_ALL_USER_QUERY = 
+			"select * from message where sender_id = ? or receiver_id = ? order by date_time desc";
+	protected static final String FIND_ALL_USER_WITH_OFFSET_QUERY = 
+			"select * from message where (sender_id = ? or receiver_id = ?) and message_id <= ? order by date_time desc";
 	
 	protected ChatMessageDaoJDBC(StatementPrompterJDBC statementPrompter)
 	{
@@ -71,18 +76,48 @@ public class ChatMessageDaoJDBC extends AbstractDaoJDBC<ChatMessage> implements 
 	}
 	
 	@Override
-	public List<ChatMessage> findAll(Long groupId, Long messageOffsetId)
+	public List<ChatMessage> findAllGroup(Long groupId, Long messageOffsetId)
 	{
 		final List<ChatMessage> messages = new ArrayList<ChatMessage>();
 		
 		try
 		{
 			final PreparedStatement statement = 
-					statementPrompter.prepareStatement(messageOffsetId == null ? FIND_ALL_QUERY : FIND_ALL_WITH_OFFSET_QUERY);
+					statementPrompter.prepareStatement(messageOffsetId == null ? FIND_ALL_GROUP_QUERY : FIND_ALL_GROUP_WITH_OFFSET_QUERY);
 			
 			statement.setLong(1, groupId);
 			if ( messageOffsetId != null )
 				statement.setLong(2, messageOffsetId);
+			
+			ResultSet result = statement.executeQuery();
+			
+			while ( result.next() )
+				messages.add(createFromResult(result));
+			
+			return messages;
+		}
+		
+		catch (SQLException e)
+		{ e.printStackTrace(); return messages; }
+		
+		finally 
+		{ statementPrompter.onFinalize(); }
+	}
+	
+	@Override
+	public List<ChatMessage> findAllUser(Long userId, Long messageOffsetId)
+	{
+		final List<ChatMessage> messages = new ArrayList<ChatMessage>();
+		
+		try
+		{
+			final PreparedStatement statement = 
+					statementPrompter.prepareStatement(messageOffsetId == null ? FIND_ALL_USER_QUERY : FIND_ALL_USER_WITH_OFFSET_QUERY);
+			
+			statement.setLong(1, userId);
+			statement.setLong(2, userId);
+			if ( messageOffsetId != null )
+				statement.setLong(3, messageOffsetId);
 			
 			ResultSet result = statement.executeQuery();
 			

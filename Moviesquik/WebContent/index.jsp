@@ -45,7 +45,10 @@
 	<script src="js/contents.js"></script>
 	<script src="js/media-contents-filler.js"></script>
 	<script src="js/home/sidenav.js"></script>
-	<script src="js/home/home-chat-controller.js"></script>
+	<c:if test="${user != null}">
+		<script src="js/home/home-chat-controller.js" type="module"></script>
+		<script src="js/home/home-chat-search.js" type="module"></script>
+	</c:if>
 	<script src="js/watchlist/add-item.js"></script>
 	<script src="js/movieparty/movie-party-search.js"></script>
 	<script src="js/movieparty/movie-party-calendar.js"></script>

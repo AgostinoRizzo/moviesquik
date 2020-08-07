@@ -24,23 +24,24 @@
 </div> --%>
 
 <div class="users-col-title">
-	<strong class="note">FRIENDS</strong><br>
+	<strong class="note">Messages</strong><br>
+	<input type="text" id="chat-search-input" placeholder="Search">
 </div>
 	
 <c:forEach items="${user.friends}" var="friend">
-	<div class="row user-list-row clickable-light">
+	<div class="row user-list-row clickable-light user-chat-row">
 		  
 		  <input type="hidden" id="friend-id" value="${friend.id}">
 		  			
 		  <c:if test="${friend.profileImagePath != null && friend.profileImagePath.length() > 0}">
-		  		<a href="user?id=${friend.id}" class="col-auto col-light-left"><img src="${friend.profileImagePath}" class="avatar-img card-list-avatar-img rounded-circle">
+		  		<div class="col-auto col-light-left"><img src="${friend.profileImagePath}" class="avatar-img card-list-avatar-img rounded-circle">
 		  			<i class="fa fa-check-circle fa-xs line-status online-status"></i>
-		  		</a>
+		  		</div>
 		  </c:if>
 		  <c:if test="${friend.profileImagePath == null || friend.profileImagePath.length() == 0}">
-		  		<a href="user?id=${friend.id}" class="col-auto col-light-left"><img src="res/drawable/user_avatar.jpg" class="avatar-img card-list-avatar-img rounded-circle">
+		  		<div class="col-auto col-light-left"><img src="res/drawable/user_avatar.jpg" class="avatar-img card-list-avatar-img rounded-circle">
 		  			<i class="fa fa-check-circle fa-xs line-status online-status"></i>
-		  		</a>
+		  		</div>
 		  </c:if>		  
 		  
 		  <div class="col users-list-name col-light-right">

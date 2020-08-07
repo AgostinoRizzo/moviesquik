@@ -23,7 +23,9 @@
 <div class="home-wrapper">
 	
 	<div class="home-container-wrapper row" id="home-wrapper">
-	
+		
+		<input type="hidden" id="user-id" value="${user.id}">
+		
 		<!-- Friends sidenav -->
 		<div class="col-2 scollable-col sidenav users-col home-container-col">
 					<jsp:include page="sidenav.jsp"></jsp:include>

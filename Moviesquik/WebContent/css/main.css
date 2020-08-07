@@ -234,6 +234,7 @@ a.a-hidden
 .scollable-col
 {
 	-ms-overflow-style: none;
+	scrollbar-width: none;
 }
 
 @keyframes spin {

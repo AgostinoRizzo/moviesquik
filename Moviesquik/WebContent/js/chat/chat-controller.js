@@ -58,9 +58,9 @@ function addNewMessageCloud( messagePacket, received=false, append=false )
 	chatContent.find("#empty-chat-content").hide();
 }
 
-function createNewMessagePacket( messageText, userId, userIconSrc ) 
+function createNewMessagePacket( messageText, userId, userIconSrc, recvId=-1 ) 
 {
-	return { text : messageText, id : getNextChatMessageId(), ack : false, time : '', senderId : userId, senderIconSrc : userIconSrc };
+	return { text : messageText, id : getNextChatMessageId(), ack : false, time : '', senderId : userId, senderIconSrc : userIconSrc, receiverId : recvId };
 }
 
 function onChatMessageReceived( messagePacket ) 
@@ -79,33 +79,50 @@ function onChatMessageReceived( messagePacket )
 	
 }
 
-window.onChatInit = function( textArea, userId, userIconSrc, otherId, isGroup=false ) 
+window.onChatInit = function( textArea, userId, userIconSrc, otherId=null, isGroup=false ) 
 {
 	currentUserId = userId;
 	currentUserIconSrc = userIconSrc;
 	messageTextArea = textArea;
 	
 	// request previous stored messages
-	$.ajax(
-		{
-			type: "GET",
-			url: 'getchat?groupid=' + otherId,
-			dataType: "json",
-			success: function(data)
-				{
-					data.forEach( function( msgPacket ) {
-						addNewMessageCloud( msgPacket, msgPacket.senderId != currentUserId, true );
-					});
-					
-					//$("#calendar-container").html(data);
-					//$("#calendar-container .loader").addClass("d-none");
-				}
-		}
-	);
+	if ( isGroup )
+	{
+		$.ajax(
+			{
+				type: "GET",
+				url: 'getchat?groupid=' + otherId,
+				dataType: "json",
+				success: function(data)
+					{
+						data.forEach( function( msgPacket ) {
+							addNewMessageCloud( msgPacket, msgPacket.senderId != currentUserId, true );
+						});
+					}
+			}
+		);
+	}
+	else
+	{
+		$.ajax(
+			{
+				type: "GET",
+				url: 'getchat?userid=' + userId,
+				dataType: "json",
+				success: function(data)
+					{
+						data.forEach( function( msgPacket ) {
+							addNewMessageCloud( msgPacket, msgPacket.senderId != currentUserId, true );
+						});
+					}
+			}
+		);
+	}
+	
 	chatInit( onChatMessageReceived, userId, otherId, isGroup );
 }
 
-window.onChatSend = function() 
+window.onChatSend = function(otherUserId=-1) 
 {
 	var messageText = messageTextArea.val();
 	if ( messageText == undefined )
@@ -115,7 +132,7 @@ window.onChatSend = function()
 	
 	if ( messageText.length )
 	{
-		const messagePacket = createNewMessagePacket(messageText, currentUserId, currentUserIconSrc);
+		const messagePacket = createNewMessagePacket(messageText, currentUserId, currentUserIconSrc, otherUserId);
 		
 		addNewMessageCloud(messagePacket);
 		messageTextArea.val('');

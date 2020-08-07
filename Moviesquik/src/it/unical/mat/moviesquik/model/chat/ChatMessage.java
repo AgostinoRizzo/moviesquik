@@ -33,6 +33,14 @@ public class ChatMessage
 		this.sender = sender;
 		this.movieParty = movieParty;
 	}
+	public ChatMessage( final ChatMessagePacket messagePacket, final User sender, final User receiver )
+	{		
+		this.text = messagePacket.getText();
+		this.dateTime = DateUtil.getCurrent();
+		
+		this.sender = sender;
+		this.receiver = receiver;
+	}
 	public Long getId()
 	{
 		return id;

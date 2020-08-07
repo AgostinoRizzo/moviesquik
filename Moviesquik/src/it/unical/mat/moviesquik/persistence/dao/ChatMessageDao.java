@@ -14,5 +14,6 @@ import it.unical.mat.moviesquik.model.chat.ChatMessage;
 public interface ChatMessageDao
 {
 	public boolean save( final ChatMessage message );
-	public List<ChatMessage> findAll( final Long groupId, final Long messageOffsetId );
+	public List<ChatMessage> findAllGroup( final Long groupId, final Long messageOffsetId );
+	public List<ChatMessage> findAllUser( final Long userId, final Long messageOffsetId );
 }
