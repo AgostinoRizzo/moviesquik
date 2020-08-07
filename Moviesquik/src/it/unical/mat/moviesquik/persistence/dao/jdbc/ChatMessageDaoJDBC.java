@@ -177,7 +177,10 @@ public class ChatMessageDaoJDBC extends AbstractDaoJDBC<ChatMessage> implements 
 		if ( moviePartyId != null )
 			message.setMovieParty( daoFactory.getMoviePartyDao().findById(moviePartyId, sender) );
 		
-		message.setIsRead(result.getBoolean("is_read"));
+		if ( message.getMovieParty() == null )
+			message.setIsRead(result.getBoolean("is_read"));
+		else
+			message.setIsRead(true);
 		
 		return message;
 	}

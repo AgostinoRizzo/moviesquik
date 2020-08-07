@@ -6,6 +6,7 @@ package it.unical.mat.moviesquik.controller.chat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -26,6 +27,7 @@ public class UserChatManager implements ChatManager
 	private static UserChatManager instance = null;
 	
 	private final Map<Long, Session> userSessionMap = new HashMap<Long, Session>();
+	private final Map<Long, Boolean> userStatusMap  = new HashMap<Long, Boolean>();
 	private Lock lock = new ReentrantLock();
 	
 	public static UserChatManager getInstance()
@@ -41,14 +43,25 @@ public class UserChatManager implements ChatManager
 	public void register( final Long userId, final Session session )
 	{
 		lock.lock();
+		
+		sendAllUserStatuses(session);
+		sendUserStatusToAll(userId, true);
+		
 		userSessionMap.put(userId, session);
+		userStatusMap.put(userId, true);
+		
 		lock.unlock();
 	}
 	
 	public void unregister( final Long userId )
 	{
 		lock.lock();
+		
 		userSessionMap.remove(userId);
+		userStatusMap.remove(userId);
+		
+		sendUserStatusToAll(userId, false);
+		
 		lock.unlock();
 	}
 	
@@ -124,6 +137,44 @@ public class UserChatManager implements ChatManager
 					ChatManager.sendMessageFromSession(infoMessagePacket, userSessionMap.get(friendId));
 			}
 		}
+	}
+	
+	private boolean getUserStatus( final Long userId )
+	{
+		if ( userStatusMap.containsKey(userId) )
+			return userStatusMap.get(userId);
+		return false;
+	}
+	
+	private void sendAllUserStatuses( final Session session )
+	{
+		final ChatMessagePacket infoMessagePacket = new ChatMessagePacket();
+		infoMessagePacket.setInfo(true);
+		
+		final Set<Long> allUserIds = userStatusMap.keySet();
+		boolean status;
+		
+		for ( final Long userId : allUserIds )
+		{
+			status = getUserStatus(userId);
+			
+			infoMessagePacket.setText( status ? "online" : "offline" );
+			infoMessagePacket.setSenderId(userId);
+			
+			ChatManager.sendMessageFromSession(infoMessagePacket, session);
+		}
+	}
+	
+	private void sendUserStatusToAll( final Long userId, final boolean userStatus )
+	{
+		final ChatMessagePacket infoMessagePacket = new ChatMessagePacket();
+		infoMessagePacket.setInfo(true);
+		infoMessagePacket.setText( userStatus ? "online" : "offline" );
+		infoMessagePacket.setSenderId(userId);
+		
+		final Set<Long> allUserIds = userSessionMap.keySet();
+		for ( final Long id : allUserIds )
+			ChatManager.sendMessageFromSession(infoMessagePacket, userSessionMap.get(id));
 	}
 	
 }

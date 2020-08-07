@@ -2,6 +2,8 @@
  * 
  */
 
+import '../chat/chat-controller.js';
+
 const MOVIE_PARTY_CONTAINER = "#movie-party-chat-container";
 const SHOW_CHAT_BTN = "#watching-chat-btn";
 const HIDE_CHAT_BTN = "#hide-chat-btn";
@@ -33,4 +35,16 @@ $(document).ready( function()
 		$(HIDE_CHAT_BTN).hide();
 		$(document).on("click", SHOW_CHAT_BTN, onShowChat);
 		$(document).on("click", HIDE_CHAT_BTN, onHideChat);
+		
+		$("#chat-send-btn").click( function() 
+		{
+			onChatSend();
+		});
+
+		const userId = $("#user-id").val();
+		const userIconSrc = $("#user-icon").attr('src');
+		const partyId = $("#party-id").val();
+		var textArea = $(this).find("#new-msg-text");
+		
+		onChatInit( textArea, userId, userIconSrc, partyId, true );
 	});

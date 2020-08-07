@@ -19,11 +19,13 @@ function appendChatStatus(newStatusHtml, id, fetching=false)
 	chatStatus.set( id, newStatusHtml );
 }
 
-function openChatPopup(friendId, friendName, friendEmail) 
+function openChatPopup(friendId, friendName, friendEmail, friendStatus)
 {
 	var chatPopup = $("#chats-sidenav-column .chat-popup");
 	chatPopup.find(".users-list-name .users-list-name-text").text(friendName);
 	chatPopup.find(".users-list-name .note").text(friendEmail);
+	updateLineStatus( chatPopup.find(".line-status"), friendStatus );
+	
 	selectedUserListNameRow.addClass('selected-user-list-row');
 	
 	if ( chatStatus.has(friendId) )
@@ -117,14 +119,73 @@ function onTypingInfoMessageReceived(id, start)
 	}
 }
 
+function updateLineStatus(lineStatusObj, isOnline) 
+{
+	if ( lineStatusObj.hasClass('online-status') )
+		lineStatusObj.removeClass('online-status');
+	if ( lineStatusObj.hasClass('offline-status') )
+		lineStatusObj.removeClass('offline-status');
+	
+	if ( isOnline )
+		lineStatusObj.addClass('online-status');
+	else
+		lineStatusObj.addClass('offline-status');
+}
+
+function showMainAlert(alertText) 
+{
+	$("#main-alert").html(alertText + '<button type="button" class="close">&times;</button>');
+	$("#main-alert").hide();
+	$("#main-alert").slideDown('slow');
+}
+
+function onOnlineOfflineInfoMessageReceived(id, isOnline) 
+{
+	if ( id == friendId )
+	{
+		var chatPopup = $("#chats-sidenav-column .chat-popup");
+		var lineStatus = chatPopup.find(".line-status");
+		updateLineStatus(lineStatus, isOnline);
+	}
+	
+	var userFullName = '';
+	var userIconSrc = 'res/drawable/user_avatar.jpg';
+	
+	$(".chat-list").find(".user-chat-row").each(function() 
+	{
+		const chatId = parseInt( $(this).find("#friend-id").val() );
+		if ( chatId == id )
+		{
+			userFullName = $(this).find(".users-list-name .users-list-name-text").text().trim();
+			userIconSrc  = $(this).find(".avatar-img").attr('src');
+			
+			var lineStatus = $(this).find(".user-icon-col .line-status");
+			updateLineStatus(lineStatus, isOnline);
+			return;
+		}
+	});
+	
+	// display user online/offline alert
+	if ( userFullName.length )
+		showMainAlert( '<img src="' + userIconSrc + '" class="avatar-img card-list-avatar-img rounded-circle">&nbsp;&nbsp;' + 
+					   '<strong>' + userFullName + '</strong> is now ' + (isOnline ? 'online' : 'offline') );
+}
+
 function onInfoMessageReceived(messagePacket) 
 {
+	// start/stop typing message info
 	var start = false;
 	if ( messagePacket.text == 'starttyping' )
 		start = true;
 	if ( start || messagePacket.text == 'stoptyping' )
 		onTypingInfoMessageReceived(messagePacket.senderId, start);
 	
+	// online/offline status message info
+	var online = false;
+	if ( messagePacket.text == 'online' )
+		online = true;
+	if ( online || messagePacket.text == 'offline' )
+		onOnlineOfflineInfoMessageReceived(messagePacket.senderId, online);
 }
 
 function onMessageReceived(messagePacket, fetching=false) 
@@ -166,7 +227,7 @@ $(document).ready(function()
 			selectedUserListNameRow = $(this);
 			
 			if ( !selectedUserListNameRow.hasClass('selected-user-list-row') && !chatPopup.is(':visible') )
-				openChatPopup(friendId, friendName, friendEmail);
+				openChatPopup(friendId, friendName, friendEmail, $(this).find(".line-status").hasClass('online-status'));
 		});
 		
 		$(document).on("click", "#close-chat-popup-btn", function() {
@@ -201,6 +262,14 @@ $(document).ready(function()
 		{
 			$(this).hide();
 			$(this).removeClass('d-none');
+		});
+		
+		$("#main-alert").hide();
+		$("#main-alert").removeClass('d-none');
+		
+		$(document).on("click", "#main-alert button", function() 
+		{
+			$("#main-alert").slideUp('slow');
 		});
 		
 		currentUserId = parseInt( $("#user-id").val() );

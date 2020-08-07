@@ -28,7 +28,6 @@ public class GruopChatCommunicatorEndpoint
 	public void onOpen( final Session session, @PathParam("group_id") final String groupIdStr, 
 											   @PathParam("user_id")  final String userIdStr )
 	{
-		System.out.println("New group chat connecton [group_id: " + groupIdStr + ", user_id: " + userIdStr + "]: " + session.getId());
 		try
 		{
 			final Long groupId = Long.parseLong(groupIdStr);
@@ -42,7 +41,6 @@ public class GruopChatCommunicatorEndpoint
 	@OnMessage
 	public void onMessage( final ChatMessagePacket messagePacket, final Session session ) throws IOException, EncodeException
 	{
-		System.out.println("On message packet from " + session.getId() + ": " + messagePacket.getText());
 		groupChatManager.onSendMessage(messagePacket);
 	}
 	
@@ -50,7 +48,6 @@ public class GruopChatCommunicatorEndpoint
 	public void onClose( final Session session, @PathParam("group_id") final String groupIdStr, 
 												@PathParam("user_id")  final String userIdStr )
 	{
-		System.out.println("On close: " + session.getId());
 		try
 		{
 			final Long groupId = Long.parseLong(groupIdStr);

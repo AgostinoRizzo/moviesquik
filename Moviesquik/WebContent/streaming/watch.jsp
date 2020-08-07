@@ -27,8 +27,7 @@
 	<script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<script src="lib/typeahead/bootstrap3-typeahead.js"></script>
 	<script src="js/streaming/stream-player.js" type="module"></script>
-	<script src="js/movieparty/party-chat.js"></script>
-	<script src="js/watching/movie-watching.js"></script>
+	<script src="js/watching/movie-watching.js" type="module"></script>
 	
 </head>
 <body>
@@ -36,9 +35,14 @@
 	<input type="hidden" id="media-id" value="${media_content.id}">
 	
 	<c:if test="${party != null}">
+	
+		<input type="hidden" id="user-id" value="${user.id}">
+		<input type="hidden" id="party-id" value="${party.id}">
+		
 		<div class="clickable" id="watching-chat-btn"><h3><i class="fa fa-comments"></i></h3></div>
 		<div class="clickable" id="hide-chat-btn"><h3><i class="fa fa-times"></i></h3></div>
 		<jsp:include page="../movieparty/movie-party-chat.jsp"></jsp:include>
+		
 	</c:if>
 	
 	<c:if test="${curr_watch_timestamp != null}">

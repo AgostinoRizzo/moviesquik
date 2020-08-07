@@ -128,9 +128,9 @@
 	
 	position: fixed;
 	right: 0px;
-	top: 0px;
-	margin-right: 280px;
-	margin-top: 80px;
+	bottom: 0px;
+	margin-right: 300px;
+	margin-bottom: 30px;
 	
 	box-shadow: 0px 0px 20px 20px black;
 	
@@ -259,7 +259,7 @@
 .new-message-badge
 {
 	border-radius: 50%;
-	background-color: var(--success);
+	background-color: #3fda7a;
 	font-size: small;
 	padding: 1px;
 	width: 22px;
@@ -279,4 +279,8 @@
 .chat-list .users-list-name
 {
 	max-width: 130px;
+}
+.chat-popup .users-list-name
+{
+	max-width: 180px;
 }
