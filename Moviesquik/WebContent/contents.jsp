@@ -55,38 +55,31 @@
 <div class="media-contents-list">
 
 	<div class="media-contents-list-header">
-			<!-- <img class="media-contents-list-header_icon" alt="" src="res/drawable/rate_star.png"> -->
+			
 			<div class="media-contents-icon-title">
 				<c:if test="${empty small_view}">
-					<h4 class="media-contents-list-header-title"><span class="fa fa-star checked"></span> Trending Now</h4>
+					<h4 class="media-contents-list-header-title"><span class="fa fa-line-chart checked"></span> Trending Now</h4>
 				</c:if>
 				<c:if test="${not empty small_view}">
-					<h5 class="media-contents-list-header-title"><span class="fa fa-star checked"></span> Trending Now</h5>
+					<h5 class="media-contents-list-header-title"><span class="fa fa-line-chart checked"></span> Trending Now</h5>
 				</c:if>
 			</div>
 			<div class="view-all-contents">
-				<button id="top-rated-view-all-btn" class="btn btn-link view-all-btn invisible">View All</button>
+				<button id="trending-now-view-all-btn" class="btn btn-link view-all-btn invisible">View All</button>
 			</div>
 			
 			<c:if test="${not empty small_view}"><br></c:if>
 	</div>
 	<br>
-	<!-- <hr class="mb-4"> -->
 	
-	<!-- Top content -->
-    <div id="top-rated-media-contents-items" class="media-contents-list-items row" role="listbox">
-    	<%-- <c:if test="${empty small_view}">
-        	<jsp:include page="contents-items.jsp"></jsp:include>
-        </c:if>
-        <c:if test="${not empty small_view}">
-        	<jsp:include page="contents-items-sm.jsp"></jsp:include>
-        </c:if> --%>
+	<!-- Trending Now content -->
+    <div id="trending-now-media-contents-items" class="media-contents-list-items row" role="listbox">
         <jsp:include page="contents-items.jsp"></jsp:include>
     </div>
     
     <div class="more-collapse-box d-none">
-		<button id="top-rated-view-more-btn" class="btn btn-link view-more-btn"><span class="fa fa-plus checked"></span> More</button>
-		<button id="top-rated-view-collapse-btn" class="btn btn-link view-collapse-btn"><span class="fa fa-minus checked"></span> Collapse</button>
+		<button id="trending-now-view-more-btn" class="btn btn-link view-more-btn"><span class="fa fa-plus checked"></span> More</button>
+		<button id="trending-now-view-collapse-btn" class="btn btn-link view-collapse-btn"><span class="fa fa-minus checked"></span> Collapse</button>
 	</div>
 
 </div>
@@ -133,6 +126,38 @@
 <div class="media-contents-list">
 
 	<div class="media-contents-list-header">
+			
+			<div class="media-contents-icon-title">
+				<c:if test="${empty small_view}">
+					<h4 class="media-contents-list-header-title"><span class="fa fa-star checked"></span> Top Rated</h4>
+				</c:if>
+				<c:if test="${not empty small_view}">
+					<h5 class="media-contents-list-header-title"><span class="fa fa-star checked"></span> Top Rated</h5>
+				</c:if>
+			</div>
+			<div class="view-all-contents">
+				<button id="top-rated-view-all-btn" class="btn btn-link view-all-btn invisible">View All</button>
+			</div>
+			
+			<c:if test="${not empty small_view}"><br></c:if>
+	</div>
+	<br>
+	
+	<!-- Top Rated content -->
+    <div id="top-rated-media-contents-items" class="media-contents-list-items row" role="listbox">
+        <jsp:include page="contents-items.jsp"></jsp:include>
+    </div>
+    
+    <div class="more-collapse-box d-none">
+		<button id="top-rated-view-more-btn" class="btn btn-link view-more-btn"><span class="fa fa-plus checked"></span> More</button>
+		<button id="top-rated-view-collapse-btn" class="btn btn-link view-collapse-btn"><span class="fa fa-minus checked"></span> Collapse</button>
+	</div>
+
+</div>
+
+<div class="media-contents-list">
+
+	<div class="media-contents-list-header">
 			<!-- <img class="media-contents-list-header_icon" alt="" src="res/drawable/rate_star.png"> -->
 			<div class="media-contents-icon-title">
 				<c:if test="${empty small_view}">
@@ -168,3 +193,37 @@
 	</div>
 
 </div>
+
+<c:if test="${user != null && empty no_view_suggested}">
+	<div class="media-contents-list">
+	
+		<div class="media-contents-list-header">
+				
+				<div class="media-contents-icon-title">
+					<c:if test="${empty small_view}">
+						<h4 class="media-contents-list-header-title"><span class="fa fa-history checked"></span> Recently Watched</h4>
+					</c:if>
+					<c:if test="${not empty small_view}">
+						<h5 class="media-contents-list-header-title"><span class="fa fa-history checked"></span> Recently Watched</h5>
+					</c:if>
+				</div>
+				<div class="view-all-contents">
+					<button id="recently-watched-view-all-btn" class="btn btn-link view-all-btn invisible">View All</button>
+				</div>
+				
+				<c:if test="${not empty small_view}"><br></c:if>
+		</div>
+		<br>
+		
+		<!-- Top Rated content -->
+	    <div id="recently-watched-media-contents-items" class="media-contents-list-items row" role="listbox">
+	        <jsp:include page="contents-items.jsp"></jsp:include>
+	    </div>
+	    
+	    <div class="more-collapse-box d-none">
+			<button id="recently-watched-view-more-btn" class="btn btn-link view-more-btn"><span class="fa fa-plus checked"></span> More</button>
+			<button id="recently-watched-view-collapse-btn" class="btn btn-link view-collapse-btn"><span class="fa fa-minus checked"></span> Collapse</button>
+		</div>
+	
+	</div>
+</c:if>

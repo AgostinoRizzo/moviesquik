@@ -48,7 +48,7 @@ public class NotificationDaoJDBC implements NotificationDao
 			final MovieParty movieParty = notification.getMovieParty();
 			
 			statement.setLong        (1, notification.getId());
-			statement.setTimestamp   (2, DateUtil.toJDBC(notification.getDateTime()));
+			statement.setTimestamp   (2, DateUtil.toTimestampJDBC(notification.getDateTime()));
 			statement.setString      (3, notification.getTitle());
 			statement.setString      (4, notification.getDescription());
 			statement.setBoolean     (5, notification.getIsRead());

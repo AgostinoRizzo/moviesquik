@@ -60,7 +60,7 @@ public class FriendshipDaoJDBC implements FriendshipDao
 		{
 			final PreparedStatement statement = statementPrompter.prepareStatement(UPDATE_STATEMENT);
 			
-			statement.setTimestamp   (1 , DateUtil.toJDBC(friendship.getStartDate()));
+			statement.setTimestamp   (1 , DateUtil.toTimestampJDBC(friendship.getStartDate()));
 			statement.setLong        (2, friendship.getFirstUser().getId());
 			statement.setLong        (3, friendship.getSecondUser().getId());
 			
@@ -111,7 +111,7 @@ public class FriendshipDaoJDBC implements FriendshipDao
 	protected static void setDataToInsertStatement( final Friendship friendship, final PreparedStatement statement ) throws SQLException
 	{
 		statement.setLong        (1 , friendship.getId());
-		statement.setTimestamp   (2 , DateUtil.toJDBC(friendship.getStartDate()));
+		statement.setTimestamp   (2 , DateUtil.toTimestampJDBC(friendship.getStartDate()));
 		statement.setLong        (3 , friendship.getFirstUser().getId());
 		statement.setLong        (4 , friendship.getSecondUser().getId());
 		statement.setBoolean     (5 , friendship.getFirstForApplicant());

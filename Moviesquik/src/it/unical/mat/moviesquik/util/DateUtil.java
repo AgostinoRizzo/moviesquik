@@ -52,11 +52,18 @@ public class DateUtil
 		}
 	}
 	
-	public static Timestamp toJDBC( final Date fromDate )
+	public static Timestamp toTimestampJDBC( final Date fromDate )
 	{
 		if ( fromDate == null )
 			return null;
 		return new Timestamp(fromDate.getTime());
+	}
+	
+	public static java.sql.Date toDateJDBC( final Date fromDate )
+	{
+		if ( fromDate == null )
+			return null;
+		return new java.sql.Date(fromDate.getTime());
 	}
 	
 	public static Date toJava( final Timestamp fromDate )

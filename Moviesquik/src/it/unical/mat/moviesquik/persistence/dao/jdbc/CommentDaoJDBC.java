@@ -40,7 +40,7 @@ public class CommentDaoJDBC extends AbstractDaoJDBC<Comment> implements CommentD
 			final PreparedStatement statement = statementPrompter.prepareStatement(INSERT_STATEMENT);
 			
 			statement.setLong        (1, comment.getId());
-			statement.setTimestamp   (2, DateUtil.toJDBC(comment.getDateTime()));
+			statement.setTimestamp   (2, DateUtil.toTimestampJDBC(comment.getDateTime()));
 			statement.setString      (3, comment.getText());
 			statement.setLong        (4, comment.getOwner().getId());
 			statement.setLong        (5, comment.getReferredPost().getId());

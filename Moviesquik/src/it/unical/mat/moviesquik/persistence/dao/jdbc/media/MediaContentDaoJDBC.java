@@ -162,7 +162,7 @@ public class MediaContentDaoJDBC implements MediaContentDao
 		statement.setString     (2 , mediaContent.getTitle());
 		statement.setString     (3 , mediaContent.getType());
 		statement.setShort      (4 , mediaContent.getYear());
-		statement.setTimestamp  (5 , DateUtil.toJDBC(mediaContent.getReleased()));
+		statement.setTimestamp  (5 , DateUtil.toTimestampJDBC(mediaContent.getReleased()));
 		statement.setString     (6 , mediaContent.getRuntime());
 		statement.setString     (7 , mediaContent.getGenre());
 		statement.setString     (8 , mediaContent.getPlot());

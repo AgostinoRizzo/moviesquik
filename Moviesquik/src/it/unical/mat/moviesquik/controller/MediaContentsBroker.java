@@ -41,15 +41,20 @@ public class MediaContentsBroker extends HttpServlet
 		
 		List<MediaContent> mediaContents = null;
 		
-		if ( policy.equals("most_rated") )
+		if ( policy.equals("trending") )
 			mediaContents = 
 				DBManager.getInstance().getDaoFactory().getMediaContentSearchDao()
-					.searchTopRated(MediaContentType.ALL, SortingPolicy.NONE, MAX_FIND_COUNT, MediaContentsSearchFilter.EMPTY);
+					.searchTrendingNow(MediaContentType.ALL, SortingPolicy.NONE, MAX_FIND_COUNT, MediaContentsSearchFilter.EMPTY);
 		
 		else if ( policy.equals("most_popular") )
 			mediaContents = 
 			DBManager.getInstance().getDaoFactory().getMediaContentSearchDao()
 				.searchMostPopular(MediaContentType.ALL, SortingPolicy.NONE, MAX_FIND_COUNT, MediaContentsSearchFilter.EMPTY);
+		
+		else if ( policy.equals("most_rated") )
+			mediaContents = 
+			DBManager.getInstance().getDaoFactory().getMediaContentSearchDao()
+				.searchTopRated(MediaContentType.ALL, SortingPolicy.NONE, MAX_FIND_COUNT, MediaContentsSearchFilter.EMPTY);
 		
 		else if ( policy.equals("most_favorites") )
 			mediaContents = 

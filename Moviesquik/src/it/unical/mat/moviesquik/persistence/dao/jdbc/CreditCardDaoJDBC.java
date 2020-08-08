@@ -58,7 +58,7 @@ public class CreditCardDaoJDBC implements CreditCardDao
 			
 			statement.setString(1, card.getNumber());
 			statement.setString(2, card.getName());
-			statement.setTimestamp(3, DateUtil.toJDBC(card.getExpiration()));
+			statement.setTimestamp(3, DateUtil.toTimestampJDBC(card.getExpiration()));
 			statement.setString(4, card.getCvv());
 			
 			ResultSet result = statement.executeQuery();
@@ -104,7 +104,7 @@ public class CreditCardDaoJDBC implements CreditCardDao
 		statement.setLong(1, card.getId());
 		statement.setString(2, card.getNumber());
 		statement.setString(3, card.getName());
-		statement.setTimestamp(4, DateUtil.toJDBC(card.getExpiration()));
+		statement.setTimestamp(4, DateUtil.toTimestampJDBC(card.getExpiration()));
 		statement.setString(5, card.getCvv());
 		statement.setFloat(6, card.getBalance());
 	}

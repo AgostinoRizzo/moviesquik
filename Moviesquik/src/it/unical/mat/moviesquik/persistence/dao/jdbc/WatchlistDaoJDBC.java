@@ -47,7 +47,7 @@ public class WatchlistDaoJDBC extends AbstractDaoJDBC<Watchlist> implements Watc
 			statement.setLong     (1, wl.getId());
 			statement.setString   (2, wl.getName());
 			statement.setString   (3, wl.getDescription());
-			statement.setTimestamp(4, DateUtil.toJDBC(wl.getDateTime()));
+			statement.setTimestamp(4, DateUtil.toTimestampJDBC(wl.getDateTime()));
 			statement.setBoolean  (5, wl.getIsDefault());
 			statement.setLong     (6, wl.getOwner().getId());
 			
@@ -72,7 +72,7 @@ public class WatchlistDaoJDBC extends AbstractDaoJDBC<Watchlist> implements Watc
 			
 			statement.setString   (1, wl.getName());
 			statement.setString   (2, wl.getDescription());
-			statement.setTimestamp(3, DateUtil.toJDBC(wl.getDateTime()));
+			statement.setTimestamp(3, DateUtil.toTimestampJDBC(wl.getDateTime()));
 			statement.setLong     (4, wl.getId());
 			
 			statement.executeUpdate();

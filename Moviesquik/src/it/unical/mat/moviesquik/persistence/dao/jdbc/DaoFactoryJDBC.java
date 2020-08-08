@@ -23,6 +23,12 @@ import it.unical.mat.moviesquik.persistence.dao.RegistrationTransaction;
 import it.unical.mat.moviesquik.persistence.dao.UserDao;
 import it.unical.mat.moviesquik.persistence.dao.WatchlistDao;
 import it.unical.mat.moviesquik.persistence.dao.WatchlistItemDao;
+import it.unical.mat.moviesquik.persistence.dao.analytics.MediaContentReviewDao;
+import it.unical.mat.moviesquik.persistence.dao.analytics.MediaStatisticLogDao;
+import it.unical.mat.moviesquik.persistence.dao.analytics.WatchHistoryLogDao;
+import it.unical.mat.moviesquik.persistence.dao.jdbc.analytics.MediaContentReviewDaoJDBC;
+import it.unical.mat.moviesquik.persistence.dao.jdbc.analytics.MediaStatisticLogDaoJDBC;
+import it.unical.mat.moviesquik.persistence.dao.jdbc.analytics.WatchHistoryLogDaoJDBC;
 import it.unical.mat.moviesquik.persistence.dao.jdbc.media.MediaContentDaoJDBC;
 import it.unical.mat.moviesquik.persistence.dao.jdbc.media.MediaContentGenreDaoJDBC;
 import it.unical.mat.moviesquik.persistence.dao.jdbc.media.MediaContentSearchDaoJDBC;
@@ -158,6 +164,24 @@ public class DaoFactoryJDBC implements DaoFactory
 	public ChatMessageDao getChatMessageDao()
 	{
 		return new ChatMessageDaoJDBC(getNewStatementPrompter());
+	}
+	
+	@Override
+	public MediaContentReviewDao getMediaContentReviewDao()
+	{
+		return new MediaContentReviewDaoJDBC(getNewStatementPrompter());
+	}
+	
+	@Override
+	public WatchHistoryLogDao getWatchHistoryLogDao()
+	{
+		return new WatchHistoryLogDaoJDBC(getNewStatementPrompter());
+	}
+	
+	@Override
+	public MediaStatisticLogDao getMediaStatisticLogDao()
+	{
+		return new MediaStatisticLogDaoJDBC(getNewStatementPrompter());
 	}
 	
 	@Override

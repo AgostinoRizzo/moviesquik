@@ -136,7 +136,7 @@ public class BillingDaoJDBC extends AbstractDaoJDBC<Billing> implements BillingD
 		{
 			final PreparedStatement statement = statementPrompter.prepareStatement(UPDATE_STATEMENT);
 			
-			statement.setTimestamp(1, DateUtil.toJDBC(billing.getStartDate()));
+			statement.setTimestamp(1, DateUtil.toTimestampJDBC(billing.getStartDate()));
 			statement.setString   (2, billing.getPlan());
 			statement.setBoolean  (3, billing.isTrial());
 			
@@ -170,7 +170,7 @@ public class BillingDaoJDBC extends AbstractDaoJDBC<Billing> implements BillingD
 	protected static void setDataToInsertStatement( final Billing billing, final PreparedStatement statement ) throws SQLException
 	{
 		statement.setLong(1, billing.getId());
-		statement.setTimestamp(2, DateUtil.toJDBC(billing.getStartDate()));
+		statement.setTimestamp(2, DateUtil.toTimestampJDBC(billing.getStartDate()));
 		statement.setString(3, billing.getPlan());
 		statement.setBoolean(4, billing.isTrial());
 		statement.setLong(5, billing.getFamily().getId());
@@ -178,7 +178,7 @@ public class BillingDaoJDBC extends AbstractDaoJDBC<Billing> implements BillingD
 	
 	protected static void setDataToUpdateStatement( final Billing billing, final PreparedStatement statement ) throws SQLException
 	{
-		statement.setTimestamp(1, DateUtil.toJDBC(billing.getStartDate()));
+		statement.setTimestamp(1, DateUtil.toTimestampJDBC(billing.getStartDate()));
 		statement.setString(2, billing.getPlan());
 		statement.setBoolean(3, billing.isTrial());
 		statement.setLong(4, billing.getId());

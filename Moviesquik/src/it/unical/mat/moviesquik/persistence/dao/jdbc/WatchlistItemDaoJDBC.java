@@ -42,7 +42,7 @@ public class WatchlistItemDaoJDBC extends AbstractDaoJDBC<WatchlistItem> impleme
 			
 			statement.setLong        (1, wl.getId());
 			statement.setLong        (2, item.getMediaContent().getId());
-			statement.setTimestamp   (3, DateUtil.toJDBC(item.getDateTime()));
+			statement.setTimestamp   (3, DateUtil.toTimestampJDBC(item.getDateTime()));
 			statement.setLong        (4, wl.getId());
 			statement.setLong        (5, item.getMediaContent().getId());
 			

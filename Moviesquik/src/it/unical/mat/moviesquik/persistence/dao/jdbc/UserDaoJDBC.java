@@ -126,7 +126,7 @@ public class UserDaoJDBC implements UserDao
 			statement.setString   (1, usr.getFirstName());
 			statement.setString   (2, usr.getLastName());
 			statement.setString   (3, usr.getEmail());
-			statement.setTimestamp(4, DateUtil.toJDBC(usr.getBirthday()));
+			statement.setTimestamp(4, DateUtil.toTimestampJDBC(usr.getBirthday()));
 			statement.setString   (5, usr.getGender());
 			statement.setString   (6, usr.getPassword());
 			statement.setString   (7, usr.getProfileImagePath());
@@ -340,7 +340,7 @@ public class UserDaoJDBC implements UserDao
 		statement.setString   (2, usr.getFirstName());
 		statement.setString   (3, usr.getLastName());
 		statement.setString   (4, usr.getEmail());
-		statement.setTimestamp(5, DateUtil.toJDBC(usr.getBirthday()));
+		statement.setTimestamp(5, DateUtil.toTimestampJDBC(usr.getBirthday()));
 		statement.setString   (6, usr.getGender());
 		statement.setString   (7, usr.getPassword());
 		statement.setLong     (8, usr.getFamily().getId());

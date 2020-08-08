@@ -76,8 +76,8 @@ public class MoviePartyDaoJDBC extends AbstractDaoJDBC<MovieParty> implements Mo
 			statement.setLong     (1, party.getId());
 			statement.setString   (2, party.getName());
 			statement.setString   (3, party.getDescription());
-			statement.setTimestamp(4, DateUtil.toJDBC(party.getStartDateTime()));
-			statement.setTimestamp(5, DateUtil.toJDBC(party.getCreationDateTime()));
+			statement.setTimestamp(4, DateUtil.toTimestampJDBC(party.getStartDateTime()));
+			statement.setTimestamp(5, DateUtil.toTimestampJDBC(party.getCreationDateTime()));
 			statement.setBoolean  (6, party.isPrivate());
 			statement.setLong     (7, party.getAdministrator().getId());
 			statement.setLong     (8, party.getMedia().getId());

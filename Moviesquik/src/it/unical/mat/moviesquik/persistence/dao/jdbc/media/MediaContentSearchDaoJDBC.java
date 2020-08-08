@@ -104,6 +104,13 @@ public class MediaContentSearchDaoJDBC implements MediaContentSearchDao
 	}
 	
 	@Override
+	public List<MediaContent> searchTrendingNow(MediaContentType type, SortingPolicy sortingPolicy, int limit,
+			MediaContentsSearchFilter filter)
+	{
+		return anonymusSearch(SEARCH_TOP_RATED_ORDER_BY_QUERY, type, sortingPolicy, limit, filter);
+	}
+	
+	@Override
 	public List<MediaContent> searchMostPopular(MediaContentType type, SortingPolicy sortingPolicy, int limit, MediaContentsSearchFilter filter)
 	{
 		return anonymusSearch(SEARCH_MOST_POPULAR_ORDER_BY_QUERY, type, sortingPolicy, limit, filter);

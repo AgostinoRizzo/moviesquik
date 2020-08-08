@@ -79,7 +79,7 @@ public class PostDaoJDBC extends AbstractDaoJDBC<Post> implements PostDao
 			final PreparedStatement statement = statementPrompter.prepareStatement(INSERT_STATEMENT);
 			
 			statement.setLong        (1, post.getId());
-			statement.setTimestamp   (2, DateUtil.toJDBC(post.getDateTime()));
+			statement.setTimestamp   (2, DateUtil.toTimestampJDBC(post.getDateTime()));
 			statement.setString      (3, post.getText());
 			statement.setLong        (4, post.getOwner().getId());
 			

@@ -22,6 +22,8 @@ public interface MediaContentSearchDao
 		( final MediaContentType type, final SortingPolicy sortingPolicy, final int limit, final MediaContentsSearchFilter filter );
 	public List<MediaContent> searchTopRated
 		( final MediaContentType type, final SortingPolicy sortingPolicy, final int limit, final MediaContentsSearchFilter filter );
+	public List<MediaContent> searchTrendingNow
+		( final MediaContentType type, final SortingPolicy sortingPolicy, final int limit, final MediaContentsSearchFilter filter );
 	public List<MediaContent> searchMostPopular
 		( final MediaContentType type, final SortingPolicy sortingPolicy, final int limit, final MediaContentsSearchFilter filter );
 	public List<MediaContent> searchMostFavorites

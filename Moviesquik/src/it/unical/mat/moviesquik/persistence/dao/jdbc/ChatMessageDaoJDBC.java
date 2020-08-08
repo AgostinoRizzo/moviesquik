@@ -55,7 +55,7 @@ public class ChatMessageDaoJDBC extends AbstractDaoJDBC<ChatMessage> implements 
 			
 			statement.setLong     (1, message.getId());
 			statement.setString   (2, message.getText());
-			statement.setTimestamp(3, DateUtil.toJDBC(message.getDateTime()));
+			statement.setTimestamp(3, DateUtil.toTimestampJDBC(message.getDateTime()));
 			statement.setLong     (4, message.getSender().getId());
 			
 			final User receiver = message.getReceiver();
