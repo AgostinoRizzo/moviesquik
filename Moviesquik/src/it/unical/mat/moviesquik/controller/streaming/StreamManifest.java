@@ -17,9 +17,11 @@ import com.google.gson.JsonObject;
 import it.unical.mat.moviesquik.controller.ServletUtils;
 import it.unical.mat.moviesquik.controller.SessionManager;
 import it.unical.mat.moviesquik.model.User;
+import it.unical.mat.moviesquik.model.media.MediaContent;
 import it.unical.mat.moviesquik.model.streaming.StreamService;
 import it.unical.mat.moviesquik.model.streaming.StreamServiceTable;
 import it.unical.mat.moviesquik.persistence.DBManager;
+import it.unical.mat.moviesquik.persistence.dao.analytics.AnalyticsManager;
 
 /**
  * @author Agostino
@@ -47,7 +49,9 @@ public class StreamManifest extends HttpServlet
 			return;
 		}
 		
-		DBManager.getInstance().getDaoFactory().getMediaContentDao().updateNewViewById(mediaContentId);
+		final MediaContent mediaContent = DBManager.getInstance().getDaoFactory().getMediaContentDao().findById(mediaContentId);
+		if ( mediaContent != null )
+			AnalyticsManager.logNewMediaWatch(user, mediaContent);
 		
 		ServletUtils.sendJson(createJsonManifest(mediaContentId), resp);
 	}

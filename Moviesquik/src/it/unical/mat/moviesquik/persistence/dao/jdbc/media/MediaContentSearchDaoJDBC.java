@@ -39,6 +39,9 @@ public class MediaContentSearchDaoJDBC implements MediaContentSearchDao
 	protected static final String SEARCH_MOST_POPULAR_ORDER_BY_QUERY = " order by views desc NULLS LAST";
 	protected static final String SEARCH_MOST_FAVORITES_ORDER_BY_QUERY = " ORDER BY likes_count DESC NULLS LAST, nolikes_count ASC NULLS LAST, actual_rate DESC NULLS LAST, views_count DESC NULLS LAST";
 	
+	protected static final String SEARCH_RECENTLY_WATCHED_QUERY = "SELECT MC.* FROM watch_history_log AS WHLOG INNER JOIN media_content AS MC ON WHLOG.media_content_id = MC.media_content_id " + 
+																  "WHERE WHLOG.user_id = ? ORDER BY WHLOG.date_time DESC";
+	
 	private final StatementPrompterJDBC statementPrompter;
 	
 	public MediaContentSearchDaoJDBC( final StatementPrompterJDBC statementPrompter )
@@ -142,8 +145,28 @@ public class MediaContentSearchDaoJDBC implements MediaContentSearchDao
 	public List<MediaContent> searchRecentlyWatched(MediaContentType type, User user, 
 			SortingPolicy sortingPolicy, int limit, MediaContentsSearchFilter filter)
 	{
-		// TODO Auto-generated method stub
-		return searchTopRated(type, sortingPolicy, limit, filter);
+		final List<MediaContent> mediaContents = new ArrayList<MediaContent>();
+		
+		String query = SEARCH_RECENTLY_WATCHED_QUERY;
+		query = DaoUtilJDBC.addQueryLimit(query, limit);
+		
+		try
+		{
+			final PreparedStatement statement = statementPrompter.prepareStatement(query);
+			statement.setLong(1, user.getId());
+			
+			ResultSet result = statement.executeQuery();
+			
+			while ( result.next() )
+				mediaContents.add( MediaContentDaoJDBC.createFromResult(result) );
+			return mediaContents;
+		}
+		
+		catch (SQLException e)
+		{ e.printStackTrace(); return mediaContents; }
+		
+		finally 
+		{ statementPrompter.onFinalize(); }
 	}
 	
 	private List<MediaContent> anonymusSearch( final String orderByQuery, final MediaContentType type, final SortingPolicy sortingPolicy, 

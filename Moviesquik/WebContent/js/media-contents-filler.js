@@ -16,6 +16,7 @@ function fill_media_contents(contents_items_tag_id, data)
 			$(contents_items_tag_id + " .card-title").eq(i).text(media_content.title);
 			$(contents_items_tag_id + " .card-text").eq(i).text(media_content.production);
 			$(contents_items_tag_id + " .content-ratings-box .rate-value").eq(i).text(media_content.statistics.actualRate);
+			$(contents_items_tag_id + " .media-content-card").eq(i).removeClass('d-none');
 			
 			$(contents_items_tag_id).parent().find(".view-all-btn").removeClass("invisible");
 		}
@@ -78,9 +79,24 @@ function on_collapse_view_media_contents(contents_items_tag_id)
 		$(contents_items_tag_id).children().eq(N_ITEMS_IN_ROW).remove();
 }
 
+function initMediaContentCards(parentTagId) 
+{
+	$(parentTagId).find(".media-content-card").each( function() 
+	{
+		$(this).addClass('d-none');
+	});
+}
+
 $(document).ready( function()
 	{
 		/* media contents requests */
+		
+		initMediaContentCards("#suggested-media-contents-items");
+		initMediaContentCards("#trending-now-media-contents-items");
+		initMediaContentCards("#most-popular-media-contents-items");
+		initMediaContentCards("#top-rated-media-contents-items");
+		initMediaContentCards("#most-favorites-media-contents-items");
+		initMediaContentCards("#recently-watched-media-contents-items");
 	
 		request_media_contents("#suggested-media-contents-items", "listcontents?policy=suggested", fill_media_contents);
 		request_media_contents("#trending-now-media-contents-items", "listcontents?policy=trending", fill_media_contents);

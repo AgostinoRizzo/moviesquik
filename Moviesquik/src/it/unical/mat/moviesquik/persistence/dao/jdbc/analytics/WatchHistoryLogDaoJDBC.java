@@ -35,10 +35,10 @@ public class WatchHistoryLogDaoJDBC extends AbstractDaoJDBC<WatchHistoryLog> imp
 			log.setId(IdBroker.getNextId(statementPrompter));
 			final PreparedStatement statement = statementPrompter.prepareStatement(INSERT_STATEMENT);
 			
-			statement.setLong(1, log.getId());
-			statement.setLong(2, log.getSubject().getId());
-			statement.setLong(3, log.getMediaContent().getId());
-			statement.setDate(4, DateUtil.toDateJDBC(log.getWatchDateTime()));
+			statement.setLong     (1, log.getId());
+			statement.setLong     (2, log.getSubject().getId());
+			statement.setLong     (3, log.getMediaContent().getId());
+			statement.setTimestamp(4, DateUtil.toTimestampJDBC(log.getWatchDateTime()));
 			
 			statement.executeUpdate();
 			
