@@ -24,9 +24,11 @@ import it.unical.mat.moviesquik.persistence.dao.UserDao;
 import it.unical.mat.moviesquik.persistence.dao.WatchlistDao;
 import it.unical.mat.moviesquik.persistence.dao.WatchlistItemDao;
 import it.unical.mat.moviesquik.persistence.dao.analytics.MediaContentReviewDao;
+import it.unical.mat.moviesquik.persistence.dao.analytics.MediaContentStatisticsDao;
 import it.unical.mat.moviesquik.persistence.dao.analytics.MediaStatisticLogDao;
 import it.unical.mat.moviesquik.persistence.dao.analytics.WatchHistoryLogDao;
 import it.unical.mat.moviesquik.persistence.dao.jdbc.analytics.MediaContentReviewDaoJDBC;
+import it.unical.mat.moviesquik.persistence.dao.jdbc.analytics.MediaContentStatisticsDaoJDBC;
 import it.unical.mat.moviesquik.persistence.dao.jdbc.analytics.MediaStatisticLogDaoJDBC;
 import it.unical.mat.moviesquik.persistence.dao.jdbc.analytics.WatchHistoryLogDaoJDBC;
 import it.unical.mat.moviesquik.persistence.dao.jdbc.media.MediaContentDaoJDBC;
@@ -182,6 +184,12 @@ public class DaoFactoryJDBC implements DaoFactory
 	public MediaStatisticLogDao getMediaStatisticLogDao()
 	{
 		return new MediaStatisticLogDaoJDBC(getNewStatementPrompter());
+	}
+	
+	@Override
+	public MediaContentStatisticsDao getMediaContentStatisticsDao()
+	{
+		return new MediaContentStatisticsDaoJDBC(getNewStatementPrompter());
 	}
 	
 	@Override

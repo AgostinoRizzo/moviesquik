@@ -372,4 +372,15 @@
 	<url-pattern>/getchat</url-pattern>
 </servlet-mapping>
 
+
+<!-- Media Content Review Servlet -->
+<servlet>
+	<servlet-name>media_content_review</servlet-name>
+	<servlet-class>it.unical.mat.moviesquik.controller.review.MediaReview</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>media_content_review</servlet-name>
+	<url-pattern>/review</url-pattern>
+</servlet-mapping>
+
 </web-app>

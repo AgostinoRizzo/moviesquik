@@ -4,6 +4,7 @@
 package it.unical.mat.moviesquik.persistence.dao;
 
 import it.unical.mat.moviesquik.persistence.dao.analytics.MediaContentReviewDao;
+import it.unical.mat.moviesquik.persistence.dao.analytics.MediaContentStatisticsDao;
 import it.unical.mat.moviesquik.persistence.dao.analytics.MediaStatisticLogDao;
 import it.unical.mat.moviesquik.persistence.dao.analytics.WatchHistoryLogDao;
 import it.unical.mat.moviesquik.persistence.dao.movieparty.MoviePartyDao;
@@ -38,6 +39,7 @@ public interface DaoFactory
 	public MediaContentReviewDao getMediaContentReviewDao();
 	public WatchHistoryLogDao getWatchHistoryLogDao();
 	public MediaStatisticLogDao getMediaStatisticLogDao();
+	public MediaContentStatisticsDao getMediaContentStatisticsDao();
 	
 	public RegistrationTransaction getRegistrationTransaction();
 	public PlanBillingUpdateTransaction getPlanBillingUpdateTransaction();

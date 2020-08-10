@@ -21,8 +21,8 @@ import it.unical.mat.moviesquik.persistence.dao.jdbc.StatementPrompterJDBC;
  */
 public class MediaContentReviewDaoJDBC extends AbstractDaoJDBC<MediaContentReview> implements MediaContentReviewDao
 {
-	protected static final String INSERT_STATEMENT = "INSERT INTO review(user_id, media_content_id, rate, like) VALUES (?,?,?,?) " +
-													 "ON CONFLICT (user_id, media_content_id) DO UPDATE SET rate = EXCLUDED.rate, like = EXCLUDED.like";
+	protected static final String INSERT_STATEMENT = "INSERT INTO review(user_id, media_content_id, rate, \"like\") VALUES (?,?,?,?) " +
+													 "ON CONFLICT (user_id, media_content_id) DO UPDATE SET rate = EXCLUDED.rate, \"like\" = EXCLUDED.\"like\"";
 	
 	protected static final String FIND_QUERY       = "SELECT * FROM review WHERE user_id = ? AND media_content_id = ?";
 	
@@ -41,7 +41,10 @@ public class MediaContentReviewDaoJDBC extends AbstractDaoJDBC<MediaContentRevie
 			
 			statement.setLong(1, review.getSubject().getId());
 			statement.setLong(2, review.getMediaContent().getId());
-			statement.setInt (3, review.getRate());
+			
+			final Integer rate = review.getRate();
+			if ( rate == null ) statement.setNull(3, Types.NULL);
+			else                statement.setInt (3, rate);
 			
 			final Boolean like = review.getLike();
 			if ( like == null ) statement.setNull(4, Types.NULL);
@@ -90,9 +93,11 @@ public class MediaContentReviewDaoJDBC extends AbstractDaoJDBC<MediaContentRevie
 		
 		review.setSubject( daoFactory.getUserDao().findByPrimaryKey(result.getLong("user_id")) );
 		review.setMediaContent( daoFactory.getMediaContentDao().findById(result.getLong("media_content_id")) );
-		review.setRate(result.getInt("rate"));
 		
-		final Boolean like = result.getBoolean("link");
+		final Integer rate = result.getInt("rate");
+		review.setRate( result.wasNull() ? null : rate );
+		
+		final Boolean like = result.getBoolean("like");
 		review.setLike( result.wasNull() ? null : like );
 		
 		return review;

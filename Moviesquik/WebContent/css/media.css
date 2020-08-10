@@ -24,6 +24,30 @@
 .media-content-trailer-frame
 {
 	width: 100%;
-	height: 500px;
+	height: 300px;
 	border-style: none;
+}
+
+.rating-breackdown-col .row
+{
+	margin-bottom: 5px;
+}
+.rating-breackdown-col .progress
+{
+	height: 10px;
+	margin-top: 5px;
+	background-color: var(--dark);
+}
+#avg-user-rating-col
+{
+	max-height: 120px;
+}
+#reviews-col .tile
+{
+	padding: 10px;
+	margin-right: 10px;
+}
+#your-review-col
+{
+	margin-top: 10px;
 }

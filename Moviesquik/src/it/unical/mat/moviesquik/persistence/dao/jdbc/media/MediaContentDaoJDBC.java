@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.unical.mat.moviesquik.model.media.MediaContent;
+import it.unical.mat.moviesquik.model.media.MediaContentProxy;
 import it.unical.mat.moviesquik.persistence.dao.MediaContentDao;
 import it.unical.mat.moviesquik.persistence.dao.jdbc.IdBroker;
 import it.unical.mat.moviesquik.persistence.dao.jdbc.StatementPrompterJDBC;
@@ -176,7 +177,7 @@ public class MediaContentDaoJDBC implements MediaContentDao
 	
 	protected static MediaContent createFromResult( final ResultSet result ) throws SQLException
 	{
-		final MediaContent mediaContent = new MediaContent();
+		final MediaContent mediaContent = new MediaContentProxy();
 		
 		mediaContent.setId(result.getLong("media_content_id"));
 		mediaContent.setTitle(result.getString("title"));

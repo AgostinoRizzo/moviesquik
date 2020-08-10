@@ -5,6 +5,7 @@ package it.unical.mat.moviesquik.model.media;
 
 import java.util.Date;
 
+import it.unical.mat.moviesquik.model.analytics.MediaContentStatistics;
 import it.unical.mat.moviesquik.util.DateUtil;
 
 /**
@@ -13,23 +14,24 @@ import it.unical.mat.moviesquik.util.DateUtil;
  */
 public class MediaContent
 {
-	private Long id;
-	private String title;
-	private String type;
-	private short year;
-	private Date released;
-	private String runtime;
-	private String genre;
-	private String plot;
-	private String poster;
-	private String production;
-	private String director;
-	private String actors;
-	private float rating;
-	private Long views;
-	private Long likes;
-	private float imdbRating;
-	private Integer streamTime;
+	protected Long id;
+	protected String title;
+	protected String type;
+	protected short year;
+	protected Date released;
+	protected String runtime;
+	protected String genre;
+	protected String plot;
+	protected String poster;
+	protected String production;
+	protected String director;
+	protected String actors;
+	protected float rating;
+	protected Long views;
+	protected Long likes;
+	protected float imdbRating;
+	protected Integer streamTime;
+	protected MediaContentStatistics statistics;
 	
 	public Long getId()
 	{
@@ -185,6 +187,14 @@ public class MediaContent
 	public Integer getMinStreamTime()
 	{
 		return getStreamTime() / 60;
+	}
+	public MediaContentStatistics getStatistics()
+	{
+		return statistics;
+	}
+	public void setStatistics(MediaContentStatistics statistics)
+	{
+		this.statistics = statistics;
 	}
 	
 	@Override
