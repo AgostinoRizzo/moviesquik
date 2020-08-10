@@ -115,5 +115,5 @@ public class MediaContentStatisticsDaoJDBC extends AbstractDaoJDBC<MediaContentS
 		
 		return stats;
 	}
-
+	
 }

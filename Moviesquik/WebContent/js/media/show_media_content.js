@@ -2,6 +2,8 @@
  * 
  */
 
+import './log-media-content-stats.js';
+
 var previous_page_content = "";
 
 function onMediaContentShow(mckey) 
@@ -19,6 +21,7 @@ function onMediaContentShow(mckey)
 				success: function(data)
 					{
 						$("#page-content, #movie-party-page-container").html(data);
+						initLogStats();
 					}
 			}
 		);
@@ -40,6 +43,7 @@ $(document).ready(function() {
 	});
 	
 	$(document).on("click", "#mc-page-back", function() {
+		finalizeLogStats();
 		if ( previous_page_content.length > 0 )
 			{
 				$("#page-content, #movie-party-page-container").html(previous_page_content);

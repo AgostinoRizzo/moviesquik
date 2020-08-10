@@ -383,4 +383,15 @@
 	<url-pattern>/review</url-pattern>
 </servlet-mapping>
 
+
+<!-- Media Content Analytics Servlet -->
+<servlet>
+	<servlet-name>media_content_analytics</servlet-name>
+	<servlet-class>it.unical.mat.moviesquik.controller.analytics.MediaStatisticsLog</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>media_content_analytics</servlet-name>
+	<url-pattern>/analytics/mcstats</url-pattern>
+</servlet-mapping>
+
 </web-app>

@@ -1,11 +1,10 @@
 /**
  * 
  */
-package it.unical.mat.moviesquik.controller.media;
+package it.unical.mat.moviesquik.controller.analytics;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -14,8 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import it.unical.mat.moviesquik.controller.ServletUtils;
 import it.unical.mat.moviesquik.controller.SessionManager;
 import it.unical.mat.moviesquik.model.User;
-import it.unical.mat.moviesquik.model.analytics.MediaContentReview;
-import it.unical.mat.moviesquik.model.media.MediaContent;
 import it.unical.mat.moviesquik.persistence.DBManager;
 import it.unical.mat.moviesquik.persistence.dao.DaoFactory;
 
@@ -23,7 +20,7 @@ import it.unical.mat.moviesquik.persistence.dao.DaoFactory;
  * @author Agostino
  *
  */
-public class MediaContentPage extends HttpServlet
+public class MediaStatisticsLog extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
 	
@@ -37,29 +34,30 @@ public class MediaContentPage extends HttpServlet
 			return;
 		}
 		
-		final String keyString = req.getParameter("key");
-		Long key;
 		try
 		{
-			key = Long.parseLong(keyString);
+			final Long mediaContentId = Long.parseLong(req.getParameter("key"));
+			final String event = req.getParameter("event");
+			
+			if ( event == null )
+				throw new IllegalArgumentException();
+			
+			final DaoFactory daoFactory = DBManager.getInstance().getDaoFactory();
+			
+			if ( event.equals("scroll") )
+				daoFactory.getMediaStatisticLogDao().logScroll(user.getId(), mediaContentId);
+			else if ( event.equals("time") )
+			{
+				final Integer spentTime = Integer.parseInt(req.getParameter("val"));
+				daoFactory.getMediaStatisticLogDao().logSpentTime(user.getId(), mediaContentId, spentTime);
+			}
+			else
+				throw new IllegalArgumentException();
 		}
 		catch (Exception e) 
 		{
 			ServletUtils.manageParameterError(req, resp);
 			return;
-		}		
-		
-		final DaoFactory daoFactory = DBManager.getInstance().getDaoFactory();
-		final MediaContent mc = daoFactory.getMediaContentDao().findById(key);
-		final MediaContentReview userReview = daoFactory.getMediaContentReviewDao().find(user.getId(), key);
-		
-		// log new media content hit
-		daoFactory.getMediaStatisticLogDao().logHit(user.getId(), key);
-		
-		req.setAttribute("media_content", mc);
-		req.setAttribute("user_review", userReview);
-		
-		final RequestDispatcher rd = req.getRequestDispatcher("media/media_content_page.jsp");
-		rd.forward(req, resp);
+		}	
 	}
 }

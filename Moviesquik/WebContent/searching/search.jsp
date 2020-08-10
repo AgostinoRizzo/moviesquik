@@ -32,7 +32,7 @@
 	<script src="js/anim.js"></script>
 	<script src="js/header.js"></script>
 	<script src="js/searching.js"></script>
-	<script src="js/media/show_media_content.js"></script>
+	<script src="js/media/show_media_content.js" type="module"></script>
 	<script src="js/watchlist/add-item.js"></script>
 	
 </head>

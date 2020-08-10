@@ -33,7 +33,7 @@
 	<script src="js/anim.js"></script>
 	<script src="js/header.js"></script>
 	<script src="js/notifications.js"></script>
-	<script src="js/media/show_media_content.js"></script>
+	<script src="js/media/show_media_content.js" type="module"></script>
 	<script src="js/bootstrap-validate.js"></script>
 	<script src="js/movieparty/movie-party.js" type="module"></script>
 	<script src="js/movieparty/party-chat.js" type="module"></script>

@@ -34,7 +34,7 @@
 	<script src="js/watchlist/edit-watchlist.js"></script>
 	<script src="js/watchlist/share.js"></script>
 	<script src="js/bootstrap-validate.js"></script>
-	<script src="js/media/show_media_content.js"></script>
+	<script src="js/media/show_media_content.js" type="module"></script>
 	
 </head>
 <body>

@@ -76,7 +76,7 @@ public class MediaStatisticLogDaoJDBC extends AbstractDaoJDBC<MediaStatisticLogD
 			statement.setLong(1, userId);
 			statement.setLong(2, mediaContentId);
 			
-			statement.executeUpdate();
+			statement.execute();
 			
 			return true;
 		}
