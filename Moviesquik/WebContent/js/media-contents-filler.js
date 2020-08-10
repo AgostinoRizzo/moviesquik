@@ -15,6 +15,7 @@ function fill_media_contents(contents_items_tag_id, data)
 			$(contents_items_tag_id + " img").eq(i).attr("src", media_content.poster);
 			$(contents_items_tag_id + " .card-title").eq(i).text(media_content.title);
 			$(contents_items_tag_id + " .card-text").eq(i).text(media_content.production);
+			$(contents_items_tag_id + " .content-ratings-box .rate-value").eq(i).text(media_content.statistics.actualRate);
 			
 			$(contents_items_tag_id).parent().find(".view-all-btn").removeClass("invisible");
 		}

@@ -21,7 +21,7 @@
 			    <p class="media-content-production note"><strong>${media_content.production}</strong></p>
 				
 		    	<jsp:include page="media_content_ratings.jsp"></jsp:include>
-		    	&nbsp;<strong>${media_content.statistics.rate}</strong> / 5
+		    	&nbsp;<strong>${media_content.statistics.actualRate}</strong> / 5
 		   		
 		    	<p class="">${media_content.genre}</p>
 		    	<c:if test="${user != null}">
@@ -75,7 +75,7 @@
 				
 				<div class="col-auto tile" id="avg-user-rating-col">
 					<strong>Average user rating</strong><br><br>
-					<h4><strong>${media_content.statistics.rate}</strong> / 5</h4>
+					<h4><strong>${media_content.statistics.actualRate}</strong> / 5</h4>
 					<jsp:include page="media_content_ratings.jsp"></jsp:include>
 				</div>
 				

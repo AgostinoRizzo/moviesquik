@@ -36,7 +36,7 @@
 			    
 			    
 			    <p class="card-title">${media_content.title}</p>
-			    <jsp:include page="content-ratings.html"></jsp:include>
+			    <jsp:include page="content-ratings.jsp"></jsp:include>
 			    <%-- <p class="card-text note">${media_content.production}</p> --%>
 			    
 			  </div>

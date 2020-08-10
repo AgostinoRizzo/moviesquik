@@ -11,6 +11,7 @@ public class MediaContentStatistics
 {
 	private Integer rate;
 	private Integer[] ratingBreakdown;
+	private Float actualRate;
 	private Long likes;
 	private Long nolikes;
 	private Long views;
@@ -30,6 +31,14 @@ public class MediaContentStatistics
 	public void setRatingBreakdown(Integer[] ratingBreakdown)
 	{
 		this.ratingBreakdown = ratingBreakdown;
+	}
+	public Float getActualRate()
+	{
+		return actualRate;
+	}
+	public void setActualRate(Float actualRate)
+	{
+		this.actualRate = actualRate;
 	}
 	public Long getLikes()
 	{

@@ -6,7 +6,6 @@ package it.unical.mat.moviesquik.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -78,9 +77,11 @@ public class MediaContentsBroker extends HttpServlet
 		else
 			mediaContents = new ArrayList<MediaContent>();
 		
-		Collections.shuffle(mediaContents);
-		
 		filterByCount(mediaContents, req);
+		
+		// trigger media content statistics load from DB
+		for ( final MediaContent mc : mediaContents )
+			mc.getStatistics();
 		
 		resp.setContentType("application/json");
 		resp.setCharacterEncoding("UTF-8");

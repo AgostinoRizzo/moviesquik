@@ -28,10 +28,13 @@ public class MediaContentSearchDaoJDBC implements MediaContentSearchDao
 	protected static final String SEARCH_BY_TITLE_WEAK_QUERY = "select * from media_content where lower(title) like lower(concat('%', ?, '%'))";
 	protected static final String SEARCH_BY_TYPE_QUERY = "select * from media_content where lower(type) like lower(concat('%', ?, '%'))";
 	
-	protected static final String ANONYMUS_SEARCH_QUERY = "select * from media_content where lower(type) like lower(concat('%', ?, '%'))";
-	protected static final String SEARCH_TOP_RATED_ORDER_BY_QUERY = " order by rating desc";
-	protected static final String SEARCH_MOST_POPULAR_ORDER_BY_QUERY = " order by views desc";
-	protected static final String SEARCH_MOST_FAVORITES_ORDER_BY_QUERY = " order by likes desc";
+	protected static final String ANONYMUS_SEARCH_FROM_WHERE_QUERY = " FROM media_content AS MC LEFT OUTER JOIN media_content_statistics AS MCSTAT ON MC.media_content_id = MCSTAT.media_content_id " + 
+																	 " WHERE lower(type) like lower(concat('%', ?, '%'))";
+	protected static final String ANONYMUS_SEARCH_QUERY = "select * " + ANONYMUS_SEARCH_FROM_WHERE_QUERY;
+	protected static final String ANONYMUS_TOP_RATED_SEARCH_QUERY = "select MC.*, COALESCE(avg_rate, rating * 5.0 / 10.0, 0) AS actual_rate " + ANONYMUS_SEARCH_FROM_WHERE_QUERY;
+	protected static final String SEARCH_TOP_RATED_ORDER_BY_QUERY = " ORDER BY actual_rate DESC";
+	protected static final String SEARCH_MOST_POPULAR_ORDER_BY_QUERY = " order by views desc NULLS LAST";
+	protected static final String SEARCH_MOST_FAVORITES_ORDER_BY_QUERY = " order by likes desc NULLS LAST";
 	
 	private final StatementPrompterJDBC statementPrompter;
 	
@@ -100,26 +103,26 @@ public class MediaContentSearchDaoJDBC implements MediaContentSearchDao
 	@Override
 	public List<MediaContent> searchTopRated(MediaContentType type, SortingPolicy sortingPolicy, int limit, MediaContentsSearchFilter filter)
 	{
-		return anonymusSearch(SEARCH_TOP_RATED_ORDER_BY_QUERY, type, sortingPolicy, limit, filter);
+		return anonymusSearch(SEARCH_TOP_RATED_ORDER_BY_QUERY, type, sortingPolicy, limit, filter, ANONYMUS_TOP_RATED_SEARCH_QUERY);
 	}
 	
 	@Override
 	public List<MediaContent> searchTrendingNow(MediaContentType type, SortingPolicy sortingPolicy, int limit,
 			MediaContentsSearchFilter filter)
 	{
-		return anonymusSearch(SEARCH_TOP_RATED_ORDER_BY_QUERY, type, sortingPolicy, limit, filter);
+		return anonymusSearch(SEARCH_TOP_RATED_ORDER_BY_QUERY, type, sortingPolicy, limit, filter, ANONYMUS_TOP_RATED_SEARCH_QUERY);
 	}
 	
 	@Override
 	public List<MediaContent> searchMostPopular(MediaContentType type, SortingPolicy sortingPolicy, int limit, MediaContentsSearchFilter filter)
 	{
-		return anonymusSearch(SEARCH_MOST_POPULAR_ORDER_BY_QUERY, type, sortingPolicy, limit, filter);
+		return anonymusSearch(SEARCH_MOST_POPULAR_ORDER_BY_QUERY, type, sortingPolicy, limit, filter, ANONYMUS_TOP_RATED_SEARCH_QUERY);
 	}
 	
 	@Override
 	public List<MediaContent> searchMostFavorites(MediaContentType type, SortingPolicy sortingPolicy, int limit, MediaContentsSearchFilter filter)
 	{
-		return anonymusSearch(SEARCH_MOST_FAVORITES_ORDER_BY_QUERY, type, sortingPolicy, limit, filter);
+		return anonymusSearch(SEARCH_MOST_FAVORITES_ORDER_BY_QUERY, type, sortingPolicy, limit, filter, ANONYMUS_TOP_RATED_SEARCH_QUERY);
 	}
 	
 	@Override
@@ -139,11 +142,11 @@ public class MediaContentSearchDaoJDBC implements MediaContentSearchDao
 	}
 	
 	private List<MediaContent> anonymusSearch( final String orderByQuery, final MediaContentType type, final SortingPolicy sortingPolicy, 
-												final int limit, final MediaContentsSearchFilter filter)
+												final int limit, final MediaContentsSearchFilter filter, final String anonymusSearchQuery )
 	{
 		final List<MediaContent> mediaContents = new ArrayList<MediaContent>();
 		
-		String query = ANONYMUS_SEARCH_QUERY;
+		String query = anonymusSearchQuery;
 		query = addGenresFilter(query, filter, true);
 		query = query + orderByQuery;
 		query = addQuerySortingPolicy(query, sortingPolicy, true);
@@ -167,6 +170,8 @@ public class MediaContentSearchDaoJDBC implements MediaContentSearchDao
 		finally 
 		{ statementPrompter.onFinalize(); }
 	}
+	
+	
 	
 	private static String addQuerySortingPolicy( final String query, final SortingPolicy policy, final boolean append )
 	{
