@@ -78,6 +78,8 @@ public class MediaContentStatisticsDaoJDBC extends AbstractDaoJDBC<MediaContentS
 	
 	private Integer computeRateBreakdownPercentage( final Long rateBreakdownCount, final Long rateCount )
 	{
+		if ( rateCount == 0 )
+			return 0;
 		return (int) (rateBreakdownCount / rateCount * 100);
 	}
 	

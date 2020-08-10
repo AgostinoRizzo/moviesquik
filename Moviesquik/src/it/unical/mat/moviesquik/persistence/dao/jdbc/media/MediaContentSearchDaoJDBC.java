@@ -31,10 +31,13 @@ public class MediaContentSearchDaoJDBC implements MediaContentSearchDao
 	protected static final String ANONYMUS_SEARCH_FROM_WHERE_QUERY = " FROM media_content AS MC LEFT OUTER JOIN media_content_statistics AS MCSTAT ON MC.media_content_id = MCSTAT.media_content_id " + 
 																	 " WHERE lower(type) like lower(concat('%', ?, '%'))";
 	protected static final String ANONYMUS_SEARCH_QUERY = "select * " + ANONYMUS_SEARCH_FROM_WHERE_QUERY;
-	protected static final String ANONYMUS_TOP_RATED_SEARCH_QUERY = "select MC.*, COALESCE(avg_rate, rating * 5.0 / 10.0, 0) AS actual_rate " + ANONYMUS_SEARCH_FROM_WHERE_QUERY;
-	protected static final String SEARCH_TOP_RATED_ORDER_BY_QUERY = " ORDER BY actual_rate DESC";
+	
+	protected static final String ANONYMUS_CATEGORY_SEARCH_QUERY     = "select MC.*, COALESCE(NULLIF(avg_rate, 0), rating * 5.0 / 10.0, 0) AS actual_rate, likes_count, nolikes_count, views_count " + 
+																		ANONYMUS_SEARCH_FROM_WHERE_QUERY;
+	
+	protected static final String SEARCH_TOP_RATED_ORDER_BY_QUERY = " ORDER BY actual_rate DESC NULLS LAST, likes_count DESC NULLS LAST, nolikes_count ASC NULLS LAST, views_count DESC NULLS LAST";
 	protected static final String SEARCH_MOST_POPULAR_ORDER_BY_QUERY = " order by views desc NULLS LAST";
-	protected static final String SEARCH_MOST_FAVORITES_ORDER_BY_QUERY = " order by likes desc NULLS LAST";
+	protected static final String SEARCH_MOST_FAVORITES_ORDER_BY_QUERY = " ORDER BY likes_count DESC NULLS LAST, nolikes_count ASC NULLS LAST, actual_rate DESC NULLS LAST, views_count DESC NULLS LAST";
 	
 	private final StatementPrompterJDBC statementPrompter;
 	
@@ -103,26 +106,28 @@ public class MediaContentSearchDaoJDBC implements MediaContentSearchDao
 	@Override
 	public List<MediaContent> searchTopRated(MediaContentType type, SortingPolicy sortingPolicy, int limit, MediaContentsSearchFilter filter)
 	{
-		return anonymusSearch(SEARCH_TOP_RATED_ORDER_BY_QUERY, type, sortingPolicy, limit, filter, ANONYMUS_TOP_RATED_SEARCH_QUERY);
+		return anonymusSearch(SEARCH_TOP_RATED_ORDER_BY_QUERY, type, sortingPolicy, limit, filter, ANONYMUS_CATEGORY_SEARCH_QUERY);
 	}
 	
 	@Override
 	public List<MediaContent> searchTrendingNow(MediaContentType type, SortingPolicy sortingPolicy, int limit,
 			MediaContentsSearchFilter filter)
 	{
-		return anonymusSearch(SEARCH_TOP_RATED_ORDER_BY_QUERY, type, sortingPolicy, limit, filter, ANONYMUS_TOP_RATED_SEARCH_QUERY);
+		//return anonymusSearch(SEARCH_TOP_RATED_ORDER_BY_QUERY, type, sortingPolicy, limit, filter, ANONYMUS_CATEGORY_SEARCH_QUERY);
+		return searchTopRated(type, sortingPolicy, limit, filter);
 	}
 	
 	@Override
 	public List<MediaContent> searchMostPopular(MediaContentType type, SortingPolicy sortingPolicy, int limit, MediaContentsSearchFilter filter)
 	{
-		return anonymusSearch(SEARCH_MOST_POPULAR_ORDER_BY_QUERY, type, sortingPolicy, limit, filter, ANONYMUS_TOP_RATED_SEARCH_QUERY);
+		//return anonymusSearch(SEARCH_TOP_RATED_ORDER_BY_QUERY, type, sortingPolicy, limit, filter, ANONYMUS_CATEGORY_SEARCH_QUERY);
+		return searchTopRated(type, sortingPolicy, limit, filter);
 	}
 	
 	@Override
 	public List<MediaContent> searchMostFavorites(MediaContentType type, SortingPolicy sortingPolicy, int limit, MediaContentsSearchFilter filter)
 	{
-		return anonymusSearch(SEARCH_MOST_FAVORITES_ORDER_BY_QUERY, type, sortingPolicy, limit, filter, ANONYMUS_TOP_RATED_SEARCH_QUERY);
+		return anonymusSearch(SEARCH_MOST_FAVORITES_ORDER_BY_QUERY, type, sortingPolicy, limit, filter, ANONYMUS_CATEGORY_SEARCH_QUERY);
 	}
 	
 	@Override
