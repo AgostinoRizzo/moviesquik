@@ -65,11 +65,11 @@ public class MediaContentsBroker extends HttpServlet
 			final User user = SessionManager.checkUserAuthentication(req, resp, false);
 			if ( user != null )
 				mediaContents = 
-				(policy.equals("suggested"))
-				? DBManager.getInstance().getDaoFactory().getMediaContentSearchDao()
-						.searchSuggested(MediaContentType.ALL, user, SortingPolicy.NONE, MAX_FIND_COUNT, MediaContentsSearchFilter.EMPTY)
-				: DBManager.getInstance().getDaoFactory().getMediaContentSearchDao()
-						.searchRecentlyWatched(MediaContentType.ALL, user, SortingPolicy.NONE, MAX_FIND_COUNT, MediaContentsSearchFilter.EMPTY);
+					(policy.equals("suggested"))
+					? DBManager.getInstance().getDaoFactory().getMediaContentSearchDao()
+							.searchSuggested(MediaContentType.ALL, user, SortingPolicy.NONE, MAX_FIND_COUNT, MediaContentsSearchFilter.EMPTY)
+					: DBManager.getInstance().getDaoFactory().getMediaContentSearchDao()
+							.searchRecentlyWatched(MediaContentType.ALL, user, SortingPolicy.NONE, MAX_FIND_COUNT, MediaContentsSearchFilter.EMPTY);
 			else
 				mediaContents = new ArrayList<MediaContent>();
 		}

@@ -40,5 +40,11 @@ public class PersistentAnalyticsExtractor implements AnalyticsExtractor
 	{
 		return daoFactory.getAnalyticsExtractorDao().findTrendingNow(page);
 	}
+	
+	@Override
+	public List<MediaContent> extractSuggested( final Long subjectId, final DataListPage page )
+	{
+		return daoFactory.getAnalyticsExtractorDao().findSuggested(subjectId, page);
+	}
 
 }

@@ -16,4 +16,5 @@ public interface AnalyticsExtractorDao
 {
 	public List<MediaContent> findMostPopular( final DataListPage page );
 	public List<MediaContent> findTrendingNow( final DataListPage page );
+	public List<MediaContent> findSuggested( final Long subjectId, final DataListPage page );
 }

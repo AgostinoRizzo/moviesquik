@@ -28,6 +28,12 @@ public class AnalyticsExtractorDaoJDBC extends AbstractDaoJDBC<MediaContent> imp
 	protected static final String FIND_TRENDING_NOW_QUERY = "SELECT MC.* FROM media_short_sharing_rate AS MLSHAR INNER JOIN media_content AS MC " + 
 															"ON MLSHAR.media_content_id = MC.media_content_id " + 
 															"ORDER BY MLSHAR.total_sharing_rate DESC LIMIT ? OFFSET ?";
+	protected static final String FIND_SUGGESTED_QUERY    = "SELECT MC.*, AVG(genre_rate) AS avg_genre_rate\r\n" + 
+															"FROM user_genre_rates INNER JOIN media_content AS MC " + 
+															"ON lower(MC.genre) like lower(concat('%', user_genre_rates.genre, '%')) " + 
+															"WHERE user_id = ? " + 
+															"GROUP BY MC.media_content_id " + 
+															"ORDER BY avg_genre_rate DESC LIMIT ? OFFSET ?";
 	
 	public AnalyticsExtractorDaoJDBC(StatementPrompterJDBC statementPrompter)
 	{
@@ -44,6 +50,34 @@ public class AnalyticsExtractorDaoJDBC extends AbstractDaoJDBC<MediaContent> imp
 	public List<MediaContent> findTrendingNow( final DataListPage page )
 	{
 		return simpleFind(FIND_TRENDING_NOW_QUERY, page);
+	}
+	
+	@Override
+	public List<MediaContent> findSuggested(Long subjectId, DataListPage page)
+	{
+		final List<MediaContent> mediaContents = new ArrayList<MediaContent>();
+		
+		try
+		{
+			final PreparedStatement statement = statementPrompter.prepareStatement(FIND_SUGGESTED_QUERY);
+			
+			statement.setLong(1, subjectId);
+			statement.setInt (2, page.getLimit());
+			statement.setInt (3, page.getOffset());
+			
+			ResultSet result = statement.executeQuery();
+			
+			while ( result.next() )
+				mediaContents.add(createFromResult(result));
+			
+			return mediaContents;
+		}
+		
+		catch (SQLException e)
+		{ e.printStackTrace(); return mediaContents; }
+		
+		finally 
+		{ statementPrompter.onFinalize(); }
 	}
 
 	@Override

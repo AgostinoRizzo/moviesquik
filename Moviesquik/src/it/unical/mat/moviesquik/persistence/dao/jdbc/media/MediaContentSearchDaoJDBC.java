@@ -136,8 +136,7 @@ public class MediaContentSearchDaoJDBC implements MediaContentSearchDao
 	public List<MediaContent> searchSuggested(MediaContentType type, User user,
 			SortingPolicy sortingPolicy, int limit, MediaContentsSearchFilter filter)
 	{
-		// TODO Auto-generated method stub
-		return searchTopRated(type, sortingPolicy, limit, filter);
+		return AnalyticsFacade.getSuggestedMediaContents(user.getId(), limit);
 	}
 	
 	@Override
