@@ -10,11 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import it.unical.mat.moviesquik.analytics.AnalyticsFacade;
 import it.unical.mat.moviesquik.controller.ServletUtils;
 import it.unical.mat.moviesquik.controller.SessionManager;
 import it.unical.mat.moviesquik.model.User;
-import it.unical.mat.moviesquik.persistence.DBManager;
-import it.unical.mat.moviesquik.persistence.dao.DaoFactory;
 
 /**
  * @author Agostino
@@ -42,14 +41,12 @@ public class MediaStatisticsLog extends HttpServlet
 			if ( event == null )
 				throw new IllegalArgumentException();
 			
-			final DaoFactory daoFactory = DBManager.getInstance().getDaoFactory();
-			
 			if ( event.equals("scroll") )
-				daoFactory.getMediaStatisticLogDao().logScroll(user.getId(), mediaContentId);
+				AnalyticsFacade.getLogger().logMediaPageScroll(user.getId(), mediaContentId);
 			else if ( event.equals("time") )
 			{
 				final Integer spentTime = Integer.parseInt(req.getParameter("val"));
-				daoFactory.getMediaStatisticLogDao().logSpentTime(user.getId(), mediaContentId, spentTime);
+				AnalyticsFacade.getLogger().logMediaPageSpentTime(user.getId(), mediaContentId, spentTime);
 			}
 			else
 				throw new IllegalArgumentException();

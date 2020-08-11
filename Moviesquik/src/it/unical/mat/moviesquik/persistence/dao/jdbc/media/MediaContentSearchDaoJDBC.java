@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.unical.mat.moviesquik.analytics.AnalyticsFacade;
 import it.unical.mat.moviesquik.controller.searching.MediaContentsSearchFilter;
 import it.unical.mat.moviesquik.model.User;
 import it.unical.mat.moviesquik.model.media.MediaContent;
@@ -116,15 +117,13 @@ public class MediaContentSearchDaoJDBC implements MediaContentSearchDao
 	public List<MediaContent> searchTrendingNow(MediaContentType type, SortingPolicy sortingPolicy, int limit,
 			MediaContentsSearchFilter filter)
 	{
-		//return anonymusSearch(SEARCH_TOP_RATED_ORDER_BY_QUERY, type, sortingPolicy, limit, filter, ANONYMUS_CATEGORY_SEARCH_QUERY);
-		return searchTopRated(type, sortingPolicy, limit, filter);
+		return AnalyticsFacade.getTrendingNowMediaContents(limit);
 	}
 	
 	@Override
 	public List<MediaContent> searchMostPopular(MediaContentType type, SortingPolicy sortingPolicy, int limit, MediaContentsSearchFilter filter)
 	{
-		//return anonymusSearch(SEARCH_TOP_RATED_ORDER_BY_QUERY, type, sortingPolicy, limit, filter, ANONYMUS_CATEGORY_SEARCH_QUERY);
-		return searchTopRated(type, sortingPolicy, limit, filter);
+		return AnalyticsFacade.getMostPopularMediaContents(limit);
 	}
 	
 	@Override

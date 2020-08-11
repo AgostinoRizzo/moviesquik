@@ -175,7 +175,7 @@ public class MediaContentDaoJDBC implements MediaContentDao
 		statement.setInt        (14, mediaContent.getStreamTime());
 	}
 	
-	protected static MediaContent createFromResult( final ResultSet result ) throws SQLException
+	public static MediaContent createFromResult( final ResultSet result ) throws SQLException
 	{
 		final MediaContent mediaContent = new MediaContentProxy();
 		

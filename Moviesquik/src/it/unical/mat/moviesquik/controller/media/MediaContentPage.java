@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import it.unical.mat.moviesquik.analytics.AnalyticsFacade;
 import it.unical.mat.moviesquik.controller.ServletUtils;
 import it.unical.mat.moviesquik.controller.SessionManager;
 import it.unical.mat.moviesquik.model.User;
@@ -54,7 +55,7 @@ public class MediaContentPage extends HttpServlet
 		final MediaContentReview userReview = daoFactory.getMediaContentReviewDao().find(user.getId(), key);
 		
 		// log new media content hit
-		daoFactory.getMediaStatisticLogDao().logHit(user.getId(), key);
+		AnalyticsFacade.getLogger().logMediaPageHit(user.getId(), key);
 		
 		req.setAttribute("media_content", mc);
 		req.setAttribute("user_review", userReview);
