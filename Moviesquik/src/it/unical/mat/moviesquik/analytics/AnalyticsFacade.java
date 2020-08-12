@@ -37,6 +37,10 @@ public class AnalyticsFacade
 	{
 		return getExtractor().extractSuggested(subjectId, page);
 	}
+	public static List<MediaContent> getMayLikeMediaContents( final Long subjectId, final DataListPage page )
+	{
+		return getExtractor().extractMayLike(subjectId, page);
+	}
 	
 	public static List<MediaContent> getMostPopularMediaContents( final int limit )
 	{
@@ -49,6 +53,10 @@ public class AnalyticsFacade
 	public static List<MediaContent> getSuggestedMediaContents( final Long subjectId, final int limit )
 	{
 		return getExtractor().extractSuggested( subjectId, new DataListPage(limit) );
+	}
+	public static List<MediaContent> getMayLikeMediaContents( final Long subjectId, final int limit )
+	{
+		return getExtractor().extractMayLike( subjectId, new DataListPage(limit) );
 	}
 	
 }

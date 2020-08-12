@@ -17,4 +17,5 @@ public interface AnalyticsExtractor
 	public List<MediaContent> extractMostPopular( final DataListPage page );
 	public List<MediaContent> extractTrendingNow( final DataListPage page );
 	public List<MediaContent> extractSuggested( final Long subjectId, final DataListPage page );
+	public List<MediaContent> extractMayLike( final Long subjectId, final DataListPage page );
 }

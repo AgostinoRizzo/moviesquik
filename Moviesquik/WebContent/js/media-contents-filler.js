@@ -92,6 +92,7 @@ $(document).ready( function()
 		/* media contents requests */
 		
 		initMediaContentCards("#suggested-media-contents-items");
+		initMediaContentCards("#maylike-media-contents-items");
 		initMediaContentCards("#trending-now-media-contents-items");
 		initMediaContentCards("#most-popular-media-contents-items");
 		initMediaContentCards("#top-rated-media-contents-items");
@@ -99,6 +100,7 @@ $(document).ready( function()
 		initMediaContentCards("#recently-watched-media-contents-items");
 	
 		request_media_contents("#suggested-media-contents-items", "listcontents?policy=suggested", fill_media_contents);
+		request_media_contents("#maylike-media-contents-items", "listcontents?policy=maylike", fill_media_contents);
 		request_media_contents("#trending-now-media-contents-items", "listcontents?policy=trending", fill_media_contents);
 		request_media_contents("#most-popular-media-contents-items", "listcontents?policy=most_popular", fill_media_contents);
 		request_media_contents("#top-rated-media-contents-items", "listcontents?policy=most_rated", fill_media_contents);
@@ -106,6 +108,7 @@ $(document).ready( function()
 		request_media_contents("#recently-watched-media-contents-items", "listcontents?policy=recently", fill_media_contents);
 		
 		$("#suggested-view-all-btn").click( function()        { request_more_media_contents("#suggested-media-contents-items", "suggested");           });
+		$("#maylike-view-all-btn").click( function()          { request_more_media_contents("#maylike-media-contents-items", "maylike");               });
 		$("#trending-now-view-all-btn").click( function()     { request_more_media_contents("#trending-now-media-contents-items", "trending");         });
 		$("#most-popular-view-all-btn").click( function()     { request_more_media_contents("#most-popular-media-contents-items", "most_popular");     });
 		$("#top-rated-view-all-btn").click( function()        { request_more_media_contents("#top-rated-media-contents-items", "most_rated");          });
@@ -113,6 +116,7 @@ $(document).ready( function()
 		$("#recently-watched-view-all-btn").click( function() { request_more_media_contents("#recently-watched-media-contents-items", "recently");      });
 		
 		$("#suggested-view-more-btn").click( function()        { request_more_media_contents("#suggested-media-contents-items", "suggested");           });
+		$("#maylike-view-more-btn").click( function()          { request_more_media_contents("#maylike-media-contents-items", "maylike");               });
 		$("#trending-now-view-more-btn").click( function()     { request_more_media_contents("#trending-now-contents-items", "trending");               });
 		$("#most-popular-view-more-btn").click( function()     { request_more_media_contents("#most-popular-media-contents-items", "most_popular");     });
 		$("#top-rated-view-more-btn").click( function()        { request_more_media_contents("#top-rated-media-contents-items", "most_rated");          });
@@ -120,6 +124,7 @@ $(document).ready( function()
 		$("#recently-watched-view-more-btn").click( function() { request_more_media_contents("#recently-watched-media-contents-items", "recently");     });
 		
 		$("#suggested-view-collapse-btn").click( function()        { on_collapse_view_media_contents("#suggested-media-contents-items");        });
+		$("#maylike-view-collapse-btn").click( function()          { on_collapse_view_media_contents("#maylike-media-contents-items");          });
 		$("#trending-now-view-collapse-btn").click( function()     { on_collapse_view_media_contents("#trending-now-media-contents-items");     });
 		$("#most-popular-view-collapse-btn").click( function()     { on_collapse_view_media_contents("#most-popular-media-contents-items");     });
 		$("#top-rated-view-collapse-btn").click( function()        { on_collapse_view_media_contents("#top-rated-media-contents-items");        });

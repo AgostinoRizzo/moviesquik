@@ -46,5 +46,11 @@ public class PersistentAnalyticsExtractor implements AnalyticsExtractor
 	{
 		return daoFactory.getAnalyticsExtractorDao().findSuggested(subjectId, page);
 	}
+	
+	@Override
+	public List<MediaContent> extractMayLike( final Long subjectId, final DataListPage page )
+	{
+		return daoFactory.getAnalyticsExtractorDao().findMayLike(subjectId, page);
+	}
 
 }

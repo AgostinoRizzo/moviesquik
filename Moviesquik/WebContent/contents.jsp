@@ -12,7 +12,8 @@
 
 
 <c:if test="${user != null && empty no_view_suggested}">
-
+	
+	<!-- Suggested media contents list -->
 	<div class="media-contents-list">
 
 		<div class="media-contents-list-header">
@@ -47,6 +48,37 @@
 		<div class="more-collapse-box d-none">
 			<button id="suggested-view-more-btn" class="btn btn-link view-more-btn"><span class="fa fa-plus checked"></span> More</button>
 			<button id="suggested-view-collapse-btn" class="btn btn-link view-collapse-btn"><span class="fa fa-minus checked"></span> Collapse</button>
+		</div>
+	</div>
+	
+	<!-- May Like media contents list -->
+	<div class="media-contents-list">
+
+		<div class="media-contents-list-header">
+				<div class="media-contents-icon-title">
+					<c:if test="${empty small_view}">
+						<h4 class="media-contents-list-header-title">You may like</h4>
+					</c:if>
+					<c:if test="${not empty small_view}">
+						<h5 class="media-contents-list-header-title">You may like</h5>
+					</c:if>
+				</div>
+				<div class="view-all-contents">
+					<button id="maylike-view-all-btn" class="btn btn-link view-all-btn invisible">View All</button>
+				</div>
+				
+				<c:if test="${not empty small_view}"><br></c:if>
+		</div>
+		<br>
+		
+		<!-- May Like content -->
+	    <div id="maylike-media-contents-items" class="media-contents-list-items row" role="listbox">
+	        <jsp:include page="contents-items.jsp"></jsp:include>
+	    </div>
+		
+		<div class="more-collapse-box d-none">
+			<button id="maylike-view-more-btn" class="btn btn-link view-more-btn"><span class="fa fa-plus checked"></span> More</button>
+			<button id="maylike-view-collapse-btn" class="btn btn-link view-collapse-btn"><span class="fa fa-minus checked"></span> Collapse</button>
 		</div>
 	</div>
 

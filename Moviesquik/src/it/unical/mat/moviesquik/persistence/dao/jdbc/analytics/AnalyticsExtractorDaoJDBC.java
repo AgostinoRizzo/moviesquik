@@ -34,6 +34,18 @@ public class AnalyticsExtractorDaoJDBC extends AbstractDaoJDBC<MediaContent> imp
 															"WHERE user_id = ? " + 
 															"GROUP BY MC.media_content_id " + 
 															"ORDER BY avg_genre_rate DESC LIMIT ? OFFSET ?";
+	protected static final String FIND_MAY_LIKE_QUERY     = "SELECT * " + 
+															"FROM ( " + 
+															"	SELECT COALESCE(UMSHAR.sharing_rate, 0) AS total_sharing_rate, MC.* " + 
+															"	FROM ( " + 
+															"		SELECT * " + 
+															"		FROM user_media_sharing_rate " + 
+															"		WHERE user_id = ? " + 
+															"		) AS UMSHAR " + 
+															"	RIGHT OUTER JOIN media_content AS MC " + 
+															"	ON UMSHAR.media_content_id = MC.media_content_id " + 
+															"	) AS T " + 
+															"ORDER BY total_sharing_rate ASC LIMIT ? OFFSET ?";
 	
 	public AnalyticsExtractorDaoJDBC(StatementPrompterJDBC statementPrompter)
 	{
@@ -55,29 +67,13 @@ public class AnalyticsExtractorDaoJDBC extends AbstractDaoJDBC<MediaContent> imp
 	@Override
 	public List<MediaContent> findSuggested(Long subjectId, DataListPage page)
 	{
-		final List<MediaContent> mediaContents = new ArrayList<MediaContent>();
-		
-		try
-		{
-			final PreparedStatement statement = statementPrompter.prepareStatement(FIND_SUGGESTED_QUERY);
-			
-			statement.setLong(1, subjectId);
-			statement.setInt (2, page.getLimit());
-			statement.setInt (3, page.getOffset());
-			
-			ResultSet result = statement.executeQuery();
-			
-			while ( result.next() )
-				mediaContents.add(createFromResult(result));
-			
-			return mediaContents;
-		}
-		
-		catch (SQLException e)
-		{ e.printStackTrace(); return mediaContents; }
-		
-		finally 
-		{ statementPrompter.onFinalize(); }
+		return subjectFind(FIND_SUGGESTED_QUERY, subjectId, page);
+	}
+	
+	@Override
+	public List<MediaContent> findMayLike(Long subjectId, DataListPage page)
+	{
+		return subjectFind(FIND_MAY_LIKE_QUERY, subjectId, page);
 	}
 
 	@Override
@@ -96,6 +92,33 @@ public class AnalyticsExtractorDaoJDBC extends AbstractDaoJDBC<MediaContent> imp
 			
 			statement.setInt(1, page.getLimit());
 			statement.setInt(2, page.getOffset());
+			
+			ResultSet result = statement.executeQuery();
+			
+			while ( result.next() )
+				mediaContents.add(createFromResult(result));
+			
+			return mediaContents;
+		}
+		
+		catch (SQLException e)
+		{ e.printStackTrace(); return mediaContents; }
+		
+		finally 
+		{ statementPrompter.onFinalize(); }
+	}
+	
+	private List<MediaContent> subjectFind( final String query, final Long subjectId, final DataListPage page )
+	{
+		final List<MediaContent> mediaContents = new ArrayList<MediaContent>();
+		
+		try
+		{
+			final PreparedStatement statement = statementPrompter.prepareStatement(query);
+			
+			statement.setLong(1, subjectId);
+			statement.setInt (2, page.getLimit());
+			statement.setInt (3, page.getOffset());
 			
 			ResultSet result = statement.executeQuery();
 			

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import it.unical.mat.moviesquik.analytics.AnalyticsFacade;
 import it.unical.mat.moviesquik.controller.searching.MediaContentsSearchFilter;
 import it.unical.mat.moviesquik.model.User;
 import it.unical.mat.moviesquik.model.media.MediaContent;
@@ -60,16 +61,17 @@ public class MediaContentsBroker extends HttpServlet
 			DBManager.getInstance().getDaoFactory().getMediaContentSearchDao()
 				.searchMostFavorites(MediaContentType.ALL, SortingPolicy.NONE, MAX_FIND_COUNT, MediaContentsSearchFilter.EMPTY);
 		
-		else if ( policy.equals("suggested") || policy.equals("recently") )
+		else if ( policy.equals("suggested") || policy.equals("maylike") || policy.equals("recently") )
 		{
 			final User user = SessionManager.checkUserAuthentication(req, resp, false);
 			if ( user != null )
-				mediaContents = 
-					(policy.equals("suggested"))
-					? DBManager.getInstance().getDaoFactory().getMediaContentSearchDao()
-							.searchSuggested(MediaContentType.ALL, user, SortingPolicy.NONE, MAX_FIND_COUNT, MediaContentsSearchFilter.EMPTY)
-					: DBManager.getInstance().getDaoFactory().getMediaContentSearchDao()
-							.searchRecentlyWatched(MediaContentType.ALL, user, SortingPolicy.NONE, MAX_FIND_COUNT, MediaContentsSearchFilter.EMPTY);
+			{
+				if ( policy.equals("suggested") ) 	 mediaContents = DBManager.getInstance().getDaoFactory().getMediaContentSearchDao()
+													 .searchSuggested(MediaContentType.ALL, user, SortingPolicy.NONE, MAX_FIND_COUNT, MediaContentsSearchFilter.EMPTY);
+				else if ( policy.equals("maylike") ) mediaContents = AnalyticsFacade.getMayLikeMediaContents(user.getId(), MAX_FIND_COUNT);
+				else 								 mediaContents = DBManager.getInstance().getDaoFactory().getMediaContentSearchDao()
+													 .searchRecentlyWatched(MediaContentType.ALL, user, SortingPolicy.NONE, MAX_FIND_COUNT, MediaContentsSearchFilter.EMPTY);
+			}
 			else
 				mediaContents = new ArrayList<MediaContent>();
 		}
