@@ -7,6 +7,17 @@
 	  Header section
 ======================= -->
 
+<c:if test="${user != null}">
+	
+	<input type="hidden" id="user-id" value="${user.id}">
+	
+	<!-- main alerts -->
+	<div class="alert d-none" id="main-alert">
+		
+	</div>
+	
+</c:if>
+
 <header id="header">
 		
 	<nav class="navbar navbar-expand-md lgnavbar-light">

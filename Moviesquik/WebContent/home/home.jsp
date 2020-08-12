@@ -216,10 +216,5 @@
 		</div>
 		
 	</div>
-	
-	<!-- home page alerts -->
-	<div class="alert d-none" id="main-alert">
-		
-	</div>
 
 </div>

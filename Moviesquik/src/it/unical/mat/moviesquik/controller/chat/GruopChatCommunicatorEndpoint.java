@@ -57,4 +57,5 @@ public class GruopChatCommunicatorEndpoint
 		}
 		catch (NumberFormatException e) {}
 	}
+	
 }

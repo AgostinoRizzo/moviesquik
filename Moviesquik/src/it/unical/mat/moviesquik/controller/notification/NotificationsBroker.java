@@ -1,7 +1,7 @@
 /**
  * 
  */
-package it.unical.mat.moviesquik.controller.accounting;
+package it.unical.mat.moviesquik.controller.notification;
 
 import java.io.IOException;
 

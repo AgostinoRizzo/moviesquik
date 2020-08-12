@@ -3,6 +3,7 @@
  */
 
 import '../chat/chat-controller.js';
+import '../popup-alert.js';
 
 var selectedUserListNameRow;
 var chatStatus = new Map();
@@ -132,13 +133,6 @@ function updateLineStatus(lineStatusObj, isOnline)
 		lineStatusObj.addClass('offline-status');
 }
 
-function showMainAlert(alertText) 
-{
-	$("#main-alert").html(alertText + '<button type="button" class="close">&times;</button>');
-	$("#main-alert").hide();
-	$("#main-alert").slideDown('slow');
-}
-
 function onOnlineOfflineInfoMessageReceived(id, isOnline) 
 {
 	if ( id == friendId )
@@ -167,8 +161,7 @@ function onOnlineOfflineInfoMessageReceived(id, isOnline)
 	
 	// display user online/offline alert
 	if ( userFullName.length )
-		showMainAlert( '<img src="' + userIconSrc + '" class="avatar-img card-list-avatar-img rounded-circle">&nbsp;&nbsp;' + 
-					   '<strong>' + userFullName + '</strong> is now ' + (isOnline ? 'online' : 'offline') );
+		showIconMainAlert( userIconSrc, '<strong>' + userFullName + '</strong> is now ' + (isOnline ? 'online' : 'offline') );
 }
 
 function onInfoMessageReceived(messagePacket) 

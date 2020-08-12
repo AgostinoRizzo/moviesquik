@@ -33,6 +33,7 @@
 	<script src="js/bootstrap-validate.js"></script>
 	<script src="js/media/show_media_content.js" type="module"></script>
 	<script src="js/movieparty/create-party.js" type="module"></script>
+	<script src="js/notification/notifications.js" type="module"></script>
 	
 </head>
 <body>

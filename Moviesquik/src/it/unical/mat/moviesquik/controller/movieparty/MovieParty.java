@@ -17,6 +17,7 @@ import com.google.gson.JsonElement;
 
 import it.unical.mat.moviesquik.controller.ServletUtils;
 import it.unical.mat.moviesquik.controller.SessionManager;
+import it.unical.mat.moviesquik.controller.notification.NotificationsManager;
 import it.unical.mat.moviesquik.model.Exception;
 import it.unical.mat.moviesquik.model.Notification;
 import it.unical.mat.moviesquik.model.NotificationFactory;
@@ -155,7 +156,7 @@ public class MovieParty extends HttpServlet
 				for ( final MoviePartyInvitation mpi : party.getInvitations() )
 				{
 					final Notification notification = NotificationFactory.getInstance().createMoviePartyInvitationNotification(party);
-					daoFactory.getNotificationDao().save(notification, mpi.getGuest());
+					NotificationsManager.getInstance().sendNofitication(notification, mpi.getGuest());
 				}
 				
 				req.setAttribute("success", "");
@@ -240,19 +241,18 @@ public class MovieParty extends HttpServlet
 														  final User sender,
 														  final boolean includeAdmin )
 	{
-		final DaoFactory daoFactory = DBManager.getInstance().getDaoFactory();
 		final List<MoviePartyParticipation> participations = movieParty.getParticipations();
 		final User admin = movieParty.getAdministrator();
 		
 		if ( includeAdmin && ( sender == null || !admin.getId().equals(sender.getId()) ) )
-			daoFactory.getNotificationDao().save(notification, admin);
+			NotificationsManager.getInstance().sendNofitication(notification, admin);
 		
 		User receiver;
 		for ( final MoviePartyParticipation participation : participations )
 		{
 			receiver = participation.getParticipant();
 			if ( sender == null || !receiver.getId().equals(sender.getId()) )
-				daoFactory.getNotificationDao().save(notification, receiver);
+				NotificationsManager.getInstance().sendNofitication(notification, receiver);
 		}
 	}
 	

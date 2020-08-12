@@ -3,10 +3,9 @@
  */
 package it.unical.mat.moviesquik.controller.chat;
 
-import java.io.IOException;
-
-import javax.websocket.EncodeException;
 import javax.websocket.Session;
+
+import it.unical.mat.moviesquik.util.WebsocketUtil;
 
 /**
  * @author Agostino
@@ -18,11 +17,6 @@ public interface ChatManager
 	
 	static boolean sendMessageFromSession( final ChatMessagePacket messagePacket, final Session session )
 	{
-		if ( session == null )
-			return false;
-		try
-		{ session.getBasicRemote().sendObject(messagePacket); return true;	} 
-		catch (IOException | EncodeException e)
-		{ return false; }
+		return WebsocketUtil.<ChatMessagePacket>sendPacketFromSession( messagePacket, session );
 	}
 }

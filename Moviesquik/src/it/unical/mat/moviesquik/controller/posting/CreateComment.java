@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import it.unical.mat.moviesquik.controller.ServletUtils;
 import it.unical.mat.moviesquik.controller.SessionManager;
+import it.unical.mat.moviesquik.controller.notification.NotificationsManager;
 import it.unical.mat.moviesquik.model.Comment;
 import it.unical.mat.moviesquik.model.Notification;
 import it.unical.mat.moviesquik.model.NotificationFactory;
@@ -60,7 +61,7 @@ private static final long serialVersionUID = 1L;
 		if ( !receiver.getId().equals(user.getId()) )
 		{
 			final Notification notification = NotificationFactory.getInstance().createPostCommentNotification(user);
-			daoFactory.getNotificationDao().save(notification, receiver);
+			NotificationsManager.getInstance().sendNofitication(notification, receiver);
 		}
 		
 		req.setAttribute("post_to_display", daoFactory.getPostDao().findById(post_id));

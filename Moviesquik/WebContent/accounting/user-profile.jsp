@@ -41,6 +41,7 @@
 	<script src="js/commenting.js"></script>
 	<script src="js/send-feedback.js"></script>
 	<script src="js/more-news.js"></script>
+	<script src="js/notification/notifications.js" type="module"></script>
 	
 </head>
 <body>

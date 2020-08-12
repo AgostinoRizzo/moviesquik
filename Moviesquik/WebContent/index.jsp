@@ -40,7 +40,7 @@
 	<script src="js/commenting.js"></script>
 	<script src="js/send-feedback.js"></script>
 	<script src="js/more-news.js" type="module"></script>
-	<script src="js/notifications.js"></script>
+	<script src="js/notification/notifications.js" type="module"></script>
 	<script src="js/media/show_media_content.js" type="module"></script>
 	<script src="js/contents.js"></script>
 	<script src="js/media-contents-filler.js"></script>

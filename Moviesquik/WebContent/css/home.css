@@ -352,24 +352,3 @@
 	font-size: medium;
 	font-weight: 400;
 }
-
-
-/* Home Main Alert Style */
-#main-alert
-{
-	position: fixed;
-	top: 0px;
-	margin-top: 40px;
-	left: 50%;
-	transform: translate(-50%);
-	z-index: 100000;
-	
-	background-color: #B7B7B7;
-	border-radius: 10px;
-	box-shadow: 0px 0px 20px 10px black;
-	color: black;
-}
-#main-alert button
-{
-	margin-left: 10px;
-}

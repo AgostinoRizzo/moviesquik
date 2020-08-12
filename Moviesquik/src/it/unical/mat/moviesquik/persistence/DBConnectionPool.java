@@ -169,11 +169,11 @@ public class DBConnectionPool implements Runnable
 		{ lock.unlock(); }
 	}
 	private void printStatus( final String operation )
-	{
+	{/*
 		System.out.println("############ DB CONNECTION POOL ############\n" + 
 						   "After " + operation + " operation:\n" +
 						   "\tAvailable connections: " + availableConnections.size() + "\n" +
-						   "\tUsed connections: " + usedConnections.size() + "\n");
+						   "\tUsed connections: " + usedConnections.size() + "\n");*/
 	}
 	private boolean closeConnectionWithCloseTime( final long closeTime )
 	{

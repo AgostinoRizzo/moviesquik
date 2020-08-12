@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import it.unical.mat.moviesquik.controller.ServletUtils;
 import it.unical.mat.moviesquik.controller.SessionManager;
+import it.unical.mat.moviesquik.controller.notification.NotificationsManager;
 import it.unical.mat.moviesquik.model.Notification;
 import it.unical.mat.moviesquik.model.NotificationFactory;
 import it.unical.mat.moviesquik.model.Post;
@@ -86,7 +87,7 @@ public class ShareWatchlist extends HttpServlet
 			if ( shared && !receiver.getId().equals(user.getId()) )
 			{
 				final Notification notification = NotificationFactory.getInstance().createWatchlistShareNotification(user, watchlist);
-				daoFactory.getNotificationDao().save(notification, receiver);
+				NotificationsManager.getInstance().sendNofitication(notification, receiver);
 			}
 		}
 		

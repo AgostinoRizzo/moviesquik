@@ -15,6 +15,7 @@ import com.google.gson.JsonObject;
 
 import it.unical.mat.moviesquik.controller.ServletUtils;
 import it.unical.mat.moviesquik.controller.SessionManager;
+import it.unical.mat.moviesquik.controller.notification.NotificationsManager;
 import it.unical.mat.moviesquik.model.Notification;
 import it.unical.mat.moviesquik.model.NotificationFactory;
 import it.unical.mat.moviesquik.model.Post;
@@ -75,7 +76,7 @@ public class SendPostFeedback extends HttpServlet
 				final Notification notification = feedback.isLike() 
 												  ? NotificationFactory.getInstance().createPostLikeFeedbackNotification(user)
 												  : NotificationFactory.getInstance().createPostLoveFeedbackNotification(user);
-				daoFactory.getNotificationDao().save(notification, receiver);
+				NotificationsManager.getInstance().sendNofitication(notification, receiver);
 			}
 			
 		}

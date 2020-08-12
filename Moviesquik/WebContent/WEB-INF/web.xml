@@ -250,7 +250,7 @@
 <!-- NotificationsBroker Servlet -->
 <servlet>
 	<servlet-name>notification</servlet-name>
-	<servlet-class>it.unical.mat.moviesquik.controller.accounting.NotificationsBroker</servlet-class>
+	<servlet-class>it.unical.mat.moviesquik.controller.notification.NotificationsBroker</servlet-class>
 </servlet>
 <servlet-mapping>
 	<servlet-name>notification</servlet-name>
