@@ -44,8 +44,9 @@
 	<script src="js/media/show_media_content.js" type="module"></script>
 	<script src="js/contents.js"></script>
 	<script src="js/media-contents-filler.js"></script>
-	<script src="js/home/sidenav.js"></script>
 	<c:if test="${user != null}">
+		<script src="js/home/sidenav.js"></script>
+		<script src="js/home/responsive-page-manager.js"></script>
 		<script src="js/home/home-chat-controller.js" type="module"></script>
 		<script src="js/home/home-chat-search.js" type="module"></script>
 	</c:if>
@@ -150,26 +151,34 @@
 	
 	    	</div> -->
 	    	
-	    	<div class="row showcase-row" id="top-rated-showcase-row">
-		    	<c:forEach items="${showcase.topRated}" var="media_content">
-		    		<img class="card-img-top showcase-card-img-top" src="${media_content.poster}">
-		    	</c:forEach>
-	    	</div>
-	    	<div class="row showcase-row" id="most-popular-showcase-row">
-		    	<c:forEach items="${showcase.mostPopular}" var="media_content">
-		    		<img class="card-img-top showcase-card-img-top" src="${media_content.poster}">
-		    	</c:forEach>
-	    	</div>
-	    	<div class="row showcase-row" id="most-favorites-showcase-row">
-		    	<c:forEach items="${showcase.mostFavorites}" var="media_content">
-		    		<img class="card-img-top showcase-card-img-top" src="${media_content.poster}">
-		    	</c:forEach>
+	    	<div id="showcase-rows">
+		    	<div class="row showcase-row" id="top-rated-showcase-row">
+			    	<c:forEach items="${showcase.topRated}" var="media_content"><img class="card-img-top showcase-card-img-top" src="${media_content.poster}"></c:forEach>
+			    	<c:forEach items="${showcase.topRated}" var="media_content"><img class="card-img-top showcase-card-img-top" src="${media_content.poster}"></c:forEach>
+		    	</div>
+		    	<div class="row showcase-row" id="most-popular-showcase-row">
+			    	<c:forEach items="${showcase.mostPopular}" var="media_content"><img class="card-img-top showcase-card-img-top" src="${media_content.poster}"></c:forEach>
+			    	<c:forEach items="${showcase.mostPopular}" var="media_content"><img class="card-img-top showcase-card-img-top" src="${media_content.poster}"></c:forEach>
+		    	</div>
+		    	<div class="row showcase-row" id="most-favorites-showcase-row">
+			    	<c:forEach items="${showcase.mostFavorites}" var="media_content"><img class="card-img-top showcase-card-img-top" src="${media_content.poster}"></c:forEach>
+			    	<c:forEach items="${showcase.mostFavorites}" var="media_content"><img class="card-img-top showcase-card-img-top" src="${media_content.poster}"></c:forEach>
+		    	</div>
+		    	<div class="row showcase-row" id="most-popular-showcase-row">
+			    	<c:forEach items="${showcase.trendingNow}" var="media_content"><img class="card-img-top showcase-card-img-top" src="${media_content.poster}"></c:forEach>
+			    	<c:forEach items="${showcase.trendingNow}" var="media_content"><img class="card-img-top showcase-card-img-top" src="${media_content.poster}"></c:forEach>
+		    	</div>
+		    	<div class="row showcase-row" id="top-rated-showcase-row">
+			    	<c:forEach items="${showcase.topRated}" var="media_content"><img class="card-img-top showcase-card-img-top" src="${media_content.poster}"></c:forEach>
+			    	<c:forEach items="${showcase.topRated}" var="media_content"><img class="card-img-top showcase-card-img-top" src="${media_content.poster}"></c:forEach>
+		    	</div>
 	    	</div>
 	    	
 		</section>
 		
-		
-		<jsp:include page="contents.jsp"></jsp:include>
+		<div id="contents-section">
+			<jsp:include page="contents.jsp"></jsp:include>
+		</div>
 		
 		<div class="pricing-section" id="pricing-section">
 			<div class="pricing-header">

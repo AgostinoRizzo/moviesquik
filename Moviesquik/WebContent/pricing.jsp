@@ -3,8 +3,10 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 
-<div class="card-deck mb-3 text-center">
-       <div class="card mb-4 box-shadow bg-dark">
+<div class="row text-center">
+
+	<div class="col-xl-4 col-lg-12">
+       <div class="card box-shadow bg-dark">
          <div class="card-header">
            <h4 class="my-0 font-weight-normal">Basic</h4>
          </div>
@@ -21,8 +23,10 @@
            </c:if>
          </div>
        </div>
-       
-       <div class="card mb-4 box-shadow bg-dark">
+   </div>
+   
+   <div class="col-xl-4 col-lg-12">
+       <div class="card box-shadow bg-dark">
          <div class="card-header">
            <h4 class="my-0 font-weight-normal">Standard</h4>
          </div>
@@ -39,8 +43,10 @@
            </c:if>
          </div>
        </div>
-       
-       <div class="card mb-4 box-shadow bg-dark">
+   </div>
+   
+   <div class="col-xl-4 col-lg-12">
+       <div class="card box-shadow bg-dark">
          <div class="card-header">
            <h4 class="my-0 font-weight-normal">Premium</h4>
          </div>
@@ -57,4 +63,5 @@
            </c:if>
          </div>
        </div>
+   </div>
 </div>

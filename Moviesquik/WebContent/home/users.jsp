@@ -4,25 +4,6 @@
 <!DOCTYPE html>
 
 
-<%-- <div class="row user-list-row">
-		            			
-	  <c:if test="${user.profileImagePath != null && user.profileImagePath.length() > 0}">
-	  		<a href="user?id=${user.id}" class="col-auto sidenav-item-col"><img src="${user.profileImagePath}" class="avatar-img card-list-avatar-img rounded-circle">
-	  			<i class="fa fa-check-circle fa-xs line-status online-status"></i>
-	  		</a>
-	  </c:if>
-	  <c:if test="${user.profileImagePath == null || user.profileImagePath.length() == 0}">
-	  		<a href="user?id=${user.id}" class="col-auto sidenav-item-col"><img src="res/drawable/user_avatar.jpg" class="avatar-img card-list-avatar-img rounded-circle">
-	  			<i class="fa fa-check-circle fa-xs line-status online-status"></i>
-	  		</a>
-	  </c:if>		  
-	  
-	  <div class="col-auto users-list-name">
-	    <p class="users-list-name-text">${user.fullName}</p>
-	    <p class="note">${user.email}</p>
-	  </div>
-</div> --%>
-
 <div class="users-col-title">
 	<strong class="note">Messages</strong><br>
 	<input type="text" id="chat-search-input" placeholder="Search">

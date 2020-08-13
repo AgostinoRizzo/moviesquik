@@ -46,6 +46,15 @@
 }
 
 
+/* Home Sidenav Style */
+#home-wrapper #home-sidenav-col
+{
+	/* min-width: 200px; */
+	padding-right: 5px;
+	padding-left: 5px;
+}
+
+
 /* Users List Style */
 .users-col
 {
@@ -69,7 +78,7 @@
 }
 .users-list-name
 {
-	margin: auto;
+	/* margin: auto; */
 	max-width: 180px;
 	/* padding-left: 10px; */
 }
@@ -351,4 +360,28 @@
 {
 	font-size: medium;
 	font-weight: 400;
+}
+
+
+/* Home Swiper Style */
+#home-swiper
+{
+	position: fixed;
+	top: 0px;
+	right: 0px;
+	margin-top: 90px;
+	width: 50px;
+	z-index: 1000000;
+	box-shadow: 0px 0px 20px 10px black;
+	border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
+	
+	padding: 4px 8px 4px 8px;
+	
+	background-color: gray;
+	color: black;
+}
+
+#home-swiper .swiper
+{
 }

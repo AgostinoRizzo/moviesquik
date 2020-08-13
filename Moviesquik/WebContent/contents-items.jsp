@@ -4,31 +4,31 @@
 <!DOCTYPE html>
 
 <div class="col-6"><div class="row">
-	<div class="col-12 col-sm-6 col-md-4 col-xl-3 media-col-item">
+	<div class="col-12 col-sm-6 col-md-6 col-xl-3 media-col-item">
 		<jsp:include page="contents-item.jsp"></jsp:include>
 	</div>
-	<div class="col-12 col-sm-6 col-md-4 col-xl-3 media-col-item">
+	<div class="col-12 col-sm-6 col-md-6 col-xl-3 media-col-item">
 		<jsp:include page="contents-item.jsp"></jsp:include>
 	</div>
-	<div class="col-12 col-sm-6 col-md-4 col-xl-3 media-col-item">
+	<div class="col-12 col-sm-6 col-md-6 col-xl-3 media-col-item">
 		<jsp:include page="contents-item.jsp"></jsp:include>
 	</div>
-	<div class="col-12 col-sm-6 col-md-4 col-xl-3 media-col-item">
+	<div class="col-12 col-sm-6 col-md-6 col-xl-3 media-col-item">
 		<jsp:include page="contents-item.jsp"></jsp:include>
 	</div>
 </div></div>
 
 <div class="col-6"><div class="row">
-	<div class="col-12 col-sm-6 col-md-4 col-xl-3 media-col-item">
+	<div class="col-12 col-sm-6 col-md-6 col-xl-3 media-col-item">
 		<jsp:include page="contents-item.jsp"></jsp:include>
 	</div>
-	<div class="col-12 col-sm-6 col-md-4 col-xl-3 media-col-item">
+	<div class="col-12 col-sm-6 col-md-6 col-xl-3 media-col-item">
 		<jsp:include page="contents-item.jsp"></jsp:include>
 	</div>
-	<div class="col-12 col-sm-6 col-md-4 col-xl-3 media-col-item">
+	<div class="col-12 col-sm-6 col-md-6 col-xl-3 media-col-item">
 		<jsp:include page="contents-item.jsp"></jsp:include>
 	</div>
-	<div class="col-12 col-sm-6 col-md-4 col-xl-3 media-col-item">
+	<div class="col-12 col-sm-6 col-md-6 col-xl-3 media-col-item">
 		<jsp:include page="contents-item.jsp"></jsp:include>
 	</div>
 </div></div>

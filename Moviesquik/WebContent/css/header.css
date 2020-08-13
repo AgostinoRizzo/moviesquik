@@ -84,7 +84,7 @@
 {
 	padding: 0px 30px 0px 30px;
 	/* min-height: 80px; */
-	position: fixed;
+	position: absolute;
 	left: 0;
 	top: 0;
 	right: 0;
@@ -96,6 +96,7 @@
 {
 	/* color: #afb4dc; */
 	color: #fff;
+	min-width: max-content;
 }
 
 #header .navbar-toggler

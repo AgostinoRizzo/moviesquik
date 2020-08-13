@@ -19,6 +19,10 @@
 	text-align: left;
 	margin-top: 0px !important;
 }
+#contents-section .media-contents-list-header
+{
+	height: 0px;
+}
 
 .media-contents-icon-title
 {

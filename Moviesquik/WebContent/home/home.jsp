@@ -26,9 +26,9 @@
 		
 		<input type="hidden" id="user-id" value="${user.id}">
 		
-		<!-- Friends sidenav -->
-		<div class="col-2 scollable-col sidenav users-col home-container-col">
-					<jsp:include page="sidenav.jsp"></jsp:include>
+		<!-- Sidenav -->
+		<div class="col-2 scollable-col sidenav users-col home-container-col" id="home-sidenav-col">
+			<jsp:include page="sidenav.jsp"></jsp:include>
 		</div>
 		
 		<!-- List all personal posts -->
@@ -96,7 +96,7 @@
 		
 		
 		
-		<div class="home-container col-auto home-col">
+		<!-- <div class="home-container col-auto home-col"> -->
 			
 			<%-- <div class="row">
 				<c:if test="${user != null}">
@@ -144,7 +144,7 @@
 				</c:if>
 			</div> --%>
 			
-			<div class="row">
+			<!-- <div class="row"> -->
 			
 				<%-- <div class="col-auto users-col home-container-col">
 					<jsp:include page="users.jsp"></jsp:include>
@@ -212,9 +212,13 @@
 					</nav>
 				</div> --%>
 				
-			</div>
-		</div>
+			<!-- </div> -->
+		<!-- </div> -->
 		
 	</div>
 
+</div>
+
+<div id="home-swiper" class="clickable d-none">
+	<div class="swiper" id="swiper-right"><h4><i class="fa fa-arrow-right"></i></h4></div>
 </div>

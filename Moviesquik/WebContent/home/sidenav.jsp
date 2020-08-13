@@ -17,7 +17,7 @@
 	  		</a>
 	  </c:if>		  
 	  
-	  <div class="col users-list-name col-light-right">
+	  <div class="col users-list-name col-light-right text-overflow">
 	    <p class="users-list-name-text">${user.fullName}</p>
 	    <p class="note">${user.email}</p>
 	  </div>

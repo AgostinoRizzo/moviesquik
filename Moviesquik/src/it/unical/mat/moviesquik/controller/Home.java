@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import it.unical.mat.moviesquik.analytics.AnalyticsFacade;
 import it.unical.mat.moviesquik.controller.searching.MediaContentsSearch;
 import it.unical.mat.moviesquik.controller.searching.MediaContentsSearchFilter;
 import it.unical.mat.moviesquik.controller.searching.MediaContentsViewTemplate;
@@ -55,6 +56,7 @@ public class Home extends HttpServlet
 					.searchMostPopular(MediaContentType.ALL, SortingPolicy.NONE, 10, MediaContentsSearchFilter.EMPTY));
 			sc.setMostFavorites( daofactory.getMediaContentSearchDao()
 					.searchMostFavorites(MediaContentType.ALL, SortingPolicy.NONE, 10, MediaContentsSearchFilter.EMPTY));
+			sc.setTrendingNow( AnalyticsFacade.getTrendingNowMediaContents(10) );
 			
 			req.setAttribute( "showcase", sc );
 			

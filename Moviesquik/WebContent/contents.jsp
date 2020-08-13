@@ -22,7 +22,7 @@
 						<h4 class="media-contents-list-header-title"><!-- <span class="fa fa-lightbulb-o checked"></span>  -->Suggested for you</h4>
 					</c:if>
 					<c:if test="${not empty small_view}">
-						<h5 class="media-contents-list-header-title"><!-- <span class="fa fa-lightbulb-o checked"></span>  -->Suggested for you</h5>
+						<h4 class="media-contents-list-header-title"><!-- <span class="fa fa-lightbulb-o checked"></span>  -->Suggested for you</h4>
 					</c:if>
 				</div>
 				<div class="view-all-contents">
@@ -60,7 +60,7 @@
 						<h4 class="media-contents-list-header-title">You may like</h4>
 					</c:if>
 					<c:if test="${not empty small_view}">
-						<h5 class="media-contents-list-header-title">You may like</h5>
+						<h4 class="media-contents-list-header-title">You may like</h4>
 					</c:if>
 				</div>
 				<div class="view-all-contents">
@@ -93,7 +93,7 @@
 					<h4 class="media-contents-list-header-title"><span class="fa fa-line-chart checked"></span> Trending Now</h4>
 				</c:if>
 				<c:if test="${not empty small_view}">
-					<h5 class="media-contents-list-header-title"><span class="fa fa-line-chart checked"></span> Trending Now</h5>
+					<h4 class="media-contents-list-header-title"><span class="fa fa-line-chart checked"></span> Trending Now</h4>
 				</c:if>
 			</div>
 			<div class="view-all-contents">
@@ -125,7 +125,7 @@
 					<h4 class="media-contents-list-header-title"><!-- <span class="fa fa-eye checked"></span>  -->Most Popular</h4>
 				</c:if>
 				<c:if test="${not empty small_view}">
-					<h5 class="media-contents-list-header-title"><!-- <span class="fa fa-eye checked"></span>  -->Most Popular</h5>
+					<h4 class="media-contents-list-header-title"><!-- <span class="fa fa-eye checked"></span>  -->Most Popular</h4>
 				</c:if>
 			</div>
 			<div class="view-all-contents">
@@ -164,7 +164,7 @@
 					<h4 class="media-contents-list-header-title"><span class="fa fa-star checked"></span> Top Rated</h4>
 				</c:if>
 				<c:if test="${not empty small_view}">
-					<h5 class="media-contents-list-header-title"><span class="fa fa-star checked"></span> Top Rated</h5>
+					<h4 class="media-contents-list-header-title"><span class="fa fa-star checked"></span> Top Rated</h4>
 				</c:if>
 			</div>
 			<div class="view-all-contents">
@@ -196,7 +196,7 @@
 					<h4 class="media-contents-list-header-title"><span class="fa fa-heart checked"></span> Most Favorites</h4>
 				</c:if>
 				<c:if test="${not empty small_view}">
-					<h5 class="media-contents-list-header-title"><span class="fa fa-heart checked"></span> Most Favorites</h5>
+					<h4 class="media-contents-list-header-title"><span class="fa fa-heart checked"></span> Most Favorites</h4>
 				</c:if>
 			</div>
 			<div class="view-all-contents">
@@ -236,7 +236,7 @@
 						<h4 class="media-contents-list-header-title"><span class="fa fa-history checked"></span> Recently Watched</h4>
 					</c:if>
 					<c:if test="${not empty small_view}">
-						<h5 class="media-contents-list-header-title"><span class="fa fa-history checked"></span> Recently Watched</h5>
+						<h4 class="media-contents-list-header-title"><span class="fa fa-history checked"></span> Recently Watched</h4>
 					</c:if>
 				</div>
 				<div class="view-all-contents">
