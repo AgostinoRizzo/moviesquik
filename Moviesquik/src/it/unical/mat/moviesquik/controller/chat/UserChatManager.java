@@ -81,7 +81,8 @@ public class UserChatManager implements ChatManager
 			final Long senderId = messagePacket.getSenderId();
 			final Long receiverId = messagePacket.getReceiverId();
 			
-			if ( senderId.equals(receiverId) )
+			
+			if ( senderId == null || receiverId == null || senderId.equals(receiverId) )
 				return;
 			
 			// complete message packet info

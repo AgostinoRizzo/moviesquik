@@ -49,6 +49,7 @@
 		<script src="js/home/responsive-page-manager.js"></script>
 		<script src="js/home/home-chat-controller.js" type="module"></script>
 		<script src="js/home/home-chat-search.js" type="module"></script>
+		<script src="js/home/home-users-filler.js"></script>
 	</c:if>
 	<script src="js/watchlist/add-item.js"></script>
 	<script src="js/movieparty/movie-party-search.js"></script>

@@ -15,12 +15,12 @@
 		<input type="hidden" id="friend-id" value="${friend.id}">
 					
 		<c:if test="${friend.profileImagePath != null && friend.profileImagePath.length() > 0}">
-			<div class="col-auto col-light-left user-icon-col"><img src="${friend.profileImagePath}" class="avatar-img card-list-avatar-img rounded-circle">
+			<div class="col-auto col-light-left user-icon-col"><a href="user?id=${friend.id}"><img src="${friend.profileImagePath}" class="avatar-img card-list-avatar-img rounded-circle"></a>
 				<i class="fa fa-check-circle fa-xs line-status offline-status"></i>
 			</div>
 		</c:if>
 		<c:if test="${friend.profileImagePath == null || friend.profileImagePath.length() == 0}">
-			<div class="col-auto col-light-left user-icon-col"><img src="res/drawable/user_avatar.jpg" class="avatar-img card-list-avatar-img rounded-circle">
+			<div class="col-auto col-light-left user-icon-col"><a href="user?id=${friend.id}"><img src="res/drawable/user_avatar.jpg" class="avatar-img card-list-avatar-img rounded-circle"></a>
 				<i class="fa fa-check-circle fa-xs line-status offline-status"></i>
 			</div>
 		</c:if>		  

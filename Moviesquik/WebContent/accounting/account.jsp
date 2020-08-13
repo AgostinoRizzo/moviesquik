@@ -106,7 +106,7 @@
 										<c:if test="${profile.profileImagePath != null && profile.profileImagePath.length() > 0}">
 											<c:set var = "profile_img_src" scope = "request" value = "${profile.profileImagePath}"/>
 										</c:if>
-										<img alt="" src="${profile_img_src}" class="avatar-img card-list-avatar-img rounded-circle">
+										<a href="user?id=${profile.id}"><img alt="" src="${profile_img_src}" class="avatar-img card-list-avatar-img rounded-circle"></a>
 										
 									</div>
 									<div class="col-auto col-light-right note">

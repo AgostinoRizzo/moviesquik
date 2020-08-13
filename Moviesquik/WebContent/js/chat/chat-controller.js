@@ -32,7 +32,7 @@ window.createNewMessageCloudHtml = function( messagePacket, received=false, appe
 					'</div>' +
 				'</div>' +
 				
-				'<img src="' + messagePacket.senderIconSrc + '" class="avatar-img rounded-circle">' +
+				'<a href="user?id=' + messagePacket.senderId + '"><img src="' + messagePacket.senderIconSrc + '" class="avatar-img rounded-circle"></a>' +
 				
 			'</div>' 
 			:
@@ -48,7 +48,7 @@ window.createNewMessageCloudHtml = function( messagePacket, received=false, appe
 					'</div>' +
 				'</div>' +
 				
-				'<img src="' + currentUserIconSrc + '" class="avatar-img rounded-circle">' +
+				'<a href="user?id=' + currentUserId + '"><img src="' + currentUserIconSrc + '" class="avatar-img rounded-circle">' +
 				
 			'</div>';
 	

@@ -96,9 +96,13 @@ footer
 
 .avatar-img
 {
-	width: 40px !important;
-	height: 40px !important;
-	background-color: #fff;
+	width: 50px !important;
+	height: 50px !important;
+	/* background-color: #fff; */
+	
+	border-color: #772ce8;
+	border-width: 2px;
+	border-style: solid;
 }
 
 .profile-img
