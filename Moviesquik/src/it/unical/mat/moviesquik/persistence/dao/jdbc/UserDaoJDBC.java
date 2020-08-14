@@ -6,6 +6,7 @@ package it.unical.mat.moviesquik.persistence.dao.jdbc;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +23,7 @@ import it.unical.mat.moviesquik.util.DateUtil;
  */
 public class UserDaoJDBC implements UserDao
 {
-	protected static final String INSERT_STATEMENT           = "insert into \"user\"(user_id, first_name, last_name, email, birthday, gender, password, family_id, kid) values (?,?,?,?,?,?,?,?,?)";
+	protected static final String INSERT_STATEMENT           = "insert into \"user\"(user_id, first_name, last_name, email, birthday, gender, password, family_id, kid, facebook_id) values (?,?,?,?,?,?,?,?,?,?)";
 	protected static final String FIND_BY_PRIMARY_KEY_QUERY  = "select * from \"user\" where user_id = ?";
 	protected static final String FIND_ALL_QUERY             = "select * from \"user\"";
 	protected static final String UPDATE_STATEMENT           = "update \"user\" SET first_name = ?, last_name = ?, email = ?, birthday = ?, gender = ?, password = ?, profile_img = ?, family_id = ?, kid = ? WHERE user_id = ?";
@@ -64,7 +65,7 @@ public class UserDaoJDBC implements UserDao
 		}
 		
 		catch (SQLException e)
-		{ e.printStackTrace(); return false; }
+		{ return false; }
 		
 		finally 
 		{ statementPrompter.onFinalize(); }
@@ -345,6 +346,10 @@ public class UserDaoJDBC implements UserDao
 		statement.setString   (7, usr.getPassword());
 		statement.setLong     (8, usr.getFamily().getId());
 		statement.setBoolean  (9, usr.getIsKid());
+		
+		final Long facebookId = usr.getFacebookId();
+		if ( facebookId == null ) statement.setNull(10, Types.NULL);
+		else statement.setLong(10, facebookId);
 	}
 	
 	private User createUserFromResult( final ResultSet result, final Family family ) throws SQLException
@@ -368,6 +373,10 @@ public class UserDaoJDBC implements UserDao
 		
 		usr.setProfileImagePath(result.getString("profile_img"));
 		usr.setIsKid(result.getBoolean("kid"));
+		
+		final Long facebookId = result.getLong("facebook_id");
+		if ( !result.wasNull() )
+			usr.setFacebookId(facebookId);
 		
 		return usr;
 	}

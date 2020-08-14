@@ -28,7 +28,7 @@
 <!-- Add Profile Servlet -->
 <servlet>
 	<servlet-name>addprofile</servlet-name>
-	<servlet-class>it.unical.mat.moviesquik.controller.AddProfile</servlet-class>
+	<servlet-class>it.unical.mat.moviesquik.controller.accounting.AddProfile</servlet-class>
 </servlet>
 <servlet-mapping>
 	<servlet-name>addprofile</servlet-name>

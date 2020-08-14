@@ -30,6 +30,11 @@
 	<script src="js/popup.js"></script>
 	<script src="js/registration/addprofile.js" type="module"></script>
 	
+	<c:if test="${account != null}">
+		<script defer src="https://connect.facebook.net/en_US/sdk.js"></script>
+		<script src="js/registration/add-facebook-profile.js"></script>
+	</c:if>
+	
 </head>
 <body>
 
@@ -57,7 +62,11 @@
 			
 				<div id="form-header">
 					<div class="note">ADD NEW PROFILE</div>
-					<h4>Sign up to start enjoy watching Movies, TV Shows and more from your personal profile.</h4>
+					<h4>Sign up to start enjoy watching Movies, TV Shows and more from your personal profile.</h4><br>
+					<h6 class="">
+						Create a new profile or 
+						<button class="btn btn-primary btn-sm" id="add-facebook-profile-btn"><i class="fa fa-facebook"></i>&nbsp;&nbsp;Connect with Facebook</button>
+					</h6>
 				</div>
 				
 				<form method="POST" id="addprofileform" action="addprofile" class="well form-horizontal" onsubmit="return onSubmitUserDataForm()">

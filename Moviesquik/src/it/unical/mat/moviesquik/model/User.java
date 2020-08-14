@@ -29,6 +29,7 @@ public class User
 	private String password;
 	private Boolean isKid;
 	private Family family;
+	private Long facebookId;
 	private List<User> friends;
 	private Integer followersCount;
 	private List<String> favoritesGenres;
@@ -152,6 +153,16 @@ public class User
 	public void setFamily(Family family)
 	{
 		this.family = family;
+	}
+	
+	public Long getFacebookId()
+	{
+		return facebookId;
+	}
+	
+	public void setFacebookId(Long facebookId)
+	{
+		this.facebookId = facebookId;
 	}
 	
 	public List<User> getFriends()

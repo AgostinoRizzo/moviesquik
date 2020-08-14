@@ -1,7 +1,7 @@
 /**
  * 
  */
-package it.unical.mat.moviesquik.controller;
+package it.unical.mat.moviesquik.controller.accounting;
 
 import java.io.IOException;
 
@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import it.unical.mat.moviesquik.controller.SessionManager;
 import it.unical.mat.moviesquik.model.Family;
 import it.unical.mat.moviesquik.model.User;
 import it.unical.mat.moviesquik.model.Watchlist;
@@ -45,33 +46,44 @@ public class AddProfile extends HttpServlet
 		if ( account == null )
 			return;
 		
+		final String extParam = req.getParameter("ext");
+		final boolean externalUser = ( extParam != null && extParam.equals("true") );
+		final SubmittedProfileDataBroker userDataBroker = new RequestProfileDataBroker(req);
+		
 		final User new_user = new User();
 		
-		new_user.setFirstName( req.getParameter("first_name") );
-		new_user.setLastName( req.getParameter("last_name") );
+		new_user.setFirstName( userDataBroker.getParameter("first_name") );
+		new_user.setLastName( userDataBroker.getParameter("last_name") );
 		
-		String email = req.getParameter("email");
+		String email = userDataBroker.getParameter("email");
 		if ( email == null || email.length() == 0 )
 			email = account.getEmail();
 		new_user.setEmail( email );
 		
-		new_user.setBirthday( DateUtil.parse(req.getParameter("birthday")) );
-		new_user.setGender( req.getParameter("gender") );
+		new_user.setBirthday( DateUtil.parse(userDataBroker.getParameter("birthday")) );
+		new_user.setGender( userDataBroker.getParameter("gender") );
 		
-		final String password = req.getParameter("pin");
+		final String password = userDataBroker.getParameter("pin");
 		new_user.setPassword( password == null || password.length() == 0 ? null : password );
 		
-		final String iskid = req.getParameter("kid");
+		final String iskid = userDataBroker.getParameter("kid");
 		new_user.setIsKid( iskid != null && iskid.equals("true") );
 		
-		account.getMembers().add(new_user);
 		new_user.setFamily(account);
 		
+		if ( externalUser )
+		{
+			try { new_user.setFacebookId( Long.parseLong(userDataBroker.getParameter("fb_id")) ); }
+			catch (NumberFormatException e) {}
+		}
+			
 		final DaoFactory daoFacotry = DBManager.getInstance().getDaoFactory();
-		daoFacotry.getUserDao().save(new_user);
-		
-		daoFacotry.getWatchlistDao().insert(Watchlist.createNewWatchLaterWatchlist(new_user));
-		daoFacotry.getWatchlistDao().insert(Watchlist.createNewFavoritesWatchlist(new_user));
+		if ( daoFacotry.getUserDao().save(new_user) )
+		{
+			account.getMembers().add(new_user);
+			daoFacotry.getWatchlistDao().insert(Watchlist.createNewWatchLaterWatchlist(new_user));
+			daoFacotry.getWatchlistDao().insert(Watchlist.createNewFavoritesWatchlist(new_user));
+		}
 		
 //		final RequestDispatcher rd = req.getRequestDispatcher("whoiswatching.jsp");
 //		rd.forward(req, resp);

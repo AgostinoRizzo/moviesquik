@@ -14,6 +14,7 @@ function fillChatUsers(chatContainer)
 		return;
 	
 	userFillCounter++;
+	
 	$.ajax(
 	{
 		url : USERS_DATA_API_URL,

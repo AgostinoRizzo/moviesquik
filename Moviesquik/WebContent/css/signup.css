@@ -277,3 +277,13 @@ body
 		width: 900px !important;
 	}
 }
+
+
+/* External Profile Avatar Icon Style */
+.external-profile-icon
+{
+	right: 0px !important;
+	bottom: 0px !important;
+	margin-right: 20px !important;
+	margin-bottom: 50px !important;
+}

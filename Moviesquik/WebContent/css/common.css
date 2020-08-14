@@ -65,3 +65,22 @@
 {
 	margin-left: 10px;
 }
+
+/* External Profile Avatar Icon Style */
+.external-profile-icon
+{
+	position: absolute;
+	background-color: var(--primary);
+	border-radius: 50%;
+	
+	right: 0px;
+	bottom: 0px;
+	
+	width: 23px;
+	height: 23px;
+	
+	margin-right: 0px;
+	margin-left: 10px;
+	
+	padding: 2px;
+}

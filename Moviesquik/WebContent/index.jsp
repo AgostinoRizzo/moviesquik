@@ -50,15 +50,15 @@
 		<script src="js/home/home-chat-controller.js" type="module"></script>
 		<script src="js/home/home-chat-search.js" type="module"></script>
 		<script src="js/home/home-users-filler.js"></script>
+		<script src="js/home/home-posts-filler.js"></script>
 	</c:if>
 	<script src="js/watchlist/add-item.js"></script>
 	<script src="js/movieparty/movie-party-search.js"></script>
 	<script src="js/movieparty/movie-party-calendar.js"></script>
-	<%-- <c:if test="${user == null}"><script src="js/showcase/scrolling.js"></script></c:if> --%>
 	
 </head>
 <body>
-
+	
 	<!-- ======================
 		  Header section
 	======================= -->

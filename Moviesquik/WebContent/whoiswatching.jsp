@@ -13,6 +13,7 @@
 	
 	<!-- Style sheet files -->
 	<link href="css/main.css" rel="stylesheet">
+	<link href="css/common.css" rel="stylesheet">
 	<link href="css/widget.css" rel="stylesheet">
 	<link href="css/header.css" rel="stylesheet">
 	<link href="css/signup.css" rel="stylesheet">
@@ -121,6 +122,12 @@
 								<a href="whoiswatching?action=login&userid=${profile.id}" class="profile-img-button">
 									<img alt="" src="${profile_img_src}" class="profile-img rounded-circle clickable">
 								</a>
+								
+								<c:if test="${profile.facebookId != null}">
+									<div class="external-profile-icon">
+										<i class="fa fa-facebook"></i>
+									</div>
+								</c:if>
 								
 								<br>
 								<p class="profile-name">${profile.firstName} <c:if test="${profile.isKid}"><span class="badge badge-success">KID</span></c:if> </p>
