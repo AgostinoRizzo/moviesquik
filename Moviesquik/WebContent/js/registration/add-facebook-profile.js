@@ -2,12 +2,13 @@
  * 
  */
 
+const FACEBOOK_API_APP_ID = '325081788542228';
 var addFacebookProfileBtnClicked = false;
 
 window.fbAsyncInit = function() 
 {
 	FB.init({
-		appId 	: '325081788542228',
+		appId 	: FACEBOOK_API_APP_ID,
 		status	: true,
 		xfbml	: true,
 		version	: 'v8.0'

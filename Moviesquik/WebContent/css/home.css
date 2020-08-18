@@ -384,3 +384,12 @@
 #home-swiper .swiper
 {
 }
+
+.fb-posts-loader
+{
+	box-shadow: 0px 0px 20px 20px black;
+}
+.fb-posts-loader img
+{
+	margin: 0px 12px 0px 0px !important;
+}

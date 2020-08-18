@@ -113,14 +113,14 @@
 					<c:if test="${login_user == null}">
 					
 						<c:forEach items="${account.members}" var="profile">
-							<div class="col-auto">
+							<div class="col-auto clickable">
 								
 								<c:set var = "profile_img_src" scope = "request" value = "res/drawable/user_avatar.jpg"/>
 								<c:if test="${profile.profileImagePath != null && profile.profileImagePath.length() > 0}">
 									<c:set var = "profile_img_src" scope = "request" value = "${profile.profileImagePath}"/>
 								</c:if>
 								<a href="whoiswatching?action=login&userid=${profile.id}" class="profile-img-button">
-									<img alt="" src="${profile_img_src}" class="profile-img rounded-circle clickable">
+									<img alt="" src="${profile_img_src}" class="profile-img rounded-circle">
 								</a>
 								
 								<c:if test="${profile.facebookId != null}">
@@ -135,8 +135,8 @@
 							</div>
 						</c:forEach>
 						
-						<div class="col-auto">
-							<a href="addprofile"><img alt="" src="res/drawable/new_profile.png" class="profile-img rounded-circle clickable"></a>
+						<div class="col-auto clickable">
+							<a href="addprofile"><img alt="" src="res/drawable/new_profile.png" class="profile-img rounded-circle"></a>
 							<br>
 							<p class="profile-name">Add Profile</p>
 						</div>

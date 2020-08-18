@@ -35,6 +35,7 @@
 		<div class="col-4 scollable-col" id="posts-column">
 					<!-- New post box -->
 					<jsp:include page="../posting/new_post_box.jsp"></jsp:include>
+					<div class="loader loader-sm fb-posts-loader"><img src="res/drawable/fb_logo.png" class="m-page-fb-logo"></div>
 					<div id="news-list">
 						<jsp:include page="../posting/news_content.jsp"></jsp:include>
 					</div>

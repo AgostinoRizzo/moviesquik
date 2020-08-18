@@ -50,7 +50,9 @@
 		<script src="js/home/home-chat-controller.js" type="module"></script>
 		<script src="js/home/home-chat-search.js" type="module"></script>
 		<script src="js/home/home-users-filler.js"></script>
-		<script src="js/home/home-posts-filler.js"></script>
+		<script src="js/home/home-posts-filler.js" type="module"></script>
+		
+		<script defer src="https://connect.facebook.net/en_US/sdk.js"></script>
 	</c:if>
 	<script src="js/watchlist/add-item.js"></script>
 	<script src="js/movieparty/movie-party-search.js"></script>
