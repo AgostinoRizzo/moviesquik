@@ -11,6 +11,8 @@
 		<c:if test="${error != null}">Error</c:if>
 	</title>
 	
+	<link rel="icon" type="image/x-icon" href="res/drawable/m_logo.png">
+	
 	<!-- Bootstrap CSS File -->
 	<link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	

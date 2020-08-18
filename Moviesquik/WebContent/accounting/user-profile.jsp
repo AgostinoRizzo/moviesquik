@@ -7,6 +7,7 @@
 <meta charset="ISO-8859-1">
 
 	<title>${user_to_display.firstName} ${user_to_display.lastName}</title>
+	<link rel="icon" type="image/x-icon" href="res/drawable/m_logo.png">
 	
 	<!-- Bootstrap CSS File -->
 	<link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
