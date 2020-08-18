@@ -394,4 +394,15 @@
 	<url-pattern>/analytics/mcstats</url-pattern>
 </servlet-mapping>
 
+
+<!-- Facebook App API Servlet -->
+<servlet>
+	<servlet-name>fb_app</servlet-name>
+	<servlet-class>it.unical.mat.moviesquik.controller.api.FacebookApp</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>fb_app</servlet-name>
+	<url-pattern>/api/fbapp</url-pattern>
+</servlet-mapping>
+
 </web-app>

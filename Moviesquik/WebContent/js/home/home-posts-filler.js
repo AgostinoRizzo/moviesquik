@@ -4,11 +4,12 @@
 
 import './html-post-broker.js';
 
-const FACEBOOK_API_APP_ID = '325081788542228';
-const ACCESS_TOKEN = 'EAAEnqQCHbRQBACPZAZCrpFp6tlEQGMHffrZCdkzLyZCSrI141uCZCNAg7o2KsXsUCUWWIZCvNWITl0yKqLFfJqMVLCNWKgwB7DTzSxFm6HEVP1WGzfPUoo3HnLBXsx4K7PjCBs7M1pEzN9tGp9aVCZCFBM6bbjFyn5Fe6r9dpXZA8ZAZCJHgEsrhVtKKdZBVbR8ZCdd0ZBPZC65ZCrMZAzsf2ZAG5wQVJ';
-const FACEBOOK_PAGE_ID = '101419298349489';
 const FETCH_FB_PAGE_POSTS_COMMENTS_EVENT_NAME = 'fetch_fb_posts_comments';
 const INSERT_FB_PAGE_POSTS_EVENT_NAME = 'insert_fb_posts';
+
+var FACEBOOK_API_APP_ID;
+var FACEBOOK_PAGE_ID;
+var ACCESS_TOKEN;
 
 var facebookPagePosts = [];
 
@@ -150,9 +151,26 @@ function insertFacebookPagePosts()
 
 $(document).ready( function()
 	{
-		// TODO: fetch access token, page id using AJAX
 		document.addEventListener(FETCH_FB_PAGE_POSTS_COMMENTS_EVENT_NAME, fetchFacebookPagePostsComments);
 		document.addEventListener(INSERT_FB_PAGE_POSTS_EVENT_NAME, insertFacebookPagePosts);
-		fetchFacebookPagePosts();
+		
+		$.ajax(
+			{
+				type: 'GET',
+				url: 'api/fbapp',
+				dataType: "json",
+				success: function(data)
+					{
+						if ( data.app_id && data.fbpage_id && data.access_token )
+						{
+							FACEBOOK_API_APP_ID = data.app_id;
+							FACEBOOK_PAGE_ID = data.fbpage_id;
+							ACCESS_TOKEN = data.access_token;
+							
+							fetchFacebookPagePosts();
+						}
+					}
+			}
+		);
 	}
 );
