@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import it.unical.mat.moviesquik.model.Family;
 import it.unical.mat.moviesquik.model.User;
+import it.unical.mat.moviesquik.model.business.Analyst;
 import it.unical.mat.moviesquik.persistence.DBManager;
 
 /**
@@ -70,5 +71,24 @@ public class SessionManager
 		}
 		
 		return account;
+	}
+	
+	public static Analyst checkAdminAuthentication( final HttpServletRequest req, final HttpServletResponse resp ) 
+			throws ServletException, IOException
+	{
+		return checkAdminAuthentication(req, resp, true);
+	}
+	public static Analyst checkAdminAuthentication( final HttpServletRequest req, final HttpServletResponse resp, final boolean finalize ) 
+			throws ServletException, IOException
+	{
+		final Analyst admin = (Analyst) req.getSession().getAttribute("admin");
+		if ( admin == null )
+		{
+			if ( finalize ) 
+				ServletUtils.manageSessionError(req, resp);
+			return null;
+		}
+		
+		return admin;
 	}
 }

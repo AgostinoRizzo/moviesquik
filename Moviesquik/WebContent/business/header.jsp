@@ -7,17 +7,6 @@
 	  Header section
 ======================= -->
 
-<c:if test="${user != null}">
-	
-	<input type="hidden" id="user-id" value="${user.id}">
-	
-	<!-- main alerts -->
-	<div class="alert d-none" id="main-alert">
-		
-	</div>
-	
-</c:if>
-
 <header id="header">
 		
 	<nav class="navbar navbar-expand-md lgnavbar-light">
@@ -28,35 +17,13 @@
 			<span class="icon-bar bottom-bar"></span>
 		</button>
 		
-		<a class="navbar-brand" href="./"><img alt="" src="res/drawable/logo3.png"></a>
+		<a class="navbar-brand" href="./"><img alt="" src="res/drawable/business_logo.png"></a>
 		
 		<div class="collapse navbar-collapse justify-content-end" id="navbarToggler">
-		
-			<c:if test="${user == null}">
-			
-				<ul class="navbar-nav">
-					<li class="nav-item active">
-						<a class="nav-link" href="#">About <span class="sr-only">(current)</span></a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="business">Business</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#pricing-section">Prices</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="registration">Sign Up</a>
-					</li>
-				</ul>
-				<form class="form-inline my-2 my-lg-0">
-					<button class="btn btn-main" type="button" onclick="window.location.href='login'">Sign In</button>
-				</form>
-			
-			</c:if>
 			
 		</div>
 		
-		<c:if test="${user != null}">
+		<c:if test="${admin != null}">
 			<div class="collapse navbar-collapse justify-content-end" id="navbarToggler">
 				
 				<ul id="navbar-nav-links" class="navbar-nav">
@@ -91,28 +58,6 @@
 					<span id="searching-icon" class="input-group-addon fa fa-search d-none"></span>
 					<input id="search-textbox" class="form-control mr-sm-2 d-none" type="text" placeholder="Search on moviesquik" aria-label="Search" name="query" autocomplete="off">
 				</form>
-				    
-				<ul class="navbar-nav notifications-navbar-nav">
-						
-						<li class="nav-item last-nav-item dropdown">
-					        <a id="nav-user-avatar-box" class="nav-link" href="#" id="notifications-menu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					          	<span class="fa fa-envelope checked" id="notifications-menu-btn"></span>
-					          	
-					          	
-					        </a>
-					        <div id="nav-user-notifications-dropdown-menu" class="dropdown-menu dropdown-menu-right notifications-dropdown-menu header-dropdown-menu" aria-labelledby="notifications-menu">
-					        	<jsp:include page="notifications/notifications-list.jsp"></jsp:include>
-					        </div>
-					    </li>
-					    
-					    <c:if test="${user.unreadNotifications != null && user.unreadNotifications.size() > 0}">
-					    	<small><span class="badge badge-pill badge-danger">${user.unreadNotifications.size()}</span></small>
-					    </c:if>
-					    <c:if test="${user.unreadNotifications == null || user.unreadNotifications.size() == 0}">
-					    	<small><span class="badge badge-pill badge-danger invisible"></span></small>
-					    </c:if>
-					      
-				</ul>
 				
 				<ul id="navbar-nav-user" class="navbar-nav">
 						
@@ -132,7 +77,7 @@
 					        	<a class="dropdown-item" href="#">Dashboard</a>
 					        	<a class="dropdown-item" href="#">Edit Profile</a>
 					        	<div class="dropdown-divider"></div>
-					        	<a class="dropdown-item" href="login?logout=true&subject=user">Sign Out</a>
+					        	<a class="dropdown-item" href="business/login?logout=true">Sign Out</a>
 					        </div>
 					    </li>
 					      
@@ -145,12 +90,3 @@
 	</nav>
 		
 </header>
-
-<!-- <div class="chapternav">
-	<div class="container row">
-		
-		<div class="col-auto">
-		</div>
-		
-	</div>
-</div> -->

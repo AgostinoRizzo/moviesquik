@@ -1,0 +1,64 @@
+@charset "ISO-8859-1";
+
+#header
+{
+	background-color: black;
+}
+
+body
+{
+}
+
+.page-container-wrapper
+{
+	margin-top: 30vh;
+}
+.page-container
+{
+	text-align: center;
+}
+.page-container img
+{
+	height: 50px;
+}
+.page-container form
+{
+	margin-top: 50px;
+	margin-right: 100px;
+	margin-left: 100px;
+}
+.page-container form #sign-in-btn-col
+{
+	align-self: flex-end;
+	text-align: start;
+}
+.page-container form .form-row .col
+{
+	margin-top: 20px;
+}
+
+
+#business-login-intro h1,h2
+{
+	font-weight: 600;
+	font-size: 48px;
+}
+#business-login-intro h1
+{
+	/* font-size: 5.5rem; */
+}
+#business-login-intro h2
+{
+	/* font-size: 3.5rem; */
+}
+
+#business-background-img
+{
+	position: fixed;
+	left: 0px;
+	top: 0px;
+	min-width: 100%;
+	min-height: 100%;
+	z-index: -1;
+	-webkit-mask: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,.5) 50%, rgba(0,0,0,.8) 100%);
+}

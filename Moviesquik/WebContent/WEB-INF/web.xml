@@ -405,4 +405,25 @@
 	<url-pattern>/api/fbapp</url-pattern>
 </servlet-mapping>
 
+
+<!-- Business Home Servlet -->
+<servlet>
+	<servlet-name>business_home</servlet-name>
+	<servlet-class>it.unical.mat.moviesquik.controller.business.BusinessHome</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>business_home</servlet-name>
+	<url-pattern>/business</url-pattern>
+</servlet-mapping>
+
+<!-- Business Login Servlet -->
+<servlet>
+	<servlet-name>business_login</servlet-name>
+	<servlet-class>it.unical.mat.moviesquik.controller.business.BusinessLogin</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>business_login</servlet-name>
+	<url-pattern>/business/login</url-pattern>
+</servlet-mapping>
+
 </web-app>

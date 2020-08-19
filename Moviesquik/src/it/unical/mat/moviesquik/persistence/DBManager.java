@@ -9,6 +9,7 @@ import it.unical.mat.moviesquik.model.BillingReport;
 import it.unical.mat.moviesquik.model.CreditCard;
 import it.unical.mat.moviesquik.model.Family;
 import it.unical.mat.moviesquik.model.User;
+import it.unical.mat.moviesquik.model.business.Analyst;
 import it.unical.mat.moviesquik.persistence.dao.DaoFactory;
 import it.unical.mat.moviesquik.persistence.dao.jdbc.DaoFactoryJDBC;
 import it.unical.mat.moviesquik.persistence.searching.DBSearchEngine;
@@ -110,6 +111,13 @@ public class DBManager
 	public User login( final String email, final String password )
 	{
 		return getDaoFactory().getUserDao().findByLogin(email, password);
+	}
+	
+	public Analyst adminLogin( final String username, final String password )
+	{
+		final Analyst admin = new Analyst();
+		admin.setUsername(username);
+		return admin;
 	}
 	
 	public boolean updatePlanBilling( final BillingReport newBillingReport )
