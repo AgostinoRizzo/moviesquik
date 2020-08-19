@@ -29,6 +29,7 @@
 	<script src="lib/typeahead/bootstrap3-typeahead.js"></script>
 	<script src="js/anim.js"></script>
 	<script src="js/header.js"></script>
+	<script src="js/popup.js"></script>
 	<script src="js/business/login-intro.js"></script>
 	
 </head>
@@ -51,15 +52,15 @@
 				
 				<h5>Sign in into your analyst account to manage media contents, money collections, media servers, pages and contents analytics, external APIs and more.</h5>
 				
-				<form method="POST" action="business/login">
+				<form method="POST" action="business/login" id="signup-form">
 					
 					<div class="form-row">
 						<div class="col col-md-5 col-12">
-							<label for="email">Analyst username</label>
+							<label for="email">Analyst email</label>
 							<div class="input-group">
 								
 								<span class="input-group-addon"><span class="fa fa-user"></span></span>
-								<input type="text" id="username" name="username" class="form-control" placeholder="admin" value="" required>
+								<input type="text" id="email" name="email" class="form-control" placeholder="email@example.com" value="" required>
 								
 							</div>
 						</div>
@@ -73,7 +74,7 @@
 						</div>
 						
 						<div class="col col-md-2 col-12" id="sign-in-btn-col">
-							<button type="submit" class="btn btn-primary">Sign in</button>
+							<button type="submit" class="btn btn-primary" id="signin-submit-btn">Sign in</button>
 						</div>
 					</div>
 					
@@ -83,6 +84,28 @@
 			
 		</div>
 	</div>
+	
+	<c:if test="${error != null && error.type == 'invalid_login'}">
+				
+		<div id="invalid-login-popup" class="modal" tabindex="-1">
+	        <div class="modal-dialog">
+	            <div class="modal-content">
+	                <div class="modal-header">
+	                    <h5 class="modal-title">Invalid login</h5>
+	                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+	                </div>
+	                <div class="modal-body">
+	                    <p>Incorrect email or password.</p>
+	                    <p class="text-secondary"><small>Please enter a correct email address and password.</small></p>
+	                </div>
+	                <div class="modal-footer">
+	                    <button type="button" class="btn btn-main btn-main-light" data-dismiss="modal">Cancel</button>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+			  										
+	</c:if>
 
 </body>
 </html>

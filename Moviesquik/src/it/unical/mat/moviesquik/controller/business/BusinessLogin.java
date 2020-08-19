@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import it.unical.mat.moviesquik.controller.IllegalServletSessionException;
 import it.unical.mat.moviesquik.controller.ServletUtils;
 import it.unical.mat.moviesquik.controller.SessionManager;
+import it.unical.mat.moviesquik.model.Exception;
 import it.unical.mat.moviesquik.model.business.Analyst;
 import it.unical.mat.moviesquik.persistence.DBManager;
 
@@ -37,7 +38,7 @@ public class BusinessLogin extends HttpServlet
 			if ( isLogout != null && isLogout.equals("true") )
 				req.getSession().invalidate();
 		}
-		catch (Exception e) {}
+		catch (java.lang.Exception e) {}
 		finally 
 		{
 			resp.sendRedirect("../business");
@@ -54,26 +55,27 @@ public class BusinessLogin extends HttpServlet
 			return;
 		}
 		
-		final String username = req.getParameter("username");
+		final String email = req.getParameter("email");
 		final String password = req.getParameter("password");
 		
-		if ( username == null || password == null )
+		if ( email == null || password == null )
 		{
-			ServletUtils.manageSessionError(req, resp);
+			ServletUtils.manageSessionError(req, resp, "../info.jsp");
 			return;
 		}
 		
-		admin = DBManager.getInstance().adminLogin(username, password);
+		admin = DBManager.getInstance().adminLogin(email, password);
 		
 		if ( admin != null )
 		{
+			ServletUtils.removeAllSessionAttributes(req);
 			req.getSession().setAttribute("admin", admin);
 			resp.sendRedirect("../business");
 		}
 		else
 		{
-			ServletUtils.manageSessionError(req, resp);
-			return;
+			req.getSession().setAttribute("error", new Exception("invalid_login"));
+			resp.sendRedirect("../business");
 		}
 	}
 }

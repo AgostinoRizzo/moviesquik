@@ -28,11 +28,13 @@ import it.unical.mat.moviesquik.persistence.dao.analytics.MediaContentReviewDao;
 import it.unical.mat.moviesquik.persistence.dao.analytics.MediaContentStatisticsDao;
 import it.unical.mat.moviesquik.persistence.dao.analytics.MediaStatisticLogDao;
 import it.unical.mat.moviesquik.persistence.dao.analytics.WatchHistoryLogDao;
+import it.unical.mat.moviesquik.persistence.dao.business.AnalystDao;
 import it.unical.mat.moviesquik.persistence.dao.jdbc.analytics.AnalyticsExtractorDaoJDBC;
 import it.unical.mat.moviesquik.persistence.dao.jdbc.analytics.MediaContentReviewDaoJDBC;
 import it.unical.mat.moviesquik.persistence.dao.jdbc.analytics.MediaContentStatisticsDaoJDBC;
 import it.unical.mat.moviesquik.persistence.dao.jdbc.analytics.MediaStatisticLogDaoJDBC;
 import it.unical.mat.moviesquik.persistence.dao.jdbc.analytics.WatchHistoryLogDaoJDBC;
+import it.unical.mat.moviesquik.persistence.dao.jdbc.business.AnalystDaoJDBC;
 import it.unical.mat.moviesquik.persistence.dao.jdbc.media.MediaContentDaoJDBC;
 import it.unical.mat.moviesquik.persistence.dao.jdbc.media.MediaContentGenreDaoJDBC;
 import it.unical.mat.moviesquik.persistence.dao.jdbc.media.MediaContentSearchDaoJDBC;
@@ -198,6 +200,12 @@ public class DaoFactoryJDBC implements DaoFactory
 	public AnalyticsExtractorDao getAnalyticsExtractorDao()
 	{
 		return new AnalyticsExtractorDaoJDBC(getNewStatementPrompter());
+	}
+	
+	@Override
+	public AnalystDao getAnalystDao()
+	{
+		return new AnalystDaoJDBC(getNewStatementPrompter());
 	}
 	
 	@Override

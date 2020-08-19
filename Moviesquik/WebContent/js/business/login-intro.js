@@ -32,6 +32,10 @@ function changeIntroImage()
 
 $(document).ready(function() 
 	{
+		$("#signup-form").submit( function() {
+			$(this).find("#signin-submit-btn").html("<h5>Signing in...</h5>");
+		});
+	
 		setIntroImageChangeTimeout();
 	}
 );

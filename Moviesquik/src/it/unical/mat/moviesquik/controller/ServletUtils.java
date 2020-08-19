@@ -30,18 +30,30 @@ public class ServletUtils
 	public static void manageSessionError( HttpServletRequest req, HttpServletResponse resp ) 
 			throws ServletException, IOException
 	{
+		manageSessionError(req, resp, "info.jsp");
+	}
+	
+	public static void manageSessionError( HttpServletRequest req, HttpServletResponse resp, String path ) 
+			throws ServletException, IOException
+	{
 		req.getSession().setAttribute("error", new Exception("session_error"));
 		
-		final RequestDispatcher rd = req.getRequestDispatcher("info.jsp");
+		final RequestDispatcher rd = req.getRequestDispatcher(path);
 		rd.forward(req, resp);
 	}
 	
 	public static void manageParameterError( HttpServletRequest req, HttpServletResponse resp ) 
 			throws ServletException, IOException
 	{
+		manageParameterError(req, resp, "info.jsp");
+	}
+	
+	public static void manageParameterError( HttpServletRequest req, HttpServletResponse resp, String path ) 
+			throws ServletException, IOException
+	{
 		req.getSession().setAttribute("error", new Exception("parameter_error"));
 		
-		final RequestDispatcher rd = req.getRequestDispatcher("info.jsp");
+		final RequestDispatcher rd = req.getRequestDispatcher(path);
 		rd.forward(req, resp);
 	}
 	

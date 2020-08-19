@@ -17,8 +17,8 @@ import it.unical.mat.moviesquik.persistence.DataListPage;
  */
 public class User
 {
-	private static final String DEFAULT_USER_PROFILE_IMG_PATH = "res/drawable/user_avatar.jpg";
-	private static final String USER_PROFILE_IMG_PATH = "res/user/";
+	public static final String DEFAULT_USER_PROFILE_IMG_PATH = "res/drawable/user_avatar.jpg";
+	public static final String USER_PROFILE_IMG_PATH = "res/user/";
 	
 	private Long id;
 	private String first_name;

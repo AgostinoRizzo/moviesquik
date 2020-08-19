@@ -3,21 +3,66 @@
  */
 package it.unical.mat.moviesquik.model.business;
 
+import it.unical.mat.moviesquik.model.User;
+
 /**
  * @author Agostino
  *
  */
 public class Analyst
 {
-	private String username;
+	private Long id;
+	private String email;
+	private String firstName;
+	private String LastName;
+	private String profileImagePath;
 	
-	public String getUsername()
+	public Long getId()
 	{
-		return username;
+		return id;
+	}
+	public void setId(Long id)
+	{
+		this.id = id;
 	}
 	
-	public void setUsername(String username)
+	public String getEmail()
 	{
-		this.username = username;
+		return email;
 	}
+	
+	public void setEmail(String email)
+	{
+		this.email = email;
+	}
+	
+	public String getFirstName()
+	{
+		return firstName;
+	}
+	public void setFirstName(String firstName)
+	{
+		this.firstName = firstName;
+	}
+	
+	public String getLastName()
+	{
+		return LastName;
+	}
+	public void setLastName(String lastName)
+	{
+		LastName = lastName;
+	}
+	
+	public String getProfileImagePath()
+	{
+		return (profileImagePath == null || profileImagePath.isEmpty()) 
+				? User.DEFAULT_USER_PROFILE_IMG_PATH : User.USER_PROFILE_IMG_PATH + profileImagePath;
+	}
+	
+	public void setProfileImagePath(String profileImagePath)
+	{
+		this.profileImagePath = profileImagePath;
+	}
+	
 }

@@ -113,11 +113,9 @@ public class DBManager
 		return getDaoFactory().getUserDao().findByLogin(email, password);
 	}
 	
-	public Analyst adminLogin( final String username, final String password )
+	public Analyst adminLogin( final String email, final String password )
 	{
-		final Analyst admin = new Analyst();
-		admin.setUsername(username);
-		return admin;
+		return getDaoFactory().getAnalystDao().findByLogin(email, password);
 	}
 	
 	public boolean updatePlanBilling( final BillingReport newBillingReport )
