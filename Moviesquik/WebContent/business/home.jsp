@@ -14,10 +14,14 @@
 	<!-- Style sheet files -->
 	<link href="css/main.css" rel="stylesheet">
 	<link href="css/business.css" rel="stylesheet">
+	<link href="css/business-home.css" rel="stylesheet">
 	<link href="css/header.css" rel="stylesheet">
 	<link href="css/widget.css" rel="stylesheet">
 	<link href="css/common.css" rel="stylesheet">
 	<link href="css/glyphicon.css" rel="stylesheet">
+	<link href="css/home.css" rel="stylesheet">
+	<link href="css/media.css" rel="stylesheet">
+	<link href="css/contents.css" rel="stylesheet">
 	
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	
@@ -29,6 +33,8 @@
 	<script src="lib/typeahead/bootstrap3-typeahead.js"></script>
 	<script src="js/anim.js"></script>
 	<script src="js/header.js"></script>
+	<script src="js/business/sidenav.js"></script>
+	<script src="js/business/media-search.js"></script>
 	
 </head>
 <body>
@@ -39,11 +45,18 @@
 	
 	<jsp:include page="header.jsp"></jsp:include>
 	
-	<div class="page-container-wrapper">
-		<div class="page-container container">
-			
+	<div class="page-container home-container-wrapper row">
+		
+		<!-- home sidenav -->
+		<div class="col-2 scollable-col sidenav users-col home-container-col" id="home-sidenav-col">
+			<jsp:include page="sidenav.jsp"></jsp:include>
+		</div>
+		
+		<!-- home page content -->
+		<div class="col-10 scollable-col home-container-col" id="home-page-content">
 			
 		</div>
+		
 	</div>
 
 </body>

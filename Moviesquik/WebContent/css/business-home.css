@@ -1,0 +1,22 @@
+@charset "ISO-8859-1";
+
+.loader
+{
+	top: calc(50% - 15px);
+}
+
+#home-page-content
+{
+	text-align: left;
+}
+
+#media-search-form #search-media-btn-col
+{
+	align-self: flex-end;
+	text-align: start;
+}
+
+#media-search-results-container
+{
+	position: relative;
+}

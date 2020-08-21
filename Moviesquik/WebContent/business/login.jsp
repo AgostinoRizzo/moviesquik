@@ -47,7 +47,7 @@
 			
 			<div id="business-login-intro">
 			
-				<img src="res/drawable/business_logo.png">
+				<img src="res/drawable/business_logo.png" id="business-logo-img">
 				<h1>Management and Analytics</h1>
 				
 				<h5>Sign in into your analyst account to manage media contents, money collections, media servers, pages and contents analytics, external APIs and more.</h5>
@@ -55,12 +55,12 @@
 				<form method="POST" action="business/login" id="signup-form">
 					
 					<div class="form-row">
-						<div class="col col-md-5 col-12">
+						<div class="col col-md-6 col-12">
 							<label for="email">Analyst email</label>
 							<div class="input-group">
 								
 								<span class="input-group-addon"><span class="fa fa-user"></span></span>
-								<input type="text" id="email" name="email" class="form-control" placeholder="email@example.com" value="" required>
+								<input type="text" id="email" name="email" class="form-control" placeholder="email@example.com" value="admin@moviesquik.com" required>
 								
 							</div>
 						</div>
@@ -68,12 +68,12 @@
 							<label for="password">Password</label>
 							<div class="input-group">
 								<span class="input-group-addon"><span class="fa fa-lock"></span></span>
-								<input type="password" id="password" name="password" class="form-control" placeholder="Password" value="" required>
+								<input type="password" id="password" name="password" class="form-control" placeholder="Password" value="adminpassword1234" required>
 								
 							</div>
 						</div>
 						
-						<div class="col col-md-2 col-12" id="sign-in-btn-col">
+						<div class="col col-md-1 col-12" id="sign-in-btn-col">
 							<button type="submit" class="btn btn-primary" id="signin-submit-btn">Sign in</button>
 						</div>
 					</div>

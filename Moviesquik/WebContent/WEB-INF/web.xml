@@ -426,4 +426,24 @@
 	<url-pattern>/business/login</url-pattern>
 </servlet-mapping>
 
+<!-- Business Media Contents Management Servlet -->
+<servlet>
+	<servlet-name>business_media_management</servlet-name>
+	<servlet-class>it.unical.mat.moviesquik.controller.business.MediaContentsManagement</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>business_media_management</servlet-name>
+	<url-pattern>/business/media</url-pattern>
+</servlet-mapping>
+
+<!-- Business Media Contents Register Servlet -->
+<servlet>
+	<servlet-name>business_media_register</servlet-name>
+	<servlet-class>it.unical.mat.moviesquik.controller.business.MediaContentsRegister</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>business_media_register</servlet-name>
+	<url-pattern>/business/media/register</url-pattern>
+</servlet-mapping>
+
 </web-app>

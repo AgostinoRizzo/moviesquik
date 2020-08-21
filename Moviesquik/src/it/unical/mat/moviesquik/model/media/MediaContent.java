@@ -188,6 +188,10 @@ public class MediaContent
 	{
 		return getStreamTime() / 60;
 	}
+	public boolean hasStreaming()
+	{
+		return ( streamTime != null && streamTime > 0 );
+	}
 	public MediaContentStatistics getStatistics()
 	{
 		return statistics;

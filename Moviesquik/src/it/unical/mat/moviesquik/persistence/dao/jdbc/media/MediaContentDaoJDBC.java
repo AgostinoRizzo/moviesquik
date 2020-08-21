@@ -6,6 +6,7 @@ package it.unical.mat.moviesquik.persistence.dao.jdbc.media;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -172,7 +173,10 @@ public class MediaContentDaoJDBC implements MediaContentDao
 		statement.setString     (11, mediaContent.getDirector());
 		statement.setString     (12, mediaContent.getActors());
 		statement.setFloat      (13, mediaContent.getRating());
-		statement.setInt        (14, mediaContent.getStreamTime());
+		
+		final Integer streamTime = mediaContent.hasStreaming() ? mediaContent.getStreamTime() : null;
+		if ( streamTime != null ) statement.setInt (14, mediaContent.getStreamTime());
+		else                      statement.setNull(14, Types.NULL);
 	}
 	
 	public static MediaContent createFromResult( final ResultSet result ) throws SQLException

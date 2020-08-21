@@ -20,7 +20,7 @@ public class DBFiller
 	
 	public void fillMediaContents( final String root_path )
 	{		
-		final MediaContent[] mcs = JSONUtil.readFromFile(root_path + File.separator + MEDIA_CONTENTS_JSON_FILE,
+		final MediaContent[] mcs = JSONUtil.readClassFromFile(root_path + File.separator + MEDIA_CONTENTS_JSON_FILE,
 													    MediaContent[].class);
 		
 		for ( final MediaContent mc : mcs )
