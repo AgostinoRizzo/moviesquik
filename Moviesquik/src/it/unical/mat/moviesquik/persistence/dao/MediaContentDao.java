@@ -16,6 +16,7 @@ public interface MediaContentDao
 	public boolean save( final MediaContent mediaContent );
 	public boolean updateRatings( final MediaContent mediaContent );
 	public List<MediaContent> findByTitleYear( final String title, final short year );
+	public List<MediaContent> findAll();
 	public MediaContent getMediaContentOfTheDay();
 	public MediaContent findById( final Long id );
 	public boolean updateNewViewById( final Long id );

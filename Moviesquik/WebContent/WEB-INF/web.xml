@@ -446,4 +446,24 @@
 	<url-pattern>/business/media/register</url-pattern>
 </servlet-mapping>
 
+<!-- Business Media Contents Analytics Servlet -->
+<servlet>
+	<servlet-name>business_media_analytics</servlet-name>
+	<servlet-class>it.unical.mat.moviesquik.controller.business.MediaContentsAnalytics</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>business_media_analytics</servlet-name>
+	<url-pattern>/business/analytics</url-pattern>
+</servlet-mapping>
+
+<!-- Business Media Contents Analytics Chart Servlet -->
+<servlet>
+	<servlet-name>business_media_analytics_chart</servlet-name>
+	<servlet-class>it.unical.mat.moviesquik.controller.business.MediaContentsAnalyticsChart</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>business_media_analytics_chart</servlet-name>
+	<url-pattern>/business/analytics/chart</url-pattern>
+</servlet-mapping>
+
 </web-app>

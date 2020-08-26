@@ -8,7 +8,7 @@ const HOME_PAGE_CONTENT_LOADER_HTML = '<div class="loader loader-sm"></div>';
 
 var currSidenavSelectedItem;
 
-function onSidenavItemClick(clickedItem) 
+function onSidenavItemClick(clickedItem, homePageContentFetchUrl) 
 {
 	if ( currSidenavSelectedItem )
 		currSidenavSelectedItem.removeClass(SELECTED_CLASS);
@@ -16,15 +16,15 @@ function onSidenavItemClick(clickedItem)
 	currSidenavSelectedItem.addClass(SELECTED_CLASS);
 	
 	$(HOME_PAGE_CONTENT_ID).html(HOME_PAGE_CONTENT_LOADER_HTML);
-	fetchHomePageContent();
+	fetchHomePageContent(homePageContentFetchUrl);
 }
 
-function fetchHomePageContent() 
+function fetchHomePageContent(homePageContentFetchUrl) 
 {
 	$.ajax(
 		{
 			type: 'GET',
-			url: 'business/media',
+			url: homePageContentFetchUrl,
 			dataType: "html",
 			success: function(data)
 				{
@@ -36,11 +36,9 @@ function fetchHomePageContent()
 
 $(document).ready(function() 
 	{
-		onSidenavItemClick($('#dashboard-link-item'));
+		onSidenavItemClick($('#dashboard-link-item'), 'business/media');
 		
-		$('#media-contents-link-item').click( function() 
-		{
-			onSidenavItemClick($(this));
-		});
+		$('#media-contents-link-item').click( function() { onSidenavItemClick($(this), 'business/media'); } );
+		$('#analytics-link-item')     .click( function() { onSidenavItemClick($(this), 'business/analytics'); } );
 	}
 );

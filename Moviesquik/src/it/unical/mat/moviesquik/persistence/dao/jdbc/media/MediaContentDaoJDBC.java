@@ -30,6 +30,7 @@ public class MediaContentDaoJDBC implements MediaContentDao
 	protected static final String UPDATE_NEW_VIEW_STATEMENT = "update media_content SET views = views + 1 WHERE media_content_id = ?";
 	protected static final String FIND_BY_PRIMARY_KEY_QUERY = "select * from media_content where media_content_id = ?";
 	protected static final String FIND_BY_TITLE_YEAR_QUERY = "select * from media_content where title = ? and year = ?";
+	protected static final String FIND_ALL_QUERY = "select * from media_content";
 	
 	
 	private final StatementPrompterJDBC statementPrompter;
@@ -92,6 +93,29 @@ public class MediaContentDaoJDBC implements MediaContentDao
 			final PreparedStatement statement = statementPrompter.prepareStatement(FIND_BY_TITLE_YEAR_QUERY);
 			statement.setString(1, title);
 			statement.setShort(2, year);
+			
+			ResultSet result = statement.executeQuery();
+			
+			while ( result.next() )
+				mediaContents.add( createFromResult(result) );
+			return mediaContents;
+		}
+		
+		catch (SQLException e)
+		{ e.printStackTrace(); return mediaContents; }
+		
+		finally 
+		{ statementPrompter.onFinalize(); }
+	}
+	
+	@Override
+	public List<MediaContent> findAll()
+	{
+		final List<MediaContent> mediaContents = new ArrayList<MediaContent>();
+		
+		try
+		{
+			final PreparedStatement statement = statementPrompter.prepareStatement(FIND_ALL_QUERY);
 			
 			ResultSet result = statement.executeQuery();
 			

@@ -6,8 +6,10 @@ package it.unical.mat.moviesquik.util;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -73,9 +75,36 @@ public class DateUtil
 		return new Date(fromDate.getTime());
 	}
 	
+	public static Date toJava( final java.sql.Date fromDate )
+	{
+		if ( fromDate == null )
+			return null;
+		return new Date(fromDate.getTime());
+	}
+	
 	public static Date getCurrent()
 	{
 		return new Date(System.currentTimeMillis());
+	}
+	
+	public static Calendar getCurrentDayCalendar()
+	{
+		final Calendar today = Calendar.getInstance();
+		today.setTimeInMillis(System.currentTimeMillis());
+		setDaysHorizon(today);
+		return today;
+	}
+	
+	public static Date getCurrentDay()
+	{
+		return getCurrentDayCalendar().getTime();
+	}
+	
+	public static Date getYesterday()
+	{
+		final Calendar yesterday = getCurrentDayCalendar();
+		yesterday.add(Calendar.DATE, -1);
+		return yesterday.getTime();
 	}
 	
 	public static String getCurrentClockTime()
@@ -92,10 +121,28 @@ public class DateUtil
 	
 	public static void setDaysHorizon( final Calendar c )
 	{
-		c.set(Calendar.HOUR, 0);
+		c.set(Calendar.HOUR_OF_DAY, 0);
 		c.set(Calendar.MINUTE, 0);
 		c.set(Calendar.SECOND, 0);
 		c.set(Calendar.MILLISECOND, 0);
+	}
+	
+	public static List<Date> getLastDaysList( final int lastDaysCount )
+	{
+		final List<Date> daysList = new ArrayList<Date>();
+		if (lastDaysCount <= 0 )
+			return daysList;
+		
+		final Calendar day = getCurrentDayCalendar();
+		day.add(Calendar.DATE, -lastDaysCount);
+		
+		for( int i=0; i<lastDaysCount; ++i )
+		{
+			daysList.add(day.getTime());
+			day.add(Calendar.DATE, 1);
+		}
+		
+		return daysList;
 	}
 	
 	public static String toHumanReadable( final Date when )
@@ -150,6 +197,14 @@ public class DateUtil
 			target_date.setTime(when);
 			ans += " at " + getTimeString(target_date);
 		}
+		
+		return ans;
+	}
+	
+	public static String toDayString( final Date when )
+	{
+		final SimpleDateFormat format = new SimpleDateFormat("dd-MM", Locale.ENGLISH);
+		String ans = format.format(when);
 		
 		return ans;
 	}

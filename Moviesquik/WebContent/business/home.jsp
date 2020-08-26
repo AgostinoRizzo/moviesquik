@@ -33,8 +33,14 @@
 	<script src="lib/typeahead/bootstrap3-typeahead.js"></script>
 	<script src="js/anim.js"></script>
 	<script src="js/header.js"></script>
+	
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	
 	<script src="js/business/sidenav.js"></script>
-	<script src="js/business/media-search.js"></script>
+	<script src="js/business/media-search-utils.js"></script>
+	<script src="js/business/media-search.js" type="module"></script>
+	<script src="js/business/media-search-analytics.js" type="module"></script>
+	<script src="js/business/media-analytics-dashboard.js" type="module"></script>
 	
 </head>
 <body>

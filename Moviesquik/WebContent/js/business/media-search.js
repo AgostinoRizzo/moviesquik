@@ -2,13 +2,11 @@
  * 
  */
 
+import './media-search-utils.js';
+
 const EXTERNAL_DB_API_KEY = '871e3cc3';
 const EXTERNAL_DB_API_URL = 'http://www.omdbapi.com/?apikey=871e3cc3';
 
-const SEARCH_LOADER_HTML  = '<div class="loader loader-sm"></div>';
-const SEARCH_TITLE_REQUIRED_ALERT_HTML   = '<span class="fa fa-warning text-warning"></span> The media content title is required!';
-const MEDIA_SEARCH_ERROR_ALERT_HTML   = '<span class="fa fa-warning text-warning"></span> The media content search error!';
-const MEDIA_SEARCH_EMPTY_ALERT_HTML   = '<span class="fa fa-warning text-warning"></span> No search results.';
 const MEDIA_SEARCH_RESULTS_CONTAINER_ID = '#media-search-results-container';
 
 const REGISTERED_MEDIA_INFO_HTML = 

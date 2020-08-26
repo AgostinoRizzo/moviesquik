@@ -64,4 +64,13 @@ public class JSONUtil
 	{
 		return (JsonArray) JsonParser.parseString(json);
 	}
+	
+	public static JsonArray fromListToJsonArray( final List<?> lst, final Class<?> itemsClass )
+	{
+		final Gson gson = new Gson();
+		final JsonArray array = new JsonArray();
+		for ( final Object item : lst )
+			array.add( gson.toJsonTree(item) );
+		return array;
+	}
 }

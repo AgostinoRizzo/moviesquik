@@ -5,6 +5,7 @@ package it.unical.mat.moviesquik.model.media;
 
 import java.util.Date;
 
+import it.unical.mat.moviesquik.model.analytics.MediaContentSharing;
 import it.unical.mat.moviesquik.model.analytics.MediaContentStatistics;
 import it.unical.mat.moviesquik.util.DateUtil;
 
@@ -32,6 +33,8 @@ public class MediaContent
 	protected float imdbRating;
 	protected Integer streamTime;
 	protected MediaContentStatistics statistics;
+	protected MediaContentSharing shortSharing;
+	protected MediaContentSharing longSharing;
 	
 	public Long getId()
 	{
@@ -199,6 +202,22 @@ public class MediaContent
 	public void setStatistics(MediaContentStatistics statistics)
 	{
 		this.statistics = statistics;
+	}
+	public MediaContentSharing getShortSharing()
+	{
+		return shortSharing;
+	}
+	public void setShortSharing(MediaContentSharing shortSharing)
+	{
+		this.shortSharing = shortSharing;
+	}
+	public MediaContentSharing getLongSharing()
+	{
+		return longSharing;
+	}
+	public void setLongSharing(MediaContentSharing longSharing)
+	{
+		this.longSharing = longSharing;
 	}
 	
 	@Override

@@ -24,13 +24,17 @@ import it.unical.mat.moviesquik.persistence.dao.UserDao;
 import it.unical.mat.moviesquik.persistence.dao.WatchlistDao;
 import it.unical.mat.moviesquik.persistence.dao.WatchlistItemDao;
 import it.unical.mat.moviesquik.persistence.dao.analytics.AnalyticsExtractorDao;
+import it.unical.mat.moviesquik.persistence.dao.analytics.MediaAnalyticsHistoryLogDao;
 import it.unical.mat.moviesquik.persistence.dao.analytics.MediaContentReviewDao;
+import it.unical.mat.moviesquik.persistence.dao.analytics.MediaContentSharingDao;
 import it.unical.mat.moviesquik.persistence.dao.analytics.MediaContentStatisticsDao;
 import it.unical.mat.moviesquik.persistence.dao.analytics.MediaStatisticLogDao;
 import it.unical.mat.moviesquik.persistence.dao.analytics.WatchHistoryLogDao;
 import it.unical.mat.moviesquik.persistence.dao.business.AnalystDao;
 import it.unical.mat.moviesquik.persistence.dao.jdbc.analytics.AnalyticsExtractorDaoJDBC;
+import it.unical.mat.moviesquik.persistence.dao.jdbc.analytics.MediaAnalyticsHistoryLogDaoJDBC;
 import it.unical.mat.moviesquik.persistence.dao.jdbc.analytics.MediaContentReviewDaoJDBC;
+import it.unical.mat.moviesquik.persistence.dao.jdbc.analytics.MediaContentSharingDaoJDBC;
 import it.unical.mat.moviesquik.persistence.dao.jdbc.analytics.MediaContentStatisticsDaoJDBC;
 import it.unical.mat.moviesquik.persistence.dao.jdbc.analytics.MediaStatisticLogDaoJDBC;
 import it.unical.mat.moviesquik.persistence.dao.jdbc.analytics.WatchHistoryLogDaoJDBC;
@@ -197,6 +201,12 @@ public class DaoFactoryJDBC implements DaoFactory
 	}
 	
 	@Override
+	public MediaContentSharingDao getMediaContentSharingDao()
+	{
+		return new MediaContentSharingDaoJDBC(getNewStatementPrompter());
+	}
+	
+	@Override
 	public AnalyticsExtractorDao getAnalyticsExtractorDao()
 	{
 		return new AnalyticsExtractorDaoJDBC(getNewStatementPrompter());
@@ -206,6 +216,12 @@ public class DaoFactoryJDBC implements DaoFactory
 	public AnalystDao getAnalystDao()
 	{
 		return new AnalystDaoJDBC(getNewStatementPrompter());
+	}
+	
+	@Override
+	public MediaAnalyticsHistoryLogDao getMediaAnalyticsHistoryLogDao()
+	{
+		return new MediaAnalyticsHistoryLogDaoJDBC(getNewStatementPrompter());
 	}
 	
 	@Override

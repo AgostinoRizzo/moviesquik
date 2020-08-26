@@ -10,13 +10,46 @@
 	text-align: left;
 }
 
+#media-search-form, #analytics-media-dashboard-container
+{
+	margin-right: 2%;
+	margin-left: 2%;
+}
+
 #media-search-form #search-media-btn-col
 {
 	align-self: flex-end;
 	text-align: start;
 }
 
-#media-search-results-container
+#media-search-results-container, #analytics-media-search-results, #analytics-media-dashboard-container
 {
 	position: relative;
+}
+
+#analytics-media-search-results .fa-warning
+{
+	margin-left: 2%;
+}
+
+#media-dashboard-content-col
+{
+	margin-top: 15px;
+}
+
+#dashboard-media-card-col .card-body
+{
+	justify-content: flex-start !important;
+}
+
+#charts-data-row
+{
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+#media-analytics-charts-loader
+{
+	top: 0px !important;
+	margin-left: 10px;
 }
