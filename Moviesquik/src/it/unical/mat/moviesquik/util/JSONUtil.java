@@ -60,9 +60,14 @@ public class JSONUtil
 		return new Gson().fromJson(reader, JsonObject.class);
 	}
 	
-	public static JsonArray fromStringToArray( final String json )
+	public static JsonArray fromStringToJsonArray( final String json )
 	{
 		return (JsonArray) JsonParser.parseString(json);
+	}
+	
+	public static JsonObject fromStringToJsonObject( final String json )
+	{
+		return (JsonObject) JsonParser.parseString(json);
 	}
 	
 	public static JsonArray fromListToJsonArray( final List<?> lst, final Class<?> itemsClass )

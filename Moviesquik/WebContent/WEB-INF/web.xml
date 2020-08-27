@@ -436,6 +436,16 @@
 	<url-pattern>/business/media</url-pattern>
 </servlet-mapping>
 
+<!-- Media Contents AMDB API data Servlet -->
+<servlet>
+	<servlet-name>business_omdb_api_data</servlet-name>
+	<servlet-class>it.unical.mat.moviesquik.controller.api.ExternalOmdbApi</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>business_omdb_api_data</servlet-name>
+	<url-pattern>/business/media/apidata</url-pattern>
+</servlet-mapping>
+
 <!-- Business Media Contents Register Servlet -->
 <servlet>
 	<servlet-name>business_media_register</servlet-name>
@@ -464,6 +474,26 @@
 <servlet-mapping>
 	<servlet-name>business_media_analytics_chart</servlet-name>
 	<url-pattern>/business/analytics/chart</url-pattern>
+</servlet-mapping>
+
+<!-- Business CDN Servers Servlet -->
+<servlet>
+	<servlet-name>business_cdn</servlet-name>
+	<servlet-class>it.unical.mat.moviesquik.controller.business.ContextDistributionNetwork</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>business_cdn</servlet-name>
+	<url-pattern>/business/cdn</url-pattern>
+</servlet-mapping>
+
+<!-- Business CDN Broker Servlet -->
+<servlet>
+	<servlet-name>business_cdn_broker</servlet-name>
+	<servlet-class>it.unical.mat.moviesquik.controller.business.ContextDistributionNetworkBroker</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>business_cdn_broker</servlet-name>
+	<url-pattern>/business/cdn/list</url-pattern>
 </servlet-mapping>
 
 </web-app>

@@ -9,13 +9,19 @@ package it.unical.mat.moviesquik.model.streaming;
  */
 public class StreamService
 {
+	private final String serverKey;
 	private final String serverAddress;
 	private final int    servicePort;
 	
-	public StreamService( final String serverAddress, final int servicePort )
+	public StreamService( final String serverKey, final String serverAddress, final int servicePort )
 	{
+		this.serverKey = serverKey;
 		this.serverAddress = serverAddress;
 		this.servicePort = servicePort;
+	}
+	public String getServerKey()
+	{
+		return serverKey;
 	}
 	public String getServerAddress()
 	{

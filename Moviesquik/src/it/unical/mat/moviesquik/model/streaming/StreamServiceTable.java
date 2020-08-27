@@ -68,6 +68,19 @@ public class StreamServiceTable implements Runnable
 			lock.unlock();
 		}
 	}
+	public boolean isStreamServiceOn( final String serverKey )
+	{
+		lock.lock();
+		try
+		{
+			final Set<StreamService> activeServices = services.keySet();
+			for ( final StreamService s : activeServices )
+				if ( s.getServerKey().equals(serverKey) )
+					return true;
+			return false;
+		}
+		finally { lock.unlock(); }
+	}
 	@Override
 	public void run()
 	{

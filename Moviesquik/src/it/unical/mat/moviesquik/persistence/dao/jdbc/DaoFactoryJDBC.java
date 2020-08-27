@@ -31,6 +31,7 @@ import it.unical.mat.moviesquik.persistence.dao.analytics.MediaContentStatistics
 import it.unical.mat.moviesquik.persistence.dao.analytics.MediaStatisticLogDao;
 import it.unical.mat.moviesquik.persistence.dao.analytics.WatchHistoryLogDao;
 import it.unical.mat.moviesquik.persistence.dao.business.AnalystDao;
+import it.unical.mat.moviesquik.persistence.dao.business.CDNServerDao;
 import it.unical.mat.moviesquik.persistence.dao.jdbc.analytics.AnalyticsExtractorDaoJDBC;
 import it.unical.mat.moviesquik.persistence.dao.jdbc.analytics.MediaAnalyticsHistoryLogDaoJDBC;
 import it.unical.mat.moviesquik.persistence.dao.jdbc.analytics.MediaContentReviewDaoJDBC;
@@ -39,6 +40,7 @@ import it.unical.mat.moviesquik.persistence.dao.jdbc.analytics.MediaContentStati
 import it.unical.mat.moviesquik.persistence.dao.jdbc.analytics.MediaStatisticLogDaoJDBC;
 import it.unical.mat.moviesquik.persistence.dao.jdbc.analytics.WatchHistoryLogDaoJDBC;
 import it.unical.mat.moviesquik.persistence.dao.jdbc.business.AnalystDaoJDBC;
+import it.unical.mat.moviesquik.persistence.dao.jdbc.business.CDNServerDaoJDBC;
 import it.unical.mat.moviesquik.persistence.dao.jdbc.media.MediaContentDaoJDBC;
 import it.unical.mat.moviesquik.persistence.dao.jdbc.media.MediaContentGenreDaoJDBC;
 import it.unical.mat.moviesquik.persistence.dao.jdbc.media.MediaContentSearchDaoJDBC;
@@ -222,6 +224,12 @@ public class DaoFactoryJDBC implements DaoFactory
 	public MediaAnalyticsHistoryLogDao getMediaAnalyticsHistoryLogDao()
 	{
 		return new MediaAnalyticsHistoryLogDaoJDBC(getNewStatementPrompter());
+	}
+	
+	@Override
+	public CDNServerDao getCDNServerDao()
+	{
+		return new CDNServerDaoJDBC(getNewStatementPrompter());
 	}
 	
 	@Override

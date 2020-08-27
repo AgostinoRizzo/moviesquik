@@ -24,6 +24,7 @@
 	<link href="css/contents.css" rel="stylesheet">
 	
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"/>
 	
 	
 	<!-- JavaScript files -->
@@ -35,12 +36,17 @@
 	<script src="js/header.js"></script>
 	
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 	
-	<script src="js/business/sidenav.js"></script>
+	<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+	
+	<script src="js/business/sidenav.js" type="module"></script>
 	<script src="js/business/media-search-utils.js"></script>
 	<script src="js/business/media-search.js" type="module"></script>
 	<script src="js/business/media-search-analytics.js" type="module"></script>
 	<script src="js/business/media-analytics-dashboard.js" type="module"></script>
+	<script src="js/business/cdn-charts.js" type="module"></script>
+	<script src="js/business/cdn-servers-list.js"></script>
 	
 </head>
 <body>

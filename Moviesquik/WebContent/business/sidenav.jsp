@@ -30,7 +30,7 @@
 
 <div class="row sidenav-list-row" id="servers-link-item">
 	<div class="col-auto sidenav-item-col clickable"><i class="fa fa-server sidenav-item-icon news-icon"></i></div>
-	<div class="col-auto clickable">Media Servers</div>
+	<div class="col-auto clickable">CDN Servers</div>
 </div>
 
 <br>

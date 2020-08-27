@@ -128,7 +128,7 @@ public class MovieParty extends HttpServlet
 		final DaoFactory daoFactory = DBManager.getInstance().getDaoFactory();
 		party.setMedia( daoFactory.getMediaContentDao().findById(mediaContentId) );
 		
-		final JsonArray invitedFriends = JSONUtil.fromStringToArray( req.getParameter("invited-users") );
+		final JsonArray invitedFriends = JSONUtil.fromStringToJsonArray( req.getParameter("invited-users") );
 		final List<MoviePartyInvitation> invitations = new ArrayList<MoviePartyInvitation>();
 		
 		MoviePartyInvitation invitation;

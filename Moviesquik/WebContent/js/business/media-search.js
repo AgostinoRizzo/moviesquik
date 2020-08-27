@@ -4,8 +4,7 @@
 
 import './media-search-utils.js';
 
-const EXTERNAL_DB_API_KEY = '871e3cc3';
-const EXTERNAL_DB_API_URL = 'http://www.omdbapi.com/?apikey=871e3cc3';
+const EXTERNAL_DB_API_DATA_REQUEST_URL = 'business/media/apidata';
 
 const MEDIA_SEARCH_RESULTS_CONTAINER_ID = '#media-search-results-container';
 
@@ -15,6 +14,8 @@ const REGISTERED_MEDIA_INFO_HTML =
 
 const MEDIA_REGISTRATION_URL = 'business/media/register';
 
+var EXTERNAL_DB_API_KEY;
+var EXTERNAL_DB_API_URL;
 var searchResult;
 
 function createMediaSearchResultHtml(mediaContent, mediaContentIndex) 
@@ -154,11 +155,26 @@ function onMediaRegister(registerBtn, omdbId)
 	);
 }
 
-$(document).ready(function() 
-	{
-		$(document).on('click', '#media-search-form #search-media-btn', onMediaSearch);
-		$(document).on('click', '#media-search-results-container #register-media-btn', function() {
-			onMediaRegister( $(this), $(this).closest(".media-info").find('.omdb-id').val() );
-		});
-	}
-);
+window.initMediaSearch = function() 
+{
+	$.ajax(
+		{
+			type: 'GET',
+			url: EXTERNAL_DB_API_DATA_REQUEST_URL,
+			dataType: "json",
+			success: function(data)
+				{
+					if ( data.url && data.key )
+					{
+						EXTERNAL_DB_API_KEY = data.key;
+						EXTERNAL_DB_API_URL = data.url + EXTERNAL_DB_API_KEY;
+						
+						$(document).on('click', '#media-search-form #search-media-btn', onMediaSearch);
+						$(document).on('click', '#media-search-results-container #register-media-btn', function() {
+							onMediaRegister( $(this), $(this).closest(".media-info").find('.omdb-id').val() );
+						});
+					}
+				}
+		}
+	);
+}
