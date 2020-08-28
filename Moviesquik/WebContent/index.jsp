@@ -7,14 +7,14 @@
 <meta charset="ISO-8859-1">
 	
 	<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-176431235-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-176431235-1');
-</script>
+	<script src="https://www.googletagmanager.com/gtag/js?id=UA-176431235-1"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+	
+		gtag('config', 'UA-176431235-1');
+	</script>
 	
 	
 	<title>Moviesquik</title>

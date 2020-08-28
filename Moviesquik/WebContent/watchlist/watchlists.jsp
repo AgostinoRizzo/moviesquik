@@ -6,6 +6,16 @@
 <head>
 <meta charset="ISO-8859-1">
 
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script src="https://www.googletagmanager.com/gtag/js?id=UA-176431235-1"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+	
+		gtag('config', 'UA-176431235-1');
+	</script>
+	
 	<title>Watch List</title>
 	<link rel="icon" type="image/x-icon" href="res/drawable/m_logo.png">
 	
