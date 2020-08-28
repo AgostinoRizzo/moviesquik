@@ -17,7 +17,7 @@
 			<span class="icon-bar bottom-bar"></span>
 		</button>
 		
-		<a class="navbar-brand" href="./"><img alt="" src="res/drawable/business_logo.png"></a>
+		<a class="navbar-brand" href="business"><img alt="" src="res/drawable/business_logo.png"></a>
 		
 		<div class="collapse navbar-collapse justify-content-end" id="navbarToggler">
 			
@@ -29,25 +29,22 @@
 				<ul id="navbar-nav-links" class="navbar-nav">
 						
 						<li class="nav-item">
-							<a class="nav-link" href="./">Home</a>
+							<a class="nav-link can-point" id="header-dashboard-link-item">Dashboard</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="mcsearch?type=movie&view=group">Movies</a>
+							<a class="nav-link can-point" id="header-media-contents-link-item">Media Contents</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="mcsearch?type=tv_show&view=group">TV Shows</a>
+							<a class="nav-link can-point" id="header-servers-link-item">CDN Servers</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="watchlist">Watch List</a>
-						</li>
-						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Movie Party</a>
-							<div class="dropdown-menu header-dropdown-menu">
-								<a class="dropdown-item" href="movieparty?action=new"><span class="fa fa-plus"></span> Create Party</a>
-							</div>
+							<a class="nav-link can-point" id="header-analytics-link-item">Analytics</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#">Family</a>
+							<a class="nav-link can-point">Money Collection</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link can-point">Gift Cards</a>
 						</li>
 						
 				</ul>
@@ -67,8 +64,12 @@
 					        <div id="nav-user-avatar-dropdown-menu" class="dropdown-menu dropdown-menu-right header-dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 					        	<a class="dropdown-item" href="user"><small>Signed in as</small><br><strong>${admin.firstName} ${admin.lastName}</strong></a>
 					        	<div class="dropdown-divider"></div>
-					        	<a class="dropdown-item" href="#">Dashboard</a>
-					        	<a class="dropdown-item" href="#">Edit Profile</a>
+					        	<a class="dropdown-item can-point" id="menu-dashboard-link-item">Dashboard</a>
+					        	<a class="dropdown-item can-point" id="menu-media-contents-link-item">Media Contents</a>
+					        	<a class="dropdown-item can-point" id="menu-servers-link-item">CDN Servers</a>
+					        	<a class="dropdown-item can-point" id="menu-analytics-link-item">Analytics</a>
+					        	<a class="dropdown-item can-point">Money Collection</a>
+					        	<a class="dropdown-item can-point">Gift Cards</a>
 					        	<div class="dropdown-divider"></div>
 					        	<a class="dropdown-item" href="business/login?logout=true">Sign Out</a>
 					        </div>

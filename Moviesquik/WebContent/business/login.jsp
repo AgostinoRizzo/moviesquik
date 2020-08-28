@@ -79,6 +79,9 @@
 					</div>
 					
 				</form>
+				
+				<br><br>
+				<div><a href="./" id="back-home-link">Back to Moviesquik</a></div>
 			
 			</div>
 			

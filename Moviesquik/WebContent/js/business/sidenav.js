@@ -40,13 +40,28 @@ function fetchHomePageContent(homePageContentFetchUrl, onFetchCallback=null)
 	);
 }
 
+function onDashboardLinkClick()     { onSidenavItemClick($('#dashboard-link-item'), 'business/dashboard', initAnalyticsDashboard); }
+function onMediaContentsLinkClick() { onSidenavItemClick($('#media-contents-link-item'), 'business/media', initMediaSearch); }
+function onAnalyticsLinkClick()     { onSidenavItemClick($('#analytics-link-item'), 'business/analytics'); }
+function onServersLinkClick()       { onSidenavItemClick($('#servers-link-item'), 'business/cdn', fetchCDNServersList); }
+
 $(document).ready(function() 
 	{
-		onSidenavItemClick($('#dashboard-link-item'), 'business/dashboard', initAnalyticsDashboard);
+		onDashboardLinkClick();
 		
-		$('#dashboard-link-item')     .click( function() { onSidenavItemClick($(this), 'business/dashboard', initAnalyticsDashboard); } );
-		$('#media-contents-link-item').click( function() { onSidenavItemClick($(this), 'business/media', initMediaSearch); } );
-		$('#analytics-link-item')     .click( function() { onSidenavItemClick($(this), 'business/analytics'); } );
-		$('#servers-link-item')       .click( function() { onSidenavItemClick($(this), 'business/cdn', fetchCDNServersList); } );
+		$('#dashboard-link-item')     .click( onDashboardLinkClick );
+		$('#media-contents-link-item').click( onMediaContentsLinkClick );
+		$('#analytics-link-item')     .click( onAnalyticsLinkClick );
+		$('#servers-link-item')       .click( onServersLinkClick );
+		
+		$('#header-dashboard-link-item')     .click( onDashboardLinkClick );
+		$('#header-media-contents-link-item').click( onMediaContentsLinkClick );
+		$('#header-analytics-link-item')     .click( onAnalyticsLinkClick );
+		$('#header-servers-link-item')       .click( onServersLinkClick );
+		
+		$('#menu-dashboard-link-item')     .click( onDashboardLinkClick );
+		$('#menu-media-contents-link-item').click( onMediaContentsLinkClick );
+		$('#menu-analytics-link-item')     .click( onAnalyticsLinkClick );
+		$('#menu-servers-link-item')       .click( onServersLinkClick );
 	}
 );
