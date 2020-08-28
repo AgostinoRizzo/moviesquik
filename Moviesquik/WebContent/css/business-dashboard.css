@@ -1,0 +1,43 @@
+@charset "ISO-8859-1";
+
+.dashboard-row
+{
+	margin-top: 10px;
+	margin-right: 0px;
+	margin-left: 0px;
+}
+
+.dashboard-row .col
+{
+	padding: 5px 10px 5px 0px;
+}
+
+.dashboard-row .tile
+{
+	padding: 10px;
+}
+
+#sessions-by-country-chart
+{
+	margin-top: 15px;
+}
+
+#sessions-by-country-chart svg
+{
+	border-radius: 12px;
+}
+
+#sync-btn-col
+{
+	align-self: flex-end;
+}
+
+#sync-btn-col .btn
+{
+	height: 40px;
+}
+
+#sync-btn-col .btn img
+{
+	height: 20px;
+}

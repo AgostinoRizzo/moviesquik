@@ -4,6 +4,7 @@
 
 import './cdn-charts.js';
 import './media-search.js';
+import './analytics-dashboard.js';
 
 const SELECTED_CLASS = 'selected';
 const HOME_PAGE_CONTENT_ID = '#home-page-content';
@@ -41,8 +42,9 @@ function fetchHomePageContent(homePageContentFetchUrl, onFetchCallback=null)
 
 $(document).ready(function() 
 	{
-		onSidenavItemClick($('#dashboard-link-item'), 'business/media');
+		onSidenavItemClick($('#dashboard-link-item'), 'business/dashboard', initAnalyticsDashboard);
 		
+		$('#dashboard-link-item')     .click( function() { onSidenavItemClick($(this), 'business/dashboard', initAnalyticsDashboard); } );
 		$('#media-contents-link-item').click( function() { onSidenavItemClick($(this), 'business/media', initMediaSearch); } );
 		$('#analytics-link-item')     .click( function() { onSidenavItemClick($(this), 'business/analytics'); } );
 		$('#servers-link-item')       .click( function() { onSidenavItemClick($(this), 'business/cdn', fetchCDNServersList); } );

@@ -18,6 +18,10 @@
 
 <br>
 
+<p class="g-signin2" data-onsuccess="initAnalyticsDashboard"></p>
+
+<br>
+
 <div class="row sidenav-list-row" id="dashboard-link-item">
 	<div class="col-auto sidenav-item-col clickable"><i class="fa fa-dashboard sidenav-item-icon foryou-icon"></i></div>
 	<div class="col-auto clickable">Dashboard</div>

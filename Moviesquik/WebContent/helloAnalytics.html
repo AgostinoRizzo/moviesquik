@@ -21,7 +21,7 @@
   var VIEW_ID = '227388746';
 
   // Query the API and print the results to the page.
-  function queryReports() {
+   function queryReports() {
     gapi.client.request({
       path: '/v4/reports:batchGet',
       root: 'https://analyticsreporting.googleapis.com/',
@@ -30,15 +30,17 @@
         reportRequests: [
           {
             viewId: VIEW_ID,
-            "dateRanges": [
-                {"endDate": "2020-08-26", "startDate": "2020-08-15"}
-              ],
-              "metrics": [
-                {"expression": "ga:pageviews"}, {"expression": "ga:uniquePageviews"}, {"expression": "ga:timeOnPage"}, {"expression": "ga:bounces"}, {"expression": "ga:entrances"},
-                {"expression": "ga:sessions"},
-                {"expression": "ga:timeOnPage"}
-              ],
-              "dimensions": [{"name": "ga:browser"}, {"name": "ga:city"}, {"name": "ga:pagePath"}]
+            dateRanges: [
+              {
+                startDate: '7daysAgo',
+                endDate: 'today'
+              }
+            ],
+            metrics: [
+              {
+                expression: 'ga:sessions'
+              }
+            ]
           }
         ]
       }

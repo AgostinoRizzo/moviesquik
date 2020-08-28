@@ -496,4 +496,14 @@
 	<url-pattern>/business/cdn/list</url-pattern>
 </servlet-mapping>
 
+<!-- Business Analytics Dashboard Servlet -->
+<servlet>
+	<servlet-name>business_analytics_dashboard</servlet-name>
+	<servlet-class>it.unical.mat.moviesquik.controller.business.AnalyticsDashboard</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>business_analytics_dashboard</servlet-name>
+	<url-pattern>/business/dashboard</url-pattern>
+</servlet-mapping>
+
 </web-app>

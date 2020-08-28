@@ -15,6 +15,7 @@
 	<link href="css/main.css" rel="stylesheet">
 	<link href="css/business.css" rel="stylesheet">
 	<link href="css/business-home.css" rel="stylesheet">
+	<link href="css/business-dashboard.css" rel="stylesheet">
 	<link href="css/header.css" rel="stylesheet">
 	<link href="css/widget.css" rel="stylesheet">
 	<link href="css/common.css" rel="stylesheet">
@@ -24,9 +25,15 @@
 	<link href="css/contents.css" rel="stylesheet">
 	
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+	<!-- OpenStreetMap API -->
 	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"/>
 	
-	
+	<!-- Google Analytics API -->
+	<meta name="google-signin-client_id" content="${google_analytics_client_id}">
+  	<meta name="google-signin-scope" content="https://www.googleapis.com/auth/analytics.readonly">
+  	<script src="https://apis.google.com/js/client:platform.js"></script>
+  
 	<!-- JavaScript files -->
 	<script src="lib/jquery/jquery.min.js"></script>
 	<script src="lib/jquery/jquery-migrate.min.js"></script>
@@ -38,6 +45,7 @@
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 	
+	<!-- OpenStreetMap API -->
 	<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
 	
 	<script src="js/business/sidenav.js" type="module"></script>
