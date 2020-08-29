@@ -259,6 +259,9 @@ function VideoLoader(videoLoaderTagId)
 	this.hide = function() 
 	{
 		$(this.tagid).hide();
+		
+		//if ( $('#interval-btn-container').length && $('#interval-btn-container').hasClass('d-none') )
+		//	$('#interval-btn-container').removeClass('d-none');
 	};
 	
 	this.showLoadingError = function() 
@@ -332,4 +335,13 @@ $(document).ready( function()
 		streamManager.onStart();
 		
 		//$("#seek-btn").click( function() { onSeek(); } );
-	});
+	}
+);
+
+window.onPlayerIntervalStateChange = function(state) 
+{
+	if ( state )
+		playPauseBtn.onPause();
+	else
+		playPauseBtn.onPlay();
+}

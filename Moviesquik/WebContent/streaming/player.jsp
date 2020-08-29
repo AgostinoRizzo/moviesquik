@@ -53,3 +53,7 @@
 	<div id="video-loader-wrapper"><div class="loader loader-sm"></div></div>
 	
 </div>
+
+<div id="player-interval" class="d-none">
+	<h1>Interval</h1>
+</div>

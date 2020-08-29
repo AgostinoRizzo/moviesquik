@@ -196,6 +196,13 @@ window.StreamManager = function(mediaId, playPauseBtn, mediaTimeline, videoLoade
 			//if ( this.startTimestampSeek != null && this.nextSegmentIndex != 0 )
 			//{ watchingPageSetup(); this.startTimestampSeek = null; this.videotag.volume = 1.0; }
 			
+			if ( this.startedWithTimestampSeek ) // activate view
+			{ 
+				this.startedWithTimestampSeek = false;
+				watchingPageSetup();
+				this.videotag.volume = 1.0;
+			}
+			
 			++this.nextSegmentIndex;
 			
 			if ( this.isThereSegmentsToFetch() )

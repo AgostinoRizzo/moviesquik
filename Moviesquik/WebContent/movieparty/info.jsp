@@ -85,10 +85,6 @@
 				  <br>
 				  
 				  <div class="lead">
-				  	<c:if test="${error != null}">
-					    <a class="btn btn-main" href="movieparty" role="button">Continue</a>
-				    </c:if>
-				    
 				    <c:if test="${success != null}">
 					    <a class="btn btn-main" href="." role="button">Continue</a>
 				    </c:if>

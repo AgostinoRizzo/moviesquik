@@ -35,8 +35,9 @@ public class MoviePartyDaoJDBC extends AbstractDaoJDBC<MovieParty> implements Mo
 	protected static final String FIND_ALL_BY_USER_QUERY   = "select * from movie_party " + 
 			"where movie_party_id in (select MP_INV.movie_party_id from movie_party_invitation as MP_INV where MP_INV.user_id = ?) or user_id = ? or not is_private " + 
 			"order by start_date_time desc, date_time desc";
-	protected static final String FIND_BY_ID_QUERY = "select * from movie_party " + 
+	protected static final String FIND_BY_ID_USER_QUERY = "select * from movie_party " + 
 			"where movie_party_id = ? and (movie_party_id in (select MP_INV.movie_party_id from movie_party_invitation as MP_INV where MP_INV.user_id = ?) or user_id = ? or not is_private)";
+	protected static final String FIND_BY_ID_QUERY = "select * from movie_party where movie_party_id = ?"; 
 	
 	protected static final String PLAYING_PARTY_CONDITION  = " start_date_time <= now() and (start_date_time + (\"getMediaContentStreamTime\"(movie_party_id) * interval '1 second')) > now() ";
 	protected static final String UPCOMING_PARTY_CONDITION = " start_date_time > now() ";
@@ -197,11 +198,34 @@ public class MoviePartyDaoJDBC extends AbstractDaoJDBC<MovieParty> implements Mo
 	{
 		try
 		{
-			final PreparedStatement statement = statementPrompter.prepareStatement(FIND_BY_ID_QUERY);
+			final PreparedStatement statement = statementPrompter.prepareStatement(FIND_BY_ID_USER_QUERY);
 			
 			statement.setLong(1, id);
 			statement.setLong(2, user.getId());
 			statement.setLong(3, user.getId());
+			ResultSet result = statement.executeQuery();
+			
+			if ( result.next() )
+				return createFromResult(result);
+			
+			return null;
+		}
+		
+		catch (SQLException e)
+		{ e.printStackTrace(); return null; }
+		
+		finally 
+		{ statementPrompter.onFinalize(); }
+	}
+	
+	@Override
+	public MovieParty findById(Long id)
+	{
+		try
+		{
+			final PreparedStatement statement = statementPrompter.prepareStatement(FIND_BY_ID_QUERY);
+			
+			statement.setLong(1, id);
 			ResultSet result = statement.executeQuery();
 			
 			if ( result.next() )

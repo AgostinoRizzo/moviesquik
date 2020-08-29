@@ -39,6 +39,7 @@
 	<script src="lib/typeahead/bootstrap3-typeahead.js"></script>
 	<script src="js/streaming/stream-player.js" type="module"></script>
 	<script src="js/watching/movie-watching.js" type="module"></script>
+	<c:if test="${party != null}"><script src="js/watching/interval-manager.js" type="module"></script></c:if>
 	
 </head>
 <body>
@@ -53,6 +54,10 @@
 		<div class="clickable" id="watching-chat-btn"><h3><i class="fa fa-comments"></i></h3></div>
 		<div class="clickable" id="hide-chat-btn"><h3><i class="fa fa-times"></i></h3></div>
 		<jsp:include page="../movieparty/movie-party-chat.jsp"></jsp:include>
+		
+		<c:if test="${user != null && party.administrator.id.equals(user.id)}">
+			<div id="interval-btn-container" class="d-none"><div class="btn btn-secondary btn-sm" id="interval-btn"><span class="fa fa-hourglass"></span> Interval</div></div>
+		</c:if>
 		
 	</c:if>
 	

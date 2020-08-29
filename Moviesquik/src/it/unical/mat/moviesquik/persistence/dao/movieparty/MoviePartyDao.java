@@ -21,6 +21,7 @@ public interface MoviePartyDao
 	public List<MovieParty> findAllByUser( final User user, final MoviePartySearchFilter filter, final DataListPage page );
 	public List<MovieParty> findCommitmentsByUser( final User user, final MoviePartySearchFilter filter, final DataListPage page );
 	public MovieParty findById( final Long id, final User user );
+	public MovieParty findById( final Long id );
 	public List<MovieParty> findAllStartedNow();
 	public List<MovieParty> findAllEndedNow();
 	public List<MovieParty> findAllStarting( final int minutes );
