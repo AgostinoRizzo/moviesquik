@@ -21,6 +21,7 @@ import it.unical.mat.moviesquik.model.User;
 import it.unical.mat.moviesquik.model.media.MediaContent;
 import it.unical.mat.moviesquik.model.media.MediaContentType;
 import it.unical.mat.moviesquik.persistence.DBManager;
+import it.unical.mat.moviesquik.persistence.DataListPage;
 import it.unical.mat.moviesquik.persistence.dao.DaoFactory;
 import it.unical.mat.moviesquik.persistence.searching.SortingPolicy;
 
@@ -49,13 +50,14 @@ public class Home extends HttpServlet
 		{
 			final DaoFactory daofactory = DBManager.getInstance().getDaoFactory();
 			final Showcase sc = new Showcase();
+			final DataListPage dataListPage = new DataListPage(10);
 			
 			sc.setTopRated( daofactory.getMediaContentSearchDao()
-					.searchTopRated(MediaContentType.ALL, SortingPolicy.NONE, 10, MediaContentsSearchFilter.EMPTY));
+					.searchTopRated(MediaContentType.ALL, SortingPolicy.NONE, dataListPage, MediaContentsSearchFilter.EMPTY));
 			sc.setMostPopular( daofactory.getMediaContentSearchDao()
-					.searchMostPopular(MediaContentType.ALL, SortingPolicy.NONE, 10, MediaContentsSearchFilter.EMPTY));
+					.searchMostPopular(MediaContentType.ALL, SortingPolicy.NONE, dataListPage, MediaContentsSearchFilter.EMPTY));
 			sc.setMostFavorites( daofactory.getMediaContentSearchDao()
-					.searchMostFavorites(MediaContentType.ALL, SortingPolicy.NONE, 10, MediaContentsSearchFilter.EMPTY));
+					.searchMostFavorites(MediaContentType.ALL, SortingPolicy.NONE, dataListPage, MediaContentsSearchFilter.EMPTY));
 			sc.setTrendingNow( AnalyticsFacade.getTrendingNowMediaContents(10) );
 			
 			req.setAttribute( "showcase", sc );

@@ -25,15 +25,37 @@ function fill_media_contents(contents_items_tag_id, data)
 
 function append_media_contents(contents_items_tag_id, data)
 {
-	var content_html = $(contents_items_tag_id).children(".media-col-item:first")[0].outerHTML;
-	var start = $(contents_items_tag_id).children(".media-col-item").length;
+	var content_html = $(contents_items_tag_id).find(".media-col-item:first")[0].outerHTML;
+	var start = $(contents_items_tag_id).find(".media-col-item").length;
+	
+	var rowColAdded = 0;;
+	
+	var fullHtml = '';
+	
+	for ( var i in data )
+	{
+		var addColRow = (i % 4) == 0;
+		
+		if ( addColRow )
+		{
+			if ( rowColAdded > 0 )
+				fullHtml += '</div></div>';
+			fullHtml += ( rowColAdded > 0 ? '</div>' : '' ) + '<div class="col-6"><div class="row">';
+			rowColAdded = 1;
+		}
+		
+		fullHtml += content_html;
+	}
+	
+	if ( rowColAdded > 0 )
+		fullHtml += '</div></div>';
+	
+	$(contents_items_tag_id).append(fullHtml);
 	
 	for ( var i in data )
 	{
 		var real_i = +start + +i;
 		var media_content = data[i];
-			
-		$(contents_items_tag_id).append(content_html);
 		
 		$(contents_items_tag_id + " img").eq(real_i).attr("src", media_content.poster);
 		$(contents_items_tag_id + " .card-title").eq(real_i).text(media_content.title);
@@ -61,8 +83,11 @@ function request_media_contents(contents_items_tag_id, url_str, fill_callback)
 
 function request_more_media_contents(contents_items_tag_id, policy)
 {
-	var start = $(contents_items_tag_id).children(".media-col-item").length;
-	N_ITEMS_IN_ROW = start;
+	var itemsCount = $(contents_items_tag_id).find(".media-col-item").length;
+	if ( (itemsCount % N_ITEMS_IN_ROW) != 0 )
+		return;
+	var start = itemsCount / N_ITEMS_IN_ROW;
+	//N_ITEMS_IN_ROW = start;
 	request_media_contents(contents_items_tag_id, "listcontents?policy=" + policy + "&start=" + start, append_media_contents);
 	
 	$(contents_items_tag_id).parent().find(".view-all-btn").addClass("d-none");
@@ -75,8 +100,8 @@ function on_collapse_view_media_contents(contents_items_tag_id)
 	
 	$(contents_items_tag_id).parent().find(".view-all-btn").removeClass("d-none");
 	
-	while ( $(contents_items_tag_id).children(".media-col-item").length > N_ITEMS_IN_ROW )
-		$(contents_items_tag_id).children().eq(N_ITEMS_IN_ROW).remove();
+	while ( $(contents_items_tag_id).find(".media-col-item").length > N_ITEMS_IN_ROW )
+		$(contents_items_tag_id).find(".media-col-item").eq(N_ITEMS_IN_ROW).remove();
 }
 
 function initMediaContentCards(parentTagId) 
@@ -117,7 +142,7 @@ $(document).ready( function()
 		
 		$("#suggested-view-more-btn").click( function()        { request_more_media_contents("#suggested-media-contents-items", "suggested");           });
 		$("#maylike-view-more-btn").click( function()          { request_more_media_contents("#maylike-media-contents-items", "maylike");               });
-		$("#trending-now-view-more-btn").click( function()     { request_more_media_contents("#trending-now-contents-items", "trending");               });
+		$("#trending-now-view-more-btn").click( function()     { request_more_media_contents("#trending-now-media-contents-items", "trending");               });
 		$("#most-popular-view-more-btn").click( function()     { request_more_media_contents("#most-popular-media-contents-items", "most_popular");     });
 		$("#top-rated-view-more-btn").click( function()        { request_more_media_contents("#top-rated-media-contents-items", "most_rated");          });
 		$("#most-favorites-view-more-btn").click( function()   { request_more_media_contents("#most-favorites-media-contents-items", "most_favorites"); });

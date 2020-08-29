@@ -14,6 +14,7 @@ import it.unical.mat.moviesquik.controller.searching.MediaContentsSearchFilter;
 import it.unical.mat.moviesquik.model.User;
 import it.unical.mat.moviesquik.model.media.MediaContent;
 import it.unical.mat.moviesquik.model.media.MediaContentType;
+import it.unical.mat.moviesquik.persistence.DataListPage;
 import it.unical.mat.moviesquik.persistence.dao.MediaContentSearchDao;
 import it.unical.mat.moviesquik.persistence.dao.jdbc.DaoUtilJDBC;
 import it.unical.mat.moviesquik.persistence.dao.jdbc.StatementPrompterJDBC;
@@ -51,13 +52,13 @@ public class MediaContentSearchDaoJDBC implements MediaContentSearchDao
 	}
 	
 	@Override
-	public List<MediaContent> searchByTitle(String title, boolean weakSearch, SortingPolicy sortingPolicy, int limit)
+	public List<MediaContent> searchByTitle(String title, boolean weakSearch, SortingPolicy sortingPolicy, DataListPage dataListPage)
 	{
 		final List<MediaContent> mediaContents = new ArrayList<MediaContent>();
 		
 		String query = weakSearch ? SEARCH_BY_TITLE_WEAK_QUERY : SEARCH_BY_TITLE_QUERY;
 		query = addQuerySortingPolicy(query, sortingPolicy, false);
-		query = DaoUtilJDBC.addQueryLimit(query, limit);
+		query = DaoUtilJDBC.addQueryOffsetLimit(query, dataListPage);
 		
 		try
 		{
@@ -79,14 +80,14 @@ public class MediaContentSearchDaoJDBC implements MediaContentSearchDao
 	}
 
 	@Override
-	public List<MediaContent> searchByType(MediaContentType type, SortingPolicy sortingPolicy, int limit, MediaContentsSearchFilter filter)
+	public List<MediaContent> searchByType(MediaContentType type, SortingPolicy sortingPolicy, DataListPage dataListPage, MediaContentsSearchFilter filter)
 	{
 		final List<MediaContent> mediaContents = new ArrayList<MediaContent>();
 		
 		String query = SEARCH_BY_TYPE_QUERY;
 		query = addGenresFilter(query, filter, true);
 		query = addQuerySortingPolicy(query, sortingPolicy, false);
-		query = DaoUtilJDBC.addQueryLimit(query, limit);
+		query = DaoUtilJDBC.addQueryOffsetLimit(query, dataListPage);
 		
 		try
 		{
@@ -108,45 +109,45 @@ public class MediaContentSearchDaoJDBC implements MediaContentSearchDao
 	}
 	
 	@Override
-	public List<MediaContent> searchTopRated(MediaContentType type, SortingPolicy sortingPolicy, int limit, MediaContentsSearchFilter filter)
+	public List<MediaContent> searchTopRated(MediaContentType type, SortingPolicy sortingPolicy, DataListPage dataListPage, MediaContentsSearchFilter filter)
 	{
-		return anonymusSearch(SEARCH_TOP_RATED_ORDER_BY_QUERY, type, sortingPolicy, limit, filter, ANONYMUS_CATEGORY_SEARCH_QUERY);
+		return anonymusSearch(SEARCH_TOP_RATED_ORDER_BY_QUERY, type, sortingPolicy, dataListPage, filter, ANONYMUS_CATEGORY_SEARCH_QUERY);
 	}
 	
 	@Override
-	public List<MediaContent> searchTrendingNow(MediaContentType type, SortingPolicy sortingPolicy, int limit,
+	public List<MediaContent> searchTrendingNow(MediaContentType type, SortingPolicy sortingPolicy, DataListPage dataListPage,
 			MediaContentsSearchFilter filter)
 	{
-		return AnalyticsFacade.getTrendingNowMediaContents(limit);
+		return AnalyticsFacade.getTrendingNowMediaContents(dataListPage);
 	}
 	
 	@Override
-	public List<MediaContent> searchMostPopular(MediaContentType type, SortingPolicy sortingPolicy, int limit, MediaContentsSearchFilter filter)
+	public List<MediaContent> searchMostPopular(MediaContentType type, SortingPolicy sortingPolicy, DataListPage dataListPage, MediaContentsSearchFilter filter)
 	{
-		return AnalyticsFacade.getMostPopularMediaContents(limit);
+		return AnalyticsFacade.getMostPopularMediaContents(dataListPage);
 	}
 	
 	@Override
-	public List<MediaContent> searchMostFavorites(MediaContentType type, SortingPolicy sortingPolicy, int limit, MediaContentsSearchFilter filter)
+	public List<MediaContent> searchMostFavorites(MediaContentType type, SortingPolicy sortingPolicy, DataListPage dataListPage, MediaContentsSearchFilter filter)
 	{
-		return anonymusSearch(SEARCH_MOST_FAVORITES_ORDER_BY_QUERY, type, sortingPolicy, limit, filter, ANONYMUS_CATEGORY_SEARCH_QUERY);
+		return anonymusSearch(SEARCH_MOST_FAVORITES_ORDER_BY_QUERY, type, sortingPolicy, dataListPage, filter, ANONYMUS_CATEGORY_SEARCH_QUERY);
 	}
 	
 	@Override
 	public List<MediaContent> searchSuggested(MediaContentType type, User user,
-			SortingPolicy sortingPolicy, int limit, MediaContentsSearchFilter filter)
+			SortingPolicy sortingPolicy, DataListPage dataListPage, MediaContentsSearchFilter filter)
 	{
-		return AnalyticsFacade.getSuggestedMediaContents(user.getId(), limit);
+		return AnalyticsFacade.getSuggestedMediaContents(user.getId(), dataListPage);
 	}
 	
 	@Override
 	public List<MediaContent> searchRecentlyWatched(MediaContentType type, User user, 
-			SortingPolicy sortingPolicy, int limit, MediaContentsSearchFilter filter)
+			SortingPolicy sortingPolicy, DataListPage dataListPage, MediaContentsSearchFilter filter)
 	{
 		final List<MediaContent> mediaContents = new ArrayList<MediaContent>();
 		
 		String query = SEARCH_RECENTLY_WATCHED_QUERY;
-		query = DaoUtilJDBC.addQueryLimit(query, limit);
+		query = DaoUtilJDBC.addQueryOffsetLimit(query, dataListPage);
 		
 		try
 		{
@@ -168,7 +169,7 @@ public class MediaContentSearchDaoJDBC implements MediaContentSearchDao
 	}
 	
 	private List<MediaContent> anonymusSearch( final String orderByQuery, final MediaContentType type, final SortingPolicy sortingPolicy, 
-												final int limit, final MediaContentsSearchFilter filter, final String anonymusSearchQuery )
+												final DataListPage dataListPage, final MediaContentsSearchFilter filter, final String anonymusSearchQuery )
 	{
 		final List<MediaContent> mediaContents = new ArrayList<MediaContent>();
 		
@@ -176,7 +177,7 @@ public class MediaContentSearchDaoJDBC implements MediaContentSearchDao
 		query = addGenresFilter(query, filter, true);
 		query = query + orderByQuery;
 		query = addQuerySortingPolicy(query, sortingPolicy, true);
-		query = DaoUtilJDBC.addQueryLimit(query, limit);
+		query = DaoUtilJDBC.addQueryOffsetLimit(query, dataListPage);
 		
 		try
 		{

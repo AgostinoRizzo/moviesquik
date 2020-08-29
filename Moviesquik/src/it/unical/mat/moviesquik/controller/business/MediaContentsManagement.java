@@ -17,6 +17,7 @@ import it.unical.mat.moviesquik.model.business.Analyst;
 import it.unical.mat.moviesquik.model.media.MediaContent;
 import it.unical.mat.moviesquik.model.media.MediaContentType;
 import it.unical.mat.moviesquik.persistence.DBManager;
+import it.unical.mat.moviesquik.persistence.DataListPage;
 import it.unical.mat.moviesquik.persistence.searching.SortingPolicy;
 
 /**
@@ -27,6 +28,7 @@ public class MediaContentsManagement extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
 	private static final int MAX_MEDIA_FIND_COUNT = 8;
+	private static final DataListPage FIND_DATA_LIST_PAGE = new DataListPage(MAX_MEDIA_FIND_COUNT);
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
@@ -40,7 +42,7 @@ public class MediaContentsManagement extends HttpServlet
 		
 		final List<MediaContent> trendingMediaContents = 
 				DBManager.getInstance().getDaoFactory().getMediaContentSearchDao()
-					.searchTrendingNow(MediaContentType.ALL, SortingPolicy.NONE, MAX_MEDIA_FIND_COUNT, MediaContentsSearchFilter.EMPTY);
+					.searchTrendingNow(MediaContentType.ALL, SortingPolicy.NONE, FIND_DATA_LIST_PAGE, MediaContentsSearchFilter.EMPTY);
 		req.setAttribute("trendingnow", trendingMediaContents);
 		
 		req.getRequestDispatcher("/business/media-management.jsp").forward(req, resp);

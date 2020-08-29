@@ -15,6 +15,7 @@ import it.unical.mat.moviesquik.model.media.MediaContent;
 import it.unical.mat.moviesquik.model.media.MediaContentGroup;
 import it.unical.mat.moviesquik.model.media.MediaContentType;
 import it.unical.mat.moviesquik.persistence.DBManager;
+import it.unical.mat.moviesquik.persistence.DataListPage;
 import it.unical.mat.moviesquik.persistence.dao.DaoFactory;
 
 /**
@@ -28,6 +29,10 @@ public class DBSearchEngine
 	public static final int FULL_MEDIA_CONTENTS_SEARCH_LIMIT = 12;
 	public static final int GROUP_MEDIA_CONTENTS_SEARCH_LIMIT = 6;
 	
+	public static final DataListPage SEARCH_DATA_LIST_PAGE = new DataListPage(MEDIA_CONTENTS_SEARCH_LIMIT);
+	public static final DataListPage GROUP_SEARCH_DATA_LIST_PAGE = new DataListPage(GROUP_MEDIA_CONTENTS_SEARCH_LIMIT);
+	public static final DataListPage FULL_SEARCH_DATA_LIST_PAGE = new DataListPage(FULL_MEDIA_CONTENTS_SEARCH_LIMIT);
+	
 	public void searchMediaContentsByQuery( String query, final SortingPolicy sortingPolicy, final SearchResult result )
 	{
 		final DaoFactory daoFactory = DBManager.getInstance().getDaoFactory();
@@ -35,10 +40,10 @@ public class DBSearchEngine
 		query = clearQueryText(query);
 		result.setQuery(query);
 		
-		final List<MediaContent> mediaContents = daoFactory.getMediaContentSearchDao().searchByTitle(query, false, sortingPolicy, MEDIA_CONTENTS_SEARCH_LIMIT);
+		final List<MediaContent> mediaContents = daoFactory.getMediaContentSearchDao().searchByTitle(query, false, sortingPolicy, SEARCH_DATA_LIST_PAGE);
 		
 		if ( mediaContents.size() < MEDIA_CONTENTS_SEARCH_LIMIT )
-			mediaContents.addAll(daoFactory.getMediaContentSearchDao().searchByTitle(query, true, sortingPolicy, MEDIA_CONTENTS_SEARCH_LIMIT));
+			mediaContents.addAll(daoFactory.getMediaContentSearchDao().searchByTitle(query, true, sortingPolicy, SEARCH_DATA_LIST_PAGE));
 		
 		result.setContents(mediaContents.stream()
 				.distinct()
@@ -78,7 +83,7 @@ public class DBSearchEngine
 				final User user, final MediaContentsSearchFilter filter )
 	{
 		final DaoFactory daoFactory = DBManager.getInstance().getDaoFactory();
-		return daoFactory.getMediaContentSearchDao().searchByType(type, sortingPolicy, FULL_MEDIA_CONTENTS_SEARCH_LIMIT, filter);
+		return daoFactory.getMediaContentSearchDao().searchByType(type, sortingPolicy, FULL_SEARCH_DATA_LIST_PAGE, filter);
 	}
 
 	public Map<MediaContentGroup, List<MediaContent>> groupMediaContentSearch
@@ -89,21 +94,21 @@ public class DBSearchEngine
 		final Map<MediaContentGroup, List<MediaContent>> groupMediaContents = new HashMap<MediaContentGroup, List<MediaContent>>();
 		
 		groupMediaContents.put(MediaContentGroup.TOP_RATED, daoFactory.getMediaContentSearchDao()
-					.searchTopRated(type, sortingPolicy, GROUP_MEDIA_CONTENTS_SEARCH_LIMIT, filter));
+					.searchTopRated(type, sortingPolicy, GROUP_SEARCH_DATA_LIST_PAGE, filter));
 		
 		groupMediaContents.put(MediaContentGroup.MOST_POPULAR, daoFactory.getMediaContentSearchDao()
-				.searchMostPopular(type, sortingPolicy, GROUP_MEDIA_CONTENTS_SEARCH_LIMIT, filter));
+				.searchMostPopular(type, sortingPolicy, GROUP_SEARCH_DATA_LIST_PAGE, filter));
 		
 		groupMediaContents.put(MediaContentGroup.MOST_FAVORITES, daoFactory.getMediaContentSearchDao()
-				.searchMostFavorites(type, sortingPolicy, GROUP_MEDIA_CONTENTS_SEARCH_LIMIT, filter));
+				.searchMostFavorites(type, sortingPolicy, GROUP_SEARCH_DATA_LIST_PAGE, filter));
 		
 		if ( user != null )
 		{
 			groupMediaContents.put(MediaContentGroup.SUGGESTED, daoFactory.getMediaContentSearchDao()
-					.searchSuggested(type, user, sortingPolicy, GROUP_MEDIA_CONTENTS_SEARCH_LIMIT, filter));
+					.searchSuggested(type, user, sortingPolicy, GROUP_SEARCH_DATA_LIST_PAGE, filter));
 			
 			groupMediaContents.put(MediaContentGroup.RECENTLY_WATCHED, daoFactory.getMediaContentSearchDao()
-					.searchRecentlyWatched(type, user, sortingPolicy, GROUP_MEDIA_CONTENTS_SEARCH_LIMIT, filter));
+					.searchRecentlyWatched(type, user, sortingPolicy, GROUP_SEARCH_DATA_LIST_PAGE, filter));
 		}
 		
 		return groupMediaContents;

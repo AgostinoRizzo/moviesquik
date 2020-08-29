@@ -19,6 +19,7 @@ import it.unical.mat.moviesquik.model.User;
 import it.unical.mat.moviesquik.model.media.MediaContent;
 import it.unical.mat.moviesquik.model.media.MediaContentType;
 import it.unical.mat.moviesquik.persistence.DBManager;
+import it.unical.mat.moviesquik.persistence.DataListPage;
 import it.unical.mat.moviesquik.persistence.searching.SortingPolicy;
 import it.unical.mat.moviesquik.util.JSONUtil;
 
@@ -29,7 +30,7 @@ import it.unical.mat.moviesquik.util.JSONUtil;
 public class MediaContentsBroker extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
-	private static final int MAX_FIND_COUNT = 10;
+	private static final int MAX_FIND_COUNT = 8;
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
@@ -39,27 +40,28 @@ public class MediaContentsBroker extends HttpServlet
 		if ( policy == null )
 			return;
 		
+		final DataListPage dataListPage = getDataListPage(req);
 		List<MediaContent> mediaContents = null;
 		
 		if ( policy.equals("trending") )
 			mediaContents = 
 				DBManager.getInstance().getDaoFactory().getMediaContentSearchDao()
-					.searchTrendingNow(MediaContentType.ALL, SortingPolicy.NONE, MAX_FIND_COUNT, MediaContentsSearchFilter.EMPTY);
+					.searchTrendingNow(MediaContentType.ALL, SortingPolicy.NONE, dataListPage, MediaContentsSearchFilter.EMPTY);
 		
 		else if ( policy.equals("most_popular") )
 			mediaContents = 
 			DBManager.getInstance().getDaoFactory().getMediaContentSearchDao()
-				.searchMostPopular(MediaContentType.ALL, SortingPolicy.NONE, MAX_FIND_COUNT, MediaContentsSearchFilter.EMPTY);
+				.searchMostPopular(MediaContentType.ALL, SortingPolicy.NONE, dataListPage, MediaContentsSearchFilter.EMPTY);
 		
 		else if ( policy.equals("most_rated") )
 			mediaContents = 
 			DBManager.getInstance().getDaoFactory().getMediaContentSearchDao()
-				.searchTopRated(MediaContentType.ALL, SortingPolicy.NONE, MAX_FIND_COUNT, MediaContentsSearchFilter.EMPTY);
+				.searchTopRated(MediaContentType.ALL, SortingPolicy.NONE, dataListPage, MediaContentsSearchFilter.EMPTY);
 		
 		else if ( policy.equals("most_favorites") )
 			mediaContents = 
 			DBManager.getInstance().getDaoFactory().getMediaContentSearchDao()
-				.searchMostFavorites(MediaContentType.ALL, SortingPolicy.NONE, MAX_FIND_COUNT, MediaContentsSearchFilter.EMPTY);
+				.searchMostFavorites(MediaContentType.ALL, SortingPolicy.NONE, dataListPage, MediaContentsSearchFilter.EMPTY);
 		
 		else if ( policy.equals("suggested") || policy.equals("maylike") || policy.equals("recently") )
 		{
@@ -67,10 +69,10 @@ public class MediaContentsBroker extends HttpServlet
 			if ( user != null )
 			{
 				if ( policy.equals("suggested") ) 	 mediaContents = DBManager.getInstance().getDaoFactory().getMediaContentSearchDao()
-													 .searchSuggested(MediaContentType.ALL, user, SortingPolicy.NONE, MAX_FIND_COUNT, MediaContentsSearchFilter.EMPTY);
-				else if ( policy.equals("maylike") ) mediaContents = AnalyticsFacade.getMayLikeMediaContents(user.getId(), MAX_FIND_COUNT);
+													 .searchSuggested(MediaContentType.ALL, user, SortingPolicy.NONE, dataListPage, MediaContentsSearchFilter.EMPTY);
+				else if ( policy.equals("maylike") ) mediaContents = AnalyticsFacade.getMayLikeMediaContents(user.getId(), dataListPage);
 				else 								 mediaContents = DBManager.getInstance().getDaoFactory().getMediaContentSearchDao()
-													 .searchRecentlyWatched(MediaContentType.ALL, user, SortingPolicy.NONE, MAX_FIND_COUNT, MediaContentsSearchFilter.EMPTY);
+													 .searchRecentlyWatched(MediaContentType.ALL, user, SortingPolicy.NONE, dataListPage, MediaContentsSearchFilter.EMPTY);
 			}
 			else
 				mediaContents = new ArrayList<MediaContent>();
@@ -91,6 +93,14 @@ public class MediaContentsBroker extends HttpServlet
 		final PrintWriter out = resp.getWriter();
 		out.print(JSONUtil.fromListToString(mediaContents));
 		out.flush();
+	}
+	
+	private DataListPage getDataListPage( final HttpServletRequest req )
+	{
+		int pageIndex = 0;
+		try { pageIndex = Integer.parseInt(req.getParameter("start")); }
+		catch (Exception e) {}
+		return new DataListPage(pageIndex, MAX_FIND_COUNT);
 	}
 	
 	private void filterByCount( final List<MediaContent> contents, final HttpServletRequest req )

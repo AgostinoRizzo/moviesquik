@@ -22,6 +22,7 @@ import it.unical.mat.moviesquik.model.business.Analyst;
 import it.unical.mat.moviesquik.model.media.MediaContent;
 import it.unical.mat.moviesquik.model.media.MediaContentType;
 import it.unical.mat.moviesquik.persistence.DBManager;
+import it.unical.mat.moviesquik.persistence.DataListPage;
 import it.unical.mat.moviesquik.persistence.dao.DaoFactory;
 import it.unical.mat.moviesquik.persistence.searching.SortingPolicy;
 import it.unical.mat.moviesquik.util.JSONUtil;
@@ -34,6 +35,7 @@ public class MediaContentsAnalytics extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
 	private static final int MAX_MEDIA_FIND_COUNT = 8;
+	private static final DataListPage FIND_DATA_LIST_PAGE = new DataListPage(MAX_MEDIA_FIND_COUNT);
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
@@ -61,7 +63,7 @@ public class MediaContentsAnalytics extends HttpServlet
 		
 		final List<MediaContent> trendingMediaContents = 
 				DBManager.getInstance().getDaoFactory().getMediaContentSearchDao()
-					.searchTrendingNow(MediaContentType.ALL, SortingPolicy.NONE, MAX_MEDIA_FIND_COUNT, MediaContentsSearchFilter.EMPTY);
+					.searchTrendingNow(MediaContentType.ALL, SortingPolicy.NONE, FIND_DATA_LIST_PAGE, MediaContentsSearchFilter.EMPTY);
 		req.setAttribute("trendingnow", trendingMediaContents);
 		
 		req.getRequestDispatcher("/business/media-analytics.jsp").forward(req, resp);
@@ -71,7 +73,7 @@ public class MediaContentsAnalytics extends HttpServlet
 	{
 		final List<MediaContent> mediaContents = 
 				DBManager.getInstance().getDaoFactory().getMediaContentSearchDao()
-				.searchByTitle(title, true, SortingPolicy.TITLE_ASC, MAX_MEDIA_FIND_COUNT);
+				.searchByTitle(title, true, SortingPolicy.TITLE_ASC, FIND_DATA_LIST_PAGE);
 		manageSearchResult(mediaContents, resp);
 	}
 	
@@ -81,13 +83,13 @@ public class MediaContentsAnalytics extends HttpServlet
 		List<MediaContent> mediaContents;
 		
 		if ( rating.equals("trendingnow") ) mediaContents = daoFactory.getMediaContentSearchDao()
-				.searchTrendingNow(MediaContentType.ALL, SortingPolicy.NONE, MAX_MEDIA_FIND_COUNT, MediaContentsSearchFilter.EMPTY);
+				.searchTrendingNow(MediaContentType.ALL, SortingPolicy.NONE, FIND_DATA_LIST_PAGE, MediaContentsSearchFilter.EMPTY);
 		else if ( rating.equals("popular") ) mediaContents = daoFactory.getMediaContentSearchDao()
-				.searchMostPopular(MediaContentType.ALL, SortingPolicy.NONE, MAX_MEDIA_FIND_COUNT, MediaContentsSearchFilter.EMPTY);
+				.searchMostPopular(MediaContentType.ALL, SortingPolicy.NONE, FIND_DATA_LIST_PAGE, MediaContentsSearchFilter.EMPTY);
 		else if ( rating.equals("toprated") ) mediaContents = daoFactory.getMediaContentSearchDao()
-				.searchTopRated(MediaContentType.ALL, SortingPolicy.NONE, MAX_MEDIA_FIND_COUNT, MediaContentsSearchFilter.EMPTY);
+				.searchTopRated(MediaContentType.ALL, SortingPolicy.NONE, FIND_DATA_LIST_PAGE, MediaContentsSearchFilter.EMPTY);
 		else if ( rating.equals("favorites") ) mediaContents = daoFactory.getMediaContentSearchDao()
-				.searchMostFavorites(MediaContentType.ALL, SortingPolicy.NONE, MAX_MEDIA_FIND_COUNT, MediaContentsSearchFilter.EMPTY);
+				.searchMostFavorites(MediaContentType.ALL, SortingPolicy.NONE, FIND_DATA_LIST_PAGE, MediaContentsSearchFilter.EMPTY);
 		else
 			mediaContents = new ArrayList<MediaContent>();
 		
