@@ -19,8 +19,10 @@ import it.unical.mat.moviesquik.controller.ServletUtils;
 import it.unical.mat.moviesquik.controller.SessionManager;
 import it.unical.mat.moviesquik.model.User;
 import it.unical.mat.moviesquik.model.media.MediaContent;
+import it.unical.mat.moviesquik.model.streaming.PlanStreamingQualityManager;
 import it.unical.mat.moviesquik.model.streaming.StreamService;
 import it.unical.mat.moviesquik.model.streaming.StreamServiceTable;
+import it.unical.mat.moviesquik.model.streaming.StreamingQuality;
 import it.unical.mat.moviesquik.persistence.DBManager;
 
 /**
@@ -53,9 +55,9 @@ public class StreamManifest extends HttpServlet
 		if ( mediaContent != null )
 			AnalyticsFacade.getLogger().logNewMediaWatch(user, mediaContent);
 		
-		ServletUtils.sendJson(createJsonManifest(mediaContentId), resp);
+		ServletUtils.sendJson(createJsonManifest(mediaContentId, user), resp);
 	}
-	private JsonObject createJsonManifest( final long mediaContentId )
+	private JsonObject createJsonManifest( final long mediaContentId, final User user )
 	{
 		final JsonObject manifest = new JsonObject();
 		
@@ -65,7 +67,10 @@ public class StreamManifest extends HttpServlet
 		for ( final StreamService s : services )
 			servers.add(s.getUrl());
 		
-		manifest.addProperty("streamspath", "/streams/mc-" + mediaContentId + "/");
+		final StreamingQuality streamingQuality = PlanStreamingQualityManager.getInstance()
+				.getBillingStreamingQuality(user.getFamily().getBillingReport().getCurrent());
+		
+		manifest.addProperty("streamspath", "/streams/mc-" + mediaContentId + "/" + StreamingQuality.toString(streamingQuality) + "/");
 		manifest.add("servers", servers);
 		
 		return manifest;
