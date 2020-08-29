@@ -46,6 +46,8 @@ window.StreamManager = function(mediaId, playPauseBtn, mediaTimeline, videoLoade
 	this.fetchErrorCount = 0;
 	this.startTimestampSeek = null;
 	this.startedWithTimestampSeek = false;
+	this.isMulticast = false;
+	this.isMulticastOnPause = false;
 	
 	// state variable.
 	this.state = STREAM_MANAGER_STATE.BOOTSTRAP;
@@ -132,6 +134,22 @@ window.StreamManager = function(mediaId, playPauseBtn, mediaTimeline, videoLoade
 		{
 			this.startLoading();
 		}
+		
+		if ( this.startedWithTimestampSeek &&
+				!(this.state != STREAM_MANAGER_STATE.BUFFERING || this.sourceBuffer.updating || this.isFetching) )
+		{
+			// movie party streaming start sync
+			this.startedWithTimestampSeek = false;
+			this.onSeek(this.startTimestampSeek);
+			
+			watchingPageSetup();
+			
+			this.videotag.volume = 1.0;
+			//this.playPauseBtn.enable();
+			//this.playPauseBtn.onPlay();
+			//this.playPauseBtn.disable();
+		}
+		
 	}
 	
 	/* on seek managing routine. */
@@ -175,6 +193,7 @@ window.StreamManager = function(mediaId, playPauseBtn, mediaTimeline, videoLoade
 				{
 					this.startTimestampSeek = this.startTimestamp / this.manifest.duration;
 					this.startedWithTimestampSeek = true;
+					this.isMulticast = true;
 					this.videotag.volume = 0.0;
 				}
 			}
@@ -195,13 +214,6 @@ window.StreamManager = function(mediaId, playPauseBtn, mediaTimeline, videoLoade
 			
 			//if ( this.startTimestampSeek != null && this.nextSegmentIndex != 0 )
 			//{ watchingPageSetup(); this.startTimestampSeek = null; this.videotag.volume = 1.0; }
-			
-			if ( this.startedWithTimestampSeek ) // activate view
-			{ 
-				this.startedWithTimestampSeek = false;
-				watchingPageSetup();
-				this.videotag.volume = 1.0;
-			}
 			
 			++this.nextSegmentIndex;
 			
@@ -247,12 +259,12 @@ window.StreamManager = function(mediaId, playPauseBtn, mediaTimeline, videoLoade
 				if ( this.isThereSegmentsToFetch() )
 					this.fetchNextSegment();
 				
-				if ( this.startedWithTimestampSeek ) // activate view
+				/*if ( this.startedWithTimestampSeek ) // activate view
 				{ 
 					this.startedWithTimestampSeek = false;
 					watchingPageSetup();
 					this.videotag.volume = 1.0;
-				}
+				}*/
 			}
 			else
 			{
@@ -335,6 +347,7 @@ window.StreamManager = function(mediaId, playPauseBtn, mediaTimeline, videoLoade
 		this.videoLoader.hide();
 		this.playPauseBtn.enable();
 		this.playPauseBtn.syncToVideoTag();
-		//playPauseBtn.onPlay(); 
+		if ( this.isMulticast && !this.isMulticastOnPause )
+			playPauseBtn.onPlay(); 
 	};
 }

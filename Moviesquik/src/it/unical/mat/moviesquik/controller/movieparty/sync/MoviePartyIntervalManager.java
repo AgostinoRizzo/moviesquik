@@ -28,7 +28,7 @@ public class MoviePartyIntervalManager
 	
 	private final Map<Session, MovieParty> sessionsPartyMap = new HashMap<Session, MovieParty>();
 	private final Map<MovieParty, List<Session>> partySessionsListMap = new HashMap<MovieParty, List<Session>>();
-	private final Map<MovieParty, Boolean> partyIntervalStatusMap = new HashMap<MovieParty, Boolean>();
+	private final Map<Long, Boolean> partyIntervalStatusMap = new HashMap<Long, Boolean>();
 	
 	private final Lock lock = new ReentrantLock();
 	
@@ -148,19 +148,21 @@ public class MoviePartyIntervalManager
 	
 	private void updateMoviePartyIntervalStatus( final MovieParty party, final boolean newIntervalStatus )
 	{
+		final Long partyId = party.getId();
+		
 		if ( newIntervalStatus )
-			partyIntervalStatusMap.put(party, true);
+			partyIntervalStatusMap.put(partyId, true);
 		else
 		{
-			if ( partyIntervalStatusMap.containsKey(party) )
-				partyIntervalStatusMap.remove(party);
+			if ( partyIntervalStatusMap.containsKey(partyId) )
+				partyIntervalStatusMap.remove(partyId);
 		}
 			
 	}
 	
 	private boolean getMoviePartyIntervalStatus( final MovieParty party )
 	{
-		return partyIntervalStatusMap.containsKey(party);
+		return partyIntervalStatusMap.containsKey(party.getId());
 	}
 	
 }

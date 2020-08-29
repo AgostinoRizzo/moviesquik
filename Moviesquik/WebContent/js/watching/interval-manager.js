@@ -9,6 +9,7 @@ const WEB_APPLICATION_NAME = "Moviesquik";
 var partyIntervalWebSocket;
 var userId;
 var partyId;
+var intervalBtnEnabled = true;
 
 function addClassToTagObject( classString, tagId ) 
 {
@@ -30,13 +31,16 @@ function onPartyIntervalPacketReceived(intervalPacket)
 	{
 		addClassToTagObject('d-none', '#player');
 		removeClassToTagObject('d-none', '#player-interval');
+		onIntervalStart($('#interval-btn'), false);
 	}
 	else
 	{
 		addClassToTagObject('d-none', '#player-interval');
 		removeClassToTagObject('d-none', '#player');
+		onIntervalEnd($('#interval-btn'), false);
 	}
 	
+	intervalBtnEnabled = true;
 	onPlayerIntervalStateChange(intervalPacket.interval);
 }
 
@@ -85,20 +89,24 @@ function sendPartyIntervalState(senderId, state)
 	partyIntervalWebSocket.send(jsonIntervalPacket);
 }
 
-function onIntervalStart(intervalBtn) 
+function onIntervalStart(intervalBtn, sendRequest=true) 
 {
 	intervalBtn.removeClass('btn-secondary');
 	intervalBtn.addClass('btn-warning');
+	intervalBtnEnabled = false;
 	
-	sendPartyIntervalState(userId, true);
+	if ( sendRequest )
+		sendPartyIntervalState(userId, true);
 }
 
-function onIntervalEnd(intervalBtn) 
+function onIntervalEnd(intervalBtn, sendRequest=true) 
 {
 	intervalBtn.removeClass('btn-warning');
 	intervalBtn.addClass('btn-secondary');
+	intervalBtnEnabled = false;
 	
-	sendPartyIntervalState(userId, false);
+	if ( sendRequest )
+		sendPartyIntervalState(userId, false);
 }
 
 $(document).ready( function()
@@ -110,7 +118,8 @@ $(document).ready( function()
 		
 		$('#interval-btn').click( function() 
 		{
-			$(this).hasClass('btn-secondary') ? onIntervalStart($(this)) : onIntervalEnd($(this));
+			if ( intervalBtnEnabled )
+				$(this).hasClass('btn-secondary') ? onIntervalStart($(this)) : onIntervalEnd($(this));
 		});
 	}
 );

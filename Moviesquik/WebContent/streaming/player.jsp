@@ -55,5 +55,8 @@
 </div>
 
 <div id="player-interval" class="d-none">
-	<h1>Interval</h1>
+	<div>
+		<h1><strong>INTERVAL</strong></h1>
+		<h5 class="note">The movie will restart when the administrator will end the interval.</h5>
+	</div>
 </div>

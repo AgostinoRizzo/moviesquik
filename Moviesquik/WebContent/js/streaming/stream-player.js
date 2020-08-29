@@ -254,14 +254,17 @@ function VideoLoader(videoLoaderTagId)
 	this.show = function() 
 	{
 		$(this.tagid).show();
+		
+		if ( $('#interval-btn-container').length && !$('#interval-btn-container').hasClass('d-none') )
+			$('#interval-btn-container').addClass('d-none');
 	};
 	
 	this.hide = function() 
 	{
 		$(this.tagid).hide();
 		
-		//if ( $('#interval-btn-container').length && $('#interval-btn-container').hasClass('d-none') )
-		//	$('#interval-btn-container').removeClass('d-none');
+		if ( $('#interval-btn-container').length && $('#interval-btn-container').hasClass('d-none') )
+			$('#interval-btn-container').removeClass('d-none');
 	};
 	
 	this.showLoadingError = function() 
@@ -344,4 +347,5 @@ window.onPlayerIntervalStateChange = function(state)
 		playPauseBtn.onPause();
 	else
 		playPauseBtn.onPlay();
+	streamManager.isMulticastOnPause = state;
 }
