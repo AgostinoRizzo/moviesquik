@@ -406,6 +406,27 @@
 </servlet-mapping>
 
 
+<!-- Developer Setting Page Servlet -->
+<servlet>
+	<servlet-name>developer_setting_page</servlet-name>
+	<servlet-class>it.unical.mat.moviesquik.controller.developer.DeveloperSettingsPage</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>developer_setting_page</servlet-name>
+	<url-pattern>/developer</url-pattern>
+</servlet-mapping>
+
+<!-- Developer Setting Edit Servlet -->
+<servlet>
+	<servlet-name>developer_setting_edit</servlet-name>
+	<servlet-class>it.unical.mat.moviesquik.controller.developer.DeveloperSettingsEdit</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>developer_setting_edit</servlet-name>
+	<url-pattern>/developer/settings/edit</url-pattern>
+</servlet-mapping>
+
+
 <!-- Business Home Servlet -->
 <servlet>
 	<servlet-name>business_home</servlet-name>
@@ -504,6 +525,17 @@
 <servlet-mapping>
 	<servlet-name>business_analytics_dashboard</servlet-name>
 	<url-pattern>/business/dashboard</url-pattern>
+</servlet-mapping>
+
+
+<!-- API Request Manager Servlet -->
+<servlet>
+	<servlet-name>api_request_manager</servlet-name>
+	<servlet-class>it.unical.mat.moviesquik.controller.developer.APIRequestManager</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>api_request_manager</servlet-name>
+	<url-pattern>/api</url-pattern>
 </servlet-mapping>
 
 </web-app>

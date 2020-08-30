@@ -82,6 +82,9 @@
 						<li class="nav-item">
 							<a class="nav-link" href="#">Family</a>
 						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="developer">Developer</a>
+						</li>
 						
 				</ul>
 				
@@ -131,6 +134,7 @@
 					        	<div class="dropdown-divider"></div>
 					        	<a class="dropdown-item" href="#">Dashboard</a>
 					        	<a class="dropdown-item" href="#">Edit Profile</a>
+					        	<a class="dropdown-item" href="developer">Developer</a>
 					        	<div class="dropdown-divider"></div>
 					        	<a class="dropdown-item" href="login?logout=true&subject=user">Sign Out</a>
 					        </div>

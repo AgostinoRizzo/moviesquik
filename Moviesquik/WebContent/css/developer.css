@@ -1,0 +1,24 @@
+@charset "ISO-8859-1";
+
+#developer-settings-container
+{
+	margin-top: 100px;
+}
+#developer-settings-container .col-auto
+{
+	/* width: fit-content; */
+}
+
+.service-img
+{
+	width: 50px;
+}
+
+.action-tile
+{
+	padding: 10px;
+}
+code
+{
+	font-size: 100%;
+}
