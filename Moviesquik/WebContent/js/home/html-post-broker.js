@@ -49,14 +49,16 @@ function getFacebookPostCommentsHtml(post, currentPageId)
 	return html;
 }
 
-window.createFacebookPostHtml = function(post, currentPageId) 
+window.createFacebookPostHtml = function(post, currentPageId, fbPageUrl) 
 {
 	const html = 
 		'<div class="media p-3 media-post-box main-media-post-box tile">' +
 		  '<div class="media-body">' +
 		  		'<div class="row">' +
 			  		'<div class="col-auto col-light-left">'+
-			  			'<img src="res/drawable/m_logo.png" class="avatar-img rounded-circle">' + 
+			  			'<a href="' + fbPageUrl + '">' +
+			  				'<img src="res/drawable/m_logo.png" class="avatar-img rounded-circle">' + 
+			  			'</a>' +
 			  			'<img src="res/drawable/fb_logo.png" class="m-page-fb-logo">' + 
 			  		'</div>' +
 				    '<div class="col col-light-right header-text">' +

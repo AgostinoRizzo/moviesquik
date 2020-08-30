@@ -140,7 +140,14 @@
 					        		<a class="dropdown-item" href="developer">Developer</a>
 					        	</c:if>
 					        	<div class="dropdown-divider"></div>
-					        	<a class="dropdown-item" href="login?logout=true&subject=user">Sign Out</a>
+					        	
+					        	<c:if test="${user.facebookId == null}">
+					        		<a class="dropdown-item" href="login?logout=true&subject=user">Sign Out</a>
+					        	</c:if>
+					        	<c:if test="${user.facebookId != null}">
+					        		<a class="dropdown-item" href="login?logout=true&subject=user" id="fb-profile-sign-out-btn">Sign Out</a>
+					        	</c:if>
+					        	
 					        </div>
 					    </li>
 					      

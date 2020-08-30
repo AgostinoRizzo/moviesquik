@@ -54,4 +54,10 @@ public class CreatePost extends HttpServlet
 		final RequestDispatcher rd = req.getRequestDispatcher("/");
 		rd.forward(req, resp);
 	}
+	
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
+	{
+		doPost(req, resp);
+	}
 }

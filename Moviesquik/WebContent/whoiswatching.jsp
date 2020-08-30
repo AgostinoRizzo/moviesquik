@@ -43,12 +43,21 @@
 	<script src="js/popup.js"></script>
 	<script src="js/accounting/whoiswatching.js"></script>
 	
+	<script src="js/facebook-login.js" type="module"></script>
+	
+	<script defer src="https://connect.facebook.net/en_US/sdk.js"></script>
+	
 </head>
 <body>
 	
 	<!-- ======================
 		  Header section
 	======================= -->
+	
+	<!-- main alerts -->
+	<div class="alert d-none" id="main-alert">
+		
+	</div>
 	
 	<header id="header">
 			
@@ -124,7 +133,9 @@
 					<c:if test="${login_user == null}">
 					
 						<c:forEach items="${account.members}" var="profile">
-							<div class="col-auto clickable">
+							<div class="col-auto clickable profile-col">
+								
+								<input type="hidden" id="profile-id" value="${profile.id}">
 								
 								<c:set var = "profile_img_src" scope = "request" value = "res/drawable/user_avatar.jpg"/>
 								<c:if test="${profile.profileImagePath != null && profile.profileImagePath.length() > 0}">
@@ -135,6 +146,7 @@
 								</a>
 								
 								<c:if test="${profile.facebookId != null}">
+									<input type="hidden" id="facebook-id" value="${profile.facebookId}">
 									<div class="external-profile-icon">
 										<i class="fa fa-facebook"></i>
 									</div>

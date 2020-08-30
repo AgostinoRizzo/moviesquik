@@ -69,6 +69,10 @@
 	<script src="js/watchlist/add-item.js"></script>
 	<script src="js/movieparty/movie-party-search.js"></script>
 	<script src="js/movieparty/movie-party-calendar.js"></script>
+	<c:if test="${user != null && user.facebookId != null}">
+		<script src="js/facebook-login.js" type="module"></script>
+		<script src="js/facebook-posting.js" type="module"></script>
+	</c:if>
 	
 </head>
 <body>

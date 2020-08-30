@@ -2,7 +2,7 @@
  * 
  */
 
-const FACEBOOK_API_APP_ID = '325081788542228';
+var FACEBOOK_API_APP_ID = '';
 var addFacebookProfileBtnClicked = false;
 
 window.fbAsyncInit = function() 
@@ -67,15 +67,30 @@ function addFacebookProfile()
 	$("#add-facebook-profile-btn").text('connecting...');
 	addFacebookProfileBtnClicked = true;
 	
-	FB.login( function(response) 
-	{
-		if ( response.status == 'connected' )
+	$.ajax(
 		{
-			console.log("logged in");
-			getUserInfo();
+			type: 'GET',
+			url: 'api/fbapp',
+			dataType: "json",
+			success: function(data)
+				{
+					if ( data.app_id )
+					{
+						FACEBOOK_API_APP_ID = data.app_id;
+						
+						FB.login( function(response) 
+						{
+							if ( response.status == 'connected' )
+							{
+								console.log("logged in");
+								getUserInfo();
+							}
+							
+						});
+					}
+				}
 		}
-		
-	});
+	);
 }
 
 $(document).ready( function()

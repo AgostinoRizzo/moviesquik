@@ -29,6 +29,7 @@
 				    	</div>
 				    	
 				    	<!-- Review post action -->
+				    	<!-- 
 				    	<div class="post-action dropdown row-item">
 				    		
 				    		<div class="btn btn-secondary dropdown-toggle" role="button" id="dropdown-emoji-panel-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -36,6 +37,7 @@
 				    		</div>
 				    		<jsp:include page="./emoji_panel.jsp"></jsp:include>
 				    	</div>
+				    	 -->
 				    	
 				    	<!-- CinemaRoom post action -->
 				    	<div class="post-action dropdown row-item">
@@ -45,6 +47,19 @@
 				    		</div>
 				    		<jsp:include page="./emoji_panel.jsp"></jsp:include>
 				    	</div>
+				    	
+				    	<!-- Social-Facebook posting -->
+				    	<c:if test="${user != null && user.facebookId != null}">
+					    	<div class="post-action dropdown row-item">
+					    		
+					    		<button class="btn btn-secondary dropdown-toggle" role="button" id="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					    			<h5><span class="fa fa-facebook text-primary"></span></h5> Social
+					    		</button>
+					    		<div class="dropdown-menu header-dropdown-menu">
+					    			<a class="dropdown-item clickable-light" id="publish-on-facebook-btn">Publish on Facebook</a>
+					    		</div>
+					    	</div>
+				    	</c:if>
 				    	
 				    	<div class="row-item" id="publish-row-item">
 				    		<button class="col post-action btn btn-main btn-sm" type="submit">Publish</button>

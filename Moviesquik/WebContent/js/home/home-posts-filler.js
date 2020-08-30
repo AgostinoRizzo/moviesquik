@@ -9,6 +9,7 @@ const INSERT_FB_PAGE_POSTS_EVENT_NAME = 'insert_fb_posts';
 
 var FACEBOOK_API_APP_ID;
 var FACEBOOK_PAGE_ID;
+var FACEBOOK_PAGE_URL;
 var ACCESS_TOKEN;
 
 var facebookPagePosts = [];
@@ -141,7 +142,7 @@ function insertFacebookPagePosts()
 	for ( var i in facebookPagePosts )
 	{
 		var post = facebookPagePosts[i];
-		var postHtml = createFacebookPostHtml(post, FACEBOOK_PAGE_ID);
+		var postHtml = createFacebookPostHtml(post, FACEBOOK_PAGE_ID, FACEBOOK_PAGE_URL);
 		
 		// appent the html to the posts list
 		$('#news-list').closest('#posts-column').find('.fb-posts-loader').addClass('d-none');
@@ -161,10 +162,11 @@ $(document).ready( function()
 				dataType: "json",
 				success: function(data)
 					{
-						if ( data.app_id && data.fbpage_id && data.access_token )
+						if ( data.app_id && data.fbpage_id && data.fbpage_url && data.access_token )
 						{
 							FACEBOOK_API_APP_ID = data.app_id;
 							FACEBOOK_PAGE_ID = data.fbpage_id;
+							FACEBOOK_PAGE_URL = data.fbpage_url;
 							ACCESS_TOKEN = data.access_token;
 							
 							fetchFacebookPagePosts();
