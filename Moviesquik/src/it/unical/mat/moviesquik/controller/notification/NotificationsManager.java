@@ -66,4 +66,25 @@ public class NotificationsManager
 		
 		return ans;
 	}
+	
+	public boolean sendTrigger( final String triggerUrl, final String triggerError, final User receiver )
+	{
+		final NotificationPacket triggerPacket = new NotificationPacket();
+		triggerPacket.setTrigger(true);
+		triggerPacket.setTriggerUrl(triggerUrl);
+		triggerPacket.setTriggerError(triggerError);
+		
+		lock.lock();
+		try
+		{
+			if ( userSessionMap.containsKey(receiver.getId()) )
+			{
+				final Session recvSession = userSessionMap.get(receiver.getId());
+				WebsocketUtil.<NotificationPacket>sendPacketFromSession( triggerPacket, recvSession);
+				return true;
+			}
+			return false;
+		}
+		finally { lock.unlock(); }
+	}
 }

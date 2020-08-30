@@ -29,8 +29,27 @@ function read_notifications(navbar) {
 		);
 }
 
+function manageTriggerNotification(trigger) 
+{
+	if ( trigger.triggerError && trigger.triggerError.length )
+	{
+		// show trigger error alert
+		showMainAlert( trigger.triggerError );
+		return;
+	}
+	
+	if ( trigger.triggerUrl && trigger.triggerUrl.length )
+		window.location.href = trigger.triggerUrl;
+}
+
 function onNewNotification(notification) 
 {	
+	if ( notification.trigger )
+	{
+		manageTriggerNotification(notification);
+		return;
+	}
+	
 	var partyIcon = false;
 	if ( !notification.iconSrc.length && notification.moviePartyId )
 	{

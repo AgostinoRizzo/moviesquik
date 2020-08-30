@@ -59,10 +59,13 @@
 					<p>Trigger a media content play</p>
 					
 					<span class="fa fa-globe"></span> URL Pattern: 
-						<span><code>http://<strong>&lt;MOVIESQUIK_FQDN&gt;</strong>:<strong>&lt;MOVIESQUIK_WEB_PORT&gt;</strong>/api?api_key=${developer_setting.apiKey}&amp;service_key=${assistant_service_key}&amp;user_id=${user.id}&amp;action=play&amp;media=<strong>&lt;MEDIA_TITLE&gt;</strong></code></span><br>
+						<span><code>http://<strong>&lt;MOVIESQUIK_FQDN&gt;</strong>:<strong>&lt;MOVIESQUIK_WEB_PORT&gt;</strong>/api</code></span><br>
 					<span class="fa fa-puzzle-piece"></span> HTTP Request Method: <span><code>GET</code></span><br>
+					<span class="fa fa-puzzle-piece"></span> HTTP Request Body: <span><code>{ api_key: ${developer_setting.apiKey}, service_key: ${assistant_service_key}, user_id: ${user.id}, query: "play <strong>&lt;MEDIA_TITLE&gt;</strong>" }</code></span><br>
 					<span class="fa fa-reply"></span> HTTP Response Data: <span><code>JSON</code></span><br>
 					<span class="fa fa-lock"></span> User ID: <span><code>${user.id}</code></span><br>
+					
+					<span class="fa fa-question"></span> Trigger query: <span><code>play <strong>&lt;MEDIA_TITLE&gt;</strong></code></span><br>
 					
 					<c:if test="${developer_setting.playAction}">
 						<span class="fa fa-info"></span> Status: <span><code>Enabled</code></span><br><br>

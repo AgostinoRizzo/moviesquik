@@ -24,6 +24,9 @@ public class NotificationPacket
 	private Long subjectUserId;
 	private Long moviePartyId;
 	private String iconSrc;
+	private Boolean trigger=false;
+	private String triggerUrl=null;
+	private String triggerError=null;
 	
 	public NotificationPacket()
 	{}
@@ -50,6 +53,8 @@ public class NotificationPacket
 		}
 		if ( movieParty != null )
 			moviePartyId = movieParty.getId();
+		
+		
 	}
 	
 	public Long getId()
@@ -123,6 +128,30 @@ public class NotificationPacket
 	public void setIconSrc(String iconSrc)
 	{
 		this.iconSrc = iconSrc;
+	}
+	public Boolean getTrigger()
+	{
+		return trigger;
+	}
+	public void setTrigger(Boolean trigger)
+	{
+		this.trigger = trigger;
+	}
+	public String getTriggerUrl()
+	{
+		return triggerUrl;
+	}
+	public void setTriggerUrl(String triggerUrl)
+	{
+		this.triggerUrl = triggerUrl;
+	}
+	public String getTriggerError()
+	{
+		return triggerError;
+	}
+	public void setTriggerError(String triggerError)
+	{
+		this.triggerError = triggerError;
 	}
 	
 }

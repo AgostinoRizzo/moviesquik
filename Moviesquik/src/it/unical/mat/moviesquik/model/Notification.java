@@ -82,4 +82,5 @@ public class Notification
 	{
 		this.movieParty = movieParty;
 	}
+	
 }
