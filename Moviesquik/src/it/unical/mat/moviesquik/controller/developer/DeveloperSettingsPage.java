@@ -34,6 +34,12 @@ public class DeveloperSettingsPage extends HttpServlet
 			return;
 		}
 		
+		if ( user.getIsKid() )
+		{
+			ServletUtils.manageParameterError(req, resp);
+			return;
+		}
+		
 		final String assistantServiceKey = APIKeyManager.getAssistantServiceAPI(getServletContext());
 		final DeveloperSetting setting = DBManager.getInstance().getDaoFactory().getDeveloperSettingDao().findByUser(user);
 		

@@ -34,6 +34,12 @@ public class DeveloperSettingsEdit extends HttpServlet
 			return;
 		}
 		
+		if ( user.getIsKid() )
+		{
+			ServletUtils.manageParameterError(req, resp);
+			return;
+		}
+		
 		final String action = req.getParameter("action");
 		final String subject = req.getParameter("subject");
 		
