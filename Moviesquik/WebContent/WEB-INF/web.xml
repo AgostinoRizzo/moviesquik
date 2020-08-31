@@ -398,7 +398,7 @@
 <!-- Facebook App API Servlet -->
 <servlet>
 	<servlet-name>fb_app</servlet-name>
-	<servlet-class>it.unical.mat.moviesquik.controller.api.FacebookApp</servlet-class>
+	<servlet-class>it.unical.mat.moviesquik.controller.api.FacebookAppConfigsBroker</servlet-class>
 </servlet>
 <servlet-mapping>
 	<servlet-name>fb_app</servlet-name>
@@ -460,7 +460,7 @@
 <!-- Media Contents AMDB API data Servlet -->
 <servlet>
 	<servlet-name>business_omdb_api_data</servlet-name>
-	<servlet-class>it.unical.mat.moviesquik.controller.api.ExternalOmdbApi</servlet-class>
+	<servlet-class>it.unical.mat.moviesquik.controller.api.ExternalOmdbApiConfigsBroker</servlet-class>
 </servlet>
 <servlet-mapping>
 	<servlet-name>business_omdb_api_data</servlet-name>
@@ -536,6 +536,17 @@
 <servlet-mapping>
 	<servlet-name>api_request_manager</servlet-name>
 	<url-pattern>/api</url-pattern>
+</servlet-mapping>
+
+
+<!-- NYTimes Review API Configs Broker Servlet -->
+<servlet>
+	<servlet-name>nytimes_api_configs_broker</servlet-name>
+	<servlet-class>it.unical.mat.moviesquik.controller.api.NYTimesReviewsAPIConfigsBroker</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>nytimes_api_configs_broker</servlet-name>
+	<url-pattern>/api/nytimes</url-pattern>
 </servlet-mapping>
 
 </web-app>

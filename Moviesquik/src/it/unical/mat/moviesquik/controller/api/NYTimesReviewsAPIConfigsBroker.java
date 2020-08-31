@@ -21,9 +21,9 @@ import it.unical.mat.moviesquik.util.ConfigUtil;
  * @author Agostino
  *
  */
-public class ExternalOmdbApi extends HttpServlet
+public class NYTimesReviewsAPIConfigsBroker extends HttpServlet
 {
-	private static final long serialVersionUID = 1L;
+private static final long serialVersionUID = 1L;
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
@@ -34,7 +34,7 @@ public class ExternalOmdbApi extends HttpServlet
 	
 	private JsonObject createJsonResponse()
 	{
-		final Properties config = ConfigUtil.loadConfigFile(ConfigUtil.EXTERNAL_OMDB_API_CONFIG_FILENAME, getServletContext());
+		final Properties config = ConfigUtil.loadConfigFile(ConfigUtil.NY_TIMES_REVIEWS_API_CONFIG_FILENAME, getServletContext());
 		final JsonObject resp = new JsonObject();
 		
 		final Set<String> properties = config.stringPropertyNames();

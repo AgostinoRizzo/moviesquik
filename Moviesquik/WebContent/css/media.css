@@ -51,3 +51,10 @@
 {
 	margin-top: 10px;
 }
+
+#ny-times-reviews-container .tile
+{
+	padding-top: 10px;
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+}

@@ -14,17 +14,17 @@ function onMediaContentShow(mckey)
 	$("#page-content, #movie-party-page-container").html('<div class="container" id="media-content-loading-container"><div class="loader loader-sm"></div></div');
 	
 	$.ajax(
-			{
-				type: "GET",
-				url: ajax_url,
-				dataType: "html",
-				success: function(data)
-					{
-						$("#page-content, #movie-party-page-container").html(data);
-						initLogStats();
-					}
-			}
-		);
+		{
+			type: "GET",
+			url: ajax_url,
+			dataType: "html",
+			success: function(data)
+				{
+					$("#page-content, #movie-party-page-container").html(data);
+					initLogStats();
+				}
+		}
+	);
 }
 
 $(document).ready(function() {

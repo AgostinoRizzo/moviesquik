@@ -4,10 +4,12 @@
 <!DOCTYPE html>
 
 <script src="js/media/rate-media-content.js"></script>
+<script src="js/media/load-nytimes-reviews.js"></script>
 
 <div id="media-content-page-container" class="container">
 	
 	<input type="hidden" id="media-id" value="${media_content.id}">
+	<input type="hidden" id="media-title" value="${media_content.title}">
 	
 	<div class="row">
 		
@@ -177,16 +179,19 @@
 	
 	<br><br><br>
 	
-	<!-- <div class="row">
+	<div id="ny-times-reviews-container">
 		
-		<div class="col-1"></div>
+		<h4 class="media-content-title">New York Times Reviews</h4><br>
+		<p class="note">The reviews are loaded from the <strong>New York Times Movie Review API</strong> submitting the media content title <strong>(${media_content.title})</strong> as query.</p>
 		
-		<div class="col-10">
-			<h4 class="media-content-title">Reviews</h4><br>
+		<div id="ny-times-reviews-list">
+		
+			<div class="loader loader-sm"></div>		
+		
 		</div>
 		
-		<div class="col-1"></div>
-		
-	</div> -->
+	</div>
+	
+	<br>
 	
 </div>

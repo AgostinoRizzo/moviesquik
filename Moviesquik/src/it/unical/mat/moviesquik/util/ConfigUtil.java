@@ -21,6 +21,7 @@ public class ConfigUtil
 	public static final String EXTERNAL_OMDB_API_CONFIG_FILENAME = "configs/omdb-api.config";
 	public static final String GOOGLE_ANALYTICS_API_CONFIG_FILENAME = "configs/google-analytics-api.config";
 	public static final String MOVIESQUIK_API_CONFIG_FILENAME = "configs/moviesquik-api.config";
+	public static final String NY_TIMES_REVIEWS_API_CONFIG_FILENAME = "configs/nytimes-reviews-api.config";
 	
 	public static Properties loadConfigFile( final String filename, final ServletContext context )
 	{

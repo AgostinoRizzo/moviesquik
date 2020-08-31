@@ -67,5 +67,5 @@ window.finalizeLogStats = function()
 
 $(document).ready(function()
 {
-	initLogStats();
+	//initLogStats();
 });

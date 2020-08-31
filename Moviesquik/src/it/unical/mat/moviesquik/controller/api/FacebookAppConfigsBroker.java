@@ -21,7 +21,7 @@ import it.unical.mat.moviesquik.util.ConfigUtil;
  * @author Agostino
  *
  */
-public class FacebookApp extends HttpServlet
+public class FacebookAppConfigsBroker extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
 	
