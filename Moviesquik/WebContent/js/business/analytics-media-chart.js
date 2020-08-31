@@ -6,6 +6,18 @@ import './chart-utils.js';
 
 google.charts.load('current', {'packages' : ['corechart']});
 
+function getMaxChartDataValue(chartData) 
+{
+	var max = 0;
+	for ( var i in chartData )
+	{
+		var values = chartData[i];
+		if ( values.value1 > max )
+			max = values.value1;
+		if ( values.value2 > max )
+			max = values.value2;
+	}
+}
 
 function getDataArray(chartData, value1Label, value2Label=null)  
 {
@@ -21,10 +33,9 @@ function getDataArray(chartData, value1Label, value2Label=null)
 	return dataArray;
 }
 
-function initChartData(chartTitle, chartTagId, chartData, value1Label, value2Label=null) 
+function initChartData(chartTagId, chartData, options, value1Label, value2Label=null) 
 {
 	var data = google.visualization.arrayToDataTable( getDataArray(chartData, value1Label, value2Label) );
-	var options = getChartOptions(chartTitle);
 
     var chart = new google.visualization.AreaChart(document.getElementById(chartTagId));
     chart.draw(data, options);
@@ -32,20 +43,26 @@ function initChartData(chartTitle, chartTagId, chartData, value1Label, value2Lab
 
 window.initTrendingChartData = function(chartData) 
 {
-	initChartData('Trending/Popularity chart', 'trending-chart', chartData, 'Trending Rate', 'Popularity Rate');
+	var options = getChartOptions('Trending/Popularity chart');
+	options.vAxis.viewWindow.max = getMaxChartDataValue(chartData);
+	initChartData('trending-chart', chartData, options, 'Trending Rate', 'Popularity Rate');
 }
 
 window.initRatingsChartData = function(chartData) 
 {
-	initChartData('Ratings chart', 'ratings-chart', chartData, 'Rate');
+	var options = getChartOptions('Ratings chart');
+	initChartData('ratings-chart', chartData, options, 'Rate');
 }
 
 window.initLikesChartData = function(chartData) 
 {
-	initChartData('Likes/Dislikes chart', 'likes-chart', chartData, 'Likes', 'No Likes');
+	var options = getChartOptions('Likes/Dislikes chart');
+	initChartData('likes-chart', chartData, options, 'Likes', 'No Likes');
 }
 
 window.initViewsChartData = function(chartData) 
 {
-	initChartData('Views chart', 'views-chart', chartData, 'views');
+	var options = getChartOptions('Views chart');
+	options.vAxis.viewWindow.max = getMaxChartDataValue(chartData);
+	initChartData('views-chart', chartData, options, 'views');
 }

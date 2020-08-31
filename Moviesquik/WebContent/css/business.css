@@ -78,3 +78,16 @@ body
 {
 	/* margin-bottom: 10px; */
 }
+#home-sidenav-col
+{
+	min-width: 200px;
+	max-width: 240px;
+}
+#home-page-content
+{
+	
+}
+.home-container-wrapper
+{
+	min-width: 1540px;
+}

@@ -19,10 +19,6 @@
 		
 		<a class="navbar-brand" href="business"><img alt="" src="res/drawable/business_logo.png"></a>
 		
-		<div class="collapse navbar-collapse justify-content-end" id="navbarToggler">
-			
-		</div>
-		
 		<c:if test="${admin != null}">
 			<div class="collapse navbar-collapse justify-content-end" id="navbarToggler">
 				

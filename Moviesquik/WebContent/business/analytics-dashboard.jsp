@@ -62,7 +62,7 @@
 			<div class="row dashboard-row">
 				
 				<div class="col col-4">
-					<div class="tile bg-primary">
+					<div class="tile info-tile bg-primary">
 						<h5>Total Sessions</h5>
 						<h1 id="total-sessions">0</h1>
 						<h5>Mobile Sessions</h5>
@@ -71,7 +71,7 @@
 				</div>
 				
 				<div class="col col-4">
-					<div class="tile bg-info">
+					<div class="tile info-tile bg-info">
 						<h5>Total Pageviews</h5>
 						<h1 id="total-pageviews">0</h1>
 						<h5>Mobile Pageviews</h5>
@@ -80,7 +80,7 @@
 				</div>
 				
 				<div class="col col-4">
-					<div class="tile bg-warning">
+					<div class="tile info-tile bg-warning">
 						<h5>Total Duration</h5>
 						<h1 id="total-session-duration">0s</h1>
 						<h5>Mobile Duration</h5>
@@ -96,14 +96,14 @@
 			<div class="row dashboard-row">
 				
 				<div class="col col-6">
-					<div class="tile bg-primary">
+					<div class="tile info-tile bg-primary">
 						<h5>New Visitors</h5>
 						<h1 id="new-visitors">0</h1>
 					</div>
 				</div>
 				
 				<div class="col col-6">
-					<div class="tile bg-info">
+					<div class="tile info-tile bg-info">
 						<h5>Returning Visitors</h5>
 						<h1 id="returning-visitors">0</h1>
 					</div>
