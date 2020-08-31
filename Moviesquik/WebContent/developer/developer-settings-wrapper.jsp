@@ -56,7 +56,16 @@
 	======================= -->
 	
 	<div id="developer-settings-container" class="container">
-		<jsp:include page="developer-settings.jsp"></jsp:include>
+	
+		<c:if test="${user.family.billingReport.current.canAccessDeveloperAPI()}">
+			<jsp:include page="developer-settings.jsp"></jsp:include>
+		</c:if>
+		<c:if test="${!user.family.billingReport.current.canAccessDeveloperAPI()}">
+			<div class="note">Moviesquik for Developers</div>
+			<h4><span class="fa fa-warning text-warning"></span> The Developer API settings are reserved only to <strong>premium</strong> plans.</h4>
+			<h5 class="note">Please update your next billing to be able to access your Developer API.</h5>
+		</c:if>
+		
 	</div>
 	
 </body>

@@ -37,12 +37,26 @@ public class MediaContentsSearch extends HttpServlet
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
 	{
+		final User user = SessionManager.checkUserAuthentication(req, resp, false);
+		if ( user == null )
+		{
+			ServletUtils.manageSessionError(req, resp);
+			return;
+		}
+		
 		manageSearch(req, resp, MediaContentsSearchFilter.EMPTY);
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
 	{
+		final User user = SessionManager.checkUserAuthentication(req, resp, false);
+		if ( user == null )
+		{
+			ServletUtils.manageSessionError(req, resp);
+			return;
+		}
+		
 		final JsonObject jsonFilter = new Gson().fromJson(ServletUtils.readAllBody(req), JsonObject.class);
 		final MediaContentsSearchFilter filter  = new MediaContentsSearchFilter(jsonFilter);
 		
@@ -90,9 +104,11 @@ public class MediaContentsSearch extends HttpServlet
 	
 	public static void manageGroupViewTemplate( HttpServletRequest req, HttpServletResponse resp,
 											final MediaContentType type, final MediaContentsViewTemplate viewTemplate, final User user,
-											final MediaContentsSearchFilter filter, final boolean sendview ) 
+											MediaContentsSearchFilter filter, final boolean sendview ) 
 													throws ServletException, IOException
 	{
+		filter = new MediaContentsSearchFilter();
+		
 		final Map<MediaContentGroup, List<MediaContent>> groupMediaContents = DBManager.getSearchEngine()
 				.groupMediaContentSearch(type, "", SortingPolicy.YEAR_RELEASED, user, filter);
 

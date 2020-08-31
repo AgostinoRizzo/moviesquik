@@ -34,7 +34,7 @@ public class DeveloperSettingsPage extends HttpServlet
 			return;
 		}
 		
-		if ( user.getIsKid() )
+		if ( user.getIsKid() || !user.getFamily().getBillingReport().getCurrent().canAccessDeveloperAPI() )
 		{
 			ServletUtils.manageParameterError(req, resp);
 			return;

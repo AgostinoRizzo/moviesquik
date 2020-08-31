@@ -24,6 +24,7 @@
 	
 	<!-- Style sheet files -->
 	<link href="css/main.css" rel="stylesheet">
+	<link href="css/common.css" rel="stylesheet">
 	<link href="css/widget.css" rel="stylesheet">
 	<link href="css/header.css" rel="stylesheet">
 	<link href="css/signup.css" rel="stylesheet">
@@ -81,7 +82,7 @@
 							<h6>Credit/Debit Card</h6><br>
 						</div>
 						<div class="col-6 col-right">
-							<a href="">Change</a>
+							<!-- <a href="">Change</a> -->
 						</div>
 					</div>
 					
@@ -165,7 +166,7 @@
 					
 					<hr class="mb-4">
 					
-					<div class="row">
+					<div class="row tile info-tile">
 						<div class="col-8 col-left form-section-text">
 						
 							<h6>Auto Update </h6><br>
@@ -203,7 +204,7 @@
 					
 					<c:if test="${!account.billingReport.history.isEmpty()}">
 						<c:forEach items="${account.billingReport.history}" var="previous_billing">
-								<div class="row note">
+								<div class="row note tile info-tile">
 									<div class="col-6 col-left">
 										<strong>Plan</strong>:<br>
 										<strong>Start Date</strong>:<br>
@@ -223,7 +224,7 @@
 										 	<c:if test="${previous_billing.trial}"><span class="badge badge-success">TRIAL</span></c:if>
 										 	<c:if test="${!previous_billing.trial}"><span class="badge badge-primary">PAYED</span></c:if><br>
 									</div>
-								</div>
+								</div><br>
 						</c:forEach>
 					</c:if>
 					

@@ -30,10 +30,9 @@
 		
 		<a class="navbar-brand" href="./"><img alt="" src="res/drawable/logo3.png"></a>
 		
-		<div class="collapse navbar-collapse justify-content-end" id="navbarToggler">
-		
-			<c:if test="${user == null}">
-			
+		<c:if test="${user == null}">
+			<div class="collapse navbar-collapse justify-content-end" id="navbarToggler">
+				
 				<ul class="navbar-nav">
 					<li class="nav-item active">
 						<a class="nav-link" href="#">About <span class="sr-only">(current)</span></a>
@@ -51,10 +50,9 @@
 				<form class="form-inline my-2 my-lg-0">
 					<button class="btn btn-main" type="button" onclick="window.location.href='login'">Sign In</button>
 				</form>
-			
-			</c:if>
-			
-		</div>
+				
+			</div>
+		</c:if>
 		
 		<c:if test="${user != null}">
 			<div class="collapse navbar-collapse justify-content-end" id="navbarToggler">

@@ -62,6 +62,8 @@
 	
 	<div id="create-party-page-content" class="container">
 		
+		<c:if test="${user.family.billingReport.current.canCreateMovieParty()}">
+		
 		<div id="create-party-form-header">
 			<div class="note">MOVIE PARTY</div>
 			<h2>Create a new movie party</h2>
@@ -245,8 +247,19 @@
 				<button class="btn btn-success btn-sm" form="create-party-form" type="submit"><span class="fa fa-plus" id="create-party-submit-btn"></span> Create Party</button>
 			</div>
 		</div>
+	
+		</c:if>
+		
+		<c:if test="${!user.family.billingReport.current.canCreateMovieParty()}">
+			<div id="create-party-form-header">
+				<div class="note">MOVIE PARTY</div>
+				<h4><span class="fa fa-warning text-warning"></span> The Movie Party creation is reserved only to <strong>standard</strong> and <strong>premium</strong> plans.</h4>
+				<h5 class="note">Please update your next billing to be able to create a movie party.</h5>
+			</div>
+		</c:if>
 		
 	</div>
+	
 	
 	<jsp:include page="../footer.html"></jsp:include>
 	

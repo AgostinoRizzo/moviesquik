@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.unical.mat.moviesquik.analytics.AnalyticsFacade;
+import it.unical.mat.moviesquik.controller.searching.DurationFilter;
+import it.unical.mat.moviesquik.controller.searching.FeaturesFilter;
 import it.unical.mat.moviesquik.controller.searching.MediaContentsSearchFilter;
 import it.unical.mat.moviesquik.model.User;
 import it.unical.mat.moviesquik.model.media.MediaContent;
@@ -86,6 +88,7 @@ public class MediaContentSearchDaoJDBC implements MediaContentSearchDao
 		
 		String query = SEARCH_BY_TYPE_QUERY;
 		query = addGenresFilter(query, filter, true);
+		query = addDurationAndFeatureFilter(query, filter, true);
 		query = addQuerySortingPolicy(query, sortingPolicy, false);
 		query = DaoUtilJDBC.addQueryOffsetLimit(query, dataListPage);
 		
@@ -175,6 +178,7 @@ public class MediaContentSearchDaoJDBC implements MediaContentSearchDao
 		
 		String query = anonymusSearchQuery;
 		query = addGenresFilter(query, filter, true);
+		query = addDurationAndFeatureFilter(query, filter, true);
 		query = query + orderByQuery;
 		query = addQuerySortingPolicy(query, sortingPolicy, true);
 		query = DaoUtilJDBC.addQueryOffsetLimit(query, dataListPage);
@@ -224,6 +228,50 @@ public class MediaContentSearchDaoJDBC implements MediaContentSearchDao
 			whereConditions.append( first ? "(" : " or " );
 			whereConditions.append("lower(genre) like lower('%" + genre + "%')");
 			first = false;
+		}
+		
+		if ( whereConditions.length() > 0 )
+		{
+			whereConditions.append(") ");
+			return (append) ? query + " and " + whereConditions.toString() 
+							: query + " where " + whereConditions.toString();
+		}
+		return query;
+	}
+	
+	private static String addDurationAndFeatureFilter( final String query, final MediaContentsSearchFilter filter, final boolean append )
+	{
+		final DurationFilter duration = filter.getDuration();
+		final FeaturesFilter features = filter.getFeatures();
+		
+		if ( duration == DurationFilter.ANY && features == FeaturesFilter.ANY )
+			return query;
+		
+		final StringBuilder whereConditions = new StringBuilder();
+		
+		whereConditions.append("( "); // : " or " );
+		boolean durationAdded = true;
+		
+		if ( duration == DurationFilter.SHORT )
+			whereConditions.append("(stream_time IS NOT NULL AND stream_time < 240) ");
+		else if ( duration == DurationFilter.LONG )
+			whereConditions.append("(stream_time IS NOT NULL AND stream_time > 1200) ");
+		else
+			durationAdded = false;
+		
+		if ( features != FeaturesFilter.ANY )
+		{
+			if ( durationAdded )
+				whereConditions.append("AND ");
+			
+			whereConditions.append("(quality IS NOT NULL AND quality = ");
+			
+			if ( features == FeaturesFilter._4K )
+				whereConditions.append("'4K') ");
+			else if ( features == FeaturesFilter.HD )
+				whereConditions.append("'HD') ");
+			else
+				whereConditions.append("'LD') ");
 		}
 		
 		if ( whereConditions.length() > 0 )

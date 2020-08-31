@@ -109,6 +109,12 @@ public class MovieParty extends HttpServlet
 			return;
 		}
 		
+		if ( !user.getFamily().getBillingReport().getCurrent().canCreateMovieParty() )
+		{
+			ServletUtils.manageSessionError(req, resp);
+			return;
+		}
+		
 		final it.unical.mat.moviesquik.model.movieparty.MovieParty party = 
 				new it.unical.mat.moviesquik.model.movieparty.MovieParty();
 		

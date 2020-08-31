@@ -24,6 +24,7 @@
 	
 	<!-- Style sheet files -->
 	<link href="css/main.css" rel="stylesheet">
+	<link href="css/common.css" rel="stylesheet">
 	<link href="css/header.css" rel="stylesheet">
 	<link href="css/widget.css" rel="stylesheet">
 	<link href="css/user-profile.css" rel="stylesheet">
@@ -102,11 +103,11 @@
 		        		
 		        		<c:if test="${!is_friend}">
 		        			<a class="btn btn-warning btn-sm col-4 dropdown-toggle" data-toggle="dropdown">Following</a>
-		        			<div class="dropdown-menu"><a class="dropdown-item" href="#">Remove</a></div>
+		        			<!-- <div class="dropdown-menu"><a class="dropdown-item" href="#">Remove</a></div> -->
 		        		</c:if>
 		        		<c:if test="${is_friend}">
 		        			<a class="btn btn-success btn-sm col-4 dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-check"></i> Friend</a>
-		        			<div class="dropdown-menu"><a class="dropdown-item" href="#">Remove</a></div>
+		        			<!-- <div class="dropdown-menu"><a class="dropdown-item" href="#">Remove</a></div> -->
 		        		</c:if>
 						
 		        	</c:if>
@@ -153,26 +154,19 @@
 	        </c:if>
 	        
 	        <p class="lead">
-	          <a href="#"><small>${user_to_display.email}</small></a>
+	          <a><small>${user_to_display.email}</small></a>
 	        </p>
 	        	        
 	        <div class="row user-stats-section">
 				<div class="col-3">
-					<span class="fa fa-comment"></span>
-					<strong>12</strong> posts
+					<span class="fa fa-group"></span>
+					<strong>${user_to_display.friends.size()}</strong> friends
 				</div>
 				<div class="col-3">
 					<span class="fa fa-group"></span>
 					<strong>${user_to_display.followersCount}</strong> followers
 				</div>
-				<div class="col-3">
-					<span class="fa fa-video-camera"></span>
-					<strong>12</strong> views
-				</div>
 			</div>
-	        
-	       	     
-	        
 	        
 	        <br>
         
@@ -205,9 +199,6 @@
 					  </li>
 				  </c:if>
 				  <li class="nav-item col">
-				    <a class="nav-link" data-toggle="tab" href="#info"><span class="fa fa-info"></span> Info</a>
-				  </li>
-				  <li class="nav-item col">
 				    <a class="nav-link" data-toggle="tab" href="#family"><span class="fa fa-home"></span> Family (${user_to_display.family.members.size()})</a>
 				  </li>
 				  <li class="nav-item col">
@@ -231,7 +222,7 @@
 			<div class="tab-content">
 			  
 			  <div class="tab-pane container" id="showcase">
-			  		<c:if test="${user_to_display.id == user.id}">
+			  		<%-- <c:if test="${user_to_display.id == user.id}"> --%>
 
 						<div class="media-contents-list">
 					
@@ -255,7 +246,7 @@
 							</div>
 						</div>
 					
-					</c:if>
+					<%-- </c:if> --%>
 					
 					<c:if test="${has_recently_watched != null}">
 						<div class="media-contents-list">
@@ -284,71 +275,14 @@
 			  </div>
 			  
 			  <div class="tab-pane container fade active show" id="posts">
-			  		<div class="showcase-header-title"><h3>Showcase</h3></div>
-	        
-			        <c:if test="${user_to_display.id == user.id}">
-				        <!-- Comments Form -->
-				        <div class="card bg-dark text-white my-4">
-				          <h5 class="card-header">Leave a Comment:</h5>
-				          <div class="card-body">
-				            <form>
-				              <div class="form-group">
-				                <textarea class="form-control" rows="3"></textarea>
-				              </div>
-				              <button class="btn btn-primary" type="submit">Submit</button>
-				            </form>
-				          </div>
-				        </div>
-					</c:if>
-					
-					
+			  		
 					<!-- List all personal posts -->
 					<c:forEach items="${user_to_display.personalPosts}" var="post">
 						<c:set var="post_to_display" scope="request" value="${post}"/>
 						<jsp:include page="../posting/post_box.jsp"></jsp:include>
 					</c:forEach>
 					
-					
-			        <!-- Single Comment -->
-			        <div class="media mb-4">
-			          <img class="d-flex mr-3 rounded-circle" alt="" src="http://placehold.it/50x50">
-			          <div class="media-body">
-			            <h5 class="mt-0">Commenter Name</h5>
-			            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-			          </div>
-			        </div>
-			
-			        <!-- Comment with nested comments -->
-			        <div class="media mb-4">
-			          <img class="d-flex mr-3 rounded-circle" alt="" src="http://placehold.it/50x50">
-			          <div class="media-body">
-			            <h5 class="mt-0">Commenter Name</h5>
-			            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-			
-			            <div class="media mt-4">
-			              <img class="d-flex mr-3 rounded-circle" alt="" src="http://placehold.it/50x50">
-			              <div class="media-body">
-			                <h5 class="mt-0">Commenter Name</h5>
-			                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-			              </div>
-			            </div>
-			
-			            <div class="media mt-4">
-			              <img class="d-flex mr-3 rounded-circle" alt="" src="http://placehold.it/50x50">
-			              <div class="media-body">
-			                <h5 class="mt-0">Commenter Name</h5>
-			                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-			              </div>
-			            </div>
-			
-			          </div>
-			        </div>
-			  </div>
-			  
-			  <div class="tab-pane container fade" id="info">
-			  		<jsp:include page="user-info.jsp"></jsp:include>
-			  </div>
-			  
+			  </div>			  
 			  
 			  <div class="tab-pane container fade" id="family">
 			  		
@@ -358,7 +292,7 @@
 	          			
 		            	<c:forEach items="${user_to_display.family.members}" var="member">
 		            	
-		            		<div class="media">
+		            		<div class="media col">
 		            			  <c:if test="${member.profileImagePath != null && member.profileImagePath.length() > 0}">
 								  		<a href="user?id=${member.id}"><img src="${member.profileImagePath}" class="avatar-img card-list-avatar-img rounded-circle"></a>
 								  </c:if>
@@ -367,8 +301,8 @@
 								  </c:if>
 								  
 								  <div class="media-body">
-								    <h4>${member.firstName} ${member.lastName} <small class="is-master-text"><i>master</i></small></h4>
-								    <p><a href="#">${member.email}</a></p>
+								    <h5>${member.firstName} ${member.lastName} <small class="is-master-text"><i>master</i></small></h5>
+								    <p><a>${member.email}</a></p>
 								  </div>
 							</div>
 							
@@ -392,8 +326,8 @@
 								  </c:if>
 								  
 								  <div class="media-body">
-								    <h4>${friend.firstName} ${friend.lastName}</h4>
-								    <p><a href="#">${friend.email}</a></p>
+								    <h5>${friend.firstName} ${friend.lastName}</h5>
+								    <p><a>${friend.email}</a></p>
 								  </div>
 							</div>
 							
@@ -436,7 +370,7 @@
 	            
 	            	<c:forEach items="${user_to_display.favoritesGenres}" var="genre">
 			            	<div class="col-lg-4">
-									<a href="#">${genre}</a>
+									<a>${genre}</a>
 							</div>
 					</c:forEach>
 	              
@@ -460,7 +394,7 @@
 										  		<img src="res/drawable/user_avatar.jpg" class="avatar-img card-list-avatar-img rounded-circle">
 										</c:if>
 								</a>
-								<p><small>${member.firstName} ${member.lastName}</small></p>
+								<p class="text-overflow"><small>${member.firstName} ${member.lastName}</small></p>
 							</div>
 							
 						</c:forEach>
@@ -486,7 +420,7 @@
 										</c:if>
 										
 									</a>
-									<p><small>${friend.firstName} ${friend.lastName}</small></p>
+									<p class="text-overflow"><small>${friend.firstName} ${friend.lastName}</small></p>
 							</div>
 						</c:forEach>
 						

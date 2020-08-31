@@ -99,6 +99,8 @@ jQuery(document).ready(function($) {
 	  			return item.query;
 	  		if ( item.type == "user")
 	  			window.location.href = "user?id=" + item.id;
+	  		if ( item.type == "media_content")
+	  			window.location.href = "search?query=" + item.title;
 	  		return item.title + ", " + item.subtitle;
   		},
 		source: function (query, response) {

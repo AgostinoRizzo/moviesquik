@@ -87,7 +87,7 @@
 		
 		<div id="filter-section" class="media-contents-list-header filter-section row">
 			
-			<div id="" class="col col-12 col-lg-10">
+			<div id="filter-col" class="col">
 				<div class="btn-group">
 					<h5 class="media-contents-list-header-title"><span class="fa fa-sliders"></span> &nbsp;&nbsp;Filter </h5>
 					&nbsp;
@@ -150,9 +150,10 @@
 						
 						<select id="features-select" class="form-control filter-select-position" name="">
 							
-							<option value="any">Any</option>
-							<option value="4k">4K</option>
-							<option value="hd">HD</option>
+							<option value="ANY">Any</option>
+							<option value="4K">4K</option>
+							<option value="HD">HD</option>
+							<option value="LD">LD</option>
 							
 						</select>
 						
@@ -169,7 +170,7 @@
 				<button type="button" id="clear-filter-btn" class="btn btn-warning filter-select-position d-none"><span class="fa fa-times"></span> Clear</button>
 			</div>
 			
-			<div class="sorting-policy-section col col-12 col-lg-2">
+			<div class="sorting-policy-section col">
 					
 				<div class="btn-group">
 				
@@ -248,6 +249,8 @@
 	</div>
 	
 	</div>
+	
+	<jsp:include page="../footer.html"></jsp:include>
 	
 </body>
 </html>

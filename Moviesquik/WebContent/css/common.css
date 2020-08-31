@@ -1,10 +1,26 @@
 @charset "ISO-8859-1";
 
+:root
+{
+	--tile-background-color: #1c1c1e82; /*#1c1c1e;*/
+	--tile-border-radius: 12px;
+}
+
 /* Tile group style */
 .tile
 {
-	background-color: #1c1c1e82; /*#1c1c1e;*/
-	border-radius: 12px;
+	background-color: var(--tile-background-color);
+	border-radius: var(--tile-border-radius);
+}
+.info-tile
+{
+	padding-top: 10px;
+	padding-bottom: 10px;
+	transition: 0.5s;
+}
+.info-tile:hover
+{
+	transform: scale(1.1);
 }
 
 /* Selected item style */

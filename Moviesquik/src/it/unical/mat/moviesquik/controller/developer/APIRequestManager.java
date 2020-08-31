@@ -40,7 +40,8 @@ public class APIRequestManager extends HttpServlet
 			final User user = daoFactory.getUserDao().findByPrimaryKey(userId);
 			final DeveloperSetting developerSetting = daoFactory.getDeveloperSettingDao().findByUser(user);
 			
-			if ( !user.getIsKid() && developerSetting.getApiKey().equals(jsonRequest.get("api_key").getAsString()) &&
+			if ( !user.getIsKid() && user.getFamily().getBillingReport().getCurrent().canAccessDeveloperAPI() &&
+					developerSetting.getApiKey().equals(jsonRequest.get("api_key").getAsString()) &&
 					developerSetting.getAssistantServiceKey().equals(jsonRequest.get("service_key").getAsString()) )
 			{
 				final String query = jsonRequest.get("query").getAsString();

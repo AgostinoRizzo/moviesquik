@@ -85,4 +85,14 @@ public class Billing
 		return PlanPricesManager.getInstance().getBillingPrice(this);
 	}
 	
+	public Boolean canCreateMovieParty()
+	{
+		return (plan.equals("standard") || plan.equals("premium"));
+	}
+	
+	public Boolean canAccessDeveloperAPI()
+	{
+		return plan.equals("premium");
+	}
+	
 }

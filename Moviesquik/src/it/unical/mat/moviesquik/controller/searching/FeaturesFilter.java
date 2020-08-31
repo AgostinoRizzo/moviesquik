@@ -11,7 +11,7 @@ import com.google.gson.JsonObject;
  */
 public enum FeaturesFilter
 {
-	ANY, _4K, HD;
+	ANY, _4K, HD, LD;
 	
 	public static FeaturesFilter getFromJson( final JsonObject json )
 	{
@@ -24,6 +24,7 @@ public enum FeaturesFilter
 			return ANY;
 		if ( str.equals("4K") ) return _4K;
 		if ( str.equals("HD") ) return HD;
+		if ( str.equals("LD") ) return LD;
 		return ANY;
 	}
 }

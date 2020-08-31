@@ -25,8 +25,8 @@
 	<div id="search-result" class="media-contents-list-items row" role="listbox">
 		<c:forEach items="${media_content_list}" var="current_media_content">
 			<c:set var="media_content" scope="request" value="${current_media_content}"/>
-			<div class="col-12 col-sm-6 col-md-4 col-xl-2 media-col-item">
-			<jsp:include page="../contents-item.jsp"></jsp:include>
+			<div class="col-12 col-sm-12 col-md-4 col-xl-2 media-col-item">
+				<jsp:include page="../contents-item.jsp"></jsp:include>
 			</div>
 		</c:forEach>
 	</div>

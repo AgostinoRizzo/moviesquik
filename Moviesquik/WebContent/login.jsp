@@ -123,10 +123,10 @@
 						<button class="btn btn-main" type="submit" id="signin-submit-btn"><h5>Sign In</h5></button>
 					</div>
 				</div>
-				<div class="form-check form-check-inline">
+				<!-- <div class="form-check form-check-inline">
 					<input id="remember_me_checkbox" type="checkbox">
 					<label for="remember_me_checkbox">Remember me</label>
-				</div>
+				</div> -->
 				
 			</fieldset>
 			</form>

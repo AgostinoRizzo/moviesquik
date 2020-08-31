@@ -24,6 +24,7 @@
 	
 	<!-- Style sheet files -->
 	<link href="css/main.css" rel="stylesheet">
+	<link href="css/common.css" rel="stylesheet">
 	<link href="css/widget.css" rel="stylesheet">
 	<link href="css/header.css" rel="stylesheet">
 	<link href="css/signup.css" rel="stylesheet">
@@ -81,7 +82,7 @@
 							<h6>Account details</h6><br>
 						</div>
 						<div class="col-2 col-right">
-							<a href="">Change</a>
+							<!-- <a href="">Change</a> -->
 						</div>						
 					</div>
 					
@@ -117,7 +118,7 @@
 										<c:if test="${profile.profileImagePath != null && profile.profileImagePath.length() > 0}">
 											<c:set var = "profile_img_src" scope = "request" value = "${profile.profileImagePath}"/>
 										</c:if>
-										<a href="user?id=${profile.id}"><img alt="" src="${profile_img_src}" class="avatar-img card-list-avatar-img rounded-circle"></a>
+										<a><img alt="" src="${profile_img_src}" class="avatar-img card-list-avatar-img rounded-circle"></a>
 										
 									</div>
 									<div class="col-auto col-light-right note">
@@ -131,7 +132,7 @@
 							</p>
 						</div>
 						<div class="col-2 col-right">
-							<a href="">Change</a>
+							<!-- <a href="">Change</a> -->
 						</div>
 					</div>
 					
@@ -170,7 +171,7 @@
 					
 					<hr class="mb-4">
 					
-					<div class="row">
+					<div class="row tile info-tile">
 						<div class="col-8 col-left form-section-text">
 						
 							<h6>Auto Update </h6><br>

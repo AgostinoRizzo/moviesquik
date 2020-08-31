@@ -86,9 +86,9 @@
 				<div class="collapse navbar-collapse justify-content-end" id="navbarToggler">
 				
 					<ul class="navbar-nav">
-						<li class="nav-item">
+						<!-- <li class="nav-item">
 							<a class="nav-link" href="#">Watch Lists</a>
-						</li>
+						</li> -->
 						<li class="nav-item active">
 							<a class="nav-link" href="account">Account <span class="sr-only">(current)</span></a>
 						</li>
