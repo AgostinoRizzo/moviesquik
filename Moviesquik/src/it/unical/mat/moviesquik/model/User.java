@@ -32,7 +32,6 @@ public class User
 	private Long facebookId;
 	private List<User> friends;
 	private Integer followersCount;
-	private List<String> favoritesGenres;
 	private String profileImagePath;
 	private List<Notification> notifications;
 	private List<Notification> unreadNotifications;
@@ -40,6 +39,7 @@ public class User
 	private List<Post> allPosts;
 	private List<Watchlist> watchlists;
 	private List<MovieParty> allParties;
+	private List<String> favoriteGenres;
 	
 	public User()
 	{}
@@ -187,16 +187,6 @@ public class User
 		this.followersCount = followersCount;
 	}
 	
-	public List<String> getFavoritesGenres()
-	{
-		return favoritesGenres;
-	}
-	
-	public void setFavoritesGenres(List<String> favoritesGenres)
-	{
-		this.favoritesGenres = favoritesGenres;
-	}
-	
 	public String getProfileImagePath()
 	{
 		return (profileImagePath == null || profileImagePath.isEmpty()) 
@@ -265,5 +255,17 @@ public class User
 			allParties = DBManager.getInstance().getDaoFactory().getMoviePartyDao()
 				.findAllByUser(this, MoviePartySearchFilter.ALL, DataListPage.DEFAULT_MOVIE_PARTIES_PAGE);
 		return allParties;
+	}
+	
+	public List<String> getFavoriteGenres()
+	{
+		if ( favoriteGenres == null || favoriteGenres.isEmpty() )
+			favoriteGenres = DBManager.getInstance().getDaoFactory().getUserGenreDao().findFavorites(this);
+		return favoriteGenres;
+	}
+	
+	public void setFavoriteGenres(List<String> favoriteGenres)
+	{
+		this.favoriteGenres = favoriteGenres;
 	}
 }

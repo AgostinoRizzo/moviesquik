@@ -48,6 +48,7 @@ public interface DaoFactory
 	public MediaContentStatisticsDao getMediaContentStatisticsDao();
 	public MediaContentSharingDao getMediaContentSharingDao();
 	public AnalyticsExtractorDao getAnalyticsExtractorDao();
+	public UserGenreDao getUserGenreDao();
 	public AnalystDao getAnalystDao();
 	public MediaAnalyticsHistoryLogDao getMediaAnalyticsHistoryLogDao();
 	public CDNServerDao getCDNServerDao();

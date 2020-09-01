@@ -364,11 +364,11 @@
 	
 	        <!-- Genres Widget -->
 	        <div class="card bg-dark text-white my-4">
-	          <p class="card-header"><span class="fa fa-film"></span> Favorites Genres (${user_to_display.favoritesGenres.size()})</p>
+	          <p class="card-header"><span class="fa fa-film"></span> Favorites Genres (${user_to_display.favoriteGenres.size()})</p>
 	          <div class="card-body">
 	            <div class="row">
 	            
-	            	<c:forEach items="${user_to_display.favoritesGenres}" var="genre">
+	            	<c:forEach items="${user_to_display.favoriteGenres}" var="genre">
 			            	<div class="col-lg-4">
 									<a>${genre}</a>
 							</div>

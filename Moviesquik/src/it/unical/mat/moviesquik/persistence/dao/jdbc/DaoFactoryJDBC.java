@@ -21,6 +21,7 @@ import it.unical.mat.moviesquik.persistence.dao.PostDao;
 import it.unical.mat.moviesquik.persistence.dao.PostFeedbackDao;
 import it.unical.mat.moviesquik.persistence.dao.RegistrationTransaction;
 import it.unical.mat.moviesquik.persistence.dao.UserDao;
+import it.unical.mat.moviesquik.persistence.dao.UserGenreDao;
 import it.unical.mat.moviesquik.persistence.dao.WatchlistDao;
 import it.unical.mat.moviesquik.persistence.dao.WatchlistItemDao;
 import it.unical.mat.moviesquik.persistence.dao.analytics.AnalyticsExtractorDao;
@@ -214,6 +215,12 @@ public class DaoFactoryJDBC implements DaoFactory
 	public AnalyticsExtractorDao getAnalyticsExtractorDao()
 	{
 		return new AnalyticsExtractorDaoJDBC(getNewStatementPrompter());
+	}
+	
+	@Override
+	public UserGenreDao getUserGenreDao()
+	{
+		return new UserGenreDaoJDBC(getNewStatementPrompter());
 	}
 	
 	@Override

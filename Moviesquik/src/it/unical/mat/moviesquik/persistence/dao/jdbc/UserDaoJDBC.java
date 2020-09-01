@@ -369,7 +369,6 @@ public class UserDaoJDBC implements UserDao
 				.findByPrimaryKey(result.getLong("family_id")) : family );
 		
 		usr.setFollowersCount(getFollowersCount(usr));
-		usr.setFavoritesGenres(getFavoritesGenres(usr));
 		
 		usr.setProfileImagePath(result.getString("profile_img"));
 		usr.setIsKid(result.getBoolean("kid"));
@@ -400,19 +399,5 @@ public class UserDaoJDBC implements UserDao
 		
 		finally 
 		{ statementPrompter.onFinalize(); }
-	}
-	
-	private List<String> getFavoritesGenres( final User user )
-	{
-		final String g1 = "Action";
-		final String g2 = "Cartoon";
-		final String g3 = "Science";
-		
-		final List<String> genres = new ArrayList<String>();
-		genres.add(g1);
-		genres.add(g2);
-		genres.add(g3);
-		
-		return genres;
 	}
 }
