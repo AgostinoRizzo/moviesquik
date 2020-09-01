@@ -21,10 +21,12 @@ import it.unical.mat.moviesquik.persistence.DBManager;
  *
  */
 public class Initializer implements ServletContextListener
-{
+{	
 	@Override
 	public void contextInitialized(ServletContextEvent sce)
 	{
+		ServletContextPath.setServletContext(sce.getServletContext());
+		
 		DBManager.getInstance().getFiller()
 			.fillMediaContents(sce.getServletContext().getRealPath(File.separator));
 		DBManager.getFileSystemDataSource().setSrcPath(sce.getServletContext().getRealPath(""));
@@ -43,4 +45,5 @@ public class Initializer implements ServletContextListener
 		CDNUsageUpdateManager.getInstance().finalize();
 		DBConnectionPool.getInstance().finalize();
 	}
+	
 }

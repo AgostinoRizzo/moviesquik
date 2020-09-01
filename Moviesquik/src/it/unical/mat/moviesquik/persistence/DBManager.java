@@ -4,6 +4,7 @@
 package it.unical.mat.moviesquik.persistence;
 
 import java.util.List;
+import java.util.Properties;
 
 import it.unical.mat.moviesquik.model.BillingReport;
 import it.unical.mat.moviesquik.model.CreditCard;
@@ -13,6 +14,7 @@ import it.unical.mat.moviesquik.model.business.Analyst;
 import it.unical.mat.moviesquik.persistence.dao.DaoFactory;
 import it.unical.mat.moviesquik.persistence.dao.jdbc.DaoFactoryJDBC;
 import it.unical.mat.moviesquik.persistence.searching.DBSearchEngine;
+import it.unical.mat.moviesquik.util.ConfigUtil;
 
 /**
  * @author Agostino
@@ -32,8 +34,10 @@ public class DBManager
 	{
 		try
 		{
+			final Properties dbconfigs = ConfigUtil.loadConfigFile(ConfigUtil.DATABASE_CONFIG_FILENAME);
+			
 			Class.forName("org.postgresql.Driver");
-			dataSource = new DataSource("jdbc:postgresql://localhost:5432/moviesquik", "postgres", "postgres");
+			dataSource = new DataSource(dbconfigs.getProperty("uri"), dbconfigs.getProperty("username"), dbconfigs.getProperty("password"));
 			daoFactory = new DaoFactoryJDBC(dataSource);
 			fsDataSource = new FileSystemDataSoruce();
 			searchEngine = new DBSearchEngine();
