@@ -34,17 +34,20 @@ public class DeveloperSettingsPage extends HttpServlet
 			return;
 		}
 		
-		if ( user.getIsKid() || !user.getFamily().getBillingReport().getCurrent().canAccessDeveloperAPI() )
+		if ( user.getIsKid() )
 		{
 			ServletUtils.manageParameterError(req, resp);
 			return;
 		}
 		
-		final String assistantServiceKey = APIKeyManager.getAssistantServiceAPI(getServletContext());
-		final DeveloperSetting setting = DBManager.getInstance().getDaoFactory().getDeveloperSettingDao().findByUser(user);
-		
-		req.setAttribute("assistant_service_key", assistantServiceKey);
-		req.setAttribute("developer_setting", setting);
+		if ( user.getFamily().getBillingReport().getCurrent().canAccessDeveloperAPI() )
+		{
+			final String assistantServiceKey = APIKeyManager.getAssistantServiceAPI(getServletContext());
+			final DeveloperSetting setting = DBManager.getInstance().getDaoFactory().getDeveloperSettingDao().findByUser(user);
+			
+			req.setAttribute("assistant_service_key", assistantServiceKey);
+			req.setAttribute("developer_setting", setting);
+		}
 		
 		req.getRequestDispatcher("developer/developer-settings-wrapper.jsp").forward(req, resp);
 	}

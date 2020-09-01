@@ -109,7 +109,7 @@ public class MovieParty extends HttpServlet
 			return;
 		}
 		
-		if ( !user.getFamily().getBillingReport().getCurrent().canCreateMovieParty() )
+		if ( user.getIsKid() || !user.getFamily().getBillingReport().getCurrent().canCreateMovieParty() )
 		{
 			ServletUtils.manageSessionError(req, resp);
 			return;

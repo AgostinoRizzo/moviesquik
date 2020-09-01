@@ -62,7 +62,7 @@
 	
 	<div id="create-party-page-content" class="container">
 		
-		<c:if test="${user.family.billingReport.current.canCreateMovieParty()}">
+		<c:if test="${!user.isKid && user.family.billingReport.current.canCreateMovieParty()}">
 		
 		<div id="create-party-form-header">
 			<div class="note">MOVIE PARTY</div>
@@ -250,7 +250,14 @@
 	
 		</c:if>
 		
-		<c:if test="${!user.family.billingReport.current.canCreateMovieParty()}">
+		<c:if test="${user.isKid}">
+			<div id="create-party-form-header">
+				<div class="note">MOVIE PARTY</div>
+				<h4><span class="fa fa-warning text-warning"></span> The Movie Party creation is reserved only to <strong>non kid</strong> profiles.</h4>
+			</div>
+		</c:if>
+		
+		<c:if test="${!user.isKid && !user.family.billingReport.current.canCreateMovieParty()}">
 			<div id="create-party-form-header">
 				<div class="note">MOVIE PARTY</div>
 				<h4><span class="fa fa-warning text-warning"></span> The Movie Party creation is reserved only to <strong>standard</strong> and <strong>premium</strong> plans.</h4>
