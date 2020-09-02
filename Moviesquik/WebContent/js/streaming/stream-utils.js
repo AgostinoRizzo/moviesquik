@@ -2,6 +2,8 @@
  * 
  */
 
+import './geolocation-manager.js';
+
 var GET_MANIFEST_URL_PATTERN = "stream";
 
 
@@ -75,17 +77,25 @@ window.watchingPageSetup = function()
 
 window.requestManifest = function(media_content_id, stream_manager) 
 {
-	$.ajax(
-		{
-			type: "GET",
-			url: GET_MANIFEST_URL_PATTERN + "?key=" + media_content_id,
-			dataType: "json",
-			success: function(data)
-				{
-					stream_manager.onManifestReceived(data);
-				}
-		}
-	);
+	getGeolocationCoords( function(position) 
+	{
+		var reqUrl = GET_MANIFEST_URL_PATTERN + "?key=" + media_content_id;
+		
+		if ( position && position.coords )
+			reqUrl += '&latitude=' + position.coords.latitude + '&longitude=' + position.coords.longitude;
+		
+		$.ajax(
+			{
+				type: "GET",
+				url: reqUrl,
+				dataType: "json",
+				success: function(data)
+					{
+						stream_manager.onManifestReceived(data);
+					}
+			}
+		);
+	});
 }
 
 window.requestFullManifest = function(media_content_id, manifest, stream_manager) 

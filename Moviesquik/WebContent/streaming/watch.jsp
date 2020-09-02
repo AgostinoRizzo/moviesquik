@@ -46,6 +46,11 @@
 	
 	<input type="hidden" id="media-id" value="${media_content.id}">
 	
+	<!-- main alerts -->
+	<div class="alert d-none" id="main-alert">
+		
+	</div>
+	
 	<c:if test="${party != null}">
 	
 		<input type="hidden" id="user-id" value="${user.id}">

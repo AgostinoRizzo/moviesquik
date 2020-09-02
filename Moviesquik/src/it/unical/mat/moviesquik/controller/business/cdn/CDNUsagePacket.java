@@ -6,7 +6,6 @@ package it.unical.mat.moviesquik.controller.business.cdn;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * @author Agostino
@@ -20,12 +19,11 @@ public class CDNUsagePacket
 	public CDNUsagePacket()
 	{}
 	
-	public CDNUsagePacket( final Map<String, Float[]> chartSamples )
+	public CDNUsagePacket( final Map<String, Float[]> chartSamples, final List<String> allServersKeys )
 	{
-		final Set<String> keys = chartSamples.keySet();
 		int i;
 		
-		for ( final String key : keys )
+		for ( final String key : allServersKeys )
 		{			
 			final Float[] samplesArray = chartSamples.get(key);
 			final List<Float> samples = new ArrayList<Float>();

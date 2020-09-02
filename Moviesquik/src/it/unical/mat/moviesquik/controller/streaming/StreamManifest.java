@@ -19,6 +19,7 @@ import it.unical.mat.moviesquik.controller.ServletUtils;
 import it.unical.mat.moviesquik.controller.SessionManager;
 import it.unical.mat.moviesquik.model.User;
 import it.unical.mat.moviesquik.model.media.MediaContent;
+import it.unical.mat.moviesquik.model.streaming.ClientGeolocation;
 import it.unical.mat.moviesquik.model.streaming.PlanStreamingQualityManager;
 import it.unical.mat.moviesquik.model.streaming.StreamService;
 import it.unical.mat.moviesquik.model.streaming.StreamServiceTable;
@@ -55,13 +56,15 @@ public class StreamManifest extends HttpServlet
 		if ( mediaContent != null )
 			AnalyticsFacade.getLogger().logNewMediaWatch(user, mediaContent);
 		
-		ServletUtils.sendJson(createJsonManifest(mediaContentId, user), resp);
+		final ClientGeolocation clientGeolocation = getClientGeolocation(req);
+		
+		ServletUtils.sendJson(createJsonManifest(mediaContentId, user, clientGeolocation), resp);
 	}
-	private JsonObject createJsonManifest( final long mediaContentId, final User user )
+	private JsonObject createJsonManifest( final long mediaContentId, final User user, final ClientGeolocation clientGeolocation )
 	{
 		final JsonObject manifest = new JsonObject();
 		
-		final List<StreamService> services = StreamServiceTable.getInstance().getStreamServices();
+		final List<StreamService> services = StreamServiceTable.getInstance().getStreamServices(clientGeolocation);
 		final JsonArray servers = new JsonArray();
 		
 		for ( final StreamService s : services )
@@ -74,5 +77,20 @@ public class StreamManifest extends HttpServlet
 		manifest.add("servers", servers);
 		
 		return manifest;
+	}
+	
+	private ClientGeolocation getClientGeolocation( final HttpServletRequest req )
+	{
+		try
+		{
+			final Float latitude  = Float.parseFloat(req.getParameter("latitude" ));
+			final Float longitude = Float.parseFloat(req.getParameter("longitude"));
+			
+			return new ClientGeolocation(latitude, longitude);
+		}
+		catch (Exception e) 
+		{
+			return null;
+		}
 	}
 }

@@ -3,6 +3,7 @@
  */
 package it.unical.mat.moviesquik.model.business;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +21,7 @@ public class CDNUsageChart
 {	
 	private static CDNUsageChart instance = null;
 	private final Map<String, CDNUsageSamples> serversUsageSamplesMap = new HashMap<String, CDNUsageSamples>();
+	private final List<String> allServersKeys = new ArrayList<String>();
 	private CDNUsageChartUpdateCallback updateCallback = null;
 	private final Lock lock = new ReentrantLock();
 	
@@ -35,7 +37,11 @@ public class CDNUsageChart
 		final List<CDNServer> allServers = DBManager.getInstance().getDaoFactory().getCDNServerDao().findAll();
 		if ( allServers != null )
 			for ( final CDNServer server : allServers )
-				update(server.getKey(), null);
+			{
+				final String serverKey = server.getKey();
+				allServersKeys.add(serverKey);
+				update(serverKey, null);
+			}
 	}
 	
 	public void setUpdateCallback( final CDNUsageChartUpdateCallback callback )
@@ -62,6 +68,13 @@ public class CDNUsageChart
 	{
 		lock.lock();
 		try { return getCurrentUsageChart( System.currentTimeMillis() ); }
+		finally { lock.unlock(); }
+	}
+	
+	public List<String> getAllServersKeysList()
+	{
+		lock.lock();
+		try { return new ArrayList<String>(allServersKeys); }
 		finally { lock.unlock(); }
 	}
 	

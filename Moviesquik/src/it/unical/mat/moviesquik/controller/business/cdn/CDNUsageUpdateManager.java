@@ -4,6 +4,7 @@
 package it.unical.mat.moviesquik.controller.business.cdn;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.locks.Lock;
@@ -58,8 +59,10 @@ public class CDNUsageUpdateManager extends Worker
 		final Set<Session> allSessions = sessionsMap.keySet();
 		if ( !allSessions.isEmpty() )
 		{
-			final Map<String, Float[]> chartSamples = CDNUsageChart.getInstance().getCurrentChartSamples();
-			final CDNUsagePacket cdnUsagePacket = new CDNUsagePacket(chartSamples);
+			final CDNUsageChart cdnUsageChart = CDNUsageChart.getInstance();
+			final Map<String, Float[]> chartSamples = cdnUsageChart.getCurrentChartSamples();
+			final List<String> allServersKeys = cdnUsageChart.getAllServersKeysList();
+			final CDNUsagePacket cdnUsagePacket = new CDNUsagePacket(chartSamples, allServersKeys);
 			
 			for ( final Session session : allSessions )
 				sendUsagePacketFromSession(cdnUsagePacket, session);

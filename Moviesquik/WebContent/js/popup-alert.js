@@ -4,8 +4,10 @@
 
 window.showMainAlert = function(alertText) 
 {
-	$("#main-alert").html(alertText + '<button type="button" class="close">&times;</button>');
+	$("#main-alert").html(alertText + '<button type="button" class="close" data-dismiss="alert">&times;</button>');
 	$("#main-alert").hide();
+	if ( $("#main-alert").hasClass('d-none') )
+		$("#main-alert").removeClass('d-none');
 	$("#main-alert").slideDown('slow');
 }
 

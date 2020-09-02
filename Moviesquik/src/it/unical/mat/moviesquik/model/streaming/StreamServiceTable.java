@@ -15,6 +15,10 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+import it.unical.mat.moviesquik.model.business.CDNServer;
+import it.unical.mat.moviesquik.model.business.CDNServerLocation;
+import it.unical.mat.moviesquik.persistence.DBManager;
+
 /**
  * @author Agostino
  *
@@ -22,9 +26,11 @@ import java.util.concurrent.locks.ReentrantLock;
 public class StreamServiceTable implements Runnable
 {
 	public static final int EXPIRATION_TIME = 120000;  // expressed in seconds.
+	public static final int MAX_STREAM_SERVICE_DISTANCE = 10000;  // expressed in kilometers
 	private static StreamServiceTable instance = null;
 	
 	private final Map<StreamService, Long> services = new HashMap<StreamService, Long>();
+	private Map<String, CDNServer> serverDataMap = null;
 	
 	private final Lock lock = new ReentrantLock();
 	private final Condition emptyCond = lock.newCondition();
@@ -39,7 +45,7 @@ public class StreamServiceTable implements Runnable
 		return instance;
 	}
 	private StreamServiceTable()
-	{
+	{			
 		tableUpdaterThread = new Thread(this);
 		tableUpdaterThread.setDaemon(true);
 		tableUpdaterThread.start();
@@ -49,10 +55,10 @@ public class StreamServiceTable implements Runnable
 		lock.lock();
 		if ( services.isEmpty() )
 			emptyCond.signal();
-		services.put(service, System.currentTimeMillis() + EXPIRATION_TIME);
+		services.put(streamServiceAlreadySync(service), System.currentTimeMillis() + EXPIRATION_TIME);
 		lock.unlock();
 	}
-	public List<StreamService> getStreamServices()
+	public List<StreamService> getStreamServices( final ClientGeolocation geolocation )
 	{
 		final List<StreamService> ans = new ArrayList<StreamService>();
 		lock.lock();
@@ -60,7 +66,14 @@ public class StreamServiceTable implements Runnable
 		{
 			final Set<StreamService> keys = services.keySet();
 			for ( final StreamService s : keys )
-				ans.add(s);
+				if ( geolocation == null || getStreamServiceDistance(s.getServerKey(), geolocation) 
+											<= MAX_STREAM_SERVICE_DISTANCE )
+					ans.add(s);
+			
+			if ( ans.isEmpty() )
+				for ( final StreamService s : keys )
+					ans.add(s);
+			
 			return ans;
 		}
 		finally 
@@ -120,4 +133,44 @@ public class StreamServiceTable implements Runnable
 		for ( final StreamService s : toRemove )
 			services.remove(s);
 	}
+	
+	private int getStreamServiceDistance( final String cdnServerKey, final ClientGeolocation geolocation )
+	{
+		loadServiceDataMap();
+		
+		final CDNServer cdnServer = serverDataMap.get(cdnServerKey);
+		final CDNServerLocation serverLocation = cdnServer.getLocation();
+		
+		final float lat1  = serverLocation.getLatitude();
+		final float long1 = serverLocation.getLongitude();
+		
+		final float lat2  = geolocation.getLatitude();
+		final float long2 = geolocation.getLongitude();
+		
+		float distance = (float) Math.acos(Math.sin(lat2 * Math.PI / 180.0) * Math.sin(lat1 * Math.PI / 180.0) +
+				Math.cos(lat2 * Math.PI / 180.0) * Math.cos(lat1 * Math.PI / 180.0) *
+				Math.cos((long1 - long2) * Math.PI / 180.0)) * 6371;
+		return (int) distance;
+	}
+	
+	private void loadServiceDataMap()
+	{
+		if ( serverDataMap == null )
+		{
+			final List<CDNServer> allServers = DBManager.getInstance().getDaoFactory().getCDNServerDao().findAll();
+			serverDataMap = new HashMap<String, CDNServer>();
+			for ( final CDNServer server : allServers )
+				serverDataMap.put(server.getKey(), server);
+		}
+	}
+	
+	private StreamService streamServiceAlreadySync( final StreamService service )
+	{
+		final Set<StreamService> allServices = services.keySet();
+		for ( final StreamService s : allServices )
+			if ( s.getServerKey().equals(service.getServerKey()) )
+				return s;
+		return service;
+	}
+	
 }
