@@ -71,7 +71,7 @@
 	</c:if>
 	
 	<div id="loading-wrapper">
-		<div id="brand-icon"><img alt="" src="res/drawable/logo3.png"></div>
+		<div id="brand-icon"><img alt="" src="res/drawable/logo.png"></div>
 		<div class="loader loader-sm"></div>
 	</div>
 	

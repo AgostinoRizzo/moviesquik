@@ -4,7 +4,6 @@
 package it.unical.mat.moviesquik.util;
 
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
 
 /**
  * @author Agostino
@@ -18,12 +17,11 @@ public class EncodingUtil
 		final StringBuilder decoded_string = new StringBuilder();
 		
 		for ( int i=0; i<source_bytes.length; ++i )
-		{System.out.println("CURR_VAL: + " + source_bytes[i]);
+		{
 			if ( source_bytes[i] == -16 && source_bytes.length - i > 4 )
 			{
 				byte[] symbol_bytes = {source_bytes[i], source_bytes[i+1], source_bytes[i+2], source_bytes[i+3]};
 				symbol_bytes = new String(symbol_bytes, StandardCharsets.UTF_8).getBytes();
-				System.out.println("BYTES: -> " + Arrays.toString(symbol_bytes));
 			}
 			else
 				decoded_string.append(source_bytes[i]);

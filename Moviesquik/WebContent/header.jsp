@@ -28,7 +28,7 @@
 			<span class="icon-bar bottom-bar"></span>
 		</button>
 		
-		<a class="navbar-brand" href="./"><img alt="" src="res/drawable/logo3.png"></a>
+		<a class="navbar-brand" href="./"><img alt="" src="res/drawable/logo.png"></a>
 		
 		<c:if test="${user == null}">
 			<div class="collapse navbar-collapse justify-content-end" id="navbarToggler">

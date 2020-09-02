@@ -58,7 +58,7 @@
 					          	
 					        </a>
 					        <div id="nav-user-avatar-dropdown-menu" class="dropdown-menu dropdown-menu-right header-dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-					        	<a class="dropdown-item" href="user"><small>Signed in as</small><br><strong>${admin.firstName} ${admin.lastName}</strong></a>
+					        	<a class="dropdown-item"><small>Signed in as</small><br><strong>${admin.firstName} ${admin.lastName}</strong></a>
 					        	<div class="dropdown-divider"></div>
 					        	<a class="dropdown-item can-point" id="menu-dashboard-link-item">Dashboard</a>
 					        	<a class="dropdown-item can-point" id="menu-media-contents-link-item">Media Contents</a>

@@ -104,7 +104,7 @@ public class UserProfileUpload extends HttpServlet
 				}
 			}
 			catch (Exception e)
-			{System.out.println(e.getMessage());}
+			{}
 		}
 		
 		ServletUtils.manageParameterError(req, resp);

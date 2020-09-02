@@ -59,8 +59,7 @@ public class SignupUserData extends HttpServlet
 		{
 			req.getSession().removeAttribute("existing_user");
 			req.getSession().setAttribute("user", new_user);
-			//req.getRequestDispatcher("signup?plans=true").forward(req, resp);
-			System.out.println("GO TO PLAN");
+			
 			req.getRequestDispatcher("plan").forward(req, resp);
 		}
 	}

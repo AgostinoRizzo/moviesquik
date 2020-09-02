@@ -9,7 +9,7 @@
 		<div class="row user-list-row">
 	
 			<a href="user?id=3540" class="col-auto col-light-left"><img src="res/drawable/user_avatar.jpg" class="avatar-img card-list-avatar-img rounded-circle">
-	  			<i class="fa fa-check-circle fa-xs line-status offline-status"></i>
+	  			<i class="fa fa-times-circle fa-xs line-status offline-status"></i>
 	  		</a>
 	  		
 	  		<div class="col users-list-name col-light-right">

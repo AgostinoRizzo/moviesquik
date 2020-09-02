@@ -30,14 +30,11 @@ public class MoviePartySynchronizer
 	
 	@OnOpen
 	public void onOpen( final Session session )
-	{
-		System.out.println("New connecton: " + session.getId());
-	}
+	{}
 	
 	@OnMessage
 	public void onMessage( final String message, final Session session ) throws IOException
 	{
-		System.out.println("On message from " + session.getId() + ": " + message);
 		session.getBasicRemote().sendText("Welcome!");
 		
 		final Long[] ids = parseIdsFromMessage(message, 2);
@@ -56,7 +53,6 @@ public class MoviePartySynchronizer
 	@OnClose
 	public void onClose( final Session session )
 	{
-		System.out.println("On close: " + session.getId());
 		moviePartySyncSessions.remove(session);
 	}
 	

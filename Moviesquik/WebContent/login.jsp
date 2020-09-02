@@ -52,7 +52,7 @@
 	<header id="header">
 			
 		<nav class="navbar navbar-light">
-			<a class="navbar-brand" href="./"><img alt="" src="res/drawable/logo3.png"></a>
+			<a class="navbar-brand" href="./"><img alt="" src="res/drawable/logo.png"></a>
 		</nav>
 			
 	</header>

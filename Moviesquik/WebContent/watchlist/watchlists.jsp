@@ -197,9 +197,9 @@
 								</div>
 							</c:if>
 							
-							<c:if test="${!watchlist.items.isEmpty()}">
+							<%-- <c:if test="${!watchlist.items.isEmpty()}">
 								<button id="suggested-view-all-btn" class="btn btn-link view-all-btn">View All</button>
-							</c:if>
+							</c:if> --%>
 							
 						</div>
 						

@@ -23,7 +23,7 @@ public class SignupPlan extends HttpServlet
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) 
 			throws ServletException, IOException
-	{System.out.println("ON PLAN");
+	{
 		final String cancel = req.getParameter("cancel");
 		req.getSession().invalidate();
 		
@@ -35,40 +35,5 @@ public class SignupPlan extends HttpServlet
 		
 		req.getRequestDispatcher("signup.jsp").forward(req, resp);
 	}
-	/*
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException
-	{
-		final User user = (User) req.getSession().getAttribute("user");
-		final String choosenPlan = getChoosenPlan(req);
-		
-		if ( user != null && choosenPlan != null )
-		{
-			user.setPlan(choosenPlan);
-			req.getSession().setAttribute("plan", choosenPlan);
-			
-			System.out.println("Choosen plan: " + choosenPlan);
-			
-			resp.sendRedirect("../");
-		}
-		else
-		{
-			req.getSession().invalidate();
-			resp.sendRedirect("user");
-		}
-		
-		//req.getRequestDispatcher("signup.jsp").forward(req, resp);
-	}
 	
-	private String getChoosenPlan( final HttpServletRequest req )
-	{
-		final String[] plans = {"basic", "standard", "premium"};
-		
-		for( final String plan : plans )
-			if ( req.getParameter(plan) != null )
-				return plan;
-		return null;
-	}
-	*/
 }

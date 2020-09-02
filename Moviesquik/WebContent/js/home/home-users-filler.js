@@ -30,7 +30,7 @@ function fillChatUsers(chatContainer)
 					
 					'<div class="col-auto col-light-left user-icon-col">' +
 						'<img src="' + userData.picture.medium + '" class="avatar-img card-list-avatar-img rounded-circle">' +
-						'<i class="fa fa-check-circle fa-xs line-status offline-status"></i>' +
+						'<i class="fa fa-times-circle fa-xs line-status offline-status"></i>' +
 					'</div>' +
 			 
 					'<div class="col users-list-name col-light-right">' +

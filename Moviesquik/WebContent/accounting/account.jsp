@@ -52,7 +52,7 @@
 	<header id="header" class="foreground-box">
 			
 		<nav class="navbar navbar-light">
-			<a class="navbar-brand" href="./"><img alt="" src="res/drawable/logo3.png"></a>
+			<a class="navbar-brand" href="./"><img alt="" src="res/drawable/logo.png"></a>
 			<div class="navbar-content">
 				<form class="form-inline">
 					<a class="btn btn-outline-danger" type="button" href=".">Back</a>
