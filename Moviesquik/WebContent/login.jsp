@@ -75,7 +75,7 @@
 						<div class="input-group">
 							
 							<span class="input-group-addon"><span class="fa fa-envelope"></span></span>
-							<input type="text" id="email" name="email" class="form-control" placeholder="email@example.com" value="myfamily@email.com" required>
+							<input type="text" id="email" name="email" class="form-control" placeholder="email@example.com" value="" required>
 							
 						</div>
 					</div>
@@ -86,7 +86,7 @@
 						<label for="password">Password</label>
 						<div class="input-group">
 							<span class="input-group-addon"><span class="fa fa-lock"></span></span>
-							<input type="password" id="password" name="password" class="form-control" placeholder="Password" value="password1234" required>
+							<input type="password" id="password" name="password" class="form-control" placeholder="Password" value="" required>
 							
 							<c:if test="${error != null && error.type == 'invalid_login'}">
 										

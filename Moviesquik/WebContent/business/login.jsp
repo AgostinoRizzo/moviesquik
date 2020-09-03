@@ -60,7 +60,7 @@
 							<div class="input-group">
 								
 								<span class="input-group-addon"><span class="fa fa-user"></span></span>
-								<input type="text" id="email" name="email" class="form-control" placeholder="email@example.com" value="admin@moviesquik.com" required>
+								<input type="text" id="email" name="email" class="form-control" placeholder="email@example.com" value="" required>
 								
 							</div>
 						</div>
@@ -68,7 +68,7 @@
 							<label for="password">Password</label>
 							<div class="input-group">
 								<span class="input-group-addon"><span class="fa fa-lock"></span></span>
-								<input type="password" id="password" name="password" class="form-control" placeholder="Password" value="adminpassword1234" required>
+								<input type="password" id="password" name="password" class="form-control" placeholder="Password" value="" required>
 								
 							</div>
 						</div>
