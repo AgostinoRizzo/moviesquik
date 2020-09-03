@@ -9,8 +9,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import it.unical.mat.moviesquik.model.Billing;
-import it.unical.mat.moviesquik.model.Family;
+import it.unical.mat.moviesquik.model.accounting.Billing;
+import it.unical.mat.moviesquik.model.accounting.Family;
 import it.unical.mat.moviesquik.persistence.dao.BillingDao;
 import it.unical.mat.moviesquik.util.DateUtil;
 

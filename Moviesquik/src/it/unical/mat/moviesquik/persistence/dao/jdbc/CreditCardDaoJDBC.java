@@ -7,7 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import it.unical.mat.moviesquik.model.CreditCard;
+import it.unical.mat.moviesquik.model.accounting.CreditCard;
 import it.unical.mat.moviesquik.persistence.dao.CreditCardDao;
 import it.unical.mat.moviesquik.util.DateUtil;
 

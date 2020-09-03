@@ -1,7 +1,7 @@
 /**
  * 
  */
-package it.unical.mat.moviesquik.model;
+package it.unical.mat.moviesquik.model.watchlist;
 
 import java.util.Date;
 

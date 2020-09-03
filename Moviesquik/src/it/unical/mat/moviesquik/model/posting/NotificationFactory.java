@@ -1,9 +1,11 @@
 /**
  * 
  */
-package it.unical.mat.moviesquik.model;
+package it.unical.mat.moviesquik.model.posting;
 
+import it.unical.mat.moviesquik.model.accounting.User;
 import it.unical.mat.moviesquik.model.movieparty.MovieParty;
+import it.unical.mat.moviesquik.model.watchlist.Watchlist;
 import it.unical.mat.moviesquik.util.DateUtil;
 
 /**

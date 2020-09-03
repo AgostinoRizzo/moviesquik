@@ -7,9 +7,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import it.unical.mat.moviesquik.model.Billing;
-import it.unical.mat.moviesquik.model.BillingReport;
-import it.unical.mat.moviesquik.model.Family;
+import it.unical.mat.moviesquik.model.accounting.Billing;
+import it.unical.mat.moviesquik.model.accounting.BillingReport;
+import it.unical.mat.moviesquik.model.accounting.Family;
 import it.unical.mat.moviesquik.persistence.DBManager;
 import it.unical.mat.moviesquik.persistence.dao.RegistrationTransaction;
 

@@ -6,7 +6,7 @@ package it.unical.mat.moviesquik.model.chat;
 import java.util.Date;
 
 import it.unical.mat.moviesquik.controller.chat.ChatMessagePacket;
-import it.unical.mat.moviesquik.model.User;
+import it.unical.mat.moviesquik.model.accounting.User;
 import it.unical.mat.moviesquik.model.movieparty.MovieParty;
 import it.unical.mat.moviesquik.util.DateUtil;
 

@@ -10,8 +10,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import it.unical.mat.moviesquik.model.Family;
-import it.unical.mat.moviesquik.model.User;
+import it.unical.mat.moviesquik.model.accounting.Family;
+import it.unical.mat.moviesquik.model.accounting.User;
 import it.unical.mat.moviesquik.model.business.Analyst;
 import it.unical.mat.moviesquik.persistence.DBManager;
 

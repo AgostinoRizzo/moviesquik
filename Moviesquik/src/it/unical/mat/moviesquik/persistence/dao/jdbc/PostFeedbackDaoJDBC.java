@@ -7,9 +7,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import it.unical.mat.moviesquik.model.Post;
-import it.unical.mat.moviesquik.model.PostFeedback;
-import it.unical.mat.moviesquik.model.User;
+import it.unical.mat.moviesquik.model.accounting.User;
+import it.unical.mat.moviesquik.model.posting.Post;
+import it.unical.mat.moviesquik.model.posting.PostFeedback;
 import it.unical.mat.moviesquik.persistence.dao.PostFeedbackDao;
 
 /**

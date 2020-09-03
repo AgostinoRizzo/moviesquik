@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 import it.unical.mat.moviesquik.controller.searching.MediaContentsSearchFilter;
 import it.unical.mat.moviesquik.model.SearchResult;
-import it.unical.mat.moviesquik.model.User;
+import it.unical.mat.moviesquik.model.accounting.User;
 import it.unical.mat.moviesquik.model.media.MediaContent;
 import it.unical.mat.moviesquik.model.media.MediaContentGroup;
 import it.unical.mat.moviesquik.model.media.MediaContentType;

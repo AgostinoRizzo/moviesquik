@@ -1,7 +1,9 @@
 /**
  * 
  */
-package it.unical.mat.moviesquik.model;
+package it.unical.mat.moviesquik.model.posting;
+
+import it.unical.mat.moviesquik.model.accounting.User;
 
 /**
  * @author Agostino

@@ -3,7 +3,7 @@
  */
 package it.unical.mat.moviesquik.model.movieparty;
 
-import it.unical.mat.moviesquik.model.User;
+import it.unical.mat.moviesquik.model.accounting.User;
 
 /**
  * @author Agostino

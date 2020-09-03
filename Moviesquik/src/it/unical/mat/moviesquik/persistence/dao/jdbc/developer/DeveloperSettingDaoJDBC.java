@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 
-import it.unical.mat.moviesquik.model.User;
+import it.unical.mat.moviesquik.model.accounting.User;
 import it.unical.mat.moviesquik.model.developer.DeveloperSetting;
 import it.unical.mat.moviesquik.persistence.dao.developer.DeveloperSettingDao;
 import it.unical.mat.moviesquik.persistence.dao.jdbc.AbstractDaoJDBC;

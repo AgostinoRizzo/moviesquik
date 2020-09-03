@@ -9,8 +9,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import it.unical.mat.moviesquik.model.User;
-import it.unical.mat.moviesquik.model.Watchlist;
+import it.unical.mat.moviesquik.model.accounting.User;
+import it.unical.mat.moviesquik.model.watchlist.Watchlist;
 import it.unical.mat.moviesquik.persistence.DBManager;
 import it.unical.mat.moviesquik.persistence.dao.DaoFactory;
 import it.unical.mat.moviesquik.persistence.dao.WatchlistDao;

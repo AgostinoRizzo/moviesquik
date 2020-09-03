@@ -3,7 +3,7 @@
  */
 package it.unical.mat.moviesquik.controller.chat;
 
-import it.unical.mat.moviesquik.model.User;
+import it.unical.mat.moviesquik.model.accounting.User;
 import it.unical.mat.moviesquik.model.chat.ChatMessage;
 import it.unical.mat.moviesquik.util.DateUtil;
 

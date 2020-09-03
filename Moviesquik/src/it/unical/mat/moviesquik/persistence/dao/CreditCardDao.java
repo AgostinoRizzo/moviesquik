@@ -3,7 +3,7 @@
  */
 package it.unical.mat.moviesquik.persistence.dao;
 
-import it.unical.mat.moviesquik.model.CreditCard;
+import it.unical.mat.moviesquik.model.accounting.CreditCard;
 
 /**
  * @author Agostino

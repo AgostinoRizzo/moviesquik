@@ -5,7 +5,7 @@ package it.unical.mat.moviesquik.persistence.dao;
 
 import java.util.List;
 
-import it.unical.mat.moviesquik.model.User;
+import it.unical.mat.moviesquik.model.accounting.User;
 
 /**
  * @author Agostino

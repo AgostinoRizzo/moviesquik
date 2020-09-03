@@ -3,7 +3,7 @@
  */
 package it.unical.mat.moviesquik.persistence.dao.developer;
 
-import it.unical.mat.moviesquik.model.User;
+import it.unical.mat.moviesquik.model.accounting.User;
 import it.unical.mat.moviesquik.model.developer.DeveloperSetting;
 
 /**

@@ -10,9 +10,9 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
-import it.unical.mat.moviesquik.model.Notification;
-import it.unical.mat.moviesquik.model.User;
+import it.unical.mat.moviesquik.model.accounting.User;
 import it.unical.mat.moviesquik.model.movieparty.MovieParty;
+import it.unical.mat.moviesquik.model.posting.Notification;
 import it.unical.mat.moviesquik.persistence.DBManager;
 import it.unical.mat.moviesquik.persistence.DataListPage;
 import it.unical.mat.moviesquik.persistence.dao.NotificationDao;

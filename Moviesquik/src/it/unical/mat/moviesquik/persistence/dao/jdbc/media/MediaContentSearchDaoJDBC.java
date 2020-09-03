@@ -13,7 +13,7 @@ import it.unical.mat.moviesquik.analytics.AnalyticsFacade;
 import it.unical.mat.moviesquik.controller.searching.DurationFilter;
 import it.unical.mat.moviesquik.controller.searching.FeaturesFilter;
 import it.unical.mat.moviesquik.controller.searching.MediaContentsSearchFilter;
-import it.unical.mat.moviesquik.model.User;
+import it.unical.mat.moviesquik.model.accounting.User;
 import it.unical.mat.moviesquik.model.media.MediaContent;
 import it.unical.mat.moviesquik.model.media.MediaContentType;
 import it.unical.mat.moviesquik.persistence.DataListPage;

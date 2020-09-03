@@ -1,7 +1,7 @@
 /**
  * 
  */
-package it.unical.mat.moviesquik.model;
+package it.unical.mat.moviesquik.model.accounting;
 
 /**
  * @author Agostino

@@ -9,8 +9,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import it.unical.mat.moviesquik.model.Comment;
-import it.unical.mat.moviesquik.model.Post;
+import it.unical.mat.moviesquik.model.posting.Comment;
+import it.unical.mat.moviesquik.model.posting.Post;
 import it.unical.mat.moviesquik.persistence.DBManager;
 import it.unical.mat.moviesquik.persistence.DataListPage;
 import it.unical.mat.moviesquik.persistence.dao.CommentDao;

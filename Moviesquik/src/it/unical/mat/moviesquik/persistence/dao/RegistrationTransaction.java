@@ -3,7 +3,7 @@
  */
 package it.unical.mat.moviesquik.persistence.dao;
 
-import it.unical.mat.moviesquik.model.Family;
+import it.unical.mat.moviesquik.model.accounting.Family;
 
 /**
  * @author Agostino

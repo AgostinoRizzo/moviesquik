@@ -12,9 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import it.unical.mat.moviesquik.controller.SessionManager;
-import it.unical.mat.moviesquik.model.Family;
-import it.unical.mat.moviesquik.model.User;
-import it.unical.mat.moviesquik.model.Watchlist;
+import it.unical.mat.moviesquik.model.accounting.Family;
+import it.unical.mat.moviesquik.model.accounting.User;
+import it.unical.mat.moviesquik.model.watchlist.Watchlist;
 import it.unical.mat.moviesquik.persistence.DBManager;
 import it.unical.mat.moviesquik.persistence.dao.DaoFactory;
 import it.unical.mat.moviesquik.util.DateUtil;

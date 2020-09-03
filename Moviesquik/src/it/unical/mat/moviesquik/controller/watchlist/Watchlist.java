@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import it.unical.mat.moviesquik.controller.ServletUtils;
 import it.unical.mat.moviesquik.controller.SessionManager;
-import it.unical.mat.moviesquik.model.User;
+import it.unical.mat.moviesquik.model.accounting.User;
 import it.unical.mat.moviesquik.persistence.DBManager;
 
 /**
@@ -47,7 +47,7 @@ public class Watchlist extends HttpServlet
 				return;
 			}
 			
-			final it.unical.mat.moviesquik.model.Watchlist watchlist = 
+			final it.unical.mat.moviesquik.model.watchlist.Watchlist watchlist = 
 					DBManager.getInstance().getDaoFactory().getWatchlistDao().findById(watchlistId);
 			
 			if ( watchlist == null )
@@ -97,8 +97,8 @@ public class Watchlist extends HttpServlet
 		
 		final String watchlistDescription = req.getParameter("description");
 		
-		final it.unical.mat.moviesquik.model.Watchlist newWatchlist = 
-				it.unical.mat.moviesquik.model.Watchlist.createsNewWatchlist(watchlistName, watchlistDescription, user);
+		final it.unical.mat.moviesquik.model.watchlist.Watchlist newWatchlist = 
+				it.unical.mat.moviesquik.model.watchlist.Watchlist.createsNewWatchlist(watchlistName, watchlistDescription, user);
 		
 		final boolean created = DBManager.getInstance().getDaoFactory().getWatchlistDao().insert(newWatchlist);
 		req.setAttribute("on_create", created);

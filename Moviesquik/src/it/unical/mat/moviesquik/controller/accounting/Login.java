@@ -1,7 +1,7 @@
 /**
  * 
  */
-package it.unical.mat.moviesquik.controller;
+package it.unical.mat.moviesquik.controller.accounting;
 
 import java.io.IOException;
 
@@ -10,8 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import it.unical.mat.moviesquik.controller.ServletUtils;
 import it.unical.mat.moviesquik.model.Exception;
-import it.unical.mat.moviesquik.model.Family;
+import it.unical.mat.moviesquik.model.accounting.Family;
 import it.unical.mat.moviesquik.persistence.DBManager;
 
 /**

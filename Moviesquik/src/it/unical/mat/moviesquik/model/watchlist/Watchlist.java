@@ -1,12 +1,13 @@
 /**
  * 
  */
-package it.unical.mat.moviesquik.model;
+package it.unical.mat.moviesquik.model.watchlist;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import it.unical.mat.moviesquik.model.accounting.User;
 import it.unical.mat.moviesquik.persistence.DBManager;
 import it.unical.mat.moviesquik.persistence.dao.DaoFactory;
 import it.unical.mat.moviesquik.util.DateUtil;

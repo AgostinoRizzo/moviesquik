@@ -7,8 +7,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import it.unical.mat.moviesquik.model.Following;
-import it.unical.mat.moviesquik.model.User;
+import it.unical.mat.moviesquik.model.accounting.Following;
+import it.unical.mat.moviesquik.model.accounting.User;
 import it.unical.mat.moviesquik.persistence.dao.FollowingDao;
 
 /**

@@ -12,7 +12,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import javax.websocket.Session;
 
-import it.unical.mat.moviesquik.model.User;
+import it.unical.mat.moviesquik.model.accounting.User;
 import it.unical.mat.moviesquik.model.chat.ChatMessage;
 import it.unical.mat.moviesquik.persistence.DBManager;
 import it.unical.mat.moviesquik.persistence.dao.DaoFactory;

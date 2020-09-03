@@ -17,7 +17,7 @@ import com.google.gson.JsonObject;
 import it.unical.mat.moviesquik.analytics.AnalyticsFacade;
 import it.unical.mat.moviesquik.controller.ServletUtils;
 import it.unical.mat.moviesquik.controller.SessionManager;
-import it.unical.mat.moviesquik.model.User;
+import it.unical.mat.moviesquik.model.accounting.User;
 import it.unical.mat.moviesquik.model.media.MediaContent;
 import it.unical.mat.moviesquik.model.streaming.ClientGeolocation;
 import it.unical.mat.moviesquik.model.streaming.PlanStreamingQualityManager;

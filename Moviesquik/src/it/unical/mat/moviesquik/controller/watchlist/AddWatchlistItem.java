@@ -15,8 +15,8 @@ import com.google.gson.JsonObject;
 
 import it.unical.mat.moviesquik.controller.ServletUtils;
 import it.unical.mat.moviesquik.controller.SessionManager;
-import it.unical.mat.moviesquik.model.User;
-import it.unical.mat.moviesquik.model.Watchlist;
+import it.unical.mat.moviesquik.model.accounting.User;
+import it.unical.mat.moviesquik.model.watchlist.Watchlist;
 
 /**
  * @author Agostino

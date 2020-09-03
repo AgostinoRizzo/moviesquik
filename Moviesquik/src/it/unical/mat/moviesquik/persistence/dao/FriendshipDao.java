@@ -3,8 +3,8 @@
  */
 package it.unical.mat.moviesquik.persistence.dao;
 
-import it.unical.mat.moviesquik.model.Friendship;
-import it.unical.mat.moviesquik.model.User;
+import it.unical.mat.moviesquik.model.accounting.Friendship;
+import it.unical.mat.moviesquik.model.accounting.User;
 
 /**
  * @author Agostino

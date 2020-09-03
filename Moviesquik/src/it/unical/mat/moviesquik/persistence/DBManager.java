@@ -6,10 +6,10 @@ package it.unical.mat.moviesquik.persistence;
 import java.util.List;
 import java.util.Properties;
 
-import it.unical.mat.moviesquik.model.BillingReport;
-import it.unical.mat.moviesquik.model.CreditCard;
-import it.unical.mat.moviesquik.model.Family;
-import it.unical.mat.moviesquik.model.User;
+import it.unical.mat.moviesquik.model.accounting.BillingReport;
+import it.unical.mat.moviesquik.model.accounting.CreditCard;
+import it.unical.mat.moviesquik.model.accounting.Family;
+import it.unical.mat.moviesquik.model.accounting.User;
 import it.unical.mat.moviesquik.model.business.Analyst;
 import it.unical.mat.moviesquik.persistence.dao.DaoFactory;
 import it.unical.mat.moviesquik.persistence.dao.jdbc.DaoFactoryJDBC;

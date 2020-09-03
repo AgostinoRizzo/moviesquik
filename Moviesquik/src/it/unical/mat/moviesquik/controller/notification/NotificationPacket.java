@@ -5,9 +5,9 @@ package it.unical.mat.moviesquik.controller.notification;
 
 import java.util.Date;
 
-import it.unical.mat.moviesquik.model.Notification;
-import it.unical.mat.moviesquik.model.User;
+import it.unical.mat.moviesquik.model.accounting.User;
 import it.unical.mat.moviesquik.model.movieparty.MovieParty;
+import it.unical.mat.moviesquik.model.posting.Notification;
 
 /**
  * @author Agostino

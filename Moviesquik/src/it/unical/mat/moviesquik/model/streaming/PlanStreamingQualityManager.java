@@ -6,8 +6,8 @@ package it.unical.mat.moviesquik.model.streaming;
 import java.util.HashMap;
 import java.util.Map;
 
-import it.unical.mat.moviesquik.model.Billing;
-import it.unical.mat.moviesquik.model.BillingPlan;
+import it.unical.mat.moviesquik.model.accounting.Billing;
+import it.unical.mat.moviesquik.model.accounting.BillingPlan;
 
 /**
  * @author Agostino

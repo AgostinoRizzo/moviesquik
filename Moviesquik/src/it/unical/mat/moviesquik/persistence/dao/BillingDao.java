@@ -5,8 +5,8 @@ package it.unical.mat.moviesquik.persistence.dao;
 
 import java.util.List;
 
-import it.unical.mat.moviesquik.model.Billing;
-import it.unical.mat.moviesquik.model.Family;
+import it.unical.mat.moviesquik.model.accounting.Billing;
+import it.unical.mat.moviesquik.model.accounting.Family;
 
 /**
  * @author Agostino

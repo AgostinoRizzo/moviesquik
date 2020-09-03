@@ -3,9 +3,9 @@
  */
 package it.unical.mat.moviesquik.persistence.dao;
 
-import it.unical.mat.moviesquik.model.Post;
-import it.unical.mat.moviesquik.model.PostFeedback;
-import it.unical.mat.moviesquik.model.User;
+import it.unical.mat.moviesquik.model.accounting.User;
+import it.unical.mat.moviesquik.model.posting.Post;
+import it.unical.mat.moviesquik.model.posting.PostFeedback;
 
 /**
  * @author Agostino

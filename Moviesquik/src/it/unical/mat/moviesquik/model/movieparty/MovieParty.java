@@ -6,7 +6,7 @@ package it.unical.mat.moviesquik.model.movieparty;
 import java.util.Date;
 import java.util.List;
 
-import it.unical.mat.moviesquik.model.User;
+import it.unical.mat.moviesquik.model.accounting.User;
 import it.unical.mat.moviesquik.model.media.MediaContent;
 import it.unical.mat.moviesquik.util.DateUtil;
 

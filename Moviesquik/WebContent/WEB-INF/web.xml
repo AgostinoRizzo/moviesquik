@@ -18,7 +18,7 @@
 <!-- Signup Servlet -->
 <servlet>
 	<servlet-name>signup</servlet-name>
-	<servlet-class>it.unical.mat.moviesquik.controller.Signup</servlet-class>
+	<servlet-class>it.unical.mat.moviesquik.controller.accounting.Signup</servlet-class>
 </servlet>
 <servlet-mapping>
 	<servlet-name>signup</servlet-name>
@@ -38,7 +38,7 @@
 <!-- Profiles Manager Servlet -->
 <servlet>
 	<servlet-name>profile_manager</servlet-name>
-	<servlet-class>it.unical.mat.moviesquik.controller.ProfilesManager</servlet-class>
+	<servlet-class>it.unical.mat.moviesquik.controller.accounting.ProfilesManager</servlet-class>
 </servlet>
 <servlet-mapping>
 	<servlet-name>profile_manager</servlet-name>
@@ -48,7 +48,7 @@
 <!-- Login Servlet -->
 <servlet>
 	<servlet-name>login</servlet-name>
-	<servlet-class>it.unical.mat.moviesquik.controller.Login</servlet-class>
+	<servlet-class>it.unical.mat.moviesquik.controller.accounting.Login</servlet-class>
 </servlet>
 <servlet-mapping>
 	<servlet-name>login</servlet-name>
@@ -58,7 +58,7 @@
 <!-- Account Info Servlet -->
 <servlet>
 	<servlet-name>account_manager</servlet-name>
-	<servlet-class>it.unical.mat.moviesquik.controller.AccountManager</servlet-class>
+	<servlet-class>it.unical.mat.moviesquik.controller.accounting.AccountManager</servlet-class>
 </servlet>
 <servlet-mapping>
 	<servlet-name>account_manager</servlet-name>
@@ -68,7 +68,7 @@
 <!-- Billing Info Servlet -->
 <servlet>
 	<servlet-name>billing_manager</servlet-name>
-	<servlet-class>it.unical.mat.moviesquik.controller.BillingManager</servlet-class>
+	<servlet-class>it.unical.mat.moviesquik.controller.accounting.BillingManager</servlet-class>
 </servlet>
 <servlet-mapping>
 	<servlet-name>billing_manager</servlet-name>
@@ -163,7 +163,7 @@
 <!-- MediaContentsBroker Servlet -->
 <servlet>
 	<servlet-name>media_contents_broker</servlet-name>
-	<servlet-class>it.unical.mat.moviesquik.controller.MediaContentsBroker</servlet-class>
+	<servlet-class>it.unical.mat.moviesquik.controller.media.MediaContentsBroker</servlet-class>
 </servlet>
 <servlet-mapping>
 	<servlet-name>media_contents_broker</servlet-name>

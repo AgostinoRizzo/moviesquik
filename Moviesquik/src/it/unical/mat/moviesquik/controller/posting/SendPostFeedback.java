@@ -16,11 +16,11 @@ import com.google.gson.JsonObject;
 import it.unical.mat.moviesquik.controller.ServletUtils;
 import it.unical.mat.moviesquik.controller.SessionManager;
 import it.unical.mat.moviesquik.controller.notification.NotificationsManager;
-import it.unical.mat.moviesquik.model.Notification;
-import it.unical.mat.moviesquik.model.NotificationFactory;
-import it.unical.mat.moviesquik.model.Post;
-import it.unical.mat.moviesquik.model.PostFeedback;
-import it.unical.mat.moviesquik.model.User;
+import it.unical.mat.moviesquik.model.accounting.User;
+import it.unical.mat.moviesquik.model.posting.Notification;
+import it.unical.mat.moviesquik.model.posting.NotificationFactory;
+import it.unical.mat.moviesquik.model.posting.Post;
+import it.unical.mat.moviesquik.model.posting.PostFeedback;
 import it.unical.mat.moviesquik.persistence.DBManager;
 import it.unical.mat.moviesquik.persistence.dao.DaoFactory;
 

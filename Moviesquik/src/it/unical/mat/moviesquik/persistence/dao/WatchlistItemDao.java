@@ -5,8 +5,8 @@ package it.unical.mat.moviesquik.persistence.dao;
 
 import java.util.List;
 
-import it.unical.mat.moviesquik.model.Watchlist;
-import it.unical.mat.moviesquik.model.WatchlistItem;
+import it.unical.mat.moviesquik.model.watchlist.Watchlist;
+import it.unical.mat.moviesquik.model.watchlist.WatchlistItem;
 
 /**
  * @author Agostino

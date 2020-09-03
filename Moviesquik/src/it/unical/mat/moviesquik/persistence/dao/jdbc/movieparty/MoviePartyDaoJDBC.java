@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.unical.mat.moviesquik.controller.movieparty.MoviePartySearchFilter;
-import it.unical.mat.moviesquik.model.User;
+import it.unical.mat.moviesquik.model.accounting.User;
 import it.unical.mat.moviesquik.model.movieparty.MovieParty;
 import it.unical.mat.moviesquik.model.movieparty.MoviePartyInvitation;
 import it.unical.mat.moviesquik.model.movieparty.MoviePartyProxy;

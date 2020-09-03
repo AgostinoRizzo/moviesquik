@@ -6,6 +6,7 @@ package it.unical.mat.moviesquik.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.unical.mat.moviesquik.model.accounting.User;
 import it.unical.mat.moviesquik.model.media.MediaContent;
 
 /**

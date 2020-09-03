@@ -1,7 +1,7 @@
 /**
  * 
  */
-package it.unical.mat.moviesquik.controller;
+package it.unical.mat.moviesquik.controller.media;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,8 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import it.unical.mat.moviesquik.analytics.AnalyticsFacade;
+import it.unical.mat.moviesquik.controller.SessionManager;
 import it.unical.mat.moviesquik.controller.searching.MediaContentsSearchFilter;
-import it.unical.mat.moviesquik.model.User;
+import it.unical.mat.moviesquik.model.accounting.User;
 import it.unical.mat.moviesquik.model.media.MediaContent;
 import it.unical.mat.moviesquik.model.media.MediaContentType;
 import it.unical.mat.moviesquik.persistence.DBManager;
