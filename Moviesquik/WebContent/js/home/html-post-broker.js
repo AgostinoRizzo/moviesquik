@@ -79,7 +79,7 @@ window.createFacebookPostHtml = function(post, currentPageId, fbPageUrl)
 			    	'<div class="col">' +
 			    		'<small class="fa-container"><i class="fa fa-thumbs-up rounded-circle clickable"></i></small>' +
 			    		'<small class="fa-container"><i class="fa fa-heart rounded-circle clickable"></i></small>' +
-			    		'<small class="note" id="likes-loves-count">&nbsp;&nbsp; 1234 likes, 1234 loves</small>' +
+			    		'<small class="note" id="likes-loves-count"></small>' +
 			    	'</div>' +
 			    	'<div class="col" id="n-comments-col">' +
 			    		'<small class="note show-comments-list-btn">' + post.comments.length + ' comments</small>' +

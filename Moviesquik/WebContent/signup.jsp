@@ -97,7 +97,7 @@
 							<label for="email">Email address</label>
 							<div class="input-group">
 								<span class="input-group-addon"><span class="fa fa-envelope"></span></span>
-								<input type="text" id="email" name="email" class="form-control" placeholder="email@example.com" required value="email@email.com">
+								<input type="text" id="email" name="email" class="form-control" placeholder="email@example.com" required value="">
 								
 								<c:if test="${existing_account != null}">
 										
@@ -158,7 +158,7 @@
 							<label for="password">Choose a password (8-40 characters)</label>
 							<div class="input-group">
 								<span class="input-group-addon"><span class="fa fa-lock"></span></span>
-								<input type="password" id="password" name="password" class="form-control" placeholder="Password" required value="password">
+								<input type="password" id="password" name="password" class="form-control" placeholder="Password" required value="">
 							</div>
 						</div>
 					</div>
@@ -167,7 +167,7 @@
 							<label for="confirm_password">Confirm Password</label>
 							<div class="input-group">
 								<span class="input-group-addon"><span class="fa fa-lock"></span></span>
-								<input type="password" id="confirm_password" name="confirm_password" class="form-control" placeholder="Confirm password" required value="password">
+								<input type="password" id="confirm_password" name="confirm_password" class="form-control" placeholder="Confirm password" required value="">
 							</div>
 						</div>
 					</div>

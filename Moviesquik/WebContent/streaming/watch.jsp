@@ -40,6 +40,7 @@
 	<script src="js/streaming/stream-player.js" type="module"></script>
 	<script src="js/watching/movie-watching.js" type="module"></script>
 	<c:if test="${party != null}"><script src="js/watching/interval-manager.js" type="module"></script></c:if>
+	<script src="js/posting.js"></script>
 	
 </head>
 <body>

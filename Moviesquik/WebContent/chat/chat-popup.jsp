@@ -14,7 +14,7 @@
 	  		
 	  		<div class="col users-list-name col-light-right">
 	  			<p class="users-list-name-text"></p>
-	  			<p class="note"></p>
+	  			<p class="note user-chat-status"></p>
 			</div>
 			
 			<div class="col col-right">

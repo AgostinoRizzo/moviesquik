@@ -19,7 +19,7 @@ $(document).ready( function()
 				textArea.val(textArea.val() + emoji_code);
 			});
 	
-	$("#chat-send-btn").click( function() 
+	$(document).on("click", "#chat-send-btn", function() 
 	{
 		if ( foreignUser )
 			$("#cannot-send-msg-modal").modal('show');

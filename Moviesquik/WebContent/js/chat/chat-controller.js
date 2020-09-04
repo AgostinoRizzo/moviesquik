@@ -24,7 +24,7 @@ window.createNewMessageCloudHtml = function( messagePacket, received=false, appe
 	const messageText = messagePacket.text.replace(/\n/g, '<br>');
 	const html = received 
 			?
-			'<div class="chat-message-container other-chat-message-container">' +
+			('<div class="chat-message-container other-chat-message-container">' +
 				
 				'<div class="chat-message-cloud">' + messageText + 
 					'<div class="chat-message-cloud-info">' +
@@ -34,9 +34,9 @@ window.createNewMessageCloudHtml = function( messagePacket, received=false, appe
 				
 				'<a href="user?id=' + messagePacket.senderId + '"><img src="' + messagePacket.senderIconSrc + '" class="avatar-img rounded-circle"></a>' +
 				
-			'</div>' 
+			'</div>')
 			:
-			'<div class="chat-message-container my-chat-message-container" id="chat-message-' + messagePacket.id + '">' +
+			('<div class="chat-message-container my-chat-message-container" id="chat-message-' + messagePacket.id + '">' +
 				
 				'<div class="chat-message-cloud">' + messageText + 
 					'<div class="chat-message-cloud-info">' +
@@ -48,9 +48,9 @@ window.createNewMessageCloudHtml = function( messagePacket, received=false, appe
 					'</div>' +
 				'</div>' +
 				
-				'<a href="user?id=' + currentUserId + '"><img src="' + currentUserIconSrc + '" class="avatar-img rounded-circle">' +
+				'<a href="user?id=' + currentUserId + '"><img src="' + currentUserIconSrc + '" class="avatar-img rounded-circle"></a>' +
 				
-			'</div>';
+			'</div>');
 	
 	return html;
 }

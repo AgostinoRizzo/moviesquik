@@ -291,6 +291,7 @@
 	position: relative;
 	top: -12px !important;
 	left: -5px !important;
+	font-size: medium !important;
 }
 
 .show-all-notification-container

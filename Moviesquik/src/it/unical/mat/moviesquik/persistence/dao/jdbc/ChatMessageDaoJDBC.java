@@ -27,17 +27,19 @@ public class ChatMessageDaoJDBC extends AbstractDaoJDBC<ChatMessage> implements 
 			"insert into message(message_id, text, date_time, sender_id, receiver_id, movie_party_id) values (?,?,?,?,?,?)";
 	
 	protected static final String FIND_ALL_GROUP_QUERY = 
-			"select * from message where movie_party_id = ? order by date_time desc";
+			"select * from message where movie_party_id = ? order by date_time desc limit ?";
 	protected static final String FIND_ALL_GROUP_WITH_OFFSET_QUERY = 
-			"select * from message where movie_party_id = ? and message_id <= ? order by date_time desc";
+			"select * from message where movie_party_id = ? and message_id <= ? order by date_time desc limit ?";
 	
 	protected static final String FIND_ALL_USER_QUERY = 
-			"select * from message where movie_party_id is null and (sender_id = ? or receiver_id = ?) order by date_time desc";
+			"select * from message where movie_party_id is null and (sender_id = ? or receiver_id = ?) order by date_time desc limit ?";
 	protected static final String FIND_ALL_USER_WITH_OFFSET_QUERY = 
-			"select * from message where movie_party_id is null and (sender_id = ? or receiver_id = ?) and message_id <= ? order by date_time desc";
+			"select * from message where movie_party_id is null and (sender_id = ? or receiver_id = ?) and message_id <= ? order by date_time desc limit ?";
 	
 	protected static final String READ_ALL_USER_STATEMENT = 
 			"UPDATE message SET is_read = true WHERE movie_party_id is null and receiver_id = ? AND NOT is_read";
+	
+	private static final int CHAT_MESSAGES_LIMIT = 20;
 	
 	protected ChatMessageDaoJDBC(StatementPrompterJDBC statementPrompter)
 	{
@@ -89,7 +91,12 @@ public class ChatMessageDaoJDBC extends AbstractDaoJDBC<ChatMessage> implements 
 			
 			statement.setLong(1, groupId);
 			if ( messageOffsetId != null )
+			{
 				statement.setLong(2, messageOffsetId);
+				statement.setInt(3, CHAT_MESSAGES_LIMIT);
+			}
+			else
+				statement.setInt(2, CHAT_MESSAGES_LIMIT);
 			
 			ResultSet result = statement.executeQuery();
 			
@@ -119,7 +126,12 @@ public class ChatMessageDaoJDBC extends AbstractDaoJDBC<ChatMessage> implements 
 			statement.setLong(1, userId);
 			statement.setLong(2, userId);
 			if ( messageOffsetId != null )
+			{
 				statement.setLong(3, messageOffsetId);
+				statement.setInt(4, CHAT_MESSAGES_LIMIT);
+			}
+			else
+				statement.setInt(3, CHAT_MESSAGES_LIMIT);
 			
 			ResultSet result = statement.executeQuery();
 			

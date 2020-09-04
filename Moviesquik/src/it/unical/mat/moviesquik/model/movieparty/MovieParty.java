@@ -122,7 +122,7 @@ public class MovieParty
 	}
 	public boolean isPlaying()
 	{
-		return isExpired() && (DateUtil.getCurrent().getTime() < startDateTime.getTime() + (media.getStreamTime() * 1000));
+		return isExpired() && (DateUtil.getCurrent().getTime() < startDateTime.getTime() + (getMedia().getStreamTime() * 1000));
 	}
 	public Long getCurrentWatchingTimestamp()
 	{
