@@ -17,7 +17,7 @@ import com.google.gson.JsonArray;
 import it.unical.mat.moviesquik.controller.ServletUtils;
 import it.unical.mat.moviesquik.controller.SessionManager;
 import it.unical.mat.moviesquik.model.accounting.User;
-import it.unical.mat.moviesquik.model.chat.ChatMessage;
+import it.unical.mat.moviesquik.model.chat.ChatMessageProxy;
 import it.unical.mat.moviesquik.persistence.DBManager;
 
 /**
@@ -42,7 +42,7 @@ public class ChatBroker extends HttpServlet
 		try { messageOffsetId = Long.parseLong(req.getParameter("offsetid")); }
 		catch (NumberFormatException e) {}
 		
-		List<ChatMessage> messages;
+		List<ChatMessageProxy> messages;
 		
 		try 
 		{
@@ -68,12 +68,12 @@ public class ChatBroker extends HttpServlet
 		ServletUtils.sendJsonArray( createJsonMessagesArray(messages), resp );
 	}
 	
-	private JsonArray createJsonMessagesArray( final List<ChatMessage> messages )
+	private JsonArray createJsonMessagesArray( final List<ChatMessageProxy> messages )
 	{
 		final Gson gson = new Gson();
 		final JsonArray allJsonMessages = new JsonArray();
 		
-		for ( final ChatMessage msg : messages )
+		for ( final ChatMessageProxy msg : messages )
 			allJsonMessages.add( gson.toJsonTree( new ChatMessagePacket(msg) ) );
 		
 		return allJsonMessages;

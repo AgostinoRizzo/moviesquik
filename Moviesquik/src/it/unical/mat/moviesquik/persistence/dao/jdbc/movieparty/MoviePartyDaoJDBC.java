@@ -314,7 +314,7 @@ public class MoviePartyDaoJDBC extends AbstractDaoJDBC<MovieParty> implements Mo
 	@Override
 	protected MovieParty createFromResult(ResultSet result) throws SQLException
 	{
-		final MovieParty party = new MoviePartyProxy();
+		final MoviePartyProxy party = new MoviePartyProxy();
 		
 		party.setId( result.getLong("movie_party_id") );
 		party.setName( result.getString("name") );
@@ -325,10 +325,9 @@ public class MoviePartyDaoJDBC extends AbstractDaoJDBC<MovieParty> implements Mo
 		
 		final Long mediaId = result.getLong("media_content_id");
 		final Long adminId = result.getLong("user_id");
-		final DaoFactory daoFactory = DBManager.getInstance().getDaoFactory();
 		
-		party.setMedia( daoFactory.getMediaContentDao().findById(mediaId) );
-		party.setAdministrator( daoFactory.getUserDao().findByPrimaryKey(adminId) );
+		party.setMediaId(mediaId);
+		party.setAdminId(adminId);
 		
 		//party.setInvitations( daoFactory.getMoviePartyInvitationDao().findByMovieParty(party) );
 		//party.setParticipations( daoFactory.getMoviePartyParticipationDao().findByMovieParty(party) );

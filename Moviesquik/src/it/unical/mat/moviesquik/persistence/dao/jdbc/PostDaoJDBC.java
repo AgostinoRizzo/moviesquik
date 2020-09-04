@@ -12,10 +12,9 @@ import java.util.List;
 
 import it.unical.mat.moviesquik.model.accounting.User;
 import it.unical.mat.moviesquik.model.posting.Post;
+import it.unical.mat.moviesquik.model.posting.PostProxy;
 import it.unical.mat.moviesquik.model.watchlist.Watchlist;
-import it.unical.mat.moviesquik.persistence.DBManager;
 import it.unical.mat.moviesquik.persistence.DataListPage;
-import it.unical.mat.moviesquik.persistence.dao.DaoFactory;
 import it.unical.mat.moviesquik.persistence.dao.PostDao;
 import it.unical.mat.moviesquik.util.DateUtil;
 
@@ -161,13 +160,12 @@ public class PostDaoJDBC extends AbstractDaoJDBC<Post> implements PostDao
 	@Override
 	protected Post createFromResult(ResultSet result) throws SQLException
 	{
-		final Post post = new Post();
+		final PostProxy post = new PostProxy();
 		
 		post.setId(result.getLong("post_id"));
 		post.setDateTime(DateUtil.toJava(result.getTimestamp("date_time")));
 		post.setText(result.getString("text"));
 		
-		final DaoFactory daoFactory = DBManager.getInstance().getDaoFactory();
 		final Long subjectUserId = result.getLong("user_id");
 		
 		if ( result.wasNull() )
@@ -175,13 +173,13 @@ public class PostDaoJDBC extends AbstractDaoJDBC<Post> implements PostDao
 		else if ( currentOwner != null )
 			post.setOwner(currentOwner);
 		else
-			post.setOwner(daoFactory.getUserDao().findByPrimaryKey(subjectUserId));
+			post.setOwnerId(subjectUserId);
 		
 		final Long watchlistId = result.getLong("watchlist_id");
 		if ( result.wasNull() )
 			post.setWatchlist(null);
 		else
-			post.setWatchlist(daoFactory.getWatchlistDao().findById(watchlistId));
+			post.setWatchlistId(watchlistId);
 		
 		addPostCounters(post);
 		

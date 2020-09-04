@@ -16,13 +16,13 @@ import it.unical.mat.moviesquik.util.DateUtil;
  */
 public class ChatMessage
 {
-	private Long id;
-	private String text;
-	private Date dateTime;
-	private User sender;
-	private User receiver;
-	private MovieParty movieParty;
-	private Boolean isRead;
+	protected Long id;
+	protected String text;
+	protected Date dateTime;
+	protected User sender;
+	protected User receiver;
+	protected MovieParty movieParty;
+	protected Boolean isRead;
 	
 	public ChatMessage()
 	{}

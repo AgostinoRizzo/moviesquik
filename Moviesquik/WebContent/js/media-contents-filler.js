@@ -63,8 +63,10 @@ function append_media_contents(contents_items_tag_id, data)
 	}
 };
 
-function request_media_contents(contents_items_tag_id, url_str, fill_callback)
+function request_media_contents(contents_items_tag_id, url_str, fill_callback, onAppend=false)
 {
+	$(contents_items_tag_id).closest('.media-contents-list').find('.loader').removeClass('d-none');
+	
 	if ( $(contents_items_tag_id).length )
 	{
 		$.ajax(
@@ -75,6 +77,10 @@ function request_media_contents(contents_items_tag_id, url_str, fill_callback)
 				success: function(data)
 					{					
 						fill_callback(contents_items_tag_id, data);
+						
+						if ( onAppend )
+							$(contents_items_tag_id).parent().find(".more-collapse-box").removeClass("d-none");
+						$(contents_items_tag_id).closest('.media-contents-list').find('.loader').addClass('d-none');
 					}
 			}
 		);
@@ -83,15 +89,16 @@ function request_media_contents(contents_items_tag_id, url_str, fill_callback)
 
 function request_more_media_contents(contents_items_tag_id, policy)
 {
+	$(contents_items_tag_id).parent().find(".more-collapse-box").addClass("d-none");
+	
 	var itemsCount = $(contents_items_tag_id).find(".media-col-item").length;
 	if ( (itemsCount % N_ITEMS_IN_ROW) != 0 )
 		return;
 	var start = itemsCount / N_ITEMS_IN_ROW;
 	//N_ITEMS_IN_ROW = start;
-	request_media_contents(contents_items_tag_id, "listcontents?policy=" + policy + "&start=" + start, append_media_contents);
+	request_media_contents(contents_items_tag_id, "listcontents?policy=" + policy + "&start=" + start, append_media_contents, true);
 	
 	$(contents_items_tag_id).parent().find(".view-all-btn").addClass("d-none");
-	$(contents_items_tag_id).parent().find(".more-collapse-box").removeClass("d-none");
 }
 
 function on_collapse_view_media_contents(contents_items_tag_id)

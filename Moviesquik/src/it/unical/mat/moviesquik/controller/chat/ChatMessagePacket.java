@@ -3,8 +3,8 @@
  */
 package it.unical.mat.moviesquik.controller.chat;
 
-import it.unical.mat.moviesquik.model.accounting.User;
-import it.unical.mat.moviesquik.model.chat.ChatMessage;
+import it.unical.mat.moviesquik.model.chat.ChatMessageProxy;
+import it.unical.mat.moviesquik.model.chat.ChatUserIconKeeper;
 import it.unical.mat.moviesquik.util.DateUtil;
 
 /**
@@ -25,17 +25,25 @@ public class ChatMessagePacket
 	
 	public ChatMessagePacket()
 	{}
-	public ChatMessagePacket( final ChatMessage message )
+	public ChatMessagePacket( final ChatMessageProxy message )
 	{
-		final User sender = message.getSender();
-		final User receiverUser = message.getReceiver();
+		final Long senderId = message.getSenderId();
+		final Long receiverId = message.getReceiverId();
 		
 		text = message.getText();
 		id = message.getId();
 		time = DateUtil.getClockTime(message.getDateTime());
-		senderId = sender.getId();
-		senderIconSrc = sender.getProfileImagePath();
-		receiverId = receiverUser == null ? message.getMovieParty().getId() : receiverUser.getId();
+		this.senderId = senderId;
+		
+		final String senderIcon = ChatUserIconKeeper.getInstance().getUserIcon(senderId);
+		if ( senderIcon != null )
+			senderIconSrc = senderIcon;
+		else
+		{
+			senderIconSrc = message.getSender().getProfileImagePath();
+			ChatUserIconKeeper.getInstance().keepUserIcon(senderId, senderIconSrc);
+		}
+		this.receiverId = receiverId == null ? message.getMoviePartyId() : receiverId;
 		isRead = message.getIsRead();
 	}
 	public String getText()

@@ -44,6 +44,8 @@
 	        </c:if> --%>
 	        <jsp:include page="contents-items.jsp"></jsp:include>
 	    </div>
+	    
+	    <div class="loader loader-sm d-none"></div>
 		
 		<div class="more-collapse-box d-none">
 			<button id="suggested-view-more-btn" class="btn btn-link view-more-btn"><span class="fa fa-plus checked"></span> More</button>
@@ -75,6 +77,8 @@
 	    <div id="maylike-media-contents-items" class="media-contents-list-items row" role="listbox">
 	        <jsp:include page="contents-items.jsp"></jsp:include>
 	    </div>
+	    
+	    <div class="loader loader-sm d-none"></div>
 		
 		<div class="more-collapse-box d-none">
 			<button id="maylike-view-more-btn" class="btn btn-link view-more-btn"><span class="fa fa-plus checked"></span> More</button>
@@ -108,6 +112,8 @@
     <div id="trending-now-media-contents-items" class="media-contents-list-items row" role="listbox">
         <jsp:include page="contents-items.jsp"></jsp:include>
     </div>
+    
+    <div class="loader loader-sm d-none"></div>
     
     <div class="more-collapse-box d-none">
 		<button id="trending-now-view-more-btn" class="btn btn-link view-more-btn"><span class="fa fa-plus checked"></span> More</button>
@@ -148,6 +154,8 @@
         <jsp:include page="contents-items.jsp"></jsp:include>
     </div>
     
+    <div class="loader loader-sm d-none"></div>
+    
     <div class="more-collapse-box d-none">
 		<button id="most-popular-view-more-btn" class="btn btn-link view-more-btn"><span class="fa fa-plus checked"></span> More</button>
 		<button id="most-popular-view-collapse-btn" class="btn btn-link view-collapse-btn"><span class="fa fa-minus checked"></span> Collapse</button>
@@ -179,6 +187,8 @@
     <div id="top-rated-media-contents-items" class="media-contents-list-items row" role="listbox">
         <jsp:include page="contents-items.jsp"></jsp:include>
     </div>
+    
+    <div class="loader loader-sm d-none"></div>
     
     <div class="more-collapse-box d-none">
 		<button id="top-rated-view-more-btn" class="btn btn-link view-more-btn"><span class="fa fa-plus checked"></span> More</button>
@@ -219,6 +229,8 @@
         <jsp:include page="contents-items.jsp"></jsp:include>
     </div>
     
+    <div class="loader loader-sm d-none"></div>
+    
     <div class="more-collapse-box d-none">
 		<button id="most-favorites-view-more-btn" class="btn btn-link view-more-btn"><span class="fa fa-plus checked"></span> More</button>
 		<button id="most-favorites-view-collapse-btn" class="btn btn-link view-collapse-btn"><span class="fa fa-minus checked"></span> Collapse</button>
@@ -251,6 +263,8 @@
 	    <div id="recently-watched-media-contents-items" class="media-contents-list-items row" role="listbox">
 	        <jsp:include page="contents-items.jsp"></jsp:include>
 	    </div>
+	    
+	    <div class="loader loader-sm d-none"></div>
 	    
 	    <div class="more-collapse-box d-none">
 			<button id="recently-watched-view-more-btn" class="btn btn-link view-more-btn"><span class="fa fa-plus checked"></span> More</button>

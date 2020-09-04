@@ -16,16 +16,16 @@ import it.unical.mat.moviesquik.util.DateUtil;
  */
 public class MovieParty
 {
-	private Long id;
-	private String name;
-	private String description;
-	private Date startDateTime;
-	private Date creationDateTime;
-	private MediaContent media;
-	private Boolean isPrivate;
-	private User administrator;
-	private List<MoviePartyInvitation> invitations;
-	private List<MoviePartyParticipation> participations;
+	protected Long id;
+	protected String name;
+	protected String description;
+	protected Date startDateTime;
+	protected Date creationDateTime;
+	protected MediaContent media;
+	protected Boolean isPrivate;
+	protected User administrator;
+	protected List<MoviePartyInvitation> invitations;
+	protected List<MoviePartyParticipation> participations;
 	
 	public Long getId()
 	{

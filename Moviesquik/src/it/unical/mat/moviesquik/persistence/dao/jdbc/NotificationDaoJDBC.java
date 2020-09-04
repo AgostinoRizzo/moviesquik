@@ -13,7 +13,7 @@ import java.util.List;
 import it.unical.mat.moviesquik.model.accounting.User;
 import it.unical.mat.moviesquik.model.movieparty.MovieParty;
 import it.unical.mat.moviesquik.model.posting.Notification;
-import it.unical.mat.moviesquik.persistence.DBManager;
+import it.unical.mat.moviesquik.model.posting.NotificationProxy;
 import it.unical.mat.moviesquik.persistence.DataListPage;
 import it.unical.mat.moviesquik.persistence.dao.NotificationDao;
 import it.unical.mat.moviesquik.util.DateUtil;
@@ -147,7 +147,7 @@ public class NotificationDaoJDBC implements NotificationDao
 	
 	private Notification createFromResult( final ResultSet result, final User owner ) throws SQLException
 	{
-		final Notification notification = new Notification();
+		final NotificationProxy notification = new NotificationProxy();
 		
 		notification.setId(result.getLong("notification_id"));
 		notification.setDateTime(DateUtil.toJava(result.getTimestamp("date_time")));
@@ -159,8 +159,7 @@ public class NotificationDaoJDBC implements NotificationDao
 		notification.setSubjectUser( result.wasNull() ? null : owner );
 		
 		final Long moviePartyId = result.getLong("movie_party_id");
-		notification.setMovieParty
-			(moviePartyId != null ? DBManager.getInstance().getDaoFactory().getMoviePartyDao().findById(moviePartyId, owner) : null);
+		notification.setMoviePartyId(moviePartyId);
 		
 		return notification;
 	}

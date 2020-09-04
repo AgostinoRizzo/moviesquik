@@ -18,15 +18,15 @@ import it.unical.mat.moviesquik.util.DateUtil;
  */
 public class Post
 {
-	private Long id;
-	private Date dateTime;
-	private String text;
-	private User owner;
-	private Watchlist watchlist;
-	private List<Comment> comments;
-	private Long numAllComments;
-	private Long numLikes;
-	private Long numLoves;
+	protected Long id;
+	protected Date dateTime;
+	protected String text;
+	protected User owner;
+	protected Watchlist watchlist;
+	protected List<Comment> comments;
+	protected Long numAllComments;
+	protected Long numLikes;
+	protected Long numLoves;
 	
 	public Long getId()
 	{

@@ -15,13 +15,13 @@ import it.unical.mat.moviesquik.util.DateUtil;
  */
 public class Notification
 {	
-	private Long id;
-	private Date dateTime;
-	private String title;
-	private String description;
-	private Boolean isRead;
-	private User subjectUser;
-	private MovieParty movieParty;
+	protected Long id;
+	protected Date dateTime;
+	protected String title;
+	protected String description;
+	protected Boolean isRead;
+	protected User subjectUser;
+	protected MovieParty movieParty;
 	
 	public Long getId()
 	{

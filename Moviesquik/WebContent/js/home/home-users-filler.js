@@ -19,7 +19,7 @@ function fillChatUsers(chatContainer)
 	{
 		url : USERS_DATA_API_URL,
 		crossDomain: true,
-		dataType: 'json',
+		dataType: 'jsonp',
 		success: function(data) 
 		{
 			var userData = data.results[0];

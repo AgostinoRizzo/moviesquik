@@ -44,6 +44,8 @@ public class User
 	private List<MovieParty> allParties;
 	private List<String> favoriteGenres;
 	
+	private Long familyId;
+	
 	public User()
 	{}
 
@@ -150,6 +152,8 @@ public class User
 
 	public Family getFamily()
 	{
+		if ( family == null && familyId != null )
+			family = DBManager.getInstance().getDaoFactory().getFamilyDao().findByPrimaryKey(familyId);
 		return family;
 	}
 	
@@ -270,5 +274,10 @@ public class User
 	public void setFavoriteGenres(List<String> favoriteGenres)
 	{
 		this.favoriteGenres = favoriteGenres;
+	}
+	
+	public void setFamilyId(Long familyId)
+	{
+		this.familyId = familyId;
 	}
 }

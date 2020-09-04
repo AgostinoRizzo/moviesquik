@@ -12,10 +12,9 @@ import java.util.List;
 
 import it.unical.mat.moviesquik.model.accounting.User;
 import it.unical.mat.moviesquik.model.chat.ChatMessage;
+import it.unical.mat.moviesquik.model.chat.ChatMessageProxy;
 import it.unical.mat.moviesquik.model.movieparty.MovieParty;
-import it.unical.mat.moviesquik.persistence.DBManager;
 import it.unical.mat.moviesquik.persistence.dao.ChatMessageDao;
-import it.unical.mat.moviesquik.persistence.dao.DaoFactory;
 import it.unical.mat.moviesquik.util.DateUtil;
 
 /**
@@ -79,9 +78,9 @@ public class ChatMessageDaoJDBC extends AbstractDaoJDBC<ChatMessage> implements 
 	}
 	
 	@Override
-	public List<ChatMessage> findAllGroup(Long groupId, Long messageOffsetId)
+	public List<ChatMessageProxy> findAllGroup(Long groupId, Long messageOffsetId)
 	{
-		final List<ChatMessage> messages = new ArrayList<ChatMessage>();
+		final List<ChatMessageProxy> messages = new ArrayList<ChatMessageProxy>();
 		
 		try
 		{
@@ -108,9 +107,9 @@ public class ChatMessageDaoJDBC extends AbstractDaoJDBC<ChatMessage> implements 
 	}
 	
 	@Override
-	public List<ChatMessage> findAllUser(Long userId, Long messageOffsetId)
+	public List<ChatMessageProxy> findAllUser(Long userId, Long messageOffsetId)
 	{
-		final List<ChatMessage> messages = new ArrayList<ChatMessage>();
+		final List<ChatMessageProxy> messages = new ArrayList<ChatMessageProxy>();
 		
 		try
 		{
@@ -157,27 +156,26 @@ public class ChatMessageDaoJDBC extends AbstractDaoJDBC<ChatMessage> implements 
 	}
 
 	@Override
-	protected ChatMessage createFromResult(ResultSet result) throws SQLException
+	protected ChatMessageProxy createFromResult(ResultSet result) throws SQLException
 	{
-		final DaoFactory daoFactory = DBManager.getInstance().getDaoFactory();
-		final ChatMessage message = new ChatMessage();
+		final ChatMessageProxy message = new ChatMessageProxy();
 		
 		message.setId(result.getLong("message_id"));
 		message.setText(result.getString("text"));
 		message.setDateTime( DateUtil.toJava(result.getTimestamp("date_time")) );
 		
-		final User sender = daoFactory.getUserDao().findByPrimaryKey(result.getLong("sender_id"));
-		message.setSender( sender );
+		message.setSenderId(result.getLong("sender_id"));
 		
 		final Long receiverId = result.getLong("receiver_id");
-		if ( receiverId != null )
-			message.setReceiver( daoFactory.getUserDao().findByPrimaryKey(receiverId) );
+		if ( !result.wasNull() )
+			message.setReceiverId(receiverId);
 		
 		final Long moviePartyId = result.getLong("movie_party_id");
-		if ( moviePartyId != null )
-			message.setMovieParty( daoFactory.getMoviePartyDao().findById(moviePartyId, sender) );
+		final boolean wasNull = result.wasNull();
+		if ( !wasNull )
+			message.setMoviePartyId(moviePartyId);
 		
-		if ( message.getMovieParty() == null )
+		if ( wasNull )
 			message.setIsRead(result.getBoolean("is_read"));
 		else
 			message.setIsRead(true);

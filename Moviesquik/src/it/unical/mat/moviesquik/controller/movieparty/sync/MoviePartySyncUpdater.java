@@ -128,6 +128,6 @@ public class MoviePartySyncUpdater extends Thread
 				it.unical.mat.moviesquik.controller.movieparty.MovieParty
 					.sendNotificationToAllParticipants( notificationFactory.createMoviePartyReminderNotification(party, min), party, null, true );
 		}
-			
+		
 	}
 }

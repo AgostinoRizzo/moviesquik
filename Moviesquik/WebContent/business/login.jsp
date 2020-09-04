@@ -27,9 +27,11 @@
 	<script src="lib/jquery/jquery-migrate.min.js"></script>
 	<script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<script src="lib/typeahead/bootstrap3-typeahead.js"></script>
+	<script src="js/bootstrap-validate.js"></script>
 	<script src="js/anim.js"></script>
 	<script src="js/header.js"></script>
 	<script src="js/popup.js"></script>
+	<script src="js/validation.js"></script>
 	<script src="js/business/login-intro.js"></script>
 	
 </head>

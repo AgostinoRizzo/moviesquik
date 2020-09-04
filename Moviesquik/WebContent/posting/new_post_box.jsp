@@ -40,13 +40,13 @@
 				    	 -->
 				    	
 				    	<!-- CinemaRoom post action -->
-				    	<div class="post-action dropdown row-item">
+				    	<%-- <div class="post-action dropdown row-item">
 				    		
 				    		<div class="btn btn-secondary dropdown-toggle" role="button" id="dropdown-emoji-panel-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 				    			<h5>&#127871;</h5>&nbsp;Cinema Room
 				    		</div>
 				    		<jsp:include page="./emoji_panel.jsp"></jsp:include>
-				    	</div>
+				    	</div> --%>
 				    	
 				    	<!-- Social-Facebook posting -->
 				    	<c:if test="${user != null && user.facebookId != null}">

@@ -12,8 +12,6 @@ import java.util.List;
 
 import it.unical.mat.moviesquik.model.accounting.Family;
 import it.unical.mat.moviesquik.model.accounting.User;
-import it.unical.mat.moviesquik.persistence.DBManager;
-import it.unical.mat.moviesquik.persistence.dao.DaoFactory;
 import it.unical.mat.moviesquik.persistence.dao.UserDao;
 import it.unical.mat.moviesquik.util.DateUtil;
 
@@ -132,8 +130,9 @@ public class UserDaoJDBC implements UserDao
 			statement.setString   (6, usr.getPassword());
 			statement.setString   (7, usr.getProfileImagePath());
 			statement.setLong     (8, usr.getFamily().getId());
+			statement.setBoolean  (9, usr.getIsKid());
 			
-			statement.setLong     (9, usr.getId());
+			statement.setLong     (10, usr.getId());
 			
 			statement.executeUpdate();
 			
@@ -354,7 +353,6 @@ public class UserDaoJDBC implements UserDao
 	
 	private User createUserFromResult( final ResultSet result, final Family family ) throws SQLException
 	{
-		final DaoFactory daoFactory = DBManager.getInstance().getDaoFactory();
 		final User usr = new User();
 		
 		usr.setId(result.getLong("user_id"));
@@ -365,8 +363,10 @@ public class UserDaoJDBC implements UserDao
 		usr.setGender(result.getString("gender"));
 		usr.setPassword(result.getString("password"));
 		
-		usr.setFamily( (family == null ) ? daoFactory.getFamilyDao()
-				.findByPrimaryKey(result.getLong("family_id")) : family );
+		if ( family == null )
+			usr.setFamilyId(result.getLong("family_id"));
+		else
+			usr.setFamily(family);
 		
 		usr.setFollowersCount(getFollowersCount(usr));
 		

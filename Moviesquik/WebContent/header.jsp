@@ -132,8 +132,9 @@
 					        <div id="nav-user-avatar-dropdown-menu" class="dropdown-menu dropdown-menu-right header-dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 					        	<a class="dropdown-item" href="user"><small>Signed in as</small><br><strong>${user.firstName} ${user.lastName}</strong></a>
 					        	<div class="dropdown-divider"></div>
-					        	<a class="dropdown-item" href="#">Dashboard</a>
-					        	<a class="dropdown-item" href="#">Edit Profile</a>
+					        	<a class="dropdown-item" href="mcsearch?type=movie&view=group">Movies</a>
+					        	<a class="dropdown-item" href="mcsearch?type=tv_show&view=group">TV Shows</a>
+					        	<a class="dropdown-item" href="watchlist">Watchlist</a>
 					        	<c:if test="${!user.isKid}">
 					        		<a class="dropdown-item" href="developer">Developer</a>
 					        	</c:if>

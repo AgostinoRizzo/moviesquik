@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import it.unical.mat.moviesquik.analytics.AnalyticsFacade;
@@ -161,6 +162,8 @@ public class MediaContentSearchDaoJDBC implements MediaContentSearchDao
 			
 			while ( result.next() )
 				mediaContents.add( MediaContentDaoJDBC.createFromResult(result) );
+			
+			removeDuplicatesMediaContentsList(mediaContents);
 			return mediaContents;
 		}
 		
@@ -281,6 +284,19 @@ public class MediaContentSearchDaoJDBC implements MediaContentSearchDao
 							: query + " where " + whereConditions.toString();
 		}
 		return query;
+	}
+	
+	private void removeDuplicatesMediaContentsList( final List<MediaContent> mcList )
+	{
+		final List<Long> mediaContentIds = new ArrayList<Long>();
+		
+		for ( final Iterator<MediaContent> iter = mcList.iterator(); iter.hasNext(); )
+		{
+			final MediaContent mc = iter.next();
+			if ( mediaContentIds.indexOf(mc.getId()) >= 0 )
+				iter.remove();
+			mediaContentIds.add(mc.getId());
+		}
 	}
 
 }
